@@ -1,0 +1,428 @@
+{
+  "user": [
+    {
+      "ID": "W000",
+      "Full_name": "Vo Viet Nam",
+      "Email_address": "vvietnam@gmail.com",
+      "Birthday": "10/8/1981",
+      "Gender": "male",
+      "ID_follow_writer": [
+        "W007",
+        "W009"
+      ],
+      "Saved_news": [
+        "A001"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-16.jpg",
+      "ID_article": [
+        "A005"
+      ],
+      "ID_user_follow": [
+        "R009",
+        "W008"
+      ]
+    },
+    {
+      "ID": "W001",
+      "Full_name": "Nguyen Van Anh",
+      "Email_address": "nvAnh@gmail.com",
+      "Birthday": "12/4/2000",
+      "Gender": "male",
+      "ID_follow_writer": [
+        "W002",
+        "W004"
+      ],
+      "Saved_news": [
+        "A001",
+        "A002",
+        "A003"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-15.jpg",
+      "ID_article": [
+        "A004"
+      ],
+      "ID_user_follow": [
+        "R001",
+        "W002",
+        "W004"
+      ]
+    },
+    {
+      "ID": "W002",
+      "Full_name": "Tran Van Hoa",
+      "Email_address": "tvHoa@gmail.com",
+      "Birthday": "15/6/1995",
+      "Gender": "male",
+      "ID_follow_writer": [
+        "W001",
+        "W004"
+      ],
+      "Saved_news": [
+        "A002",
+        "A008"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-18.jpg",
+      "ID_article": [
+        "A001"
+      ],
+      "ID_user_follow": [
+        "R001",
+        "R002",
+        "R004",
+        "R009",
+        "W001",
+        "W003"
+      ]
+    },
+    {
+      "ID": "W003",
+      "Full_name": "Le Thi Lan",
+      "Email_address": "lanle@gmail.com",
+      "Birthday": "8/10/1990",
+      "Gender": "female",
+      "ID_follow_writer": [
+        "W002",
+        "W004",
+        "W005",
+        "W007"
+      ],
+      "Saved_news": [
+        "A003",
+        "A007",
+        "A009"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-17.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "W004",
+      "Full_name": "Hoang Thi Thuy",
+      "Email_address": "thuyhoang@gmail.com",
+      "Birthday": "5/2/1985",
+      "Gender": "female",
+      "ID_follow_writer": [
+        "W001",
+        "W005"
+      ],
+      "Saved_news": [
+        "A004",
+        "A009"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-19.jpg",
+      "ID_article": [
+        "A008",
+        "A002"
+      ],
+      "ID_user_follow": [
+        "R000",
+        "R002",
+        "R004",
+        "R009",
+        "W002",
+        "W003",
+        "W005"
+      ]
+    },
+    {
+      "ID": "W005",
+      "Full_name": "Pham Van Hoang",
+      "Email_address": "pvh@gmail.com",
+      "Birthday": "20/9/1988",
+      "Gender": "male",
+      "ID_follow_writer": [
+        "W004",
+        "W008"
+      ],
+      "Saved_news": [
+        "A005"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-21.jpg",
+      "ID_article": [
+        "A009"
+      ],
+      "ID_user_follow": [
+        "R000",
+        "R002",
+        "R005",
+        "W003",
+        "W004",
+        "W006",
+        "W007"
+      ]
+    },
+    {
+      "ID": "W006",
+      "Full_name": "Ngoc Anh",
+      "Email_address": "ngocanh@gmail.com",
+      "Birthday": "7/7/1980",
+      "Gender": "female",
+      "ID_follow_writer": [
+        "W005",
+        "W007",
+        "W009"
+      ],
+      "Saved_news": [
+        "A006"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-19.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "W007",
+      "Full_name": "Quang Huy",
+      "Email_address": "qhuy@gmail.com",
+      "Birthday": "18/12/1983",
+      "Gender": "male",
+      "ID_follow_writer": [
+        "W005",
+        "W008"
+      ],
+      "Saved_news": [
+        "A007",
+        "A012",
+        "A013"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-23.jpg",
+      "ID_article": [
+        "A003"
+      ],
+      "ID_user_follow": [
+        "R005",
+        "W000",
+        "W003",
+        "W006",
+        "W008"
+      ]
+    },
+    {
+      "ID": "W008",
+      "Full_name": "Tuan Anh",
+      "Email_address": "tuana@gmail.com",
+      "Birthday": "3/1/1978",
+      "Gender": "male",
+      "ID_follow_writer": [
+        "W000",
+        "W007",
+        "W009"
+      ],
+      "Saved_news": [
+        "A008",
+        "A013",
+        "A014"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-22.jpg",
+      "ID_article": [
+        "A006"
+      ],
+      "ID_user_follow": [
+        "R005",
+        "W005",
+        "W007",
+        "W009"
+      ]
+    },
+    {
+      "ID": "W009",
+      "Full_name": "Huong Mai",
+      "Email_address": "huongmai@gmail.com",
+      "Birthday": "25/5/1993",
+      "Gender": "female",
+      "ID_follow_writer": [
+        "W008"
+      ],
+      "Saved_news": [
+        "A009",
+        "A014",
+        "A015"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-24.jpg",
+      "ID_article": [
+        "A007"
+      ],
+      "ID_user_follow": [
+        "R005",
+        "R009",
+        "W000",
+        "W006",
+        "W008"
+      ]
+    },
+    {
+      "ID": "R000",
+      "Full_name": "Nguyen An",
+      "Email_address": "nguyena@gmail.com",
+      "Birthday": "12/3/2002",
+      "Gender": "male",
+      "ID_writer_follow": [
+        "W001",
+        "W002",
+        "W003",
+        "W004",
+        "W005",
+        "W006"
+      ],
+      "Saved_news": [
+        "A000",
+        "A001",
+        "A002"
+      ],
+      "Image_Avatar": "https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-2.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R001",
+      "Full_name": "Tran Bao",
+      "Email_address": "tranbao@gmail.com",
+      "Birthday": "15/6/1995",
+      "Gender": "male",
+      "ID_writer_follow": [
+        "W001",
+        "W002",
+        "W003"
+      ],
+      "Saved_news": [
+        "A000",
+        "A001"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-5.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R002",
+      "Full_name": "Le Mai",
+      "Email_address": "lemai@gmail.com",
+      "Birthday": "8/10/1990",
+      "Gender": "female",
+      "ID_writer_follow": [
+        "W004",
+        "W005"
+      ],
+      "Saved_news": [],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-7.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R003",
+      "Full_name": "Hoang Minh",
+      "Email_address": "hoangminh@gmail.com",
+      "Birthday": "5/2/1988",
+      "Gender": "male",
+      "ID_writer_follow": [],
+      "Saved_news": [],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-6.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R004",
+      "Full_name": "Phuong Thao",
+      "Email_address": "phuongthao@gmail.com",
+      "Birthday": "20/9/1993",
+      "Gender": "female",
+      "ID_writer_follow": [
+        "W006"
+      ],
+      "Saved_news": [
+        "A006"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-8.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R005",
+      "Full_name": "Duc Huy",
+      "Email_address": "duchuy@gmail.com",
+      "Birthday": "7/7/1985",
+      "Gender": "male",
+      "ID_writer_follow": [
+        "W007",
+        "W008",
+        "W009"
+      ],
+      "Saved_news": [
+        "A007"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-10.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R006",
+      "Full_name": "Quynh Anh",
+      "Email_address": "quynhanh@gmail.com",
+      "Birthday": "18/12/1998",
+      "Gender": "female",
+      "ID_writer_follow": [],
+      "Saved_news": [
+        "A008",
+        "A009"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-9.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R007",
+      "Full_name": "Tuan Anh",
+      "Email_address": "tuananh@gmail.com",
+      "Birthday": "3/1/1980",
+      "Gender": "male",
+      "ID_writer_follow": [
+        "W010",
+        "W011"
+      ],
+      "Saved_news": [
+        "A010",
+        "A011",
+        "A012"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-11.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R008",
+      "Full_name": "Huong Giang",
+      "Email_address": "huonggiang@gmail.com",
+      "Birthday": "25/5/1996",
+      "Gender": "female",
+      "ID_writer_follow": [
+        "W012"
+      ],
+      "Saved_news": [
+        "A013",
+        "A014",
+        "A015"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-12.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    },
+    {
+      "ID": "R009",
+      "Full_name": "Viet Dung",
+      "Email_address": "vietdung@gmail.com",
+      "Birthday": "10/8/1983",
+      "Gender": "male",
+      "ID_writer_follow": [
+        "W013",
+        "W014",
+        "W015"
+      ],
+      "Saved_news": [
+        "A016",
+        "A017",
+        "A018"
+      ],
+      "Image_Avatar": "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-facebook-mac-dinh-13.jpg",
+      "ID_article": [],
+      "ID_user_follow": []
+    }
+  ]
+}
