@@ -1,11 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faEarth,
-  faTags,
-  faCircleInfo,
-  faNewspaper,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTags, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import "./footer.css";
 
 import { Link } from "react-router-dom";

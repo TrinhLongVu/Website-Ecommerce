@@ -71,25 +71,6 @@ footer {
     text-align: justify;
 }
 
-.mail-box {
-    height: 50px;
-    width: 550px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-}
-
-.mail-input {
-    padding-left: 20px;
-    font-size: 15px;
-    height: 50px;
-    width: 520px;
-    border: none;
-    background-color: white;
-    border-radius: 15px;
-    outline: none;
-}
-
 #foot-categories {
     height: 140px;
     display: flex;
