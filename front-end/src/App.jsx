@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import Detail from "./pages/Detail/Detail";
 
 import Authentication from "./pages/Authentication/Authentication";
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<Home />} />
+          <Route path="/product" element={<Detail />} />
         </Route>
         <Route path="/authentication">
           <Route

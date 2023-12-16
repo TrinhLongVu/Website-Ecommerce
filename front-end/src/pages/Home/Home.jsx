@@ -96,9 +96,7 @@ const Home = () => {
           </Link>
         </div>
         <div className="home-section-content">
-          <div className="product-container">
-            <ProductShelf products={productList2} />
-          </div>
+          <ProductShelf products={productList2} />
         </div>
       </div>
     </>
