@@ -7,7 +7,7 @@ import "./product-slider.css";
 
 import { Link } from "react-router-dom";
 
-const ArticleSlider = () => {
+const ProductSlider = () => {
   const sliderRef = useRef(null);
 
   const scrollLeft = () => {
@@ -40,7 +40,7 @@ const ArticleSlider = () => {
   };
   const product = {
     name: "Celestial Glow Crystal Pendant",
-    image: "https://example.com/celestial-glow-pendant-image",
+    image: "https://example.com/images/products/shoes/red-high-heels.jpg",
     desc: "Illuminate your style with the ethereal beauty of our Celestial Glow Crystal Pendant. This exquisite piece features a radiant crystal encased in a sterling silver setting, capturing the essence of starlight in a timeless design. The pendant exudes a captivating glow that adds a touch of celestial elegance to any outfit, making it the perfect accessory for both casual and formal occasions.",
     price: "$89.99",
     time: "2 hours ago",
@@ -76,4 +76,4 @@ const ArticleSlider = () => {
   );
 };
 
-export default ArticleSlider;
+export default ProductSlider;
