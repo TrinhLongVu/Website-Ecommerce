@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTags, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 import CategorySlider from "../../components/Home/CategorySlider/CategorySlider";
+import ProductSlider from "../../components/Home/ProductSlider/ProductSlider";
 
 import "./home.css";
 
@@ -23,18 +24,18 @@ const Home = () => {
         <div className="home-section-content">
           <CategorySlider />
         </div>
-        {/*</div>
+      </div>
       <div className="home-section">
         <div className="home-section-banner">
           <h2>
-            <FontAwesomeIcon icon={faEye} /> Most Read
+            <FontAwesomeIcon icon={faTags} /> Most Read
           </h2>
         </div>
         <div className="home-section-content">
-          <ArticleSlider />
+          <ProductSlider />
         </div>
       </div>
-      <div className="home-section">
+      {/*<div className="home-section">
         <div className="home-section-banner">
           <h2>
             <FontAwesomeIcon icon={faHeart} /> Most Liked
@@ -76,8 +77,8 @@ const Home = () => {
         </div>
         <div className="home-section-content">
           <ArticleList />
-        </div> */}
-      </div>
+        </div> 
+            </div>*/}
     </>
   );
 };
