@@ -8,6 +8,8 @@ import {
   faDollarSign,
   faStar,
   faStore,
+  faAngleDown,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 import CategorySlider from "../../components/Home/CategorySlider/CategorySlider";
@@ -44,6 +46,31 @@ const Home = () => {
     product,
     product,
   ];
+  const [showFilter, setShowFilter] = useState(false);
+  const [filter, setFilter] = useState("");
+  const toggleFilter = () => {
+    setShowFilter(!showFilter);
+    if (!showFilter) {
+      document.querySelector(".filter-box").style.borderRadius = "8px 8px 0 0";
+    } else {
+      document.querySelector(".filter-box").style.borderRadius = "8px";
+    }
+  };
+
+  const filterList = ["Price: Low to High", "Price: High to Low"];
+
+  const selectFilter = (filterType) => {
+    setFilter(filterType);
+    toggleFilter();
+  };
+
+  document.body.addEventListener("click", () => {
+    if (!event.target.closest(".filter-box")) {
+      setShowFilter(false);
+      document.querySelector(".filter-box").style.borderRadius = "8px";
+    }
+  });
+
   return (
     <>
       <div className="home-section">
@@ -91,9 +118,23 @@ const Home = () => {
           <h2>
             <FontAwesomeIcon icon={faStore} /> Our Products
           </h2>
-          <Link to="/" className="show-all-btn">
-            Show all <FontAwesomeIcon icon={faChevronRight} />
-          </Link>
+          <div className="filter-box" onClick={toggleFilter}>
+            {filter ? filter : "Filter"}
+            {filter ? (
+              <FontAwesomeIcon icon={faXmark} onClick={() => setFilter("")} />
+            ) : (
+              <FontAwesomeIcon icon={faAngleDown} />
+            )}
+          </div>
+          {showFilter && (
+            <div className="filter-dropdown">
+              {filterList.map((item, index) => (
+                <div key={index} onClick={() => selectFilter(item)}>
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="home-section-content">
           <ProductShelf products={productList2} />

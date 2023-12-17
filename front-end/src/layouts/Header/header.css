@@ -58,7 +58,7 @@ header {
 .search-box {
     margin-left: 20px;
     height: 65px;
-    width: 480px;
+    width: 580px;
     background-color: #e1e1e1;
     border-radius: 15px;
 }
@@ -67,7 +67,7 @@ header {
     padding-left: 20px;
     font-size: 20px;
     height: 65px;
-    width: 435px;
+    width: 535px;
     border: none;
     background-color: #e1e1e1;
     border-radius: 15px;
@@ -79,7 +79,7 @@ header {
     font-size: 20px;
 }
 
-.noti-bell {
+.home-shop-cart {
     cursor: pointer;
     font-size: 35px;
     margin-left: 25px;
@@ -114,37 +114,6 @@ header {
     left: 0;
 }
 
-#following-dropdown {
-    width: 265px;
-    min-height: 60px;
-    max-height: 240px;
-    overflow-y: auto;
-}
-
-#following-dropdown a {
-    height: 60px;
-}
-
-#no-following {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    font-size: 15px;
-    font-weight: normal;
-}
-
-.following-avt {
-    margin: 20px 5px;
-    height: 40px;
-    width: 40px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 20px;
-    border: 1px solid black;
-}
-
 #avt-dropdown {
     width: 150px;
     top: 70px;
@@ -167,14 +136,6 @@ header {
     align-items: center;
     justify-content: start;
     transition: all 0.15s ease;
-}
-
-.following-name {
-    width: 185px;
-    margin-left: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .dropdown-menu a:first-child:hover {

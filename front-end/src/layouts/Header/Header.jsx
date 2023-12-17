@@ -29,11 +29,6 @@ const Header = () => {
     }, 100);
   };
 
-  const openFollowingDropdown = () => {
-    clearTimeout(timeoutRef.current);
-    setShowCategoriesDropdown(false);
-  };
-
   const showAvatarDropdown = () => {
     setShowAvtDropdown(!showAvtDropdown);
   };
@@ -90,17 +85,6 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className="list-shower">
-          <div
-            className="list-shower-title"
-            onMouseEnter={openFollowingDropdown}
-          >
-            Following
-            <div className="dropdown-ico">
-              <FontAwesomeIcon icon={faAngleDown} />
-            </div>
-          </div>
-        </div>
       </div>
       <div className="search-box">
         <input
@@ -115,10 +99,8 @@ const Header = () => {
       </div>
       {authenticated ? (
         <>
-          <div className="noti">
-            <div className="noti-bell">
-              <FontAwesomeIcon icon={faCartShopping} />
-            </div>
+          <div className="home-shop-cart">
+            <FontAwesomeIcon icon={faCartShopping} />
           </div>
           <div
             className="avt-dropdown-btn"
