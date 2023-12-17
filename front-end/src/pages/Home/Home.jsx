@@ -14,11 +14,11 @@ import {
 
 import CategorySlider from "../../components/Home/CategorySlider/CategorySlider";
 import ProductSlider from "../../components/Home/ProductSlider/ProductSlider";
-import ProductCard from "../../components/ProductCard/ProductCard";
 
 import "./home.css";
 import ProductPanel from "../../components/Home/ProductPanel/ProductPanel";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
+import Pagination from "../../components/Pagination/Pagination";
 
 const Home = () => {
   const product = {
@@ -60,6 +60,7 @@ const Home = () => {
   const filterList = ["Price: Low to High", "Price: High to Low"];
 
   const selectFilter = (filterType) => {
+    setCurrentPage(1);
     setFilter(filterType);
     toggleFilter();
   };
@@ -70,6 +71,15 @@ const Home = () => {
       document.querySelector(".filter-box").style.borderRadius = "8px";
     }
   });
+
+  const unFilter = () => {
+    setCurrentPage(1);
+    setFilter("");
+    toggleFilter();
+  };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
 
   return (
     <>
@@ -121,7 +131,7 @@ const Home = () => {
           <div className="filter-box" onClick={toggleFilter}>
             {filter ? filter : "Filter"}
             {filter ? (
-              <FontAwesomeIcon icon={faXmark} onClick={() => setFilter("")} />
+              <FontAwesomeIcon icon={faXmark} onClick={unFilter} />
             ) : (
               <FontAwesomeIcon icon={faAngleDown} />
             )}
@@ -140,6 +150,11 @@ const Home = () => {
           <ProductShelf products={productList2} />
         </div>
       </div>
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };
