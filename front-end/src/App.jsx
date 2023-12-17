@@ -7,6 +7,7 @@ import Authentication from "./pages/Authentication/Authentication";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
 import Main from "./layouts/Main";
+import UserInfo from "./pages/UserInfo/UserInfo";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Main />}>
           <Route index element={<Home />} />
           <Route path="/product" element={<Detail />} />
+          <Route path="/user" element={<UserInfo />} />
         </Route>
         <Route path="/authentication">
           <Route
