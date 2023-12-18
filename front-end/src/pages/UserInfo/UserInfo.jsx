@@ -94,7 +94,7 @@ const UserInfo = () => {
               type="text"
               name="username"
               id="username"
-              placeholder="No data"
+              placeholder="Unknown"
               value={infoObj.FullName}
               readOnly={!isEditMode}
             />
@@ -107,7 +107,7 @@ const UserInfo = () => {
               type="email"
               name="email"
               id="email"
-              placeholder="No data"
+              placeholder="Unknown"
               value={infoObj.UserName}
               readOnly={!isEditMode}
             />
@@ -121,7 +121,7 @@ const UserInfo = () => {
               type="date"
               name="birthday"
               id="birthday"
-              placeholder="No data"
+              placeholder="Unknown"
               readOnly={!isEditMode}
             />
           </div>
@@ -133,7 +133,7 @@ const UserInfo = () => {
               type="text"
               name="gender"
               id="gender"
-              placeholder="No data"
+              placeholder="Unknown"
               value={infoObj.Gender}
               readOnly={!isEditMode}
             />
@@ -146,7 +146,7 @@ const UserInfo = () => {
               type="tel"
               name="phonenumber"
               id="phonenumber"
-              placeholder="No data"
+              placeholder="Unknown"
               value={infoObj.PhoneNumber}
               readOnly={!isEditMode}
             />
@@ -159,7 +159,7 @@ const UserInfo = () => {
               type="text"
               name="address"
               id="address"
-              placeholder="No data"
+              placeholder="Unknown"
               value={infoObj.Address}
               readOnly={!isEditMode}
             />

@@ -27,6 +27,7 @@
     background-color: white;
     border-radius: 12px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    user-select: none;
 }
 
 .info--avt-change:hover {
@@ -69,7 +70,6 @@
     background-position: center center;
     border: 1px solid black;
     border-radius: 125px;
-    cursor: pointer;
 }
 
 .change-profile-pic-btn {
