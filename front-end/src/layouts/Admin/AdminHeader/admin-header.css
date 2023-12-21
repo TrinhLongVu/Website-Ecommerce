@@ -46,3 +46,17 @@
 .head-login-ico {
     margin-left: 10px;
 }
+
+.admin-nav {
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #ccd1d9;
+    border-radius: 12px;
+}
+
+.admin-nav-active,.admin-nav:hover {
+    background-color: #068DA9;
+    color: white;
+}
