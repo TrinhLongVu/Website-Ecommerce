@@ -9,6 +9,8 @@ import UserInfo from "./pages/UserInfo/UserInfo";
 
 import Authentication from "./pages/Authentication/Authentication";
 
+import AdminUpload from "./pages/AdminUpload/AdminUpload";
+
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
 import Main from "./layouts/Main";
@@ -29,7 +31,9 @@ function App() {
           <Route path="/user" element={<UserInfo />} />
           <Route path="/cart" element={<ShopCart />} />
         </Route>
-        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route path="/admin/upload" element={<AdminUpload />} />
+        </Route>
         <Route path="/authentication">
           <Route
             path="/authentication/login"

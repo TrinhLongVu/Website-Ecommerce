@@ -19,7 +19,7 @@ const Detail = () => {
   const productList = [product, product, product, product];
   return (
     <>
-      <ProductFrame />
+      <ProductFrame product={product} />
       <div className="home-section">
         <div className="home-section-banner">
           <h2>
