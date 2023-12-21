@@ -99,10 +99,8 @@
 }
 
 .cart--order-checkout-info-title {
-    font-family: 'REM', serif;
     font-size: 30px;
     margin: 20px 0;
-
 }
 
 .cart--order-checkout-info-hr {
@@ -117,7 +115,6 @@
 }
 
 .cart--order-checkout-info-row div {
-    font-family: 'REM', serif;
     font-size: 25px;
 }
 

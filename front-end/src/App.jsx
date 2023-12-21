@@ -12,6 +12,7 @@ import Authentication from "./pages/Authentication/Authentication";
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
 import Main from "./layouts/Main";
+import Admin from "./layouts/Admin/Admin";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/user" element={<UserInfo />} />
           <Route path="/cart" element={<ShopCart />} />
         </Route>
+        <Route path="/admin" element={<Admin />}></Route>
         <Route path="/authentication">
           <Route
             path="/authentication/login"
