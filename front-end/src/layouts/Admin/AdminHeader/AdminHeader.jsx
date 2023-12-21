@@ -10,8 +10,8 @@ const Header = () => {
       <Link to="/admin" className="logo">
         THE MEGA MALL
       </Link>
-      <div>Manage category</div>
-      <div>Upload product</div>
+      <div>Manage Category</div>
+      <div>Upload Product</div>
       <div>Manage Users</div>
       <div>Statistics</div>
       <div className="admin-head-logout-btn">

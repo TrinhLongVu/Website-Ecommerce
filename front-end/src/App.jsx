@@ -10,6 +10,7 @@ import UserInfo from "./pages/UserInfo/UserInfo";
 import Authentication from "./pages/Authentication/Authentication";
 
 import AdminUpload from "./pages/AdminUpload/AdminUpload";
+import AdminUsers from "./pages/AdminUsers/AdminUsers";
 
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
@@ -33,6 +34,7 @@ function App() {
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/upload" element={<AdminUpload />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
         </Route>
         <Route path="/authentication">
           <Route

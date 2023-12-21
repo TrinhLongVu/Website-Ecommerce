@@ -1,0 +1,59 @@
+.admin-users {
+    width: 1260px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.admin-users-card {
+    margin: 10px 10px;
+    padding: 20px;
+    width: 230px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.admin-users-card-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.admin-users-card-name {
+    margin: 10px 0;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-users-card-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    font-size: 20px;
+    background-color: #A25772;
+    border-radius: 12px;
+}
+
+.admin-users-card-delete:hover {
+    background-color: red;
+    color: white;
+}
+
+#admin-users-card-delete-icon {
+    margin: 0 5px;
+}
