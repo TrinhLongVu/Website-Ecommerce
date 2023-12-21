@@ -99,9 +99,9 @@ const Header = () => {
       </div>
       {authenticated ? (
         <>
-          <div className="home-shop-cart">
+          <Link to="/cart" className="home-shop-cart">
             <FontAwesomeIcon icon={faCartShopping} />
-          </div>
+          </Link>
           <div
             className="avt-dropdown-btn"
             style={{ backgroundImage: `url("https://i.pravatar.cc/301")` }}
