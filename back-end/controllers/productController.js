@@ -69,13 +69,12 @@ exports.createProduct = async (req, res, next) => {
 
 exports.createAllProduct = async (req, res, next) => {
     try {
-        // const filePath = `${__dirname}data\\Product.json`.replace('controllers', '');
-        // const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8')).Product;
-
-        // for (const Product of Products) {
-        //     Product.posted_time = new Date();
-        //     await Product.create(Product);
-        // }
+        const filePath = `${__dirname}data\\products.json`.replace('controllers', '');
+        const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8')).product;
+        
+        for (const pr of Products) {
+            await Product.create(pr);
+        }
         res.status(201).json({
             status: 'success'
         })

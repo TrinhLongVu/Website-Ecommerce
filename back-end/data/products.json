@@ -1,0 +1,73 @@
+{
+  "product": [
+    {
+      "title": "Samsung Galaxy S23 Ultra",
+      "detail": "With a powerful processor, a remarkably flexible 200MP main camera, and the best zoom lens around, the Galaxy S23 Ultra can take on all comers and emerge as the best.",
+      "category": "Smartphone",
+      "price": "$1,199"
+    },
+
+    {
+      "title": "Google Pixel 6 Pro",
+      "detail": "Known for its exceptional camera capabilities, the Pixel 6 Pro offers a clean Android experience and regular software updates.",
+      "category": "Smartphone",
+      "price": "$899"
+    },
+
+    {
+      "title": "OnePlus 9 Pro",
+      "detail": "Combining high-end specs, fast charging, and a smooth display, the OnePlus 9 Pro is a flagship contender.",
+      "category": "Smartphone",
+      "price": "$999"
+    },
+
+    {
+      "title": "Xiaomi Mi 12",
+      "detail": "Expected to feature top-tier specifications, including a high-refresh-rate display and powerful cameras.",
+      "category": "Smartphone",
+      "price": "$799"
+    },
+
+    {
+      "title": "Sony Xperia 1 III",
+      "detail": "Known for its 4K OLED display, versatile camera system, and audio capabilities.",
+      "category": "Smartphone",
+      "price": "$1,199"
+    },
+
+    {
+      "title": "Samsung Galaxy Z Fold 3",
+      "detail": "A foldable smartphone, with impressive multitasking capabilities and S Pen support.",
+      "category": "Smartphone",
+      "price": "$1,799"
+    },
+
+    {
+      "title": "Apple iPhone 13",
+      "detail": "The successor to the iPhone 12 series, featuring improved performance, camera enhancements, and iOS 15.",
+      "category": "Smartphone",
+      "price": "$699"
+    },
+
+    {
+      "title": "LG Wing",
+      "detail": "Known for its unique swiveling dual-screen design, offering creative possibilities.",
+      "category": "Smartphone",
+      "price": "$699"
+    },
+
+    {
+      "title": "Motorola Edge 30",
+      "detail": "A mid-range phone with a focus on display quality and 5G connectivity.",
+      "category": "Smartphone",
+      "price": "$499"
+    },
+
+    {
+      "title": "Realme GT 5G",
+      "detail": "A budget-friendly option with flagship-level performance and 5G support.",
+      "category": "Smartphone",
+      "price": "$399"
+    }
+  ]
+}
