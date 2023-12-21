@@ -5,8 +5,14 @@ import "./user-info.css";
 
 const UserInfo = () => {
   const [infoObj, setInfoObj] = useState({});
-  const [userAvatar, setUserAvatar] = useState(null);
-  const [isWriter, setWriter] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isPending, setPending] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [changeAvt, setChangeAvt] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/user/account/success", {
@@ -25,26 +31,23 @@ const UserInfo = () => {
       });
   }, []);
 
-  const [isEditMode, setIsEditMode] = useState(false);
-
-  const handleEditClick = () => {
-    setIsEditMode(true);
+  const formatDate = (date) => {
+    const parts = date.split("-");
+    const transformedDate = `${parts[1]}/${parts[2]}/${parts[0]}`;
+    return transformedDate;
   };
 
-  const handleSaveClick = () => {
-    setIsEditMode(false);
-  };
-
-  const handleCancelClick = () => {
+  const saveInfoChanges = () => {
     setIsEditMode(false);
   };
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
+    setChangeAvt(file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUserAvatar(reader.result);
+        setInfoObj({ ...infoObj, Image_Avatar: reader.result });
       };
       reader.readAsDataURL(file);
     }
@@ -53,10 +56,10 @@ const UserInfo = () => {
   return (
     <>
       <div className="info-avt-container">
-        <div className="avt">
+        <div className="info--avt">
           <div
             className="avatar-big"
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${infoObj.Image_Avatar})` }}
           ></div>
           {isEditMode && (
             <>
@@ -74,54 +77,25 @@ const UserInfo = () => {
         </div>
 
         <div className="info">
-          {isEditMode ? (
-            <></>
-          ) : (
-            <div
-              className="action-btn change-info-btn"
-              onClick={handleEditClick}
-            >
-              Change Information
-            </div>
-          )}
-
-          <h1 className="account-title">Account Information</h1>
-
           <div className="info-field">
-            <h3 className="title-input">Username</h3>
+            <h3 className="title-input">Full Name</h3>
             <input
               className="info-inp"
               type="text"
-              name="username"
-              id="username"
               placeholder="Unknown"
-              value={infoObj.FullName}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               readOnly={!isEditMode}
             />
           </div>
-
-          <div className="info-field">
-            <h3 className="title-input">Email</h3>
-            <input
-              className="info-inp"
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Unknown"
-              value={infoObj.UserName}
-              readOnly={!isEditMode}
-            />
-          </div>
-          <h1 className="personal-title">Personal Information</h1>
-
           <div className="info-field">
             <h3 className="title-input">Birthday</h3>
             <input
               className="info-inp"
               type="date"
-              name="birthday"
-              id="birthday"
+              value={birthday}
               placeholder="Unknown"
+              onChange={(e) => setBirthday(e.target.value)}
               readOnly={!isEditMode}
             />
           </div>
@@ -131,10 +105,10 @@ const UserInfo = () => {
             <input
               className="info-inp"
               type="text"
-              name="gender"
               id="gender"
               placeholder="Unknown"
-              value={infoObj.Gender}
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
               readOnly={!isEditMode}
             />
           </div>
@@ -143,48 +117,53 @@ const UserInfo = () => {
             <h3 className="title-input">Phone number</h3>
             <input
               className="info-inp"
-              type="tel"
-              name="phonenumber"
-              id="phonenumber"
+              type="text"
               placeholder="Unknown"
-              value={infoObj.PhoneNumber}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               readOnly={!isEditMode}
             />
           </div>
-
           <div className="info-field">
             <h3 className="title-input">Address</h3>
             <input
               className="info-inp"
               type="text"
-              name="address"
-              id="address"
               placeholder="Unknown"
-              value={infoObj.Address}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               readOnly={!isEditMode}
             />
           </div>
 
-          {isEditMode ? (
-            <>
-              <div className="save-cancel-btn-container">
-                <button
-                  className="action-btn save-btn"
-                  onClick={handleSaveClick}
+          <div className="info-action-row">
+            <div className="info-action-btn-container">
+              {isEditMode ? (
+                <>
+                  <div
+                    className="info-action-btn"
+                    id="info-save-btn"
+                    onClick={saveInfoChanges}
+                  >
+                    Save
+                  </div>
+                  <div
+                    className="info-action-btn"
+                    onClick={setIsEditMode.bind(null, false)}
+                  >
+                    Cancel
+                  </div>
+                </>
+              ) : (
+                <div
+                  className="info-action-btn"
+                  onClick={setIsEditMode.bind(null, true)}
                 >
-                  Save
-                </button>
-                <button
-                  className="action-btn cancel-btn"
-                  onClick={handleCancelClick}
-                >
-                  Cancel
-                </button>
-              </div>
-            </>
-          ) : (
-            <div></div>
-          )}
+                  Change Information
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>

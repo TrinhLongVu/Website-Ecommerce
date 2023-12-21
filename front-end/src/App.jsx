@@ -4,12 +4,13 @@ import Detail from "./pages/Detail/Detail";
 import MultiCategory from "./pages/MultiCategory/MultiCategory";
 import SingleCategory from "./pages/SingleCategory/SingleCategory";
 
+import UserInfo from "./pages/UserInfo/UserInfo";
+
 import Authentication from "./pages/Authentication/Authentication";
 
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
 import Main from "./layouts/Main";
-import UserInfo from "./pages/UserInfo/UserInfo";
 
 function App() {
   return (
