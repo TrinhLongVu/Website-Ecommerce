@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
-const articleRouter = require('./routes/productRouters.js')
+const productRouter = require('./routes/productRouters.js')
 const userRouter = require('./routes/userRouters.js')
 const authentication = require('./routes/authentication.js')
 const passport = require('passport')
@@ -34,7 +34,7 @@ app.use(passport.session());
 // handle
 p(passport)
 
-app.use('/api/v1/article', articleRouter);
+app.use('/api/v1/product', productRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/user', authentication)
 
