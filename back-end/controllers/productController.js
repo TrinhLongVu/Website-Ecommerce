@@ -2,7 +2,7 @@ const Product = require('../models/productModel')
 const User = require('../models/userModel')
 const fs = require('fs');
 
-exports.getAllProduct = async (req, res, next) => {
+exports.getAllProduct = async (req, res) => {
     try {
         const data = await Product.find()
         res.status(200).json({
@@ -14,11 +14,10 @@ exports.getAllProduct = async (req, res, next) => {
             status: 'fail',
             msg: err
         })
-    }
-    next();
+    };
 }
 
-exports.getProduct = async (req, res, next) => {
+exports.getProduct = async (req, res) => {
     try {
         // const id = req.params.id;
         // let data =
@@ -47,10 +46,9 @@ exports.getProduct = async (req, res, next) => {
             msg: err
         })
     }
-    next();
 }
 
-exports.createProduct = async (req, res, next) => {
+exports.createProduct = async (req, res) => {
     try {
         const newProduct = await Product.create(req.body);
         res.status(201).json({
@@ -67,10 +65,13 @@ exports.createProduct = async (req, res, next) => {
     }
 }
 
-exports.createAllProduct = async (req, res, next) => {
+exports.createAllProduct = async (req, res) => {
     try {
-        const filePath = `${__dirname}data\\products.json`.replace('controllers', '');
-        const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8')).product;
+        const filePath = `${__dirname}data\\apples.json`.replace('controllers', '');
+        const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8')).Apples;
+
+        
+        console.log(Products)
         
         for (const pr of Products) {
             await Product.create(pr);
@@ -87,7 +88,7 @@ exports.createAllProduct = async (req, res, next) => {
 
 }
 
-exports.updateProduct = async (req, res, next) => {
+exports.updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
         const update = await Product.findByIdAndUpdate(id, req.body, {
@@ -102,11 +103,10 @@ exports.updateProduct = async (req, res, next) => {
             status: "error",
             msg: err
         })
-    }
-    next();
+    };
 }
 
-exports.getTops = async (req, res, next) => {
+exports.getTops = async (req, res) => {
     try {
         // const name = req.params.name;
         // let datas = '';
@@ -160,11 +160,10 @@ exports.getTops = async (req, res, next) => {
             status: "error",
             msg: err
         })
-    }
-    next();
+    };
 }
 
-exports.getCategory = async (req, res, next) => {
+exports.getCategory = async (req, res) => {
     try {
         // const data = await Product.find({
         //     Category: {
@@ -188,11 +187,10 @@ exports.getCategory = async (req, res, next) => {
             status: "error",
             msg: err
         })
-    }
-    next();
+    };
 }
 
-exports.getPagination = async (req, res, next) => {
+exports.getPagination = async (req, res) => {
     const query = req.query
     const skip = (query.page - 1) * query.limit
     try {
@@ -226,12 +224,11 @@ exports.getPagination = async (req, res, next) => {
             status: "error",
             msg: err
         })
-    }
-    next();
+    };
 }
 
 
-exports.deleteProduct = async (req, res, next) => {
+exports.deleteProduct = async (req, res) => {
     try {
 
         const _id = req.params.id;
@@ -263,7 +260,7 @@ exports.deleteProduct = async (req, res, next) => {
 }
 
 
-exports.SearchProduct = async (req, res, next) => {
+exports.SearchProduct = async (req, res) => {
     try {
         const tempsearchString = req.params.searchString;
 
@@ -297,12 +294,11 @@ exports.SearchProduct = async (req, res, next) => {
             status: 'fail',
             msg: err
         })
-    }
-    next();
+    };
 }
 
 
-exports.addComment = async (req, res, next) => {
+exports.addComment = async (req, res) => {
     try {
         res.status(201).json({
             status: 'success',
@@ -313,6 +309,5 @@ exports.addComment = async (req, res, next) => {
             status: "error",
             msg: err
         })
-    }
-    next();
+    };
 }

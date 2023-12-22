@@ -114,16 +114,10 @@ exports.createAllUser = async (req, res, next) => {
                     if (err) {
                         return next(err);
                     }
-                    const newUser = await User.create({
+                    await User.create({
                         UserName: UserName,
                         Password: hash  
                     });                    
-                    res.status(201).json({
-                        status: 'Create success',
-                        data: {
-                            user: newUser
-                        }
-                    })
                 })
 
             } catch (error) {
