@@ -2,14 +2,14 @@
     "Apples": [
         {
             "title": "Iphone 15",
-            "category": "phone",
+            "category": "Smartphone",
             "detail": "Dynamic Island stays on top of it all. New 48MP camera. Super-high-resolution photos. 2x Telephoto. Durable color-infused glass and aluminum design. Charging as easy as USB-C.",
             "image": "https://www.apple.com/v/iphone-15/c/images/overview/closer-look/all_colors__d4w03v51nwcy_large.jpg",
             "price": "$899"
         },
         {
             "title": "Iphone 15 Pro",
-            "category": "phone",
+            "category": "Smartphone",
             "detail": "Enter A17 Pro. Game‑changing chip. Groundbreaking performance. Titanium. So strong. So light. So Pro. Phone 15 Pro Max has the longest optical zoom in iPhone ever. Far out. All-new Action button. will yours do?",
             "image": "https://www.apple.com/v/iphone-15-pro/c/images/overview/closer-look/all_colors__eppfcocn9mky_large.jpg",
             "price": "$1,299"

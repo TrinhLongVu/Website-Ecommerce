@@ -8,6 +8,7 @@ const productSchema = new Schema({
     },
     category: {
         type: String,
+        ref: 'Category',
         required: [true, 'A Product must have a catagory']
     },
     detail: {
@@ -33,7 +34,7 @@ const productSchema = new Schema({
         type: String
     },
     price:{
-        type: String,
+        type: Number,
         required: [true, 'Product must have price']
     }
 })

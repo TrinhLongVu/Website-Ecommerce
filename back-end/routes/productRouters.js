@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const articleController = require('../controllers/productController')
+const middleware = require('../middeware/auth')
 
 router
     .route('/')
-    .get(articleController.getAllProduct)
+    .get(middleware.isLoggedUser, articleController.getAllProduct)
     .post(articleController.createProduct)
 
 router
@@ -29,10 +30,9 @@ router
     .get(articleController.getProduct)
     .patch(articleController.updateProduct)
     .delete(articleController.deleteProduct)
-    .post(articleController.addComment)
 
 router
-    .route('/search/:searchString')  // Note: if searchString have multiple words, convert to "word1+word2+..." .concatnate words with a "+" sign, must not have "space"(" ") in searchString
+    .route('/search/:searchString')
     .get(articleController.SearchProduct)
 
 module.exports = router;
