@@ -27,6 +27,12 @@ exports.createUser = async (req, res, next) => {
     try {
         //===========check username (email) available==========================
         const { UserName, Password, ConfirmPassword } = req.body;
+        if(!UserName || !Password ||!ConfirmPassword){
+            return res.status(400).json({
+                status: "fail",
+                msg: "Please fill full information",
+            });
+        }
 
         // check username is Taken
         const isTaken = await User.findOne({ UserName });
@@ -60,7 +66,7 @@ exports.createUser = async (req, res, next) => {
         const newUser = await User.create(NewBody);
 
         res.status(201).json({
-            status: 'success',
+            status: 'Create success',
             data: {
                 user: newUser
             }
