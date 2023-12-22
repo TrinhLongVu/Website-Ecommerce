@@ -1,0 +1,306 @@
+{
+    "Apples": [
+        {
+            "title": "Iphone 15",
+            "category": "Smartphone",
+            "detail": "Dynamic Island stays on top of it all. New 48MP camera. Super-high-resolution photos. 2x Telephoto. Durable color-infused glass and aluminum design. Charging as easy as USB-C.",
+            "image": "https://www.apple.com/v/iphone-15/c/images/overview/closer-look/all_colors__d4w03v51nwcy_large.jpg",
+            "price": "$899"
+        },
+        {
+            "title": "Iphone 15 Pro",
+            "category": "Smartphone",
+            "detail": "Enter A17 Pro. Game‑changing chip. Groundbreaking performance. Titanium. So strong. So light. So Pro. Phone 15 Pro Max has the longest optical zoom in iPhone ever. Far out. All-new Action button. will yours do?",
+            "image": "https://www.apple.com/v/iphone-15-pro/c/images/overview/closer-look/all_colors__eppfcocn9mky_large.jpg",
+            "price": "$1,299"
+        },
+        {
+            "Title": "Mac mini",
+            "Category": "mac",
+            "Detail": "Mac mini with M2 packs the speed you need to get more done faster.\nAnd M2 Pro takes it to a whole new level — bringing a pro chip to Mac mini for the first time.\nAdd to that a versatile array of ports and you’ve got a desktop ready to flex in any setup, no matter which chip you choose.",
+            "Image": "https://www.bing.com/images/search?view=detailV2&ccid=4B1sddXn&id=D6FE7542B04E4B5E2BCD12A2C963DDA1F9D7BFAD&thid=OIP.4B1sddXn5WqdNvP2u1YDVgHaFK&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.e01d6c75d5e7e56a9d36f3f6bb560356%3frik%3drb%252fX%252baHdY8miEg%26riu%3dhttp%253a%252f%252fupload.wikimedia.org%252fwikipedia%252fcommons%252f2%252f26%252fMac_mini_mid2010_back.jpg%26ehk%3d2bxB7M6BjBt1g9%252bxTUmbHHRMlaRGTXkj7iQ5jXx3EaU%253d%26risl%3d1%26pid%3dImgRaw%26r%3d0&exph=1990&expw=2854&q=mac+mini&simid=607992706303809027&FORM=IRPRST&ck=54624CFC92F38151AE00A0BCE778733C&selectedIndex=2&itb=0",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Mac Studio",
+            "Category": "mac",
+            "Detail": "Stunningly compact.\nExtensive connectivity.\nSupercharged by M2 Max and M2 Ultra.",
+            "Image": "https://www.apple.com/v/mac-studio/f/images/overview/hero/static_front__fmvxob6uyxiu_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Macbook Pro",
+            "Category": "mac",
+            "Detail": "The most advanced chips ever built for a personal computer.\nUp to 22 hours of battery life for the ultimate in pro portability\nThe world’s best laptop display. Brilliant in every way.\nA pro laptop without equal. Now in a new color: Space Black.",
+            "Image": "https://www.apple.com/v/macbook-pro/aj/images/overview/closer-look/3d_viewer_pf_14_16__cnmzk9b7xtpy_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Macbook Air 15",
+            "Category": "mac",
+            "Detail": "Impressively big. Impossibly thin.\nThe new 15‑inch MacBook Air makes room for more of what you love with a spacious Liquid Retina display.\nAnd with the 13‑inch model, you have more reasons than ever to choose Air.\nSupercharged by the M2 chip — and with up to 18 hours of battery life1 — both laptops deliver blazing-fast performance in an ultraportable design.",
+            "Image": "https://www.apple.com/v/macbook-air-13-and-15-m2/e/images/overview/design/design_hero_static__b5n04x7u9s9y_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Imac",
+            "Category": "mac",
+            "Detail": "The world’s best all‑in‑one computer, now supercharged by the M3 chip.\nWith a stunning 24‑inch display1 that gives you all the space you need and an iconic design that livens up any space, iMac is perfect for work and play.",
+            "Image": "https://www.apple.com/v/imac/p/images/overview/color_front_green__eb8qbnemmre6_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Apple Watch Series 9",
+            "Category": "watch",
+            "Detail": "Our most powerful chip in Apple Watch ever.\nA magical new way to use your Apple Watch without touching the screen.\nA display that’s twice as bright. And now you can choose a watch case and band combination that’s carbon neutral.",
+            "Image": "https://www.apple.com/v/apple-watch-series-9/b/images/overview/os/watchos_apps__dt73d4kbzbue_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Apple Watch Ultra 2",
+            "Category": "watch",
+            "Detail": "The most rugged and capable Apple Watch pushes the limits again.\nFeaturing the all-new S9 SiP.\nA magical new way to use your watch without touching the screen.\nThe brightest Apple display ever.\nAnd now you can choose a case and band combination that is carbon neutral.",
+            "Image": "https://www.apple.com/v/apple-watch-ultra-2/c/images/overview/design/design_glory__b6ma91iz65ci_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Apple Watch SE",
+            "Category": "watch",
+            "Detail": "Easy ways to stay connected.\nMotivating fitness metrics.\nInnovative health and safety features. And now with carbon neutral case and band combinations.\nApple Watch SE offers totally lovable features at a feel‑good price.",
+            "Image": "https://www.apple.com/v/apple-watch-se/m/images/overview/hero/hero__d5yx0jn6usae_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Apple Watch Nike",
+            "Category": "watch",
+            "Detail": "Apple and Nike have been motivating people to lace up and run for years.\nNow we’re reimagining how we design watch bands to help reduce waste and make the most of our existing materials.\nBecause even small steps can make a big impact on the planet.",
+            "Image": "https://www.apple.com/v/apple-watch-nike/af/images/overview/hero_avail__utx9u9rrh7mu_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Apple Watch Hermès",
+            "Category": "watch",
+            "Detail": "The Apple Watch Hermès partnership is built on a shared foundation of uncompromising design and craftsmanship.\nThe latest collection features four completely new styles inspired by luxurious textiles.\nPaired with the elegant new Hermès Radial face, these timepieces are as iconic as they are innovative.",
+            "Image": "https://image.Apple-Watch-Hermès",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Apple Vision Pro",
+            "Category": "vision",
+            "Detail": "Apple Vision Pro seamlessly blends digital content with your physical space.\nYou navigate simply by using your eyes, hands, and voice.\nSo you can do the things you love in ways never before possible.\nYou’ve never seen everything like this before.",
+            "Image": "https://www.apple.com/v/apple-vision-pro/b/images/overview/intro/hardware_base__ecl2v43j73o2_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "AirPods Pro (2nd generation)",
+            "Category": "airpods",
+            "Detail": "Up to 2x more Active Noise Cancellation.\nTransparency mode to hear the world around you.\nAll-new Adaptive Audio intelligently tailors noise control to your environment.\nSpatial Audio takes immersion to a remarkably personal level. And a single charge delivers 6 hours of battery life.",
+            "Image": "https://www.apple.com/v/airpods-pro/i/images/overview/audio_airpod__dni8q27q7tqq_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "AirPods (2nd generation)",
+            "Category": "airpods",
+            "Detail": "With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.\nAirPods deliver an incredible wireless headphone experience.\nSimply take them out and they’re ready to use with all your devices.\nPut them in your ears and they connect immediately, immersing you in rich, high-quality sound. Just like magic.",
+            "Image": "https://www.bing.com/images/search?view=detailV2&ccid=jgJl%2fcuF&id=E689BBFC76D1BA364025AA06B7EEA43FA8C688CC&thid=OIP.jgJl_cuFdH8Z_Xft94sjvgHaFK&mediaurl=https%3a%2f%2fimages.idgesg.net%2fimages%2farticle%2f2019%2f03%2fairpods-2nd-gen-02-100792363-orig.jpeg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.8e0265fdcb85747f19fd77edf78b23be%3frik%3dzIjGqD%252bk7rcGqg%26pid%3dImgRaw%26r%3d0&exph=2835&expw=4063&q=AirPods+(2nd+generation)&simid=608000643380360378&FORM=IRPRST&ck=D3D5D82B3853BADA4D15A83289F619D3&selectedIndex=1&itb=0",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "AirPods (3rd generation)",
+            "Category": "airpods",
+            "Detail": "It’s magic, remastered. With Personalized Spatial Audio that places sound all around you, Adaptive EQ that tunes music to your ears, and longer battery life that charges up in a snap.\nIt shrugs off sweat and sprinkles, and delivers an experience that’s simply magical.\nTaking sound in totally new directions.",
+            "Image": "https://www.apple.com/v/airpods-3rd-generation/f/images/overview/value-props/instant_connection_hw__ffmwoeteltaq_xlarge.png",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "AirPods Max",
+            "Category": "airpods",
+            "Detail": "The over-ear headphone has been completely reimagined.\nFrom cushion to canopy, AirPods Max are designed for an uncompromising fit that creates the optimal acoustic seal for many different head shapes — fully immersing you in every sound.",
+            "Image": "https://www.apple.com/v/airpods-max/f/images/overview/hero__gnfk5g59t0qe_xlarge.png",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Apple TV 4K",
+            "Category": "TV",
+            "Detail": "Apple TV 4K unites your favorite Apple services with all your streaming apps in our best-ever picture and sound quality — thanks to the blazing‑fast A15 Bionic chip.\nEnjoy a new FaceTime experience on TV1 that brings your friends and family into your living room — and onto the biggest screen in your home.\nAnd with seamless interaction with all your devices and smart home accessories,2 it’s everything you love about Apple — at its cinematic best.",
+            "Image": "https://www.apple.com/v/apple-tv-4k/ah/images/overview/facetime/facetime__exrio2z3zuie_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Home Pod",
+            "Category": "homepod",
+            "Detail": "Immersive, high-fidelity audio.\nAn intelligent assistant.\nWorks seamlessly with your Apple devices.\n A powerful way to control your smart home.\nPrivate and secure.",
+            "Image": "https://www.apple.com/v/homepod-2nd-generation/b/images/overview/homepod_twins__gi5qodweaqie_large.jpg",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        },
+        {
+            "Title": "Home Pod Mini",
+            "Category": "homepod",
+            "Detail": "Room-filling sound.\nAn intelligent assistant.\nControl your smart home.\nWorks seamlessly with iPhone.\nPrivate and secure.",
+            "Image": "https://www.apple.com/v/homepod-mini/i/images/overview/hero_homepod__cnpc7icpf1aq_large.png",
+            "Comments": [
+                {
+                    "id": 1,
+                    "content": "10đ"
+                },
+                {
+                    "id": 2,
+                    "content": ""
+                }
+            ]
+        }
+    ]
+}

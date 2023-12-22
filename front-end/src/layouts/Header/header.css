@@ -1,0 +1,193 @@
+header {
+    margin-bottom: 20px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1260px;
+    height: 110px;
+    border-radius: 0 0 30px 30px;
+    background-color: #f8f8f8;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.logo {
+    width: 240px;
+    font-family: 'Baskerville';
+    font-style: italic;
+    font-size: xxx-large;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.list-shower-container {
+    display: flex;
+    user-select: none;
+}
+
+.list-shower {
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+    display: flex;
+}
+
+.list-shower-title {
+    display: flex;
+}
+
+.list-shower-title:hover {
+    opacity: 0.6;
+}
+
+.list-shower a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.dropdown-ico {
+    margin: 0 3px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.search-box {
+    margin-left: 20px;
+    height: 65px;
+    width: 580px;
+    background-color: #e1e1e1;
+    border-radius: 15px;
+}
+
+.search-input {
+    padding-left: 20px;
+    font-size: 20px;
+    height: 65px;
+    width: 535px;
+    border: none;
+    background-color: #e1e1e1;
+    border-radius: 15px;
+    outline: none;
+}
+
+#search-ico {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.home-shop-cart {
+    color: black;
+    cursor: pointer;
+    font-size: 35px;
+    margin-left: 25px;
+}
+
+.avt-dropdown-btn {
+    width: 64px;
+    height: 64px;
+    margin-left: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border: 1px solid black;
+    border-radius: 32px;
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    width: 170px;
+    background-color: white;
+    position: absolute;
+    z-index: 5;
+    border-radius: 12px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.left-dropdown {
+    top: 35px;
+    left: 0;
+}
+
+#avt-dropdown {
+    width: 150px;
+    top: 70px;
+    right: 0;
+}
+
+.dropdown-menu a:hover {
+    background-color: #ccd1d9;
+    color: white;
+}
+
+.dropdown-menu a {
+    padding: 0 15px;
+    text-decoration: none;
+    color: inherit;
+    user-select: none;
+    font-size: 18px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    transition: all 0.15s ease;
+}
+
+.dropdown-menu a:first-child:hover {
+    border-radius: 12px 12px 0 0;
+}
+
+.dropdown-menu a:last-child:hover {
+    border-radius: 0 0 12px 12px;
+}
+
+#avt-dropdown a:last-child:hover {
+    background-color: #a25772;
+}
+
+.profile-ico {
+    margin-right: 10px;
+}
+
+.head-login-btn {
+    margin-left: 20px;
+    padding: 0 30px;
+    width: 150px;
+    height: 45px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #068DA9;
+    text-decoration: none;
+    color: #068DA9;
+}
+
+.head-login-btn:hover {
+    color: #f8f8f8;
+    background-color: #068DA9;
+    border: none;
+}
+
+.head-login-ico {
+    margin-left: 10px;
+}
+
+#search-btn {
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    color: inherit;
+}
+
+#search-btn:hover {
+    color: #068DA9;
+}

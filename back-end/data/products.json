@@ -1,0 +1,218 @@
+{
+  "product": [
+    {
+      "title": "Samsung Galaxy S23 Ultra",
+      "detail": "With a powerful processor, a remarkably flexible 200MP main camera, and the best zoom lens around, the Galaxy S23 Ultra can take on all comers and emerge as the best.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "1199",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWoAn-Mf0vxsyxhLlwojHnhzW44FWGZpStNw&usqp=CAU"
+    },
+
+    {
+      "title": "Google Pixel 6 Pro",
+      "detail": "Known for its exceptional camera capabilities, the Pixel 6 Pro offers a clean Android experience and regular software updates.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "899",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZqzmjIv5l6LvXExshD6FLZj0CBeMsCGUtsA&usqp=CAU"
+    },
+
+    {
+      "title": "OnePlus 9 Pro",
+      "detail": "Combining high-end specs, fast charging, and a smooth display, the OnePlus 9 Pro is a flagship contender.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "999",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_1KJ1RcYmRXNeQ-g9c0Y2mi7EIg-Qgn2dSw&usqp=CAU"
+    },
+
+    {
+      "title": "Xiaomi Mi 12",
+      "detail": "Expected to feature top-tier specifications, including a high-refresh-rate display and powerful cameras.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "799",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc1vSK-hpUNEWFGwReNJgNbjG85yw7eLACzg&usqp=CAU"
+    },
+
+    {
+      "title": "Sony Xperia 1 III",
+      "detail": "Known for its 4K OLED display, versatile camera system, and audio capabilities.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "1199",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbPwtW0psoLpN7tjuimoi4ayTm2GtqjvOrjw&usqp=CAU"
+    },
+
+    {
+      "title": "Samsung Galaxy Z Fold 3",
+      "detail": "A foldable 6585a4c6d90e7364220a13da, with impressive multitasking capabilities and S Pen support.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "1799",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuXtB6pMy8wNXP4NRZDEpXMnt30pH7dc8HBkr8E68btjkvc7FK3lxh92WYhdwuIune_BY&usqp=CAU"
+    },
+
+    {
+      "title": "Apple iPhone 13",
+      "detail": "The successor to the iPhone 12 series, featuring improved performance, camera enhancements, and iOS 15.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "699",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbGAopBy3-pgzwWvWZpxqMDl9iSQnopqvsg&usqp=CAU"
+    },
+
+    {
+      "title": "LG Wing",
+      "detail": "Known for its unique swiveling dual-screen design, offering creative possibilities.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "699",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc1jB1adoVSoBpioPGOrvvTCQmJOnUrMMP9Q&usqp=CAU"
+
+    },
+
+    {
+      "title": "Motorola Edge 30",
+      "detail": "A mid-range phone with a focus on display quality and 5G connectivity.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "499",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjSOOUT3cSIEJpDngmfiZdcqAcJ9mcOXvS1Q&usqp=CAU"
+    },
+
+    {
+      "title": "Realme GT 5G",
+      "detail": "A budget-friendly option with flagship-level performance and 5G support.",
+      "category": "6585a4c6d90e7364220a13da",
+      "price": "399",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAosxWPcVhMZcBolEJSWVov85sSrBq_MI56w&usqp=CAU"
+    },
+
+    {
+      "title": "Iphone 15",
+      "category": "6585a4c6d90e7364220a13da",
+      "detail": "Dynamic Island stays on top of it all. New 48MP camera. Super-high-resolution photos. 2x Telephoto. Durable color-infused glass and aluminum design. Charging as easy as USB-C.",
+      "image": "https://www.apple.com/v/iphone-15/c/images/overview/closer-look/all_colors__d4w03v51nwcy_large.jpg",
+      "price": "899"
+    },
+    {
+      "title": "Iphone 15 Pro",
+      "category": "6585a4c6d90e7364220a13da",
+      "detail": "Enter A17 Pro. Game-changing chip. Groundbreaking performance. Titanium. So strong. So light. So Pro. Phone 15 Pro Max has the longest optical zoom in iPhone ever. Far out. All-new Action button. will yours do?",
+      "image": "https://www.apple.com/v/iphone-15-pro/c/images/overview/closer-look/all_colors__eppfcocn9mky_large.jpg",
+      "price": "1299"
+    },
+    {
+      "title": "Mac mini",
+      "category": "6585a6ca9306f231fe13e80d",
+      "detail": "Mac mini with M2 packs the speed you need to get more done faster. And M2 Pro takes it to a whole new level — bringing a pro chip to Mac mini for the first time. Add to that a versatile array of ports and you've got a desktop ready to flex in any setup, no matter which chip you choose.",
+      "image": "https://www.bing.com/images/search?view=detailV2&ccid=4B1sddXn&id=D6FE7542B04E4B5E2BCD12A2C963DDA1F9D7BFAD&thid=OIP.4B1sddXn5WqdNvP2u1YDVgHaFK&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.e01d6c75d5e7e56a9d36f3f6bb560356%3frik%3drb%252fX%252baHdY8miEg%26riu%3dhttp%253a%252f%252fupload.wikimedia.org%252fwikipedia%252fcommons%252f2%252f26%252fMac_mini_mid2010_back.jpg%26ehk%3d2bxB7M6BjBt1g9%252bxTUmbHHRMlaRGTXkj7iQ5jXx3EaU%253d%26risl%3d1%26pid%3dImgRaw%26r%3d0&exph=1990&expw=2854&q=mac+mini&simid=607992706303809027&FORM=IRPRST&ck=54624CFC92F38151AE00A0BCE778733C&selectedIndex=2&itb=0",
+      "price": "1599"
+    },
+    {
+      "title": "Mac Studio",
+      "category": "6585a6ca9306f231fe13e80d",
+      "detail": "Stunningly compact. Extensive connectivity. Supercharged by M2 Max and M2 Ultra.",
+      "image": "https://www.apple.com/v/mac-studio/f/images/overview/hero/static_front__fmvxob6uyxiu_large.jpg",
+      "price": "1199"
+    },
+    {
+      "title": "Macbook Pro",
+      "category": "6585a6ca9306f231fe13e80d",
+      "detail": "The most advanced chips ever built for a personal computer. Up to 22 hours of battery life for the ultimate in pro portability The world's best laptop display. Brilliant in every way. A pro laptop without equal. Now in a new color: Space Black.",
+      "image": "https://www.apple.com/v/macbook-pro/aj/images/overview/closer-look/3d_viewer_pf_14_16__cnmzk9b7xtpy_large.jpg",
+      "price": "2099"
+    },
+    {
+      "title": "Macbook Air 15",
+      "category": "6585a6ca9306f231fe13e80d",
+      "detail": "Impressively big. Impossibly thin. The new 15‑inch MacBook Air makes room for more of what you love with a spacious Liquid Retina display. And with the 13‑inch model, you have more reasons than ever to choose Air. Supercharged by the M2 chip — and with up to 18 hours of battery life1 — both laptops deliver blazing-fast performance in an ultraportable design.",
+      "image": "https://www.apple.com/v/macbook-air-13-and-15-m2/e/images/overview/design/design_hero_static__b5n04x7u9s9y_large.jpg",
+      "price": "1099"
+    },
+    {
+      "title": "Imac",
+      "category": "6585a6ca9306f231fe13e80d",
+      "detail": "The world's best all‑in‑one computer, now supercharged by the M3 chip. With a stunning 24‑inch display1 that gives you all the space you need and an iconic design that livens up any space, iMac is perfect for work and play.",
+      "image": "https://www.apple.com/v/imac/p/images/overview/color_front_green__eb8qbnemmre6_large.jpg",
+      "price": "1099"
+    },
+    {
+      "title": "Apple Watch Series 9",
+      "category": "6585a7229306f231fe13e80f",
+      "detail": "Our most powerful chip in Apple Watch ever. A magical new way to use your Apple Watch without touching the screen. A display that's twice as bright. And now you can choose a watch case and band combination that's carbon neutral.",
+      "image": "https://www.apple.com/v/apple-watch-series-9/b/images/overview/os/watchos_apps__dt73d4kbzbue_large.jpg",
+      "price": "799"
+    },
+    {
+      "title": "Apple Watch Ultra 2",
+      "category": "6585a7229306f231fe13e80f",
+      "detail": "The most rugged and capable Apple Watch pushes the limits again. Featuring the all-new S9 SiP. A magical new way to use your watch without touching the screen. The brightest Apple display ever. And now you can choose a case and band combination that is carbon neutral.",
+      "image": "https://www.apple.com/v/apple-watch-ultra-2/c/images/overview/design/design_glory__b6ma91iz65ci_large.jpg",
+      "price": "399"
+    },
+    {
+      "title": "Apple Watch SE",
+      "category": "6585a7229306f231fe13e80f",
+      "detail": "Easy ways to stay connected. Motivating fitness metrics. Innovative health and safety features. And now with carbon neutral case and band combinations. Apple Watch SE offers totally lovable features at a feel‑good price.",
+      "image": "https://www.apple.com/v/apple-watch-se/m/images/overview/hero/hero__d5yx0jn6usae_large.jpg",
+      "price": "299"
+    },
+    {
+      "title": "Apple Watch Nike",
+      "category": "6585a7229306f231fe13e80f",
+      "detail": "Apple and Nike have been motivating people to lace up and run for years. Now we're reimagining how we design watch bands to help reduce waste and make the most of our existing materials. Because even small steps can make a big impact on the planet.",
+      "image": "https://www.apple.com/v/apple-watch-nike/af/images/overview/hero_avail__utx9u9rrh7mu_large.jpg",
+      "price": "299"
+    },
+    {
+      "title": "Apple Watch Hermer",
+      "category": "6585a7229306f231fe13e80f",
+      "detail": "The Apple Watch Hermer partnership is built on a shared foundation of uncompromising design and craftsmanship. The latest collection features four completely new styles inspired by luxurious textiles. Paired with the elegant new Hermer Radial face, these timepieces are as iconic as they are innovative.",
+      "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQJGy_G0_Njh2YoD7fizq2CqsaAMjpF-pJTg2qoTWIeb16MDklg33AzyAaEvQzF4IJBG6Z17R9XxxxUx62I59H1JUVx9K3Qc-Tz6I-eeM1L_gz1XmoKDmkmR6byx6GmS1jB1qUi6s0sxA&usqp=CAc",
+      "price": "599"
+    },
+    {
+      "title": "AirPods Pro (2nd generation)",
+      "category": "6585a74b5a2bab0032e18a56",
+      "detail": "Up to 2x more Active Noise Cancellation. Transparency mode to hear the world around you. All-new Adaptive Audio intelligently tailors noise control to your environment. Spatial Audio takes immersion to a remarkably personal level. And a single charge delivers 6 hours of battery life.",
+      "image": "https://www.apple.com/v/airpods-pro/i/images/overview/audio_airpod__dni8q27q7tqq_large.jpg",
+      "price": "899"
+    },
+    {
+      "title": "AirPods (2nd generation)",
+      "category": "6585a74b5a2bab0032e18a56",
+      "detail": "With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case. AirPods deliver an incredible wireless headphone experience. Simply take them out and they're ready to use with all your devices. Put them in your ears and they connect immediately, immersing you in rich, high-quality sound. Just like magic.",
+      "image": "https://www.bing.com/images/search?view=detailV2&ccid=jgJl%2fcuF&id=E689BBFC76D1BA364025AA06B7EEA43FA8C688CC&thid=OIP.jgJl_cuFdH8Z_Xft94sjvgHaFK&mediaurl=https%3a%2f%2fimages.idgesg.net%2fimages%2farticle%2f2019%2f03%2fairpods-2nd-gen-02-100792363-orig.jpeg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.8e0265fdcb85747f19fd77edf78b23be%3frik%3dzIjGqD%252bk7rcGqg%26pid%3dImgRaw%26r%3d0&exph=2835&expw=4063&q=AirPods+(2nd+generation)&simid=608000643380360378&FORM=IRPRST&ck=D3D5D82B3853BADA4D15A83289F619D3&selectedIndex=1&itb=0",
+      "price": "199"
+    },
+    {
+      "title": "AirPods (3rd generation)",
+      "category": "6585a74b5a2bab0032e18a56",
+      "detail": "It's magic, remastered. With Personalized Spatial Audio that places sound all around you, Adaptive EQ that tunes music to your ears, and longer battery life that charges up in a snap. It shrugs off sweat and sprinkles, and delivers an experience that's simply magical. Taking sound in totally new directions.",
+      "image": "https://www.apple.com/v/airpods-3rd-generation/f/images/overview/value-props/instant_connection_hw__ffmwoeteltaq_xlarge.png",
+      "price": "199"
+    },
+    {
+      "title": "AirPods Max",
+      "category": "6585a74b5a2bab0032e18a56",
+      "detail": "The over-ear headphone has been completely reimagined. From cushion to canopy, AirPods Max are designed for an uncompromising fit that creates the optimal acoustic seal for many different head shapes — fully immersing you in every sound.",
+      "image": "https://www.apple.com/v/airpods-max/f/images/overview/hero__gnfk5g59t0qe_xlarge.png",
+      "price": "299"
+    },
+    {
+      "title": "Apple TV 4K",
+      "category": "6585a7d16d9fc7031f1d96ec",
+      "detail": "Apple TV 4K unites your favorite Apple services with all your streaming apps in our best-ever picture and sound quality — thanks to the blazing‑fast A15 Bionic chip. Enjoy a new FaceTime experience on TV1 that brings your friends and family into your living room — and onto the biggest screen in your home. And with seamless interaction with all your devices and smart home accessories,2 it's everything you love about Apple — at its cinematic best.",
+      "image": "https://www.apple.com/v/apple-tv-4k/ah/images/overview/facetime/facetime__exrio2z3zuie_large.jpg",
+      "price": "699"
+    },
+    {
+      "title": "Home Pod",
+      "category": "6585a7d56d9fc7031f1d96ee",
+      "detail": "Immersive, high-fidelity audio. An intelligent assistant. Works seamlessly with your Apple devices.  A powerful way to control your smart home. Private and secure.",
+      "image": "https://www.apple.com/v/homepod-2nd-generation/b/images/overview/homepod_twins__gi5qodweaqie_large.jpg",
+      "price": "599"
+    },
+    {
+      "title": "Home Pod Mini",
+      "category": "6585a7d56d9fc7031f1d96ee",
+      "detail": "Room-filling sound. An intelligent assistant. Control your smart home. Works seamlessly with iPhone. Private and secure.",
+      "image": "https://www.apple.com/v/homepod-mini/i/images/overview/hero_homepod__cnpc7icpf1aq_large.png",
+      "price": "699"
+    }
+  ]
+}

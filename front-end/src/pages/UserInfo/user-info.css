@@ -1,0 +1,140 @@
+.title-input {
+    margin-bottom: 10px;
+}
+
+.info-avt-container {
+    display: flex;
+}
+
+.info--avt {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    max-height: 370px;
+    width: 650px;
+    background-color: #f8f8f8;
+    margin-right: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    position: sticky;
+    top: 20px;
+}
+
+.info--avt-change {
+    margin: 20px 0;
+    padding: 10px 20px;
+    display: flex;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.info--avt-change:hover {
+    cursor: pointer;
+    background-color: #068DA9;
+    color: white;
+}
+
+#info--avt-edit {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+    width: 100%;
+    height: auto;
+    width: 100%;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 25px;
+}
+
+#info--avt-upload {
+    display: none;
+}
+
+.avatar-big {
+    width: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border: 1px solid black;
+    border-radius: 125px;
+}
+
+.change-profile-pic-btn {
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #656462;
+    background-color: #ffffff;
+    padding: 10px 10px;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 10px 0px;
+
+}
+
+.info-inp {
+    width: 100%;
+    height: 30px;
+    font-size: 25px;
+    padding: 20px 10px;
+    background-color: #f8f8f8;
+    outline: 0;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
+/* .bio-inp::placeholder, */
+.info-inp::placeholder {
+    color: red;
+}
+
+.info-action-btn {
+    align-self: flex-end;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #ff7b7b;
+    background-color: #ffffff;
+    border: 2px solid #ff7b7b;
+    cursor: pointer;
+    user-select: none;
+}
+
+.info-action-btn:hover {
+    background-color: #ff7b7b;
+    color: #ffffff;
+}
+
+.info-action-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#info-save-btn {
+    margin: 0 15px;
+}
+
+#info-upgrade-btn {
+    margin: 10px 0;
+}
+
+.info-action-row {
+    margin: 10px 0;
+    display: flex;
+    justify-content: end;
+}

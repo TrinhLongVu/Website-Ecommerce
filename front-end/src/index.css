@@ -1,0 +1,29 @@
+@import url('https://fonts.cdnfonts.com/css/inika');
+@import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css?family=REM');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto';
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ebebeb;
+}
+
+.show-all-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100px;
+  color: #3e3232;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
