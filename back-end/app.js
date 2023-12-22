@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const productRouter = require('./routes/productRouters.js')
 const userRouter = require('./routes/userRouters.js')
 const authentication = require('./routes/authentication.js')
+const categoryRouter = require('./routes/categoryRouter.js')
 const passport = require('passport')
 const session = require('express-session');
 const cookieParser = require('cookie-parser')
@@ -40,6 +41,7 @@ p(passport)
 
 app.use('/api/v1/product', productRouter);
 app.use('/api/v1/user', userRouter);
-app.use('/api/v1/user', authentication)
+app.use('/api/v1/user', authentication);
+app.use('/api/v1/category', categoryRouter);
 
 module.exports = app;
