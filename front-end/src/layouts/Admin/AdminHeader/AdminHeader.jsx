@@ -1,0 +1,35 @@
+import { Link, NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+
+import "./admin-header.css";
+
+const Header = () => {
+  const classNameFunc = ({ isActive }) =>
+    isActive ? "admin-nav admin-nav-active" : "admin-nav";
+  return (
+    <div className="admin--header">
+      <Link to="/admin" className="logo">
+        THE MEGA MALL
+      </Link>
+      <NavLink to="/admin/category" className={classNameFunc}>
+        Manage Category
+      </NavLink>
+      <NavLink to="/admin/upload" className={classNameFunc}>
+        Upload Product
+      </NavLink>
+      <NavLink to="/admin/users" className={classNameFunc}>
+        Manage Users
+      </NavLink>
+      <NavLink to="/admin/statistics" className={classNameFunc}>
+        Statistics
+      </NavLink>
+      <div className="admin-head-logout-btn">
+        LOGOUT
+        <FontAwesomeIcon icon={faRightToBracket} className="head-login-ico" />
+      </div>
+    </div>
+  );
+};
+
+export default Header;

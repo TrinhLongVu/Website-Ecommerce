@@ -3,13 +3,21 @@ import Home from "./pages/Home/Home";
 import Detail from "./pages/Detail/Detail";
 import MultiCategory from "./pages/MultiCategory/MultiCategory";
 import SingleCategory from "./pages/SingleCategory/SingleCategory";
+import ShopCart from "./pages/ShopCart/ShopCart";
+
+import UserInfo from "./pages/UserInfo/UserInfo";
 
 import Authentication from "./pages/Authentication/Authentication";
+
+import AdminCategory from "./pages/AdminCategory/AdminCategory";
+import AdminUpload from "./pages/AdminUpload/AdminUpload";
+import AdminUsers from "./pages/AdminUsers/AdminUsers";
+import AdminStatistics from "./pages/AdminStatistics/AdminStatistics";
 
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
 import Main from "./layouts/Main";
-import UserInfo from "./pages/UserInfo/UserInfo";
+import Admin from "./layouts/Admin/Admin";
 
 function App() {
   return (
@@ -24,6 +32,13 @@ function App() {
           </Route>
           <Route path="/product" element={<Detail />} />
           <Route path="/user" element={<UserInfo />} />
+          <Route path="/cart" element={<ShopCart />} />
+        </Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route path="/admin/category" element={<AdminCategory />} />
+          <Route path="/admin/upload" element={<AdminUpload />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/statistics" element={<AdminStatistics />} />
         </Route>
         <Route path="/authentication">
           <Route
