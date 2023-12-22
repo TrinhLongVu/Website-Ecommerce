@@ -14,7 +14,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Iphone 15 Pro",
@@ -30,7 +31,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Mac mini",
@@ -46,7 +48,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Mac Studio",
@@ -62,7 +65,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Macbook Pro",
@@ -78,7 +82,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Macbook Air 15",
@@ -94,7 +99,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Imac",
@@ -110,7 +116,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Apple Watch Series 9",
@@ -126,7 +133,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Apple Watch Ultra 2",
@@ -142,7 +150,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Apple Watch SE",
@@ -158,7 +167,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Apple Watch Nike",
@@ -174,7 +184,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Apple Watch Hermès",
@@ -190,7 +201,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Apple Vision Pro",
@@ -206,7 +218,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "AirPods Pro (2nd generation)",
@@ -222,7 +235,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "AirPods (2nd generation)",
@@ -238,7 +252,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "AirPods (3rd generation)",
@@ -254,7 +269,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "AirPods Max",
@@ -270,7 +286,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Apple TV 4K",
@@ -286,7 +303,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Home Pod",
@@ -302,7 +320,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         },
         {
             "Title": "Home Pod Mini",
@@ -318,7 +337,8 @@
                     "id": 2,
                     "content": ""
                 }
-            ]
+            ],
+            "price": ""
         }
     ]
 }

@@ -83,6 +83,7 @@ exports.createAllUser = async (req, res, next) => {
     try {
 
         const filePath = `${__dirname}data\\user.json`.replace('controllers', '');
+        console.log(filePath)
         const users = JSON.parse(fs.readFileSync(filePath, 'utf-8')).user;
 
         //=================================================================================
