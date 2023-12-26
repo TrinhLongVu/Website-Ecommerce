@@ -6,21 +6,13 @@ const middleware = require('../middeware/auth')
 
 router
     .route('/')
-    .get(middleware.isLoggedUser, articleController.getAllProduct)
+    .get(articleController.getAllProduct)
     .post(articleController.createProduct)
 
 router
     .route('/create/createAll')
     .post(articleController.createAllProduct)
 
-router
-    .route('/category/:name')
-    .get(articleController.getCategory)
-
-router
-    .route('/top/:name')
-    .get(articleController.getTops)
-    
 router
     .route('/page/pagination')
     .get(articleController.getPagination)
@@ -32,7 +24,7 @@ router
     .delete(articleController.deleteProduct)
 
 router
-    .route('/search/:searchString')
+    .route('/search/:key')
     .get(articleController.SearchProduct)
 
 module.exports = router;
