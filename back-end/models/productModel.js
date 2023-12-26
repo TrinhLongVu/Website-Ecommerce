@@ -22,7 +22,7 @@ const productSchema = new Schema({
         type: Number,
         default: 0
     },
-    views: {
+    quantity: {
         type: Number,
         default: 0
     },
