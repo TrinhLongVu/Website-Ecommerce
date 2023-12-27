@@ -4,8 +4,8 @@ import Detail from "./pages/Detail/Detail";
 import MultiCategory from "./pages/MultiCategory/MultiCategory";
 import SingleCategory from "./pages/SingleCategory/SingleCategory";
 import ShopCart from "./pages/ShopCart/ShopCart";
-
 import UserInfo from "./pages/UserInfo/UserInfo";
+import Error404 from "./pages/Error404/Error404";
 
 import Authentication from "./pages/Authentication/Authentication";
 
@@ -33,6 +33,7 @@ function App() {
           <Route path="/product" element={<Detail />} />
           <Route path="/user" element={<UserInfo />} />
           <Route path="/cart" element={<ShopCart />} />
+          <Route path="*" element={<Error404 />} />
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/category" element={<AdminCategory />} />
