@@ -1,6 +1,7 @@
 const fs = require('fs');
 const User = require('../models/userModel')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const Product = require('../models/productModel');
 const saltRounds = 10
 
 //=========================== FUNCTION =========================================================================
@@ -71,7 +72,7 @@ exports.createUser = async (req, res, next) => {
             }
             const newUser = await User.create({
                 UserName: NewBody.UserName,
-                Password: hash  
+                Password: hash
             });
             res.status(201).json({
                 status: 'Create success',
@@ -116,8 +117,8 @@ exports.createAllUser = async (req, res, next) => {
                     }
                     await User.create({
                         UserName: UserName,
-                        Password: hash  
-                    });                    
+                        Password: hash
+                    });
                 })
 
             } catch (error) {
@@ -145,7 +146,6 @@ exports.getUser = async (req, res, next) => {
 
         // Find the user by ID 
         const finduser = await User.findById(_id);
-        console.log(finduser)
 
         if (!finduser) {
             // If the user with the specified ID is not found, return an error response
@@ -225,6 +225,160 @@ exports.deleteUser = async (req, res, next) => {
         })
     }
 }
+
+exports.addCart = async (req, res, next) => {
+    try {
+        const { product_id, quantity } = req.body;
+        const userId = req.params.id;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: "fail",
+                data: "Cannot find this user"
+            });
+        }
+
+        const product = await Product.findById(product_id)
+        if(!product){
+            return res.status(200).json({
+                status: "fail",
+                data: "Product does not exist"
+            });
+        }
+
+        const existingProduct = user.Cart.find(item => item.product_id == product_id);
+
+        if (existingProduct) {
+            // If the product is already in the cart, update the quantity
+            const Intquantity = parseInt(quantity)
+            existingProduct.quantity += Intquantity;
+        } else {
+            // If the product is not in the cart, push a new entry
+            user.Cart.push({
+                product_id,
+                quantity
+            });
+        }
+
+        // Save the updated user
+        const updatedUser = await user.save();
+
+        res.status(201).json({
+            status: "success",
+            data: updatedUser.Cart
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            status: "fail",
+            data: err.message
+        });
+    }
+};
+
+
+exports.minusCart = async (req, res, next) => {
+    try {
+        const { product_id, quantity } = req.body;
+        const userId = req.params.id;
+
+        // Check if the product is already in the cart
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: "fail",
+                data: "Cannot find this user"
+            });
+        }
+        const product = await Product.findById(product_id)
+        if(!product){
+            return res.status(200).json({
+                status: "fail",
+                data: "Product does not exist"
+            });
+        }
+
+        const existingProduct = user.Cart.find(item => item.product_id == product_id);
+
+        if (existingProduct) {
+            // If the product is in the cart, update the quantity
+            existingProduct.quantity -= quantity;
+
+            if (existingProduct.quantity <= 0) {
+                // If the quantity becomes zero or negative, remove the product from the cart
+                user.Cart = user.Cart.filter(item => item.product_id != product_id);
+            }
+
+            // Save the updated user
+            await user.save();
+
+            res.status(200).json({
+                status: "success"
+            });
+        } else {
+            // If the product is not in the cart, you can handle it accordingly
+            res.status(404).json({
+                status: "fail",
+                message: "Product not found in the cart"
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            status: "fail",
+            data: err.message
+        });
+    }
+};
+
+exports.deleteCart = async (req, res, next) => {
+    try {
+        const { product_id, quantity } = req.body;
+        const userId = req.params.id;
+        // Check if the product is already in the cart
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: "fail",
+                data: "Cannot find this user"
+            });
+        }
+
+        const product = await Product.findById(product_id)
+        if(!product){
+            return res.status(200).json({
+                status: "fail",
+                data: "Product does not exist"
+            });
+        }
+
+        const existingProduct = user.Cart.find(item => item.product_id == product_id);
+
+        if (existingProduct) {
+            user.Cart = user.Cart.filter(item => item.product_id != product_id);
+
+            // Save the updated user
+            await user.save();
+
+            res.status(200).json({
+                status: "success"
+            });
+        } else {
+            // If the product is not in the cart, you can handle it accordingly
+            res.status(404).json({
+                status: "fail",
+                message: "Product not found in the cart"
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            status: "fail",
+            data: err.message
+        });
+    }
+};
+
 
 
 //===============================    WRITER     =====================================================
