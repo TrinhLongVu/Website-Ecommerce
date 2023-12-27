@@ -72,7 +72,7 @@ exports.createUser = async (req, res, next) => {
             }
             const newUser = await User.create({
                 UserName: NewBody.UserName,
-                Password: hash
+                Password: hash  
             });
             res.status(201).json({
                 status: 'Create success',
@@ -117,8 +117,8 @@ exports.createAllUser = async (req, res, next) => {
                     }
                     await User.create({
                         UserName: UserName,
-                        Password: hash
-                    });
+                        Password: hash  
+                    });                    
                 })
 
             } catch (error) {
