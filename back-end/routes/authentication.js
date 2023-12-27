@@ -18,7 +18,6 @@ router
 router
     .route('/account/gg/callback')
     .get(passport.authenticate('google', {
-        successRedirect: '/api/v1/user/account/success',
         failureRedirect: '/api/v1/user/account/success'
     }))
 

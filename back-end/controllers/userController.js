@@ -1,5 +1,7 @@
 const fs = require('fs');
 const User = require('../models/userModel')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 //=========================== FUNCTION =========================================================================
 function checkIfElementExists(element, array) {
@@ -27,6 +29,12 @@ exports.createUser = async (req, res, next) => {
     try {
         //===========check username (email) available==========================
         const { UserName, Password, ConfirmPassword } = req.body;
+        if (!UserName || !Password || !ConfirmPassword) {
+            return res.status(400).json({
+                status: "fail",
+                msg: "Please fill full information",
+            });
+        }
 
         // check username is Taken
         const isTaken = await User.findOne({ UserName });
@@ -57,14 +65,22 @@ exports.createUser = async (req, res, next) => {
             Password: Password,
         }
 
-        const newUser = await User.create(NewBody);
-
-        res.status(201).json({
-            status: 'success',
-            data: {
-                user: newUser
+        bcrypt.hash(NewBody.Password, saltRounds, async function (err, hash) {
+            if (err) {
+                return next(err);
             }
+            const newUser = await User.create({
+                UserName: NewBody.UserName,
+                Password: hash  
+            });
+            res.status(201).json({
+                status: 'Create success',
+                data: {
+                    user: newUser
+                }
+            })
         })
+
     } catch (err) {
         res.status(400).json({
             status: "fail",
@@ -94,7 +110,15 @@ exports.createAllUser = async (req, res, next) => {
                 }
 
                 // If username is not taken, create the user
-                await User.create(user);
+                bcrypt.hash(user.Password, saltRounds, async function (err, hash) {
+                    if (err) {
+                        return next(err);
+                    }
+                    await User.create({
+                        UserName: UserName,
+                        Password: hash  
+                    });                    
+                })
 
             } catch (error) {
                 // Handle any other errors that might occur during user creation
@@ -121,6 +145,7 @@ exports.getUser = async (req, res, next) => {
 
         // Find the user by ID 
         const finduser = await User.findById(_id);
+        console.log(finduser)
 
         if (!finduser) {
             // If the user with the specified ID is not found, return an error response
@@ -178,8 +203,8 @@ exports.deleteUser = async (req, res, next) => {
         const _id = req.params.id;
 
         // Find the user by ID and delete it
-        // const deletedUser = await User.deleteOne({ _id });
-        const deletedUser = await User.deleteMany();
+        const deletedUser = await User.deleteOne({ _id });
+        // const deletedUser = await User.deleteMany();
 
         if (!deletedUser) {
             // If the user with the specified ID is not found, return an error response
