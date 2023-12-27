@@ -14,10 +14,6 @@ router
     .post(articleController.createAllProduct)
 
 router
-    .route('/page/pagination')
-    .get(articleController.getPagination)
-
-router
     .route('/:id')
     .get(articleController.getProduct)
     .patch(articleController.updateProduct)

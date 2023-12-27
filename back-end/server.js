@@ -1,14 +1,12 @@
 const app = require('./app')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-// const cloudinary = require('cloudinary');
+const https = require('https');
+const fs = require('fs');
 
-// cloudinary.config({
-//     cloud_name: 'dupsdtrvy',
-//     api_key: '943628789833962',
-//     api_secret: 'xsn2ONslaeDRYZS3ojFuxG74fA0'
-// });
-
+const privateKey = fs.readFileSync('./openssl/key.pem', 'utf8');
+const certificate = fs.readFileSync('./openssl/cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
 dotenv.config({
     path: './config.env'
 });
@@ -24,6 +22,11 @@ mongoose.connect(DB, {
 })
     .then(() => console.log('Connected!'));
 
-app.listen(PORT, () => {
-    console.log(`App running on http://localhost:${PORT}`)
-})
+
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(PORT);
+       
+// app.listen(PORT, () => {
+//     console.log(`App running on http://localhost:${PORT}`)
+// })
