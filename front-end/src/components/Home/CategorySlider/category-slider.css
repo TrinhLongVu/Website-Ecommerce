@@ -13,31 +13,20 @@
 
 .category-card {
     margin: 0 15px;
-    width: 170px;
-    height: 50px;
-    border: 1px solid black;
+    padding: 15px 15px;
     border-radius: 12px;
     display: flex;
+    background-color: #CCD1D9;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: black;
     font-size: 20px;
+    text-decoration: none;
     font-weight: bold;
     position: relative;
 }
 
-.category-card-bg {
-    width: 168px;
-    height: 48px;
-    border-radius: 12px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    filter: blur(1.5px);
-}
-
-.category-card-name {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.category-card:hover {
+    background-color: #00AFC1;
+    color: white;
 }

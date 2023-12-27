@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { faTag } from "@fortawesome/free-solid-svg-icons";
 import { categoryList } from "../../Global";
-
+import categoryImg from "../../assets/category_bg.jpeg";
 import "./single-category.css";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 
@@ -46,13 +46,10 @@ const SingleCategory = () => {
         <div
           className="category-banner"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.25)), url(${bannerCategory.img})`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.25)), url(${categoryImg})`,
           }}
         >
-          <FontAwesomeIcon
-            icon={bannerCategory.icon}
-            className="category-banner-icon"
-          />
+          <FontAwesomeIcon icon={faTag} className="category-banner-icon" />
           {bannerCategory.name}
         </div>
       )}

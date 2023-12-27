@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faTag } from "@fortawesome/free-solid-svg-icons";
 
 import { categoryList } from "../../Global";
 
@@ -54,7 +54,7 @@ const MultiCategory = () => {
         <div key={index} className="home-section">
           <div className="home-section-banner">
             <h2>
-              <FontAwesomeIcon icon={category.icon} /> {category.name}
+              <FontAwesomeIcon icon={faTag} /> {category.name}
             </h2>
             <Link to={category.link} className="show-all-btn">
               Show all <FontAwesomeIcon icon={faChevronRight} />

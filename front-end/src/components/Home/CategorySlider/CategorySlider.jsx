@@ -25,13 +25,7 @@ const CategorySlider = () => {
     <div className="categories-slider">
       {categoryList.map((category, idx) => (
         <Link to={category.link} key={idx} className="category-card">
-          <div
-            className="category-card-bg"
-            style={{
-              backgroundImage: `url("${category.img}")`,
-            }}
-          ></div>
-          <h3 className="category-card-name">#{category.name}</h3>
+          {category.name}
         </Link>
       ))}
     </div>

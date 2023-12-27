@@ -16,7 +16,7 @@ import AdminStatistics from "./pages/AdminStatistics/AdminStatistics";
 
 import ScrollTop from "./components/ScrollTop/ScrollTop";
 
-import Main from "./layouts/Main";
+import Main from "./layouts/Main/Main";
 import Admin from "./layouts/Admin/Admin";
 
 function App() {
