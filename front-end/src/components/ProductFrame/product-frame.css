@@ -27,19 +27,16 @@
 
 .product-frame-name {
     height: 150px;
-    font-family: 'REM', serif;
     font-size: 40px;
     text-align: justify;
     color: #0766AD;
 }
 
 .product-frame-price {
-    font-family: 'REM', serif;
     font-size: 30px;
 }
 
 .product-frame-desc {
-    font-family: 'REM', serif;
     height: 157.5px;
     font-size: 18px;
     text-align: justify;
@@ -57,7 +54,6 @@
 }
 
 .product-frame-btn {
-    font-family: 'REM', serif;
     color: white;
     padding: 15px;
     font-size: 20px;

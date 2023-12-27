@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <header>
-      <Link to="/" className="logo">
+      <Link to="/" className="main-logo">
         THE MEGA MALL
       </Link>
       <div className="list-shower-container">
