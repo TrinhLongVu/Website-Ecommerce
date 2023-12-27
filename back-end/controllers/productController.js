@@ -122,36 +122,6 @@ exports.updateProduct = async (req, res) => {
     };
 }
 
-exports.getPagination = async (req, res) => {
-    try {
-
-        const query = req.query
-        const skip = (query.page - 1) * query.limit
-        const data = await Product.find()
-            .populate({
-                path: 'category',
-                match: { name: query.category},
-                select: 'name'
-            })
-            .exec();
-        const filteredData = data.filter(product => product.category != null);
-        const paginatedResults = filteredData.slice(skip, skip + query.limit * 1.0);
-
-        res.status(200).json({
-            status: 'success',
-            totalPage: Math.ceil(filteredData.length / query.limit),
-            data: paginatedResults,
-        })
-
-    } catch (err) {
-        res.status(500).send({
-            status: "error",
-            msg: err
-        })
-    };
-}
-
-
 exports.deleteProduct = async (req, res) => {
     try {
 
@@ -173,7 +143,6 @@ exports.deleteProduct = async (req, res) => {
         })
     }
 }
-
 
 exports.SearchProduct = async (req, res) => {
     try {
