@@ -1,12 +1,7 @@
 const app = require('./app')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-const https = require('https');
-const fs = require('fs');
 
-const privateKey = fs.readFileSync('./openssl/key.pem', 'utf8');
-const certificate = fs.readFileSync('./openssl/cert.pem', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
 dotenv.config({
     path: './config.env'
 });
@@ -22,11 +17,6 @@ mongoose.connect(DB, {
 })
     .then(() => console.log('Connected!'));
 
-
-const httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(PORT);
-       
-// app.listen(PORT, () => {
-//     console.log(`App running on http://localhost:${PORT}`)
-// })
+app.listen(PORT, () => {
+    console.log(`App running on http://localhost:${PORT}`)
+})
