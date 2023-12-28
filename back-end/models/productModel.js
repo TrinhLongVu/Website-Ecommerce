@@ -26,7 +26,7 @@ const productSchema = new Schema({
         type: Number,
         default: 0
     },
-    likes: {
+    sold: {
         type: Number,
         default: 0
     },
