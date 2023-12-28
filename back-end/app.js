@@ -24,7 +24,7 @@ app.use(session({
 app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true,
-    allowedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type','Authorization'],
 }))
 // config middleware using req.body
 app.use(express.json())
