@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -37,8 +38,9 @@ const Login = () => {
         }
       );
       const data = await response.json();
-      if (data.body) {
-        window.location.href = "/";
+      localStorage.setItem("token", data.token);
+      if (data.token) {
+        navigate("/");
       } else {
         setError(true);
       }

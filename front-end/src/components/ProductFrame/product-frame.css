@@ -26,29 +26,26 @@
 }
 
 .product-frame-name {
-    height: 150px;
-    font-family: 'REM', serif;
+    height: 100px;
     font-size: 40px;
-    text-align: justify;
     color: #0766AD;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .product-frame-price {
-    font-family: 'REM', serif;
     font-size: 30px;
 }
 
 .product-frame-desc {
-    font-family: 'REM', serif;
-    height: 157.5px;
+    height: 180px;
     font-size: 18px;
     text-align: justify;
     color: #3e3232;
     opacity: 0.75;
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .product-frame-btn-container {
@@ -57,7 +54,7 @@
 }
 
 .product-frame-btn {
-    font-family: 'REM', serif;
+    user-select: none;
     color: white;
     padding: 15px;
     font-size: 20px;

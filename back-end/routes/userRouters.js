@@ -1,29 +1,32 @@
 const express = require('express')
-
 const router = express.Router();
-const passport = require('passport')
-
 const userController = require('../controllers/userController')
-// const abc = require('../controllers/authenticationController')
+const middleware = require('../middeware/auth')
 
 router
     .route('/')
-    .get(userController.getAllUsers)
-    .post(userController.createUser);
+    .get(middleware.isLoggedAdmin, userController.getAllUsers)
 
 router
     .route('/create/createAll')
-    .get(userController.createAllUser)
+    .get(middleware.isLoggedAdmin, userController.createAllUser);
+
+router
+    .route('/cart/add/:id')
+    .post(userController.addCart);
+
+router
+    .route('/cart/minus/:id')
+    .post(userController.minusCart);
+
+router
+    .route('/cart/delete/:id')
+    .post(userController.deleteCart);
 
 router
     .route('/:id')
     .get(userController.getUser)
     .patch(userController.updateUser)
     .delete(userController.deleteUser);
-
-router
-    .route('/pages/:id') // :id of writer
-    .get(userController.getWriter)
-    .patch(userController.Follow_Or_UnFollow_Writer) // To Follow or Unfollow a writer (:id is writer's id, User's id is in response body) 
 
 module.exports = router;

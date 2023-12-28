@@ -4,19 +4,8 @@ import "./footer.css";
 
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const Footer = ({ categoryList }) => {
   const today = new Date();
-
-  const categoryList = [
-    {
-      name: "Electronics",
-      link: "/categories/electronics",
-    },
-    {
-      name: "Furniture",
-      link: "/categories/furniture",
-    },
-  ];
 
   return (
     <footer>
@@ -47,7 +36,7 @@ const Footer = () => {
             </div>
             <div className="foot-section-content" id="foot-categories">
               {categoryList.map((category, idx) => (
-                <Link to={category.link} key={idx}>
+                <Link to={`/categories/${category.name}`} key={idx}>
                   {category.name}
                 </Link>
               ))}

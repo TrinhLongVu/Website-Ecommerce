@@ -1,7 +1,7 @@
 const fs = require('fs');
 const User = require('../models/userModel')
-const bcrypt = require('bcrypt')
-const saltRounds = 10
+const bcrypt = require('bcrypt');
+const Product = require('../models/productModel');
 
 //=========================== FUNCTION =========================================================================
 function checkIfElementExists(element, array) {
@@ -9,7 +9,7 @@ function checkIfElementExists(element, array) {
 }
 //=============================================================================================================
 
-exports.getAllUsers = async (req, res, next) => {
+exports.getAllUsers = async (req, res) => {
     try {
         const alldata = await User.find()
 
@@ -25,71 +25,7 @@ exports.getAllUsers = async (req, res, next) => {
     }
 }
 
-exports.createUser = async (req, res, next) => {
-    try {
-        //===========check username (email) available==========================
-        const { UserName, Password, ConfirmPassword } = req.body;
-        if (!UserName || !Password || !ConfirmPassword) {
-            return res.status(400).json({
-                status: "fail",
-                msg: "Please fill full information",
-            });
-        }
-
-        // check username is Taken
-        const isTaken = await User.findOne({ UserName });
-
-        // If username is Taken, return fail
-        if (isTaken) {
-            return res.status(400).json({
-                status: "fail",
-                msg: "Username is already taken",
-            });
-        }
-
-
-        //===========check confirm Password==========================
-
-        if (Password != ConfirmPassword) {
-            return res.status(400).json({
-                status: "fail",
-                msg: "incorrect Confirm Password",
-            });
-        }
-
-
-        //==========Create New User===============================
-
-        const NewBody = {
-            UserName: UserName,
-            Password: Password,
-        }
-
-        bcrypt.hash(NewBody.Password, saltRounds, async function (err, hash) {
-            if (err) {
-                return next(err);
-            }
-            const newUser = await User.create({
-                UserName: NewBody.UserName,
-                Password: hash  
-            });
-            res.status(201).json({
-                status: 'Create success',
-                data: {
-                    user: newUser
-                }
-            })
-        })
-
-    } catch (err) {
-        res.status(400).json({
-            status: "fail",
-            msg: err
-        })
-    }
-}
-
-exports.createAllUser = async (req, res, next) => {
+exports.createAllUser = async (req, res) => {
     try {
 
         const filePath = `${__dirname}data\\user.json`.replace('controllers', '');
@@ -103,16 +39,16 @@ exports.createAllUser = async (req, res, next) => {
                 // Check if username is taken
                 const isTaken = await User.findOne({ UserName });
 
-                // If username is taken, log a message and continue to the next iteration
+                // If username is taken, log a message and continue to th iteration
                 if (isTaken) {
                     console.log(`Username '${UserName}' is already taken. Skipping user creation.`);
                     continue;
                 }
-
+                const saltRounds = 10
                 // If username is not taken, create the user
                 bcrypt.hash(user.Password, saltRounds, async function (err, hash) {
                     if (err) {
-                        return next(err);
+                        retur(err);
                     }
                     await User.create({
                         UserName: UserName,
@@ -138,14 +74,13 @@ exports.createAllUser = async (req, res, next) => {
 
 }
 
-exports.getUser = async (req, res, next) => {
+exports.getUser = async (req, res) => {
     try {
 
         const _id = req.params.id;
 
         // Find the user by ID 
         const finduser = await User.findById(_id);
-        console.log(finduser)
 
         if (!finduser) {
             // If the user with the specified ID is not found, return an error response
@@ -168,7 +103,7 @@ exports.getUser = async (req, res, next) => {
     }
 }
 
-exports.updateUser = async (req, res, next) => {
+exports.updateUser = async (req, res) => {
     try {
 
         const _id = req.params.id;
@@ -193,11 +128,10 @@ exports.updateUser = async (req, res, next) => {
             status: "fail",
             msg: err
         })
-    }
-    next();
+    };
 }
 
-exports.deleteUser = async (req, res, next) => {
+exports.deleteUser = async (req, res) => {
     try {
 
         const _id = req.params.id;
@@ -226,153 +160,155 @@ exports.deleteUser = async (req, res, next) => {
     }
 }
 
-
-//===============================    WRITER     =====================================================
-
-exports.getWriter = async (req, res, next) => {
+exports.addCart = async (req, res) => {
     try {
-
-        const _id = req.params.id;
-
-        // Find the user by ID 
-        const find_user_writer = await User.findById(_id);
-
-        if (!find_user_writer) {
-            // If the user with the specified ID is not found, return an error response
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'User not found.',
+        const { product_id, quantity } = req.body;
+        const userId = req.params.id;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: "fail",
+                data: "Cannot find this user"
             });
         }
 
-
-        //==== Check writer, If role is "writer"
-
-        if (find_user_writer.Role != "writer") {
-            // If the user with the specified ID is not found, return an error response
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'Not Writer.',
+        const product = await Product.findById(product_id)
+        if(!product){
+            return res.status(200).json({
+                status: "fail",
+                data: "Product does not exist"
             });
         }
 
+        const existingProduct = user.Cart.find(item => item.product_id == product_id);
 
-
-        //==== Set statusFollow: return 'Followed' or 'Have not followed'
-        const _id_user = req.body._id;
-        statusFollow = 'Have not followed'
-        if (checkIfElementExists(_id_user, find_user_writer.ID_user_follow)) {
-            statusFollow = 'Followed'
+        if (existingProduct) {
+            // If the product is already in the cart, update the quantity
+            const Intquantity = parseInt(quantity)
+            existingProduct.quantity += Intquantity;
+        } else {
+            // If the product is not in the cart, push a new entry
+            user.Cart.push({
+                product_id,
+                quantity
+            });
         }
 
-
+        // Save the updated user
+        const updatedUser = await user.save();
 
         res.status(201).json({
-            status: 'success',
-            statusFollow: statusFollow,
-            data: find_user_writer
-        })
+            status: "success",
+            data: updatedUser.Cart
+        });
     } catch (err) {
-        res.status(400).json({
+        console.error(err);
+        res.status(500).json({
             status: "fail",
-            msg: err
-        })
+            data: err.message
+        });
     }
-}
+};
 
-exports.Follow_Or_UnFollow_Writer = async (req, res, next) => {
+
+exports.minusCart = async (req, res) => {
     try {
+        const { product_id, quantity } = req.body;
+        const userId = req.params.id;
 
-        const _id_writer = req.params.id;
-
-        //====================find writer====================
-        // Find the user by ID 
-        const find_user_writer = await User.findById(_id_writer);
-
-        if (!find_user_writer) {
-            // If the user with the specified ID is not found, return an error response
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'Writer not found.',
+        // Check if the product is already in the cart
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: "fail",
+                data: "Cannot find this user"
+            });
+        }
+        const product = await Product.findById(product_id)
+        if(!product){
+            return res.status(200).json({
+                status: "fail",
+                data: "Product does not exist"
             });
         }
 
-        //==== Check writer, If role is "writer"
+        const existingProduct = user.Cart.find(item => item.product_id == product_id);
 
-        if (find_user_writer.Role != "writer") {
-            // If the user with the specified ID is not found, return an error response
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'Not Writer.',
+        if (existingProduct) {
+            // If the product is in the cart, update the quantity
+            existingProduct.quantity -= quantity;
+
+            if (existingProduct.quantity <= 0) {
+                // If the quantity becomes zero or negative, remove the product from the cart
+                user.Cart = user.Cart.filter(item => item.product_id != product_id);
+            }
+
+            // Save the updated user
+            await user.save();
+
+            res.status(200).json({
+                status: "success"
+            });
+        } else {
+            // If the product is not in the cart, you can handle it accordingly
+            res.status(404).json({
+                status: "fail",
+                message: "Product not found in the cart"
             });
         }
-
-
-        //====================find user====================
-        const _id_user = req.body._id;
-        // Find the user by ID 
-        const find_user_user = await User.findById(_id_user);
-
-        if (!find_user_user) {
-            // If the user with the specified ID is not found, return an error response
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'Writer not found.',
-            });
-        }
-
-
-        if (checkIfElementExists(_id_user, find_user_writer.ID_user_follow)) {
-            //   Followed => Unfollow
-            //========================== Delete ID =========================================
-
-            find_user_user.ID_follow_writer = find_user_user.ID_follow_writer.filter(function (element) {
-                return element !== _id_writer;
-            });
-
-            find_user_writer.ID_user_follow = find_user_writer.ID_user_follow.filter(function (element) {
-                return element !== _id_user;
-            });
-
-        }
-        else {
-            //  'Have not followed' => following
-            //========================== PUSH ID =========================================
-
-            find_user_user.ID_follow_writer.push(_id_writer);
-            find_user_writer.ID_user_follow.push(_id_user);
-
-        }
-
-        //========================== UPDATE WRITE AND USER=========================================
-
-        const update_writer = await User.findByIdAndUpdate(_id_writer, find_user_writer, {
-            new: true
-        })
-
-        const update_user = await User.findByIdAndUpdate(_id_user, find_user_user, {
-            new: true
-        })
-
-        //=========================================================================
-
-
-        if (!update_writer || !update_user) {
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'Follow fail.',
-            });
-        }
-
-        res.status(201).json({
-            status: 'success',
-            data: { update_user, update_writer }
-        })
     } catch (err) {
-        res.status(400).json({
+        console.error(err);
+        res.status(500).json({
             status: "fail",
-            msg: err
-        })
+            data: err.message
+        });
     }
-    next();
-}
+};
+
+exports.deleteCart = async (req, res) => {
+    try {
+        const { product_id, quantity } = req.body;
+        const userId = req.params.id;
+        // Check if the product is already in the cart
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: "fail",
+                data: "Cannot find this user"
+            });
+        }
+
+        const product = await Product.findById(product_id)
+        if(!product){
+            return res.status(200).json({
+                status: "fail",
+                data: "Product does not exist"
+            });
+        }
+
+        const existingProduct = user.Cart.find(item => item.product_id == product_id);
+
+        if (existingProduct) {
+            user.Cart = user.Cart.filter(item => item.product_id != product_id);
+
+            // Save the updated user
+            await user.save();
+
+            res.status(200).json({
+                status: "success"
+            });
+        } else {
+            // If the product is not in the cart, you can handle it accordingly
+            res.status(404).json({
+                status: "fail",
+                message: "Product not found in the cart"
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            status: "fail",
+            data: err.message
+        });
+    }
+};

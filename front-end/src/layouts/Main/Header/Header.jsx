@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
@@ -9,10 +9,11 @@ import {
   faRightToBracket,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
-
+// Style
 import "./header.css";
 
-const Header = () => {
+const Header = ({ categoryList }) => {
+  const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
   const [showCategoriesDropdown, setShowCategoriesDropdown] = useState(false);
@@ -39,24 +40,19 @@ const Header = () => {
     }
   });
 
-  const categoryList = [
-    {
-      name: "Electronics",
-      link: "/categories/electronics",
-    },
-    {
-      name: "Furniture",
-      link: "/categories/furniture",
-    },
-  ];
-
   const [searchField, setSearchField] = useState("");
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/search/${searchField}`);
+    }
+  };
 
   const authenticated = true;
 
   return (
     <header>
-      <Link to="/" className="logo">
+      <Link to="/" className="main-logo">
         THE MEGA MALL
       </Link>
       <div className="list-shower-container">
@@ -78,7 +74,7 @@ const Header = () => {
               onMouseLeave={closeCategoriesDropdown}
             >
               {categoryList.map((category, index) => (
-                <Link to={category.link} key={index}>
+                <Link to={`/categories/${category.name}`} key={index}>
                   {category.name}
                 </Link>
               ))}
@@ -91,7 +87,8 @@ const Header = () => {
           type="text"
           onChange={(e) => setSearchField(e.target.value)}
           className="search-input"
-          placeholder="Search Products"
+          placeholder="Search Articles"
+          onKeyDown={handleKeyPress}
         />
         <Link to={`/search/${searchField}`} id="search-btn">
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />

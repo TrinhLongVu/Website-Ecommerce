@@ -12,7 +12,7 @@ const userSchema = new Schema({
     },
     Role: {
         type: String,
-        default: 'reader',
+        default: 'user',
         require: [true, 'A User must have a role']
     },
     FullName: {
@@ -37,7 +37,16 @@ const userSchema = new Schema({
     },
     Image_Avatar: {
         type: String
-    }
+    },
+    Cart: [
+        {
+            product_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+          },
+            quantity: Number
+        }
+    ]
 })
 // The same create table in sql server and table have name which is lowercase."article" 
 const User = mongoose.model('Users', userSchema);

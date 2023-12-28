@@ -10,8 +10,8 @@ const ProductPanel = ({ product }) => {
         style={{ backgroundImage: `url(${product.image})` }}
       >
         <div className="product-panel-info">
-          <div className="product-panel-title">{product.name}</div>
-          <div className="product-panel-desc">{product.desc}</div>
+          <div className="product-panel-title">{product.title}</div>
+          <div className="product-panel-desc">{product.detail}</div>
           <div className="product-panel-price">{product.price}</div>
         </div>
       </Link>

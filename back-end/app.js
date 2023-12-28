@@ -11,9 +11,6 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser')
 const p = require('./modules/passpost.js')
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-
 app.use(cookieParser())
 app.use(session({
     secret: "myscret",
@@ -27,7 +24,7 @@ app.use(session({
 app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true,
-    allowedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type','Authorization'],
 }))
 // config middleware using req.body
 app.use(express.json())

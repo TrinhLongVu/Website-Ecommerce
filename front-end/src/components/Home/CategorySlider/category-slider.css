@@ -1,5 +1,6 @@
-.categories-slider {
+.categories-list {
     width: 1260px;
+    height: 80px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -7,37 +8,43 @@
     scrollbar-color: rgba(0, 255, 255, 255);
 }
 
-.categories-slider::-webkit-scrollbar {
+.categories-list::-webkit-scrollbar {
     display: none;
 }
 
 .category-card {
-    margin: 0 15px;
-    width: 170px;
+    margin: 10px 15px;
+    width: 210px;
     height: 50px;
-    border: 1px solid black;
     border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    background-color: #ccd1d9;
+    color: black;
     font-size: 20px;
     font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: relative;
 }
 
+.category-card:hover {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
 .category-card-bg {
-    width: 168px;
+    width: 210px;
     height: 48px;
     border-radius: 12px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    filter: blur(1.5px);
 }
 
 .category-card-name {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.category-card:hover ,.category-card:hover .category-card-bg {
+    background-color: #00afc1;
+    color: white;
 }

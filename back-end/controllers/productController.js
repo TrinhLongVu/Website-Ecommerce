@@ -5,17 +5,33 @@ const fs = require('fs');
 
 exports.getAllProduct = async (req, res) => {
     try {
-        const data = await Product.find()
+        const query = req.query;
+        const skip = (query.page - 1) * query.limit;
+
+        let queryBuilder = Product.find().skip(skip).limit(query.limit).populate({
+            path: 'category',
+            select: 'name'
+        })
+        if (query.sort) {
+            const sortBy = query.sort.split(',').join(' ');
+            queryBuilder = queryBuilder.sort(sortBy);
+        }
+
+        const result = await queryBuilder.exec();
+        const totalDocuments = await Product.countDocuments();
+        const totalPages = Math.ceil(totalDocuments / query.limit);
+
         res.status(200).json({
             status: "success",
-            data: data
+            totalPage: totalPages,
+            data: result
         });
     } catch (err) {
         res.status(400).json({
             status: 'fail',
-            msg: err
-        })
-    };
+            msg: err.message
+        });
+    }
 }
 
 exports.getProduct = async (req, res) => {
@@ -99,12 +115,20 @@ exports.createAllProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
+        const newProduct = req.body
+        const result = await cloudinary.uploader.upload(file.tempFilePath, {
+            public_id: `${Date.now()}`,
+            resource_type: "auto",
+            folder: "images"
+        })
+        newProduct.image = result.url
+
         const update = await Product.findByIdAndUpdate(id, req.body, {
             new: true
         })
         res.status(201).json({
             status: 'success',
-            data: update
+            data: newProduct
         })
     } catch (err) {
         res.status(500).send({
@@ -113,126 +137,6 @@ exports.updateProduct = async (req, res) => {
         })
     };
 }
-
-exports.getTops = async (req, res) => {
-    try {
-        // const name = req.params.name;
-        // let datas = '';
-        // const limit = req.query.limit || 12;
-        // console.log(name)
-
-        // if (name == "increase") {
-        //     datas = await Product.find({
-        //         price:{ 
-        //                 $exists: true,
-        //                 $gt: 0
-        //             }
-        //         })
-        //         .sort({
-        //             view: 1
-        //         }).limit(limit);
-        // }
-
-        // if (name == 'views') {
-        //     datas = await Product.find({
-        //             view: {
-        //                 $exists: true,
-        //                 $gt: 0
-        //             }
-        //         })
-        //         .sort({
-        //             view: -1
-        //         }).limit(limit);
-        // } else if (name == 'likes') {
-        //     datas = await Product.find({
-        //         likes: {
-        //             $exists: true
-        //         }
-        //     }).sort({
-        //         likes: -1
-        //     }).limit(limit);
-        // } else if (name == 'priority') {
-        //     datas = await Product.find({
-        //         isPriority: true
-        //     }).limit(limit)
-        // } else if (name == 'timer') {
-        //     datas = await Product.find().sort({
-        //         posted_time: -1
-        //     }).limit(limit)
-        // }
-        // // console.log(datas)/
-        // const result = await Promise.all(datas.map(async (data) => {
-        //     const user = await User.findById(data.ID_author);
-        //     // the cause is Products do not have attribute is imageAuthor then i must be parse them
-        //     let aritcle = {
-        //         ...data
-        //     }._doc;
-        //     aritcle.ID_author = user.FullName
-        //     aritcle.imageAuthor = user.Image_Avatar
-        //     return aritcle
-        // }))
-
-        res.status(200).json({
-            status: 'success',
-            data: datas
-        })
-    } catch (err) {
-        res.status(500).send({
-            status: "error",
-            msg: err
-        })
-    };
-}
-
-exports.getCategory = async (req, res) => {
-    try {
-        // const data = await Product.find({
-        //     Category: {
-        //         $in: [req.params.name]
-        //     }
-        // }).exec();
-
-        // const user = await User.findById(data.ID_author);
-        // let Product = {
-        //     ...data
-        // }._doc;
-        // Product.ID_author = user.FullName
-        // Product.imageAuthor = user.Image_Avatar
-
-        res.status(200).json({
-            status: 'success',
-            data: Product
-        })
-    } catch (err) {
-        res.status(500).send({
-            status: "error",
-            msg: err
-        })
-    };
-}
-
-exports.getPagination = async (req, res) => {
-    const query = req.query
-    const skip = (query.page - 1) * query.limit
-    try {
-        const data = await Product.find()
-            .populate('category')
-            .exec();
-        const filteredData = data.filter(product => product.category.name == query.category);
-
-        res.status(200).json({
-            status: 'success',
-            data: filteredData
-        })
-
-    } catch (err) {
-        res.status(500).send({
-            status: "error",
-            msg: err
-        })
-    };
-}
-
 
 exports.deleteProduct = async (req, res) => {
     try {
@@ -256,31 +160,28 @@ exports.deleteProduct = async (req, res) => {
     }
 }
 
-
 exports.SearchProduct = async (req, res) => {
     try {
-        const tempsearchString = req.params.searchString;
-
-        const searchString = tempsearchString.replace(/\+/g, ' ');
-
-        console.log(searchString)
-
-
+        const keyword = req.params.key;
         const data = await Product.find({
-            $or: [{
-                    Title: {
-                        $regex: searchString,
-                        $options: 'i'
+                $or: [{
+                        title: {
+                            $regex: keyword,
+                            $options: 'i'
+                        }
+                    },
+                    {
+                        category: {
+                            $regex: keyword,
+                            $options: 'i'
+                        }
                     }
-                }, // Search by Title
-                {
-                    Category: {
-                        $in: [searchString]
-                    }
-                } // Search by Category
-            ]
-        });
-
+                ]
+            })
+            .populate({
+                path: 'category'
+            })
+            .exec();
 
         res.status(200).json({
             status: "success",

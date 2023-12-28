@@ -1,10 +1,11 @@
 const LocalStrategy = require('passport-local').Strategy;
-// const bcrypt = require('bcrypt'); use in the future
+const bcrypt = require('bcrypt');
 const User = require('../models/userModel')
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const dotenv = require('dotenv')
+const path = require('path');
 dotenv.config({
-    path: `${__dirname}\\..\\config.env`
+    path: path.join(__dirname, '..', 'config.env')
 });
 
 module.exports = passport => {
@@ -16,21 +17,23 @@ module.exports = passport => {
     })
 
     passport.deserializeUser(async (user, done) => {
-        console.log(user)
-        if (user.type != 'local') {
+        console.log(user);
+        if (user.type === 'local') {
+            const userLogin = await User.findOne({
+                UserName: user.name
+            });
+            if (userLogin) {
+                return done(null, userLogin);
+            }
+            return done('invalid');
+        } else {
             const userLogin = await User.findOne({
                 type: user.type
-            })
+            });
             return done(null, userLogin);
         }
-        const userLogin = await User.findOne({
-            UserName: user.UserName
-        });
-        if (userLogin) {
-            return done(null, userLogin)
-        }
-        return done('invalid')
-    })
+    });
+
 
     // username and password get from body
     passport.use(new LocalStrategy(async (username, Password, done) => {
@@ -40,8 +43,13 @@ module.exports = passport => {
             const user = await User.findOne({
                 UserName: username.trim()
             });
-            const rs = user.Password == Password
-            if (rs) {
+            if (!user) {
+                return done(null, false, {
+                    message: 'Invalid username or password'
+                }) 
+            }
+            const isPasswordValid = await bcrypt.compare(Password, user.Password);
+            if (isPasswordValid) {
                 return done(null, user);
             }
             return done(null, false, {
@@ -57,6 +65,7 @@ module.exports = passport => {
             callbackURL: "http://localhost:8000/api/v1/user/account/gg/callback"
         },
         async (accessToken, refreshToken, profile, done) => {
+            console.log("google.....")
             const user = await User.findOne({
                 type: profile.id
             })

@@ -1,17 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
-  faPaperPlane,
   faAngleDown,
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { categoryList } from "../../Global";
 import { useState, useEffect } from "react";
-import "./admin-upload.css";
 import ProductFrame from "../../components/ProductFrame/ProductFrame";
+import "./admin-upload.css";
+import { useOutletContext } from "react-router-dom";
 
 const AdminUpload = () => {
+  const { categoryList } = useOutletContext();
   const [showList, setShowList] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -51,12 +51,13 @@ const AdminUpload = () => {
 
   const handlePreview = () => {
     const previewProduct = {
-      name: document
-        .querySelector(".admin-upload-input")
+      title: document
+        .querySelector(".admin-upload-input-name")
         .value.replace("\n", " "),
-      desc: document.querySelector(".admin-upload-textarea").value,
+      detail: document.querySelector(".admin-upload-textarea").value,
       price: document.querySelector(".admin-upload-input-price").value,
       image: previewImage,
+      isPreview: true,
     };
     setPreviewProduct(previewProduct);
   };
@@ -67,22 +68,28 @@ const AdminUpload = () => {
     <>
       <div className="admin-upload">
         <div className="admin-upload-left">
+          <div className="admin-upload-info-side" id="admin-upload-price">
+            Name
+            <input
+              type="text"
+              placeholder="What's your new product name?"
+              className="admin-upload-input-name"
+            />
+          </div>
           <div className="admin-upload-info">
             <div className="admin-upload-info-side" id="admin-upload-title">
-              Name
+              Price
               <input
                 type="text"
-                placeholder="What is your product's name?"
-                className="admin-upload-input"
+                placeholder="What's the price of your new product?"
+                className="admin-upload-input-price"
               />
             </div>
             <div className="admin-upload-info-side" id="admin-upload-category">
               Category
               <div className="admin-upload-select">
                 <div className="admin-upload-select-title">
-                  {selectedCategory
-                    ? selectedCategory
-                    : "Choose category for your article"}
+                  {selectedCategory ? selectedCategory : "Choose category"}
                   <FontAwesomeIcon
                     icon={faAngleDown}
                     id="admin-upload-show-list-icon"
@@ -104,14 +111,7 @@ const AdminUpload = () => {
               </div>
             </div>
           </div>
-          <div className="admin-upload-info-side" id="admin-upload-price">
-            Price
-            <input
-              type="text"
-              placeholder="What's the price of this new product?"
-              className="admin-upload-input-price"
-            />
-          </div>
+
           <div className="admin-upload-content">
             Description
             <div className="admin-upload-content-container">

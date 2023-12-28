@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Keania+One&display=swap');
+
 .admin--header {
     margin-bottom: 20px;
     padding: 0 30px;
@@ -13,7 +15,7 @@
 
 .logo {
     width: 240px;
-    font-family: 'Baskerville';
+    font-family: 'Keania One';
     font-style: italic;
     font-size: xxx-large;
     text-align: center;

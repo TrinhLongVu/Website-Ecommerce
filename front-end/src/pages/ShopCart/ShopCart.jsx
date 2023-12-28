@@ -3,6 +3,7 @@ import "./shop-cart.css";
 import { faCashRegister, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { useState } from "react";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const ShopCart = () => {
   const product = {
@@ -18,6 +19,9 @@ const ShopCart = () => {
 
   return (
     <>
+      <Breadcrumbs
+        crumbList={[{ name: "Your Shopping Cart", link: "/cart" }]}
+      />
       <div className="shop-cart">
         <div className="cart--order-table">
           {cart.map((item, idx) => (
