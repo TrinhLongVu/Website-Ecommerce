@@ -3,6 +3,7 @@ import Home from "./pages/Home/Home";
 import Detail from "./pages/Detail/Detail";
 import MultiCategory from "./pages/MultiCategory/MultiCategory";
 import SingleCategory from "./pages/SingleCategory/SingleCategory";
+import Search from "./pages/Search/Search";
 import ShopCart from "./pages/ShopCart/ShopCart";
 import UserInfo from "./pages/UserInfo/UserInfo";
 import Error404 from "./pages/Error404/Error404";
@@ -30,6 +31,7 @@ function App() {
             <Route index element={<MultiCategory />} />
             <Route path="/categories/:name" element={<SingleCategory />} />
           </Route>
+          <Route path="/search/:key" element={<Search />} />
           <Route path="/product" element={<Detail />} />
           <Route path="/user" element={<UserInfo />} />
           <Route path="/cart" element={<ShopCart />} />

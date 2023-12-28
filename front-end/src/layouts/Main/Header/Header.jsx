@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
@@ -9,10 +9,11 @@ import {
   faRightToBracket,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
-
+// Style
 import "./header.css";
 
 const Header = ({ categoryList }) => {
+  const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
   const [showCategoriesDropdown, setShowCategoriesDropdown] = useState(false);
@@ -40,6 +41,12 @@ const Header = ({ categoryList }) => {
   });
 
   const [searchField, setSearchField] = useState("");
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/search/${searchField}`);
+    }
+  };
 
   const authenticated = true;
 
@@ -80,7 +87,8 @@ const Header = ({ categoryList }) => {
           type="text"
           onChange={(e) => setSearchField(e.target.value)}
           className="search-input"
-          placeholder="Search Products"
+          placeholder="Search Articles"
+          onKeyDown={handleKeyPress}
         />
         <Link to={`/search/${searchField}`} id="search-btn">
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />
