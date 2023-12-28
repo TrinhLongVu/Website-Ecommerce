@@ -1,8 +1,11 @@
-import React from "react";
-import Header from "./Header/Header";
-import { Outlet } from "react-router-dom";
-import Footer from "./Footer/Footer";
+// Library
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+// Components
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
+
+// Implementation
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {

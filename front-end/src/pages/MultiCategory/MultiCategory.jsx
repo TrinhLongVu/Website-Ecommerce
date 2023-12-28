@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faTag } from "@fortawesome/free-solid-svg-icons";
 
-import { categoryList } from "../../Global";
-
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 
 import "./multi-category.css";
