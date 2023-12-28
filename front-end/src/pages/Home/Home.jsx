@@ -1,6 +1,7 @@
+// Library
 import { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
-
+// Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTags,
@@ -11,14 +12,14 @@ import {
   faAngleDown,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-
+// Components
 import CategorySlider from "../../components/Home/CategorySlider/CategorySlider";
 import ProductSlider from "../../components/Home/ProductSlider/ProductSlider";
-
-import "./home.css";
 import ProductPanel from "../../components/Home/ProductPanel/ProductPanel";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 import Pagination from "../../components/Pagination/Pagination";
+// Style
+import "./home.css";
 
 const Home = () => {
   const { categoryList } = useOutletContext();
@@ -94,7 +95,7 @@ const Home = () => {
           </Link>
         </div>
         <div className="home-section-content">
-          <CategorySlider />
+          <CategorySlider categoryList={categoryList} />
         </div>
       </div>
       <div className="home-section">

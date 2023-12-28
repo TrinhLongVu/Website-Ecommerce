@@ -1,17 +1,8 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./category-slider.css";
 
-const CategorySlider = () => {
-  const [categoryList, setCategoryList] = useState([]);
-  useEffect(() => {
-    fetch("https://themegamall.onrender.com/api/v1/category")
-      .then((res) => res.json())
-      .then((json) => {
-        setCategoryList(json.data);
-      });
-  }, []);
+const CategorySlider = ({ categoryList }) => {
   return (
     <div className="categories-list">
       {categoryList.map((category, idx) => (

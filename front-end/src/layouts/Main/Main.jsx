@@ -15,7 +15,7 @@ const MainLayout = () => {
   return (
     <>
       <Header categoryList={categoryList} />
-      <Outlet context={categoryList} />
+      <Outlet context={{ categoryList }} />
       <Footer categoryList={categoryList} />
     </>
   );

@@ -1,19 +1,23 @@
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+// Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
-import { categoryList } from "../../Global";
 import categoryImg from "../../assets/category_bg.jpeg";
-import "./single-category.css";
+// Components
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
+// Pages
+import Error404 from "../Error404/Error404";
+// Style
+import "./single-category.css";
 
 const SingleCategory = () => {
   const { name } = useParams();
 
-  let pageCategory = name.charAt(0).toUpperCase() + name.slice(1);
+  const { categoryList } = useOutletContext();
 
   const bannerCategory = categoryList.find(
-    (category) => category.name === pageCategory
+    (category) => category.name === name
   );
 
   //   const [articleList, setArticleList] = useState([]);
@@ -42,18 +46,22 @@ const SingleCategory = () => {
 
   return (
     <>
-      {bannerCategory && (
-        <div
-          className="category-banner"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.25)), url(${categoryImg})`,
-          }}
-        >
-          <FontAwesomeIcon icon={faTag} className="category-banner-icon" />
-          {bannerCategory.name}
-        </div>
+      {bannerCategory ? (
+        <>
+          <div
+            className="category-banner"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.25)), url(${categoryImg})`,
+            }}
+          >
+            <FontAwesomeIcon icon={faTag} className="category-banner-icon" />
+            {bannerCategory.name}
+          </div>
+          <ProductShelf products={productList} />
+        </>
+      ) : (
+        <Error404 />
       )}
-      <ProductShelf products={productList} />
     </>
   );
 };
