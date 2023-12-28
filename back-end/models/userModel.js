@@ -12,7 +12,7 @@ const userSchema = new Schema({
     },
     Role: {
         type: String,
-        default: 'reader',
+        default: 'user',
         require: [true, 'A User must have a role']
     },
     FullName: {
