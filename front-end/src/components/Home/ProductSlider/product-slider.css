@@ -44,13 +44,13 @@
     width: 50px;
     height: 50px;
     border-radius: 12%;
-    background-color: white;
+    background-color: #ccd1d9;
     font-size: 20px;
 }
 
 .product-slider-btn:hover {
     cursor: pointer;
-    background-color: #ccd1d9;
+    background-color: #00AFC1;
     color: white;
 }
 

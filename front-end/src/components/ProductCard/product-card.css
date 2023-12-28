@@ -65,8 +65,13 @@
 .product-card-price {
     font-size: 25px;
     font-weight: bold;
-    background-color: #B6BBC4;
+    background-color: #CCD1D9;
     padding: 5px;
     border-radius: 12px;
+    color: black;
+}
+
+.product-card:hover .product-card-price {
+    background-color: #00AFC1;
     color: white;
 }
