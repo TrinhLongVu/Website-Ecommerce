@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,6 +21,7 @@ import ProductShelf from "../../components/ProductShelf/ProductShelf";
 import Pagination from "../../components/Pagination/Pagination";
 
 const Home = () => {
+  const { categoryList } = useOutletContext();
   const product = {
     id: "123",
     name: "Celestial Glow Crystal Pendant dad add",

@@ -12,7 +12,7 @@ import {
 
 import "./header.css";
 
-const Header = () => {
+const Header = ({ categoryList }) => {
   const timeoutRef = useRef(null);
 
   const [showCategoriesDropdown, setShowCategoriesDropdown] = useState(false);
@@ -38,17 +38,6 @@ const Header = () => {
       setShowAvtDropdown(false);
     }
   });
-
-  const categoryList = [
-    {
-      name: "Electronics",
-      link: "/categories/electronics",
-    },
-    {
-      name: "Furniture",
-      link: "/categories/furniture",
-    },
-  ];
 
   const [searchField, setSearchField] = useState("");
 
@@ -78,7 +67,7 @@ const Header = () => {
               onMouseLeave={closeCategoriesDropdown}
             >
               {categoryList.map((category, index) => (
-                <Link to={category.link} key={index}>
+                <Link to={`/categories/${category.name}`} key={index}>
                   {category.name}
                 </Link>
               ))}
