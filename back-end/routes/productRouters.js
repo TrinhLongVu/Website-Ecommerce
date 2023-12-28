@@ -6,7 +6,7 @@ const middleware = require('../middeware/auth')
 
 router
     .route('/')
-    .get(middleware.isLoggedUser, articleController.getAllProduct)
+    .get(articleController.getAllProduct)
     .post(articleController.createProduct)
 
 router

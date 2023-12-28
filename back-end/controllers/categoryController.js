@@ -34,29 +34,34 @@ exports.addCategory = async (req, res) => {
 
 exports.getPagination = async (req, res) => {
     try {
-        const query = req.query
-        console.log(query)
-        const skip = (query.page - 1) * query.limit
-        const data = await Product.find()
+        const query = req.query;
+        const skip = (query.page - 1) * query.limit;
+    
+        let data = Product.find()
             .populate({
                 path: 'category',
-                match: { name: query.category},
+                match: { name: query.category },
                 select: 'name'
             })
-            .exec();
-        const filteredData = data.filter(product => product.category != null);
+        
+        if (query.sort) {
+            const sortBy = query.sort.split(',').join(' ');
+            data = data.sort(sortBy);
+        }
+
+        const result = await data.exec();
+        let filteredData = result.filter(product => product.category != null);
         const paginatedResults = filteredData.slice(skip, skip + query.limit * 1.0);
-
+    
         res.status(200).json({
-            status: 'success',
-            totalPage: Math.ceil(filteredData.length / query.limit),
-            data: paginatedResults,
-        })
-
+            status: "success",
+            totalPage: Math.ceil(filteredData / query.limit),
+            data: paginatedResults
+        });
     } catch (err) {
-        res.status(500).send({
-            status: "error",
-            msg: err
-        })
-    };
+        res.status(400).json({
+            status: 'fail',
+            msg: err.message
+        });
+    }
 }

@@ -5,17 +5,33 @@ const fs = require('fs');
 
 exports.getAllProduct = async (req, res) => {
     try {
-        const data = await Product.find()
+        const query = req.query;
+        const skip = (query.page - 1) * query.limit;
+
+        let queryBuilder = Product.find().skip(skip).limit(query.limit).populate({
+            path: 'category',
+            select: 'name'
+        })
+        if (query.sort) {
+            const sortBy = query.sort.split(',').join(' ');
+            queryBuilder = queryBuilder.sort(sortBy);
+        }
+
+        const result = await queryBuilder.exec();
+        const totalDocuments = await Product.countDocuments();
+        const totalPages = Math.ceil(totalDocuments / query.limit);
+
         res.status(200).json({
             status: "success",
-            data: data
+            totalPage: totalPages,
+            data: result
         });
     } catch (err) {
         res.status(400).json({
             status: 'fail',
-            msg: err
-        })
-    };
+            msg: err.message
+        });
+    }
 }
 
 exports.getProduct = async (req, res) => {
@@ -97,7 +113,7 @@ exports.createAllProduct = async (req, res) => {
 }
 
 exports.updateProduct = async (req, res) => {
-    try {        
+    try {
         const id = req.params.id;
         const newProduct = req.body
         const result = await cloudinary.uploader.upload(file.tempFilePath, {
@@ -148,24 +164,24 @@ exports.SearchProduct = async (req, res) => {
     try {
         const keyword = req.params.key;
         const data = await Product.find({
-            $or: [{
-                    title: {
-                        $regex: keyword,
-                        $options: 'i'
+                $or: [{
+                        title: {
+                            $regex: keyword,
+                            $options: 'i'
+                        }
+                    },
+                    {
+                        category: {
+                            $regex: keyword,
+                            $options: 'i'
+                        }
                     }
-                }, 
-                {
-                    category: {
-                        $regex: keyword,
-                        $options: 'i'
-                    }
-                }
-            ]
-        })
-        .populate({
-            path: 'category'
-        })
-        .exec();
+                ]
+            })
+            .populate({
+                path: 'category'
+            })
+            .exec();
 
         res.status(200).json({
             status: "success",
