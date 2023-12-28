@@ -2,7 +2,6 @@ const fs = require('fs');
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt');
 const Product = require('../models/productModel');
-const saltRounds = 10
 
 //=========================== FUNCTION =========================================================================
 function checkIfElementExists(element, array) {
@@ -18,70 +17,6 @@ exports.getAllUsers = async (req, res, next) => {
             status: 'success',
             data: alldata
         })
-    } catch (err) {
-        res.status(400).json({
-            status: "fail",
-            msg: err
-        })
-    }
-}
-
-exports.createUser = async (req, res, next) => {
-    try {
-        //===========check username (email) available==========================
-        const { UserName, Password, ConfirmPassword } = req.body;
-        if (!UserName || !Password || !ConfirmPassword) {
-            return res.status(400).json({
-                status: "fail",
-                msg: "Please fill full information",
-            });
-        }
-
-        // check username is Taken
-        const isTaken = await User.findOne({ UserName });
-
-        // If username is Taken, return fail
-        if (isTaken) {
-            return res.status(400).json({
-                status: "fail",
-                msg: "Username is already taken",
-            });
-        }
-
-
-        //===========check confirm Password==========================
-
-        if (Password != ConfirmPassword) {
-            return res.status(400).json({
-                status: "fail",
-                msg: "incorrect Confirm Password",
-            });
-        }
-
-
-        //==========Create New User===============================
-
-        const NewBody = {
-            UserName: UserName,
-            Password: Password,
-        }
-
-        bcrypt.hash(NewBody.Password, saltRounds, async function (err, hash) {
-            if (err) {
-                return next(err);
-            }
-            const newUser = await User.create({
-                UserName: NewBody.UserName,
-                Password: hash  
-            });
-            res.status(201).json({
-                status: 'Create success',
-                data: {
-                    user: newUser
-                }
-            })
-        })
-
     } catch (err) {
         res.status(400).json({
             status: "fail",
@@ -109,7 +44,7 @@ exports.createAllUser = async (req, res, next) => {
                     console.log(`Username '${UserName}' is already taken. Skipping user creation.`);
                     continue;
                 }
-
+                const saltRounds = 10
                 // If username is not taken, create the user
                 bcrypt.hash(user.Password, saltRounds, async function (err, hash) {
                     if (err) {
