@@ -13,9 +13,9 @@ const ProductFrame = ({ product }) => {
           }}
         ></div>
         <div className="product-frame-info">
-          <div className="product-frame-name">{product.name}</div>
-          <div className="product-frame-price">{product.price}</div>
-          <div className="product-frame-desc">{product.desc}</div>
+          <div className="product-frame-name">{product.title}</div>
+          <div className="product-frame-price">${product.price}</div>
+          <div className="product-frame-desc">{product.detail}</div>
           <div className="product-frame-btn-container">
             <div className="product-frame-btn">
               <FontAwesomeIcon icon={faCartPlus} /> ADD TO CART

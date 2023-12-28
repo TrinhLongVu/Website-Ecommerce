@@ -32,7 +32,7 @@ function App() {
             <Route path="/categories/:name" element={<SingleCategory />} />
           </Route>
           <Route path="/search/:key" element={<Search />} />
-          <Route path="/product" element={<Detail />} />
+          <Route path="/product/:id" element={<Detail />} />
           <Route path="/user" element={<UserInfo />} />
           <Route path="/cart" element={<ShopCart />} />
           <Route path="*" element={<Error404 />} />

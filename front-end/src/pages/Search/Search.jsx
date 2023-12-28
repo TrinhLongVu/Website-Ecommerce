@@ -1,9 +1,10 @@
+// Library
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+// Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
+// Components
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 // Style
 import "./search.css";
