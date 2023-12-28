@@ -5,20 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
 import categoryImg from "../../assets/category_bg.jpeg";
 // Components
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 // Pages
 import Error404 from "../Error404/Error404";
 // Style
 import "./single-category.css";
-
+// Implementation
 const SingleCategory = () => {
   const { name } = useParams();
 
   const { categoryList } = useOutletContext();
 
-  const bannerCategory = categoryList.find(
-    (category) => category.name === name
-  );
+  const pageCategory = categoryList.find((category) => category.name === name);
 
   //   const [articleList, setArticleList] = useState([]);
 
@@ -46,7 +45,13 @@ const SingleCategory = () => {
 
   return (
     <>
-      {bannerCategory ? (
+      <Breadcrumbs
+        crumbList={[
+          { name: name, link: `/category/${pageCategory}` },
+          { name: "Categories", link: "/categories" },
+        ]}
+      />
+      {pageCategory ? (
         <>
           <div
             className="category-banner"
@@ -55,7 +60,7 @@ const SingleCategory = () => {
             }}
           >
             <FontAwesomeIcon icon={faTag} className="category-banner-icon" />
-            {bannerCategory.name}
+            {pageCategory.name}
           </div>
           <ProductShelf products={productList} />
         </>
