@@ -10,6 +10,7 @@
 }
 
 .admin-upload-info {
+    margin: 10px 0;
     display: flex;
     justify-content: space-between;
 }
@@ -21,7 +22,7 @@
     font-weight: bold;
 }
 
-.admin-upload-input, .admin-upload-input-price {
+.admin-upload-input-name, .admin-upload-input-price {
     background-color: white;
     padding: 0 15px;
     margin: 10px 0;
@@ -32,7 +33,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.admin-upload-input:focus, .admin-upload-input-price:focus {
+.admin-upload-input-name:focus, .admin-upload-input-price:focus {
     outline: none;
 }
 
@@ -107,7 +108,7 @@
     margin: 10px 0;
     padding: 20px;
     width: 100%;
-    height: 400px;
+    height: 180px;
     background-color: white;
     border-radius: 15px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -169,6 +170,7 @@ input[type="file"] {
 
 .admin-upload-thumbnail-upload {
     margin: 10px 0;
+    user-select: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -197,6 +199,7 @@ input[type="file"] {
 }
 
 .admin-upload-control-item {
+    user-select: none;
     display: flex;
     align-items: center;
     justify-content: space-around;

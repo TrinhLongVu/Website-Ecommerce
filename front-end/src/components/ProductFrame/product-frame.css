@@ -53,6 +53,7 @@
 }
 
 .product-frame-btn {
+    user-select: none;
     color: white;
     padding: 15px;
     font-size: 20px;
