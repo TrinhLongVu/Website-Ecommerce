@@ -10,6 +10,19 @@ router
 router
     .route('/create/createAll')
     .get(middleware.isLoggedAdmin, userController.createAllUser);
+router
+    .route('/search/')
+    .get(userController.searchProduct)
+
+router
+    .route('/:id')
+    .get(userController.getUser)
+    .patch(userController.updateUser)
+    .delete(userController.deleteUser);
+
+router
+    .route('/cart/get/:id')
+    .get(userController.getCart);
 
 router
     .route('/cart/add/:id')
@@ -22,11 +35,5 @@ router
 router
     .route('/cart/delete/:id')
     .post(userController.deleteCart);
-
-router
-    .route('/:id')
-    .get(userController.getUser)
-    .patch(userController.updateUser)
-    .delete(userController.deleteUser);
 
 module.exports = router;

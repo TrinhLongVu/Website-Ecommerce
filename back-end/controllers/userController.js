@@ -1,7 +1,10 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt');
 const Product = require('../models/productModel');
+const { pseudoRandomBytes } = require('crypto');
+const Category = require('../models/categoryModel');
+const product = require('../models/productModel');
 
 //=========================== FUNCTION =========================================================================
 function checkIfElementExists(element, array) {
@@ -52,8 +55,8 @@ exports.createAllUser = async (req, res) => {
                     }
                     await User.create({
                         UserName: UserName,
-                        Password: hash  
-                    });                    
+                        Password: hash
+                    });
                 })
 
             } catch (error) {
@@ -160,6 +163,31 @@ exports.deleteUser = async (req, res) => {
     }
 }
 
+exports.getCart = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: "fail",
+                data: "Cannot find this user"
+            });
+        }
+
+        res.status(201).json({
+            status: "success",
+            data: user.Cart
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            status: "fail",
+            data: err.message
+        });
+    }
+};
+
+
 exports.addCart = async (req, res) => {
     try {
         const { product_id, quantity } = req.body;
@@ -173,7 +201,7 @@ exports.addCart = async (req, res) => {
         }
 
         const product = await Product.findById(product_id)
-        if(!product){
+        if (!product) {
             return res.status(200).json({
                 status: "fail",
                 data: "Product does not exist"
@@ -225,7 +253,7 @@ exports.minusCart = async (req, res) => {
             });
         }
         const product = await Product.findById(product_id)
-        if(!product){
+        if (!product) {
             return res.status(200).json({
                 status: "fail",
                 data: "Product does not exist"
@@ -267,7 +295,7 @@ exports.minusCart = async (req, res) => {
 
 exports.deleteCart = async (req, res) => {
     try {
-        const { product_id, quantity } = req.body;
+        const { product_id } = req.body;
         const userId = req.params.id;
         // Check if the product is already in the cart
         const user = await User.findById(userId);
@@ -279,7 +307,7 @@ exports.deleteCart = async (req, res) => {
         }
 
         const product = await Product.findById(product_id)
-        if(!product){
+        if (!product) {
             return res.status(200).json({
                 status: "fail",
                 data: "Product does not exist"
@@ -309,6 +337,53 @@ exports.deleteCart = async (req, res) => {
         res.status(500).json({
             status: "fail",
             data: err.message
+        });
+    }
+};
+
+
+exports.searchProduct = async (req, res) => {
+    try {
+        const { searchValue } = req.body;
+
+        const products = await Product.find();
+        const categories = await Category.find();
+
+        const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
+
+        const searchResult = products.filter(product => {
+            const normalizedTitle = normalize(product.title);
+            const normalizedDetail = normalize(product.detail);
+
+            const titleMatch = normalizedTitle.includes(normalize(searchValue));
+            const detailMatch = normalizedDetail.includes(normalize(searchValue));
+            
+            const categoryMatch = categories.some(category => {
+                const normalizedCategoryName = normalize(category.name);
+                return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
+            });
+
+            return titleMatch || detailMatch || categoryMatch;
+        });
+
+        console.log(searchResult.length)
+
+        if (searchResult.length === 0) {
+            return res.status(200).json({
+                status: "fail",
+                message: "Can't find what you want"
+            });
+        }
+
+        res.status(200).json({
+            status: "success",
+            data: searchResult
+        });
+    } catch (error) {
+        console.error('Error searching for products:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Internal Server Error'
         });
     }
 };
