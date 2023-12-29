@@ -92,8 +92,8 @@ exports.createProduct = async (req, res) => {
 
 exports.createAllProduct = async (req, res) => {
     try {
-        const filePath = `${__dirname}data\\products.json`.replace('controllers', '');
-        const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8')).product;
+        const filePath = `${__dirname}data\\data.json`.replace('controllers', '');
+        const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
         console.log(Products)
 

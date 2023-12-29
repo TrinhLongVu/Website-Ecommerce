@@ -10,6 +10,10 @@ const userSchema = new Schema({
         type: String,
         require: [true, 'A User must have a Password']
     },
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
     Role: {
         type: String,
         default: 'user',

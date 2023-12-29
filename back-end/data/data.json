@@ -1,407 +1,513 @@
 [
-    {
-        "title": "MacBook Pro 14 inch 2023",
-        "category": "MacBook",
-        "detail": "SUPERCHARGED BY M3 PRO OR M3 MAX — The Apple M3 Pro chip, with an up to 12-core CPU and up to 18-core GPU, delivers amazing performance for demanding workflows like manipulating gigapixel panoramas or compiling millions of lines of code. M3 Max, with an up to 16-core CPU and up to 40-core GPU, drives extreme performance for the most advanced workflows like rendering intricate 3D content or developing transformer models with billions of parameters.\nUP TO 18 HOURS OF BATTERY LIFE — Go all day thanks to the power-efficient design of Apple silicon. The MacBook Pro laptop delivers the same exceptional performance whether it’s running on battery or plugged in. (Battery life varies by use and configuration. See apple.com/batteries for more information.)",
-        "quantity": 100,
-        "sold": 25,
-        "image": "https://m.media-amazon.com/images/I/61RJn0ofUsL._AC_SX522_.jpg",
-        "price": 1994
-    },
-    {
-        "title": "MacBook Air 13.3 inch 2020",
-        "category": "Macbook",
-        "detail": "Power. It's in the Air. Our thinnest, lightest notebook, completely transformed by the Apple M1 chip. CPU speeds up to 3.5x faster. GPU speeds up to 5x faster. \nOur most advanced Neural Engine for up to 9x faster machine learning. The longest battery life ever in a MacBook Air. And a silent, fanless design. This much power has never been this ready to go.",
-        "quantity": 50,
-        "sold": 33,
-        "image": "https://m.media-amazon.com/images/I/51KhexN7YkL._AC_SX679_.jpg",
-        "price": 1178
-    },
-    {
-        "title": "MacBook Air 15.3 inch 2023",
-        "category": "Macbook",
-        "detail": "IMPRESSIVELY BIG, IMPOSSIBLY THIN — The 15-inch MacBook Air makes room for more of what you love with a spacious Liquid Retina display. \nThe durable 100 percent recycled aluminum enclosure is strikingly thin and light.",
-        "quantity": 66,
-        "sold": 12,
-        "image": "https://m.media-amazon.com/images/I/81Fm0tRFdHL._AC_SX522_.jpg",
-        "price": 1566
-    },
-    {
-        "title": "MacBook Pro 16.2 inch 2023",
-        "category": "Macbook",
-        "detail": "BRILLIANT PRO DISPLAY — The 16.2-inch Liquid Retina XDR display features Extreme Dynamic Range, over 1000 nits of brightness for stunning HDR content, up to 600 nits of brightness for SDR content, and pro reference modes for doing your best work on the go. \n(The display has rounded corners at the top. When measured diagonally, the screen is 16.2 inches. Actual viewable area is less.)",
-        "quantity": 66,
-        "sold": 12,
-        "image": "https://m.media-amazon.com/images/I/618d5bS2lUL._AC_SX522_.jpg",
-        "price": 2499
-    },
-    {
-        "title": "MacBook Pro 16.2 inch 2021",
-        "category": "Macbook",
-        "detail": "Apple M1 Pro or M1 Max chip for a massive leap in CPU, GPU, and machine learning performance \nUp to 10-core CPU delivers up to 2x faster performance to fly through pro workflows quicker than ever \nUp to 32-core GPU with up to 4x faster performance for graphics-intensive apps and games \n16-core Neural Engine for up to 5x faster machine learning performance \nLonger battery life, up to 21 hours",
-        "quantity": 42,
-        "sold": 23,
-        "image": "https://m.media-amazon.com/images/I/61aUBxqc5PL._AC_SX522_.jpg",
-        "price": 1849
-    },
-    {
-        "title": "MacBook Air 13 inch 2020",
-        "category": "Macbook",
-        "detail": "All-Day Battery Life – Go longer than ever with up to 18 hours of battery life. \nPowerful Performance – Take on everything from professional-quality editing to action-packed gaming with ease. \nThe Apple M1 chip with an 8-core CPU delivers up to 3.5x faster performance than the previous generation while using way less power.",
-        "quantity": 10,
-        "sold": 43,
-        "image": "https://m.media-amazon.com/images/I/71vFKBpKakL._AC_SX522_.jpg",
-        "price": 690
-    },
-    {
-        "title": "MacBook Air 13.6 inch 2022",
-        "category": "Macbook",
-        "detail": "STRIKINGLY THIN DESIGN — The redesigned MacBook Air is more portable than ever and weighs just 2.7 pounds. It’s the incredibly capable laptop that lets you work, play or create just about anything — anywhere.\nSUPERCHARGED BY M2 — Get more done faster with a next-generation 8-core CPU, up to 10-core GPU and up to 24GB of unified memory.\nUP TO 18 HOURS OF BATTERY LIFE — Go all day and into the night, thanks to the power-efficient performance of the Apple M2 chip.",
-        "quantity": 42,
-        "sold": 25,
-        "image": "https://m.media-amazon.com/images/I/710TJuHTMhL._AC_SX522_.jpg",
-        "price": 1070
-    },
-    {
-        "title": "MacBook Air 13 inch Retina Display",
-        "category": "Macbook",
-        "detail": "Stunning 13.3-inch Retina display with True Tone technology \nBacklit Magic Keyboard and Touch ID \nTenth-generation Intel Core i3 processor \nIntel Iris Plus Graphics \nFast SSD storage \n8GB of memory \nStereo speakers with wider stereo sound",
-        "quantity": 20,
-        "sold": 12,
-        "image": "https://m.media-amazon.com/images/I/71k3fJh5EwL._AC_SX679_.jpg",
-        "price": 899
-    },
-    {
-        "title": "MacBook Air 13 inch 2018",
-        "category": "Macbook",
-        "detail": "Stunning 13.3-inch Retina display \nTouch ID and the latest Apple-designed keyboard \nDual-core 8th-generation Intel Core i5 processor with Intel UHD Graphics 617 \nFast SSD storage and 8GB memory",
-        "quantity": 7,
-        "sold": 49,
-        "image": "https://m.media-amazon.com/images/I/51FJlZmqO8L._AC_SX679_.jpg",
-        "price": 496
-    },
-    {
-        "title": "MacBook Pro 15 inch 2018",
-        "category": "Macbook",
-        "detail": "2.8GHz quad-core Intel Core i7 processor with Turbo Boost up to 3.8GHz \n16GB 2133MHz LPDDR3 memory \n256GB SSD storage \nRadeon Pro 555 with 2GB memory \nTouch Bar and Touch ID",
-        "quantity": 14,
-        "sold": 27,
-        "image": "https://m.media-amazon.com/images/I/61F99gFWolL._AC_SX679_.jpg",
-        "price": 696
-    },
-    {
-        "title": "HomePod 2nd Generation",
-        "category": "HomePod",
-        "detail": "Premium, immersive, high-fidelity audio \nPowerful high-excursion woofer delivers deep, rich bass \nFive beamforming tweeters for clear, detailed highs \nAdvanced computational audio delivers room-filling sound",
-        "quantity": 28,
-        "sold": 2,
-        "image": "https://m.media-amazon.com/images/I/71+BbLQz8UL._AC_SX466_.jpg",
-        "price": 404
-    },
-    {
-        "title": "HomePod Mini Blue",
-        "category": "HomePod",
-        "detail": "The new Apple S5 chip processes sound more sensitively and faster \nEquipped with 4 Microphones, respond to user commands effectively \nMatter support, diverse connections \nCentral hub for Apple HomeKit devices",
-        "quantity": 25,
-        "sold": 7,
-        "image": "https://i.ebayimg.com/images/g/EDAAAOSwZZZjvtnm/s-l960.jpg",
-        "price": 119
-    },
-    {
-        "title": "HomePod Mini Space Gray",
-        "category": "HomePod",
-        "detail": "Experience powerful and immersive sound with the HomePod Mini Space Gray. \nThe advanced Apple S5 chip ensures enhanced audio processing for a superior listening experience. \nFeaturing four high-quality microphones, it responds effectively to your voice commands.",
-        "quantity": 32,
-        "sold": 12,
-        "image": "https://i.ebayimg.com/images/g/U9EAAOSws~9g6dx-/s-l1600.jpg",
-        "price": 179
-    },
-    {
-        "title": "HomePod 1st Generation",
-        "category": "HomePod",
-        "detail": "With an impressive quantity sold and rave reviews, it's clear that this smart speaker is a crowd favorite. \nUnlock the full potential of your smart home with HomePod – the central command for all your connected devices. \nElevate your ambiance with crystal-clear sound, whether you're enjoying music, podcasts, or the latest audiobook.",
-        "quantity": 15,
-        "sold": 14,
-        "image": "https://i.ebayimg.com/images/g/svUAAOSwi-1lgk7X/s-l1600.jpg",
-        "price": 199
-    },
-    {
-        "title": "Homepod Mini White",
-        "category": "HomePod",
-        "detail": "The new Apple S5 chip processes sound more sensitively and faster \nEquipped with 4 Microphones, respond to user commands effectively \nMatter support, diverse connections \nCentral hub for Apple HomeKit devices",
-        "quantity": 35,
-        "sold": 4,
-        "image": "https://i.ebayimg.com/images/g/560AAOSwtUxj2hAc/s-l1600.jpg",
-        "price": 120
-    },
-    {
-        "title": "INSIGNIA 24 inch 2022",
-        "category": "Television",
-        "detail": "720p resolution - View your favorite movies, shows and games in high definition. \nAlexa voice control - The Alexa Voice Remote lets you easily control your entertainment, search across apps, switch inputs, and more using just your voice. Press and hold the voice button and ask Alexa to easily find, launch, and control content, and even switch to cable. \nFire TV experience built-in - Watch over 1 Million streaming movies and TV episodes with access to tens of thousands of channels, apps, and Alexa skills.",
-        "quantity": 20,
-        "sold": 2,
-        "image": "https://m.media-amazon.com/images/I/811quPi2PUL._AC_SX466_.jpg",
-        "price": 198
-    },
-    {
-        "title": "Amazon Fire TV 50 inch",
-        "category": "Television",
-        "detail": "Bring movies and shows to life with support for vivid 4K Ultra HD, HDR 10, HLG, and Dolby Digital Plus. \n4K Ultra HD, HDR 10, and HLG deliver a clearer and more vibrant picture with brighter colors compared to 1080p Full HD. \nPress and ask Alexa to easily find, launch, and control your content, or check the weather, sports scores, and more. \nStream over 1.5 million movies and TV episodes. Watch favorites with subscriptions to Netflix, Prime Video, Disney+, and more. Subscription fees may apply.",
-        "quantity": 33,
-        "sold": 29,
-        "image": "https://m.media-amazon.com/images/I/71ZO+9ATW2L._AC_SY450_.jpg",
-        "price": 269
-    },
-    {
-        "title": "VIZIO 40 inch D-Series",
-        "category": "Television",
-        "detail": "1080p High-Definition - Watch TV in crisp, clear 1080p Full HD resolution and experience a brilliant picture with the VIZIO D-Series..Voltage : 120V.Viewable Area : 39.5''. Standby Power : <0.5W \nFull Array LED Backlight - Evenly distributed LEDs across the screen’s backlight deliver superior light uniformity and picture performance.\nSmartCast - With intuitive navigation, enjoy instant access to the best selection of apps from top-tier streaming services like Netflix, Disney+, YouTube, HBO Max and many more right out of the box.",
-        "quantity": 12,
-        "sold": 5,
-        "image": "",
-        "price": 168
-    },
-    {
-        "title": "Hisense 40 inch A4-Series",
-        "category": "Television",
-        "detail": "FHD RESOLUTION: Along with 1080p high-definition LCD screen, you’ll find a powerful full array LED backlight, creating a sharper, more colorful picture. \nDTS VIRTUAL: X: This scalable and versatile advanced post processing package creates immersive audio by virtualizing height content over traditional stereos. \nBLUETOOTH CONNECTIVITY: Wirelessly connect a compatible soundbar, headphones or stereo components to your TV. Then turn it up. Sounds like your favorite playlists sound better.",
-        "quantity": 20,
-        "sold": 15,
-        "image": "https://m.media-amazon.com/images/I/71vd0UkOYOL._AC_SX679_.jpg",
-        "price": 179
-    },
-    {
-        "title": "TCL 32 inch Class S3",
-        "category": "Television",
-        "detail": "1080P Full HD Resolution: experience your favorite movies and TV shows in stunning high-definition picture quality for enhanced clarity and detail. \nHDR (HDR10, & HLG): Enjoy enhanced contrast, accurate colors and fine details utilizing all the most advanced HDR formats. \nGoogle TV Smart OS : The entertainment you love. Google TV brings your favorite movies, shows, and live shows together.",
-        "quantity": 18,
-        "sold": 6,
-        "image": "https://m.media-amazon.com/images/I/81ylxtsKamL._AC_SX679_.jpg",
-        "price": 128
-    },
-    {
-        "title": "Amazon Fire TV 32 inch",
-        "category": "Television",
-        "detail": "High definition TV - Bring movies and shows to life in HD 720p resolution, with support for HDR 10, HLG, and Dolby Digital Audio. \nAll your entertainment in one place - Fire TV gives you quick access to live TV, video games, and music, and lets you stream over 1 million movies and TV episodes with subscriptions to Netflix, Prime Video, Disney+, and more. \nStream for free - Watch free movies and TV episodes with apps like YouTube, Freevee, Tubi, Pluto TV, and more.",
-        "quantity": 11,
-        "sold": 9,
-        "image": "https://m.media-amazon.com/images/I/418UoVylqyL._AC_SY450_.jpg",
-        "price": 105
-    },
-    {
-        "title": "TCL 50 inch Class S4",
-        "category": "Television",
-        "detail": "4K Ultra HD Resolution: Experience incredible detail with 4X the resolution of 1080p Full HDTVs. \nMotion Rate 240 with MEMC Frame Insertion: Combines multiple motion enhancement technologies for exceptional motion clarity \nHDR PRO (Dolby Vision, HDR10, & HLG): Enjoy enhanced contrast, accurate colors and fine details utilizing all the most advanced HDR formats.",
-        "quantity": 35,
-        "sold": 14,
-        "image": "https://m.media-amazon.com/images/I/810xjVeLUmL._AC_SX679_.jpg",
-        "price": 249
-    },
-    {
-        "title": "SAMSUNG 32 inch Class QLED",
-        "category": "Television",
-        "detail": "QUANTUM PROCESSOR LITE W/ 4K UPSCALING: See shows and movies in a whole new light with 4K optimization; Enjoy enhanced clarity and depth in every scene as our Quantum Processor Lite with 4K Upscaling automatically transforms everything you watch \nDUAL LED: Don’t call it temperamental; You’ll enjoy beautifully balanced colors with dedicated warm and cool Dual LED backlights; Get stronger and accurate contrast with innovative technology that adapts automatically to match your content \nQUANTUM HDR: Watch the details shine through with Quantum HDR that goes beyond leading standards to create deep blacks, impressive contrast, and picture quality that’s analyzed and refined to match the creator’s vison",
-        "quantity": 12,
-        "sold": 30,
-        "image": "https://m.media-amazon.com/images/I/71bmtncxa+L._AC_SX679_.jpg",
-        "price": 477
-    },
-    {
-        "title": "Sony 43 inch 4K Ultra HD",
-        "category": "Television",
-        "detail": "POWERFUL TV PROCESSING– The 4K Processor X1 delivers a lifelike picture that is full of rich colors and sharp details. \nENHANCED COLOR AND FINE DETAILS– See natural and precise picture quality with a wide array of colors and dynamic contrast. \nPREMIUM SMART TV – Get access to all your favorite streaming apps in one place with Google TV, and simply use your voice to search and ask questions with Google Assistant. Supports Apple AirPlay.",
-        "quantity": 20,
-        "sold": 7,
-        "image": "https://m.media-amazon.com/images/I/71dRtTqxghL._AC_SX679_.jpg",
-        "price": 412
-    },
-    {
-        "title": "SYLVOX 27 inch Smart TV",
-        "category": "Television",
-        "detail": "Excellent Experience: 27-inch TV integrated ASTC tuner, with USB, ARC&CEC, VGA port, cabinet speaker, reduced distortion, excellent broadband sound effect, and 178°H/178°V ultra-wide viewing angle experience. \nSeismic Design: Passed the 4G vibration test, 12V TV will not be damaged by bumps and vibrations.",
-        "quantity": 20,
-        "sold": 2,
-        "image": "https://m.media-amazon.com/images/I/81-2nfGgfBL._AC_SX679_.jpg",
-        "price": 399
-    },
-    {
-        "title": "Garmin epix Pro (Gen 2)",
-        "category": "Watch",
-        "detail": "Ultimate high-performance smartwatch features a 1.3” always-on, stunning AMOLED display and a scratch-resistant sapphire lens with a titanium bezel \nBuilt-in LED flashlight with variable intensities and strobe modes gives you greater awareness while you train at night and provides convenient illumination when you need it \nNew hill score feature measures your running strength and endurance during ascents and gauges your progress over time",
-        "quantity": 50,
-        "sold": 38,
-        "image": "https://m.media-amazon.com/images/I/71Bx+FzytFL._AC_SX466_.jpg",
-        "price": 799
-    },
-    {
-        "title": "Amazfit Bip 5 Smart Watch",
-        "category": "Watch",
-        "detail": "Amazon Alexa Built-in: Set alarms and timers, check the weather, get translations, control your smart home devices, create shopping lists, and more - all from your wrist! With the Amazon Alexa voice assistant built-in, the Amazfit Bip 5 is your very own personal assistant. \nLong Battery Life: Able to last 10 days with typical usage, or even 26 days in battery saver mode, the Amazfit Bip 5 smartwatch stays with you every step of the way.",
-        "quantity": 20,
-        "sold": 2,
-        "image": "",
-        "price": 89
-    },
-    {
-        "title": "Amazfit GTR 4 Smart Watch",
-        "category": "Watch",
-        "detail": "Get down to business with a huge selection of over 150 sports modes, and suport smart recognition of 8 Sports. The fitness tracker watch can be used to track your swimming data and endure the equivalent of upto 50 meters' water pressure. Get live notifications broadcast through the watch for sports data like heart rate and hydration reminders, distance covered, and more. \nThe Amazfit GTR 4 smart watch debuts the new BioTracker 4.0 PPG biometric sensor, you can enjoy more accurate 24-hour monitoring of heart rate, blood-oxygen saturation and stress levels. The heath tracker watch can also detect your breathing rate, and is able to quickly measure these four important health metrics in one easy tap.",
-        "quantity": 10,
-        "sold": 12,
-        "image": "https://m.media-amazon.com/images/I/71aWDnZOfLL._AC_SX466_.jpg",
-        "price": 199
-    },
-    {
-        "title": "Amazfit T-Rex Pro Smart Watch",
-        "category": "Watch",
-        "detail": "The T-Rex Pro smartwatch features a HD AMOLED always-on color screen. Having passed 15 military-grade tests, this smart watch can battle with you through hot deserts, humid rainforest and polar glaciers \nThe Amazfit T-Rex Pro smartwatch is high-level exploration partner, suporting four global navigation satellite systems, a blood-oxygen saturation measurement system, a heart rate monitor, a sleep monitor, a weather tracker, a sunrise and sunset monitor, a current moon phase display, a compass and barometric altimeter. \nUltra-long 18 Day Battery Life: When fully-charged, you can relax and enjoy upto 18 days of activity and progress with typical usage, or upto 9 days with heavy usage, or upto 40 hours with GPS continuous working mode. Go nonstop with T-Rex Pro watch.",
-        "quantity": 13,
-        "sold": 7,
-        "image": "https://m.media-amazon.com/images/I/71gYnr-DqcL._AC_SX679_.jpg",
-        "price": 159
-    },
-    {
-        "title": "SAMSUNG Galaxy Watch 6",
-        "category": "Watch",
-        "detail": "With Galaxy Watch6 Bespoke Edition, choose your custom style with unique watch faces, stylish bands, and high-end stainless steel materials \nManage your overall sleep quality with an advanced sleep tracker that detects and analyzes sleep stages while you rest; Plus, Advanced Sleep Coaching helps you develop better sleep habits by analyzing your sleep patterns* \nBODY COMPOSITION ANALYSIS (BIA)**: Galaxy Watch6 provides body composition data right on your wrist; On your own schedule, you can now get readings on body fat, skeletal muscle, body water, basal metabolic rate and Body Mass Index (BMI).",
-        "quantity": 19,
-        "sold": 23,
-        "image": "https://m.media-amazon.com/images/I/51T+0nVCfEL._AC_SX679_.jpg",
-        "price": 329
-    },
-    {
-        "title": "Amazfit GTR 3 Pro Smart Watch",
-        "category": "Watch",
-        "detail": "Easily set an alarm, ask a question, get a translation and more with built-in Alexa. If you don’t have internet access, the smart watch also has an offline voice assistant for you to perform operations like engaging a sports mode or opening a health metric feature..Water resistance depth:50 meters.Suported Application:Breath Monitor,Heart Rate Monitor,GPS,Voice Control,Multisport Tracker. Connectivity technology:Bluetooth. Wireless comm standard:Bluetooth \nWith unprecedented visual clarity that reaches 331 ppi, the large 1.45-inch screen of the Amazfit GTR 3 Pro shows you exactly what you want, when you want it, and is visible even under bright sunlight. The ultra HD AMOLED display boasts a 70.6% screen-to-body ratio, which is among the highest for round smartwatches that are currently available.",
-        "quantity": 20,
-        "sold": 0,
-        "image": "https://m.media-amazon.com/images/I/6131owz3QFL._AC_SX679_.jpg",
-        "price": 151
-    },
-    {
-        "title": "Fitbit Versa 4 Fitness",
-        "category": "Watch",
-        "detail": "Get inspired and stay accountable with Versa 4 + Premium - learn when to work out or recover, see real-time stats during exercise and find new ways to keep your routine fresh and fun.Operating temperature: -14° to 113°F. Radio transceiver: Bluetooth 5.0.Maximum operating altitude : 28,000 feet (8,534 m). \nBuilt for better fitness results: Daily Readiness Score(1), built-in GPS and workout intensity map, Active Zone Minutes, all-day activity tracking and 24/7 heart rate, 40+ exercise modes and automatic exercise tracking, water resistant to 50 meters \nTools to measure and improve sleep quality: personalized Sleep Profile(1), daily sleep stages & Sleep Score, smart wake alarm and do not disturb mode. Compatibility-Apple iOS 15 or higher, Android OS 9 or higher",
-        "quantity": 33,
-        "sold": 4,
-        "image": "https://m.media-amazon.com/images/I/61OEuoqFqYL._AC_SX679_.jpg",
-        "price": 199
-    },
-    {
-        "title": "SAMSUNG Galaxy Watch 4 Classic",
-        "category": "Watch",
-        "detail": "Galaxy Watch4 Classic is the first smartwatch to off body composition data right on your wrist, On your own schedule, now you can get readings on body fat, skeletal muscle, body water, basal metabolic rate, and Body Mass Index \nWake up feeling refreshed and recharged with advanced sleep tracking; When you go to bed, your Galaxy Watch4 Classic sleep tracker starts monitoring your sleep and SpO2 levels continuously \nTake care of your heart with accurate ECG monitoring and keep an eye on possible atrial fibrillation, a common form of irregular heart rhythm; Share personalized readings with your doctor using the Samsung Health Monitor app on your compatible Galaxy phone",
-        "quantity": 22,
-        "sold": 14,
-        "image": "https://m.media-amazon.com/images/I/71yNmp4OnXS._AC_SX466_.jpg",
-        "price": 199
-    },
-    {
-        "title": "SAMSUNG Galaxy Watch 5",
-        "category": "Watch",
-        "detail": "All you need is your Galaxy Watch5 with LTE Connectivity; You can make or take calls, track workouts, send texts and pull up a playlist anywhere, anytime, without your phone or Wi-Fi \nManage your overall sleep quality with an advanced sleep tracker that detects and analyzes sleep stages while you rest; Plus, Advanced Sleep Coaching helps you develop better sleep habits by analyzing your sleep patterns \nGalaxy Watch5 provides body composition data right on your wrist; On your own schedule, you can now get readings on body fat, skeletal muscle, body water, basal metabolic rate and Body Mass Index (BMI)",
-        "quantity": 20,
-        "sold": 1,
-        "image": "https://m.media-amazon.com/images/I/61X2Pl7752L._AC_SX679_.jpg",
-        "price": 329
-    },
-    {
-        "title": "Apple Watch Series 9",
-        "category": "Watch",
-        "detail": " Your essential companion for a healthy life is now even more powerful. The S9 chip enables a superbright display and a magical new way to quickly and easily interact with your Apple Watch without touching the screen. Advanced health, safety, and activity features provide powerful insights and help when you need it. And redesigned apps in watchOS give you more information at a glance. \nAn aluminum Apple Watch Series 9 paired with the latest Sport Loop is carbon neutral. Learn more about Apple’s commitment to the environment at apple.com/2030. \nKeep an eye on your blood oxygen. Take an ECG anytime. Get notifications if you have an irregular heart rhythm. See how much time you spent in REM, Core, or Deep sleep with sleep stages. Temperature sensing provides insights into overall wellbeing and cycle tracking. And take note of your state of mind to help build emotional awareness and resilience.",
-        "quantity": 35,
-        "sold": 10,
-        "image": "https://m.media-amazon.com/images/I/71aXGgNCE9L._AC_SX522_.jpg",
-        "price": 453
-    },
-    {
-        "title": "SAMSUNG Galaxy Buds 2 Pro",
-        "category": "Wireless Earbuds",
-        "detail": "Intelligent Active Noise Cancellation quiets even the loudest outside sounds; Tune in to what matters most without being bothered by distracting sounds around you \nStudio quality sound isn’t just for the pros; Feel every note like you’re there with Galaxy Buds2 Pro2 and get a next-level listening experience, whether you’re rocking out to your playlist or listening to a podcast \nAmplify what you like; Minimize what you don’t; Enhanced 360-degree audio2 brings out the tones you love from every angle for a personalized surround sound experience every time you pop them in",
-        "quantity": 35,
-        "sold": 29,
-        "image": "https://m.media-amazon.com/images/I/51Uu97ekaZL._AC_SX466_.jpg",
-        "price": 167
-    },
-    {
-        "title": "Apple AirPods Pro (2nd Generation)",
-        "category": "Wireless Earbuds",
-        "detail": "The Apple-designed H2 chip helps to create more intelligent noise cancellation and deeply immersive sound. The low-distortion, custom-built driver delivers crisp, clear high notes and full, rich bass in stunning definition. \nUp to 2x more Active Noise Cancellation for dramatically less noise when you want to focus. Transparency mode lets you hear the world around you, and Adaptive Audio seamlessly blends Active Noise Cancellation and Transparency mode for the best listening experience in any environment. \nIncludes four pairs of silicone tips (XS, S, M, L) to fit a wide range of ears and provide all-day comfort. The tips create an acoustic seal to help keep out noise and secure AirPods Pro in place.",
-        "quantity": 30,
-        "sold": 23,
-        "image": "https://m.media-amazon.com/images/I/61sRKTAfrhL._AC_SX522_.jpg",
-        "price": 185
-    },
-    {
-        "title": "Apple AirPods (3rd Generation)",
-        "category": "Wireless Earbuds",
-        "detail": "With sound that suits your unique ear shape along with dynamic head tracking, AirPods (3rd generation) deliver an immersive listening experience that places sound all around you. You can also listen to select songs, shows, and movies in Dolby Atmos. \nAirPods and the Lightning Charging Case is rated IPX4 sweat and water resistant, so they’ll withstand anything from heavy workouts to rain. \nRecharge your AirPods with the portable Lightning Charging Case for power throughout the day, wherever you go.",
-        "quantity": 35,
-        "sold": 10,
-        "image": "",
-        "price": 218
-    },
-    {
-        "title": "JBL Tune Flex",
-        "category": "Wireless Earbuds",
-        "detail": "Smartly designed 12mm drivers enhanced by the stick form factor deliver JBL's Pure Bass Sound so you'll feel every pulsing beat. \nHear more of what you want, less of what you don't. Active Noise Cancelling technology with 2 microphones lets you minimize audio distractions. With Ambient Aware, you can tune into your surroundings at any time so that you feel safer when you're out in the world, while TalkThru lets you stop for a quick chat without having to remove your headphones.",
-        "quantity": 16,
-        "sold": 7,
-        "image": "https://m.media-amazon.com/images/I/61joErBxERL._AC_SX466_.jpg",
-        "price": 59
-    },
-    {
-        "title": "JBL Tune Buds",
-        "category": "Wireless Earbuds",
-        "detail": "Smartly designed 10mm drivers enhanced by the buds' form factor deliver JBL's Pure Bass Sound so you'll feel every pulsing beat. \nThanks to the next generation Bluetooth technology, the JBL Tune Buds earbuds stream audio with low power consumption at high quality. Plus, BT 5.3 allows to stream synchronized audio independently to each earbud, so that you can use either or both earbuds. Or you can share your video or music content with a friend wearing headphones, as BT 5.3 lets you seamlessly stream audio to multiple listeners. (*) Available via OTA update at a later stage",
-        "quantity": 14,
-        "sold": 3,
-        "image": "https://m.media-amazon.com/images/I/51e5NZdtmhL._AC_SX466_.jpg",
-        "price": 49
-    },
-    {
-        "title": "Google Pixel Buds Pro",
-        "category": "Wireless Earbuds",
-        "detail": "Pixel Buds Pro use Active Noise Cancellation with Silent Seal to adapt to your ear and help block outside sounds, creating a quiet foundation so your music can shine; and now they’re even better, with new features and colors \nWith double the bandwidth for clearer calls, Pixel Buds Pro are the perfect earbuds for Pixel \nPairs with any Bluetooth 4.0+ device, including Android, iOS, tablets, and laptops[1]; and multipoint connectivity helps you switch between compatible devices, so you can go from listening to music on your phone to taking a call on your laptop",
-        "quantity": 35,
-        "sold": 11,
-        "image": "https://m.media-amazon.com/images/I/61qVCvt2xjL._AC_SX679_.jpg",
-        "price": 199
-    },
-    {
-        "title": "SAMSUNG Galaxy Buds FE",
-        "category": "Wireless Earbuds",
-        "detail": " Listen comfortably all day with the new wing-tip design that keeps your Buds in place. \nHear what you want how you want thanks to Active Noise Cancellation. \nGalaxy Buds FE pair easily to your other Galaxy devices through your Samsung account; Just open the case, tap to connect* and your paired Buds FE show up in your list of devices",
-        "quantity": 32,
-        "sold": 10,
-        "image": "https://m.media-amazon.com/images/I/612LsseGIkL._AC_SX679_.jpg",
-        "price": 69
-    },
-    {
-        "title": "JBL Endurance Peak 3",
-        "category": "Wireless Earbuds",
-        "detail": "JBL Pure Bass Sound: Get the most out of your favorite workout playlist with rich bass from a 10mm dynamic driver that delivers bold sound when you need it most. \nUp to 50 total hours of playback with speed charge: Whether you measure your energy output in miles, pounds, or minutes, the JBL Endurance Peak 3 can match you beat for beat, with up to10 hours of battery power in the earbuds and 40 in the case. And when you need a boost, speed charge up to an hour of playtime in just 10 minutes. \nIP68 dust and water proof: An IP68 rating means the JBL Endurance Peak 3 earbuds are ready for your most active adventures, rain or shine. And they'll endure for 30 minutes at depths up to 1.5 meters of salt or fresh water. So you can surf with your earbuds, or rinse them after a workout, all without missing a beat.",
-        "quantity": 35,
-        "sold": 10,
-        "image": "https://m.media-amazon.com/images/I/518X-lGLUsL._AC_SX466_.jpg",
-        "price": 79
-    },
-    {
-        "title": "OnePlus Nord Buds 2",
-        "category": "Wireless Earbuds",
-        "detail": "New BassWave algorithm dynamically enhances your sound for a balanced listening experience with deeper bass and crisp, clear vocals to keep you dancing to the beat. \nNord Buds 2 are the first Fast and Smooth Nord audio product with up to 25dB of active noise cancellation to add a little more chill to your listening session.",
-        "quantity": 22,
-        "sold": 27,
-        "image": "",
-        "price": 39
-    },
-    {
-        "title": "Panasonic ErgoFit",
-        "category": "Wireless Earbuds",
-        "detail": "Panasonic ErgoFit Earbuds, Now Wireless for More Freedom: Enjoy noise cancelling, smooth bass, and great fit for less; lightweight bluetooth wireless earbuds have a secure Ergofit design and 3 earpiece sizes to customize your fit \nCancel Out Distracting Noise: The B310W TWS ear buds have active noise cancellation to eliminate background noise- perfect while traveling travel on planes, trains, and buses \nRich, Booming Bass: Immerse yourself in powerful bass energy from the earbuds’ 10mm dynamic drivers and XBS (extra bass system)",
-        "quantity": 30,
-        "sold": 10,
-        "image": "https://m.media-amazon.com/images/I/618WbocD6LL._AC_SX466_.jpg",
-        "price": 41
-    }
+  {
+    "title": "MacBook Pro 14 inch 2023",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "SUPERCHARGED BY M3 PRO OR M3 MAX — The Apple M3 Pro chip, with an up to 12-core CPU and up to 18-core GPU, delivers amazing performance for demanding workflows like manipulating gigapixel panoramas or compiling millions of lines of code. M3 Max, with an up to 16-core CPU and up to 40-core GPU, drives extreme performance for the most advanced workflows like rendering intricate 3D content or developing transformer models with billions of parameters.\nUP TO 18 HOURS OF BATTERY LIFE — Go all day thanks to the power-efficient design of Apple silicon. The MacBook Pro laptop delivers the same exceptional performance whether it's running on battery or plugged in. (Battery life varies by use and configuration. See apple.com/batteries for more information.)",
+    "quantity": 100,
+    "sold": 25,
+    "image": "https://m.media-amazon.com/images/I/61RJn0ofUsL._AC_SX522_.jpg",
+    "price": 1994
+  },
+  {
+    "title": "MacBook Air 13.3 inch 2020",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "Power. It's in the Air. Our thinnest, lightest notebook, completely transformed by the Apple M1 chip. CPU speeds up to 3.5x faster. GPU speeds up to 5x faster. \nOur most advanced Neural Engine for up to 9x faster machine learning. The longest battery life ever in a MacBook Air. And a silent, fanless design. This much power has never been this ready to go.",
+    "quantity": 50,
+    "sold": 33,
+    "image": "https://m.media-amazon.com/images/I/51KhexN7YkL._AC_SX679_.jpg",
+    "price": 1178
+  },
+  {
+    "title": "MacBook Air 15.3 inch 2023",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "IMPRESSIVELY BIG, IMPOSSIBLY THIN — The 15-inch MacBook Air makes room for more of what you love with a spacious Liquid Retina display. \nThe durable 100 percent recycled aluminum enclosure is strikingly thin and light.",
+    "quantity": 66,
+    "sold": 12,
+    "image": "https://m.media-amazon.com/images/I/81Fm0tRFdHL._AC_SX522_.jpg",
+    "price": 1566
+  },
+  {
+    "title": "MacBook Pro 16.2 inch 2023",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "BRILLIANT PRO DISPLAY — The 16.2-inch Liquid Retina XDR display features Extreme Dynamic Range, over 1000 nits of brightness for stunning HDR content, up to 600 nits of brightness for SDR content, and pro reference modes for doing your best work on the go. \n(The display has rounded corners at the top. When measured diagonally, the screen is 16.2 inches. Actual viewable area is less.)",
+    "quantity": 66,
+    "sold": 12,
+    "image": "https://m.media-amazon.com/images/I/618d5bS2lUL._AC_SX522_.jpg",
+    "price": 2499
+  },
+  {
+    "title": "MacBook Pro 16.2 inch 2021",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "Apple M1 Pro or M1 Max chip for a massive leap in CPU, GPU, and machine learning performance \nUp to 10-core CPU delivers up to 2x faster performance to fly through pro workflows quicker than ever \nUp to 32-core GPU with up to 4x faster performance for graphics-intensive apps and games \n16-core Neural Engine for up to 5x faster machine learning performance \nLonger battery life, up to 21 hours",
+    "quantity": 42,
+    "sold": 23,
+    "image": "https://m.media-amazon.com/images/I/61aUBxqc5PL._AC_SX522_.jpg",
+    "price": 1849
+  },
+  {
+    "title": "MacBook Air 13 inch 2020",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "All-Day Battery Life – Go longer than ever with up to 18 hours of battery life. \nPowerful Performance – Take on everything from professional-quality editing to action-packed gaming with ease. \nThe Apple M1 chip with an 8-core CPU delivers up to 3.5x faster performance than the previous generation while using way less power.",
+    "quantity": 10,
+    "sold": 43,
+    "image": "https://m.media-amazon.com/images/I/71vFKBpKakL._AC_SX522_.jpg",
+    "price": 690
+  },
+  {
+    "title": "MacBook Air 13.6 inch 2022",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "STRIKINGLY THIN DESIGN — The redesigned MacBook Air is more portable than ever and weighs just 2.7 pounds. It's the incredibly capable laptop that lets you work, play or create just about anything — anywhere.\nSUPERCHARGED BY M2 — Get more done faster with a next-generation 8-core CPU, up to 10-core GPU and up to 24GB of unified memory.\nUP TO 18 HOURS OF BATTERY LIFE — Go all day and into the night, thanks to the power-efficient performance of the Apple M2 chip.",
+    "quantity": 42,
+    "sold": 25,
+    "image": "https://m.media-amazon.com/images/I/710TJuHTMhL._AC_SX522_.jpg",
+    "price": 1070
+  },
+  {
+    "title": "MacBook Air 13 inch Retina Display",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "Stunning 13.3-inch Retina display with True Tone technology \nBacklit Magic Keyboard and Touch ID \nTenth-generation Intel Core i3 processor \nIntel Iris Plus Graphics \nFast SSD storage \n8GB of memory \nStereo speakers with wider stereo sound",
+    "quantity": 20,
+    "sold": 12,
+    "image": "https://m.media-amazon.com/images/I/71k3fJh5EwL._AC_SX679_.jpg",
+    "price": 899
+  },
+  {
+    "title": "MacBook Air 13 inch 2018",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "Stunning 13.3-inch Retina display \nTouch ID and the latest Apple-designed keyboard \nDual-core 8th-generation Intel Core i5 processor with Intel UHD Graphics 617 \nFast SSD storage and 8GB memory",
+    "quantity": 7,
+    "sold": 49,
+    "image": "https://m.media-amazon.com/images/I/51FJlZmqO8L._AC_SX679_.jpg",
+    "price": 496
+  },
+  {
+    "title": "MacBook Pro 15 inch 2018",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "2.8GHz quad-core Intel Core i7 processor with Turbo Boost up to 3.8GHz \n16GB 2133MHz LPDDR3 memory \n256GB SSD storage \nRadeon Pro 555 with 2GB memory \nTouch Bar and Touch ID",
+    "quantity": 14,
+    "sold": 27,
+    "image": "https://m.media-amazon.com/images/I/61F99gFWolL._AC_SX679_.jpg",
+    "price": 696
+  },
+  {
+    "title": "HomePod 2nd Generation",
+    "category": "6585a7d56d9fc7031f1d96ee",
+    "detail": "Premium, immersive, high-fidelity audio \nPowerful high-excursion woofer delivers deep, rich bass \nFive beamforming tweeters for clear, detailed highs \nAdvanced computational audio delivers room-filling sound",
+    "quantity": 28,
+    "sold": 2,
+    "image": "https://m.media-amazon.com/images/I/71+BbLQz8UL._AC_SX466_.jpg",
+    "price": 404
+  },
+  {
+    "title": "HomePod Mini Blue",
+    "category": "6585a7d56d9fc7031f1d96ee",
+    "detail": "The new Apple S5 chip processes sound more sensitively and faster \nEquipped with 4 Microphones, respond to user commands effectively \nMatter support, diverse connections \nCentral hub for Apple HomeKit devices",
+    "quantity": 25,
+    "sold": 7,
+    "image": "https://i.ebayimg.com/images/g/EDAAAOSwZZZjvtnm/s-l960.jpg",
+    "price": 119
+  },
+  {
+    "title": "HomePod Mini Space Gray",
+    "category": "6585a7d56d9fc7031f1d96ee",
+    "detail": "Experience powerful and immersive sound with the HomePod Mini Space Gray. \nThe advanced Apple S5 chip ensures enhanced audio processing for a superior listening experience. \nFeaturing four high-quality microphones, it responds effectively to your voice commands.",
+    "quantity": 32,
+    "sold": 12,
+    "image": "https://i.ebayimg.com/images/g/U9EAAOSws~9g6dx-/s-l1600.jpg",
+    "price": 179
+  },
+  {
+    "title": "HomePod 1st Generation",
+    "category": "6585a7d56d9fc7031f1d96ee",
+    "detail": "With an impressive quantity sold and rave reviews, it's clear that this smart speaker is a crowd favorite. \nUnlock the full potential of your smart home with HomePod – the central command for all your connected devices. \nElevate your ambiance with crystal-clear sound, whether you're enjoying music, podcasts, or the latest audiobook.",
+    "quantity": 15,
+    "sold": 14,
+    "image": "https://i.ebayimg.com/images/g/svUAAOSwi-1lgk7X/s-l1600.jpg",
+    "price": 199
+  },
+  {
+    "title": "Homepod Mini White",
+    "category": "6585a7d56d9fc7031f1d96ee",
+    "detail": "The new Apple S5 chip processes sound more sensitively and faster \nEquipped with 4 Microphones, respond to user commands effectively \nMatter support, diverse connections \nCentral hub for Apple HomeKit devices",
+    "quantity": 35,
+    "sold": 4,
+    "image": "https://i.ebayimg.com/images/g/560AAOSwtUxj2hAc/s-l1600.jpg",
+    "price": 120
+  },
+  {
+    "title": "INSIGNIA 24 inch 2022",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "720p resolution - View your favorite movies, shows and games in high definition. \nAlexa voice control - The Alexa Voice Remote lets you easily control your entertainment, search across apps, switch inputs, and more using just your voice. Press and hold the voice button and ask Alexa to easily find, launch, and control content, and even switch to cable. \nFire TV experience built-in - Watch over 1 Million streaming movies and TV episodes with access to tens of thousands of channels, apps, and Alexa skills.",
+    "quantity": 20,
+    "sold": 2,
+    "image": "https://m.media-amazon.com/images/I/811quPi2PUL._AC_SX466_.jpg",
+    "price": 198
+  },
+  {
+    "title": "Amazon Fire TV 50 inch",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "Bring movies and shows to life with support for vivid 4K Ultra HD, HDR 10, HLG, and Dolby Digital Plus. \n4K Ultra HD, HDR 10, and HLG deliver a clearer and more vibrant picture with brighter colors compared to 1080p Full HD. \nPress and ask Alexa to easily find, launch, and control your content, or check the weather, sports scores, and more. \nStream over 1.5 million movies and TV episodes. Watch favorites with subscriptions to Netflix, Prime Video, Disney+, and more. Subscription fees may apply.",
+    "quantity": 33,
+    "sold": 29,
+    "image": "https://m.media-amazon.com/images/I/71ZO+9ATW2L._AC_SY450_.jpg",
+    "price": 269
+  },
+  {
+    "title": "VIZIO 40 inch D-Series",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "1080p High-Definition - Watch TV in crisp, clear 1080p Full HD resolution and experience a brilliant picture with the VIZIO D-Series..Voltage : 120V.Viewable Area : 39.5''. Standby Power : <0.5W \nFull Array LED Backlight - Evenly distributed LEDs across the screen's backlight deliver superior light uniformity and picture performance.\nSmartCast - With intuitive navigation, enjoy instant access to the best selection of apps from top-tier streaming services like Netflix, Disney+, YouTube, HBO Max and many more right out of the box.",
+    "quantity": 12,
+    "sold": 5,
+    "image": "",
+    "price": 168
+  },
+  {
+    "title": "Hisense 40 inch A4-Series",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "FHD RESOLUTION: Along with 1080p high-definition LCD screen, you'll find a powerful full array LED backlight, creating a sharper, more colorful picture. \nDTS VIRTUAL: X: This scalable and versatile advanced post processing package creates immersive audio by virtualizing height content over traditional stereos. \nBLUETOOTH CONNECTIVITY: Wirelessly connect a compatible soundbar, headphones or stereo components to your TV. Then turn it up. Sounds like your favorite playlists sound better.",
+    "quantity": 20,
+    "sold": 15,
+    "image": "https://m.media-amazon.com/images/I/71vd0UkOYOL._AC_SX679_.jpg",
+    "price": 179
+  },
+  {
+    "title": "TCL 32 inch Class S3",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "1080P Full HD Resolution: experience your favorite movies and TV shows in stunning high-definition picture quality for enhanced clarity and detail. \nHDR (HDR10, & HLG): Enjoy enhanced contrast, accurate colors and fine details utilizing all the most advanced HDR formats. \nGoogle TV Smart OS : The entertainment you love. Google TV brings your favorite movies, shows, and live shows together.",
+    "quantity": 18,
+    "sold": 6,
+    "image": "https://m.media-amazon.com/images/I/81ylxtsKamL._AC_SX679_.jpg",
+    "price": 128
+  },
+  {
+    "title": "Amazon Fire TV 32 inch",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "High definition TV - Bring movies and shows to life in HD 720p resolution, with support for HDR 10, HLG, and Dolby Digital Audio. \nAll your entertainment in one place - Fire TV gives you quick access to live TV, video games, and music, and lets you stream over 1 million movies and TV episodes with subscriptions to Netflix, Prime Video, Disney+, and more. \nStream for free - Watch free movies and TV episodes with apps like YouTube, Freevee, Tubi, Pluto TV, and more.",
+    "quantity": 11,
+    "sold": 9,
+    "image": "https://m.media-amazon.com/images/I/418UoVylqyL._AC_SY450_.jpg",
+    "price": 105
+  },
+  {
+    "title": "TCL 50 inch Class S4",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "4K Ultra HD Resolution: Experience incredible detail with 4X the resolution of 1080p Full HDTVs. \nMotion Rate 240 with MEMC Frame Insertion: Combines multiple motion enhancement technologies for exceptional motion clarity \nHDR PRO (Dolby Vision, HDR10, & HLG): Enjoy enhanced contrast, accurate colors and fine details utilizing all the most advanced HDR formats.",
+    "quantity": 35,
+    "sold": 14,
+    "image": "https://m.media-amazon.com/images/I/810xjVeLUmL._AC_SX679_.jpg",
+    "price": 249
+  },
+  {
+    "title": "SAMSUNG 32 inch Class QLED",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "QUANTUM PROCESSOR LITE W/ 4K UPSCALING: See shows and movies in a whole new light with 4K optimization; Enjoy enhanced clarity and depth in every scene as our Quantum Processor Lite with 4K Upscaling automatically transforms everything you watch \nDUAL LED: Don't call it temperamental; You'll enjoy beautifully balanced colors with dedicated warm and cool Dual LED backlights; Get stronger and accurate contrast with innovative technology that adapts automatically to match your content \nQUANTUM HDR: Watch the details shine through with Quantum HDR that goes beyond leading standards to create deep blacks, impressive contrast, and picture quality that's analyzed and refined to match the creator's vison",
+    "quantity": 12,
+    "sold": 30,
+    "image": "https://m.media-amazon.com/images/I/71bmtncxa+L._AC_SX679_.jpg",
+    "price": 477
+  },
+  {
+    "title": "Sony 43 inch 4K Ultra HD",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "POWERFUL TV PROCESSING– The 4K Processor X1 delivers a lifelike picture that is full of rich colors and sharp details. \nENHANCED COLOR AND FINE DETAILS– See natural and precise picture quality with a wide array of colors and dynamic contrast. \nPREMIUM SMART TV – Get access to all your favorite streaming apps in one place with Google TV, and simply use your voice to search and ask questions with Google Assistant. Supports Apple AirPlay.",
+    "quantity": 20,
+    "sold": 7,
+    "image": "https://m.media-amazon.com/images/I/71dRtTqxghL._AC_SX679_.jpg",
+    "price": 412
+  },
+  {
+    "title": "SYLVOX 27 inch Smart TV",
+    "category": "6585a7d16d9fc7031f1d96ec",
+    "detail": "Excellent Experience: 27-inch TV integrated ASTC tuner, with USB, ARC&CEC, VGA port, cabinet speaker, reduced distortion, excellent broadband sound effect, and 178°H/178°V ultra-wide viewing angle experience. \nSeismic Design: Passed the 4G vibration test, 12V TV will not be damaged by bumps and vibrations.",
+    "quantity": 20,
+    "sold": 2,
+    "image": "https://m.media-amazon.com/images/I/81-2nfGgfBL._AC_SX679_.jpg",
+    "price": 399
+  },
+  {
+    "title": "Garmin epix Pro (Gen 2)",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "Ultimate high-performance smartwatch features a 1.3” always-on, stunning AMOLED display and a scratch-resistant sapphire lens with a titanium bezel \nBuilt-in LED flashlight with variable intensities and strobe modes gives you greater awareness while you train at night and provides convenient illumination when you need it \nNew hill score feature measures your running strength and endurance during ascents and gauges your progress over time",
+    "quantity": 50,
+    "sold": 38,
+    "image": "https://m.media-amazon.com/images/I/71Bx+FzytFL._AC_SX466_.jpg",
+    "price": 799
+  },
+  {
+    "title": "Amazfit Bip 5 Smart Watch",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "Amazon Alexa Built-in: Set alarms and timers, check the weather, get translations, control your smart home devices, create shopping lists, and more - all from your wrist! With the Amazon Alexa voice assistant built-in, the Amazfit Bip 5 is your very own personal assistant. \nLong Battery Life: Able to last 10 days with typical usage, or even 26 days in battery saver mode, the Amazfit Bip 5 smartwatch stays with you every step of the way.",
+    "quantity": 20,
+    "sold": 2,
+    "image": "",
+    "price": 89
+  },
+  {
+    "title": "Amazfit GTR 4 Smart Watch",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "Get down to business with a huge selection of over 150 sports modes, and suport smart recognition of 8 Sports. The fitness tracker watch can be used to track your swimming data and endure the equivalent of upto 50 meters' water pressure. Get live notifications broadcast through the watch for sports data like heart rate and hydration reminders, distance covered, and more. \nThe Amazfit GTR 4 smart watch debuts the new BioTracker 4.0 PPG biometric sensor, you can enjoy more accurate 24-hour monitoring of heart rate, blood-oxygen saturation and stress levels. The heath tracker watch can also detect your breathing rate, and is able to quickly measure these four important health metrics in one easy tap.",
+    "quantity": 10,
+    "sold": 12,
+    "image": "https://m.media-amazon.com/images/I/71aWDnZOfLL._AC_SX466_.jpg",
+    "price": 199
+  },
+  {
+    "title": "Amazfit T-Rex Pro Smart Watch",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "The T-Rex Pro smartwatch features a HD AMOLED always-on color screen. Having passed 15 military-grade tests, this smart watch can battle with you through hot deserts, humid rainforest and polar glaciers \nThe Amazfit T-Rex Pro smartwatch is high-level exploration partner, suporting four global navigation satellite systems, a blood-oxygen saturation measurement system, a heart rate monitor, a sleep monitor, a weather tracker, a sunrise and sunset monitor, a current moon phase display, a compass and barometric altimeter. \nUltra-long 18 Day Battery Life: When fully-charged, you can relax and enjoy upto 18 days of activity and progress with typical usage, or upto 9 days with heavy usage, or upto 40 hours with GPS continuous working mode. Go nonstop with T-Rex Pro watch.",
+    "quantity": 13,
+    "sold": 7,
+    "image": "https://m.media-amazon.com/images/I/71gYnr-DqcL._AC_SX679_.jpg",
+    "price": 159
+  },
+  {
+    "title": "SAMSUNG Galaxy Watch 6",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "With Galaxy Watch6 Bespoke Edition, choose your custom style with unique watch faces, stylish bands, and high-end stainless steel materials \nManage your overall sleep quality with an advanced sleep tracker that detects and analyzes sleep stages while you rest; Plus, Advanced Sleep Coaching helps you develop better sleep habits by analyzing your sleep patterns* \nBODY COMPOSITION ANALYSIS (BIA)**: Galaxy Watch6 provides body composition data right on your wrist; On your own schedule, you can now get readings on body fat, skeletal muscle, body water, basal metabolic rate and Body Mass Index (BMI).",
+    "quantity": 19,
+    "sold": 23,
+    "image": "https://m.media-amazon.com/images/I/51T+0nVCfEL._AC_SX679_.jpg",
+    "price": 329
+  },
+  {
+    "title": "Amazfit GTR 3 Pro Smart Watch",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "Easily set an alarm, ask a question, get a translation and more with built-in Alexa. If you don't have internet access, the smart watch also has an offline voice assistant for you to perform operations like engaging a sports mode or opening a health metric feature..Water resistance depth:50 meters.Suported Application:Breath Monitor,Heart Rate Monitor,GPS,Voice Control,Multisport Tracker. Connectivity technology:Bluetooth. Wireless comm standard:Bluetooth \nWith unprecedented visual clarity that reaches 331 ppi, the large 1.45-inch screen of the Amazfit GTR 3 Pro shows you exactly what you want, when you want it, and is visible even under bright sunlight. The ultra HD AMOLED display boasts a 70.6% screen-to-body ratio, which is among the highest for round smartwatches that are currently available.",
+    "quantity": 20,
+    "sold": 0,
+    "image": "https://m.media-amazon.com/images/I/6131owz3QFL._AC_SX679_.jpg",
+    "price": 151
+  },
+  {
+    "title": "Fitbit Versa 4 Fitness",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "Get inspired and stay accountable with Versa 4 + Premium - learn when to work out or recover, see real-time stats during exercise and find new ways to keep your routine fresh and fun.Operating temperature: -14° to 113°F. Radio transceiver: Bluetooth 5.0.Maximum operating altitude : 28,000 feet (8,534 m). \nBuilt for better fitness results: Daily Readiness Score(1), built-in GPS and workout intensity map, Active Zone Minutes, all-day activity tracking and 24/7 heart rate, 40+ exercise modes and automatic exercise tracking, water resistant to 50 meters \nTools to measure and improve sleep quality: personalized Sleep Profile(1), daily sleep stages & Sleep Score, smart wake alarm and do not disturb mode. Compatibility-Apple iOS 15 or higher, Android OS 9 or higher",
+    "quantity": 33,
+    "sold": 4,
+    "image": "https://m.media-amazon.com/images/I/61OEuoqFqYL._AC_SX679_.jpg",
+    "price": 199
+  },
+  {
+    "title": "SAMSUNG Galaxy Watch 4 Classic",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "Galaxy Watch4 Classic is the first smartwatch to off body composition data right on your wrist, On your own schedule, now you can get readings on body fat, skeletal muscle, body water, basal metabolic rate, and Body Mass Index \nWake up feeling refreshed and recharged with advanced sleep tracking; When you go to bed, your Galaxy Watch4 Classic sleep tracker starts monitoring your sleep and SpO2 levels continuously \nTake care of your heart with accurate ECG monitoring and keep an eye on possible atrial fibrillation, a common form of irregular heart rhythm; Share personalized readings with your doctor using the Samsung Health Monitor app on your compatible Galaxy phone",
+    "quantity": 22,
+    "sold": 14,
+    "image": "https://m.media-amazon.com/images/I/71yNmp4OnXS._AC_SX466_.jpg",
+    "price": 199
+  },
+  {
+    "title": "SAMSUNG Galaxy Watch 5",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": "All you need is your Galaxy Watch5 with LTE Connectivity; You can make or take calls, track workouts, send texts and pull up a playlist anywhere, anytime, without your phone or Wi-Fi \nManage your overall sleep quality with an advanced sleep tracker that detects and analyzes sleep stages while you rest; Plus, Advanced Sleep Coaching helps you develop better sleep habits by analyzing your sleep patterns \nGalaxy Watch5 provides body composition data right on your wrist; On your own schedule, you can now get readings on body fat, skeletal muscle, body water, basal metabolic rate and Body Mass Index (BMI)",
+    "quantity": 20,
+    "sold": 1,
+    "image": "https://m.media-amazon.com/images/I/61X2Pl7752L._AC_SX679_.jpg",
+    "price": 329
+  },
+  {
+    "title": "Apple Watch Series 9",
+    "category": "6585a7229306f231fe13e80f",
+    "detail": " Your essential companion for a healthy life is now even more powerful. The S9 chip enables a superbright display and a magical new way to quickly and easily interact with your Apple Watch without touching the screen. Advanced health, safety, and activity features provide powerful insights and help when you need it. And redesigned apps in watchOS give you more information at a glance. \nAn aluminum Apple Watch Series 9 paired with the latest Sport Loop is carbon neutral. Learn more about Apple's commitment to the environment at apple.com/2030. \nKeep an eye on your blood oxygen. Take an ECG anytime. Get notifications if you have an irregular heart rhythm. See how much time you spent in REM, Core, or Deep sleep with sleep stages. Temperature sensing provides insights into overall wellbeing and cycle tracking. And take note of your state of mind to help build emotional awareness and resilience.",
+    "quantity": 35,
+    "sold": 10,
+    "image": "https://m.media-amazon.com/images/I/71aXGgNCE9L._AC_SX522_.jpg",
+    "price": 453
+  },
+  {
+    "title": "SAMSUNG Galaxy Buds 2 Pro",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "Intelligent Active Noise Cancellation quiets even the loudest outside sounds; Tune in to what matters most without being bothered by distracting sounds around you \nStudio quality sound isn't just for the pros; Feel every note like you're there with Galaxy Buds2 Pro2 and get a next-level listening experience, whether you're rocking out to your playlist or listening to a podcast \nAmplify what you like; Minimize what you don't; Enhanced 360-degree audio2 brings out the tones you love from every angle for a personalized surround sound experience every time you pop them in",
+    "quantity": 35,
+    "sold": 29,
+    "image": "https://m.media-amazon.com/images/I/51Uu97ekaZL._AC_SX466_.jpg",
+    "price": 167
+  },
+  {
+    "title": "Apple AirPods Pro (2nd Generation)",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "The Apple-designed H2 chip helps to create more intelligent noise cancellation and deeply immersive sound. The low-distortion, custom-built driver delivers crisp, clear high notes and full, rich bass in stunning definition. \nUp to 2x more Active Noise Cancellation for dramatically less noise when you want to focus. Transparency mode lets you hear the world around you, and Adaptive Audio seamlessly blends Active Noise Cancellation and Transparency mode for the best listening experience in any environment. \nIncludes four pairs of silicone tips (XS, S, M, L) to fit a wide range of ears and provide all-day comfort. The tips create an acoustic seal to help keep out noise and secure AirPods Pro in place.",
+    "quantity": 30,
+    "sold": 23,
+    "image": "https://m.media-amazon.com/images/I/61sRKTAfrhL._AC_SX522_.jpg",
+    "price": 185
+  },
+  {
+    "title": "Apple AirPods (3rd Generation)",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "With sound that suits your unique ear shape along with dynamic head tracking, AirPods (3rd generation) deliver an immersive listening experience that places sound all around you. You can also listen to select songs, shows, and movies in Dolby Atmos. \nAirPods and the Lightning Charging Case is rated IPX4 sweat and water resistant, so they'll withstand anything from heavy workouts to rain. \nRecharge your AirPods with the portable Lightning Charging Case for power throughout the day, wherever you go.",
+    "quantity": 35,
+    "sold": 10,
+    "image": "",
+    "price": 218
+  },
+  {
+    "title": "JBL Tune Flex",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "Smartly designed 12mm drivers enhanced by the stick form factor deliver JBL's Pure Bass Sound so you'll feel every pulsing beat. \nHear more of what you want, less of what you don't. Active Noise Cancelling technology with 2 microphones lets you minimize audio distractions. With Ambient Aware, you can tune into your surroundings at any time so that you feel safer when you're out in the world, while TalkThru lets you stop for a quick chat without having to remove your headphones.",
+    "quantity": 16,
+    "sold": 7,
+    "image": "https://m.media-amazon.com/images/I/61joErBxERL._AC_SX466_.jpg",
+    "price": 59
+  },
+  {
+    "title": "JBL Tune Buds",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "Smartly designed 10mm drivers enhanced by the buds' form factor deliver JBL's Pure Bass Sound so you'll feel every pulsing beat. \nThanks to the next generation Bluetooth technology, the JBL Tune Buds earbuds stream audio with low power consumption at high quality. Plus, BT 5.3 allows to stream synchronized audio independently to each earbud, so that you can use either or both earbuds. Or you can share your video or music content with a friend wearing headphones, as BT 5.3 lets you seamlessly stream audio to multiple listeners. (*) Available via OTA update at a later stage",
+    "quantity": 14,
+    "sold": 3,
+    "image": "https://m.media-amazon.com/images/I/51e5NZdtmhL._AC_SX466_.jpg",
+    "price": 49
+  },
+  {
+    "title": "Google Pixel Buds Pro",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "Pixel Buds Pro use Active Noise Cancellation with Silent Seal to adapt to your ear and help block outside sounds, creating a quiet foundation so your music can shine; and now they're even better, with new features and colors \nWith double the bandwidth for clearer calls, Pixel Buds Pro are the perfect earbuds for Pixel \nPairs with any Bluetooth 4.0+ device, including Android, iOS, tablets, and laptops[1]; and multipoint connectivity helps you switch between compatible devices, so you can go from listening to music on your phone to taking a call on your laptop",
+    "quantity": 35,
+    "sold": 11,
+    "image": "https://m.media-amazon.com/images/I/61qVCvt2xjL._AC_SX679_.jpg",
+    "price": 199
+  },
+  {
+    "title": "SAMSUNG Galaxy Buds FE",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": " Listen comfortably all day with the new wing-tip design that keeps your Buds in place. \nHear what you want how you want thanks to Active Noise Cancellation. \nGalaxy Buds FE pair easily to your other Galaxy devices through your Samsung account; Just open the case, tap to connect* and your paired Buds FE show up in your list of devices",
+    "quantity": 32,
+    "sold": 10,
+    "image": "https://m.media-amazon.com/images/I/612LsseGIkL._AC_SX679_.jpg",
+    "price": 69
+  },
+  {
+    "title": "JBL Endurance Peak 3",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "JBL Pure Bass Sound: Get the most out of your favorite workout playlist with rich bass from a 10mm dynamic driver that delivers bold sound when you need it most. \nUp to 50 total hours of playback with speed charge: Whether you measure your energy output in miles, pounds, or minutes, the JBL Endurance Peak 3 can match you beat for beat, with up to10 hours of battery power in the earbuds and 40 in the case. And when you need a boost, speed charge up to an hour of playtime in just 10 minutes. \nIP68 dust and water proof: An IP68 rating means the JBL Endurance Peak 3 earbuds are ready for your most active adventures, rain or shine. And they'll endure for 30 minutes at depths up to 1.5 meters of salt or fresh water. So you can surf with your earbuds, or rinse them after a workout, all without missing a beat.",
+    "quantity": 35,
+    "sold": 10,
+    "image": "https://m.media-amazon.com/images/I/518X-lGLUsL._AC_SX466_.jpg",
+    "price": 79
+  },
+  {
+    "title": "OnePlus Nord Buds 2",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "New BassWave algorithm dynamically enhances your sound for a balanced listening experience with deeper bass and crisp, clear vocals to keep you dancing to the beat. \nNord Buds 2 are the first Fast and Smooth Nord audio product with up to 25dB of active noise cancellation to add a little more chill to your listening session.",
+    "quantity": 22,
+    "sold": 27,
+    "image": "",
+    "price": 39
+  },
+  {
+    "title": "Panasonic ErgoFit",
+    "category": "6585a74b5a2bab0032e18a56",
+    "detail": "Panasonic ErgoFit Earbuds, Now Wireless for More Freedom: Enjoy noise cancelling, smooth bass, and great fit for less; lightweight bluetooth wireless earbuds have a secure Ergofit design and 3 earpiece sizes to customize your fit \nCancel Out Distracting Noise: The B310W TWS ear buds have active noise cancellation to eliminate background noise- perfect while traveling travel on planes, trains, and buses \nRich, Booming Bass: Immerse yourself in powerful bass energy from the earbuds' 10mm dynamic drivers and XBS (extra bass system)",
+    "quantity": 30,
+    "sold": 10,
+    "image": "https://m.media-amazon.com/images/I/618WbocD6LL._AC_SX466_.jpg",
+    "price": 41
+  },
+  {
+    "title": "Samsung Galaxy S23 Ultra",
+    "detail": "Pixel 8 is the helpful phone engineered by Google; the new Google Tensor G3 chip is custom-designed with Google AI for cutting-edge photo and video features and smarter ways to help[1]\nUnlocked Android 5G phone gives you the flexibility to change carriers and choose your own data plan[2]; it works with Google Fi, Verizon, T-Mobile, AT&T, and other major carriers\nGoogle Pixel 8 has a fully upgraded camera with advanced image processing to reveal vivid colors and striking details; and now with Macro Focus, even the smallest subjects can become spectacular images\nThe 6.2-inch Pixel 8 Actua display is super sharp, with rich, vivid colors; it's fast and responsive for smoother gaming, scrolling, and moving between apps[3,4]\nPixel's Adaptive Battery can last over 24 hours; when Extreme Battery Saver is turned on, it can last up to 72 hours[5]; and it charges faster than ever[6]\nPixel 8 can notify first responders in an emergency and share your location, and can even detect if you've been in a severe car crash[7,8]; if you're unable to respond, your Pixel phone can call emergency services and notify your chosen contacts\nWith powerful security features, your Pixel phone helps keep your info safe; Google Tensor G3, VPN by Google One, and the Titan M2 security chip give your Pixel multiple layers of security[9]",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "1199",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWoAn-Mf0vxsyxhLlwojHnhzW44FWGZpStNw&usqp=CAU"
+  },
+
+  {
+    "title": "Google Pixel 6 Pro",
+    "detail": "Unlocked Android cell phone gives you the flexibility to change carriers and choose your own data plan[1]; the new, redesigned Pixel 6 Pro is the smartest and fastest Pixel yet[2].Form_factor : Smartphone.Display resolution maximum:1080 x 2340 pixels\nThe powerful Google Tensor processor is the first processor designed by Google and made for Pixel; takes performance to a whole new level\nAdvanced camera system with wide and ultrawide lenses, 4x optical zoom, and a main sensor that captures 150% more light[3]\nPixel's Magic Eraser[4], Motion Mode, and Portrait Mode professional tools keep your photos sharp, accurate, and focused; Face Unblur can deblur a face to make it sharper[5]\nPixel's fast charging all day battery adapts to you and saves power for apps you use the most [6,7]\nKeeps your phone protected with the next gen Titan M2 chip, 5 years of security updates[8], and the most hardware layers of any phone[9]\nNew Pixel experience is more modern and intuitive, with colors that reflect your personal style; the At a Glance feature shows you the apps and info you need when you need it, like a boarding pass before a flight[10]",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "899",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZqzmjIv5l6LvXExshD6FLZj0CBeMsCGUtsA&usqp=CAU"
+  },
+
+  {
+    "title": "OnePlus 9 Pro",
+    "detail": "Hasselblad Camera for Mobile - Take your best shot with the OnePlus 9 Pro 5G's Quad Camera system co-developed by Hasselblad, featuring a 48MP main camera, 50MP Ultra-Wide camera, 8MP telephoto camera, and 2MP monochrome lens.Form_factor : Slate\nQualcomm Snapdragon 888 - Powered by the most powerful Snapdragon platform yet, the OnePlus 9 Pro 5G delivers fast and smooth performance across every app\nA Day's Power in 15 Minutes - Take wired charging to the next level with Warp Charge 65T, or charge wirelessly at ridiculous speeds with Warp Charge 50 Wireless (requires optional wireless charging pad)\nNext-Generation Fluid Display - The 6.7” QHD+ display delivers stunning visuals at 120 Hz with next-generation LTPO technology that conserves battery. Enhance your gaming experience with HyperTouch, a new technology that delivers more responsive gaming in select titles\nAlexa Support - Simply by saying Alexa, you can play music, make calls, hear the news, or check the weather wherever you are. Download the Alexa app, complete setup and just ask - and Alexa will respond instantly\nIf your device is not receiving text messages or experiencing error when making phone calls, you need to contact carriers' technical support to add CDMALess feature\nVideo: 1080p video at 30fps, Time-Lapse",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "999",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_1KJ1RcYmRXNeQ-g9c0Y2mi7EIg-Qgn2dSw&usqp=CAU"
+  },
+
+  {
+    "title": "Xiaomi Mi 12",
+    "detail": "NOTE: China Version. No Warranty. This device is globally unlocked and ready to be used with your preferred GSM Carrier. THIS DEVICE IS NOT COMPATIBLE with CDMA carriers such as Cricket, Verizon, Sprint, Boost Mobile, US Cellular, etc. SIM CARD NOT INCLUDED. Please confirm device compatibility with your service provider before placing your order.\nSupported Network Bands: 5G/4G/3G/2G. Please note that 5G requires the support of local telecom operator services and may not be available in all regions. Please check with your service provider to see if 5G is offered in your area.\nStorage: 256GB 12GB RAM\nDisplay: 6.73 inches, 108.9 cm2 (~89.5% screen-to-body ratio)\nPlatform: Android 13, MIUI 14 Qualcomm SM8550-AB Snapdragon 8 Gen 2 (4 nm)\nCamera: 50 MP, f/1.9 or f/4.0, 23mm (wide), 1.0-type, 1.6µm, multi-directional PDAF, Laser AF, OIS\nBattery: Li-Po 5000 mAh, non-removable\nDrawing on Leica's professional optical design, with a Xiaomi x Leica co-engineered Summicron lens. Integrating century-old authentic Leica optics into brand new smartphone imaging technology. Take photography to the next level and empower your smartphone with the photographic creativity of a camera, for recording the authenticity of every moment.",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "799",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc1vSK-hpUNEWFGwReNJgNbjG85yw7eLACzg&usqp=CAU"
+  },
+
+  {
+    "title": "Sony Xperia 1 III",
+    "detail": "World's first smartphone with 120Hz 6.5” 4K HDR OLED display.Form_factor : Slate.Aspect ratio:21:9.Display resolution maximum:1644 x 3840 pixels\nWorld´s first smartphone with variable tele lens and Dual PD sensor\nWorld's first smartphone with 360 Reality Audio through its speakers\nTriple camera with four focal lengths and Real-time AF tracking\nWin with Game Enhancer's custom display, audio and mic settings\nEvolved Full-stage front facing stereo speakers – 40% louder\n360 Spatial Sound up-mixes stereo music into immersive experiences\nUse as high-quality external monitor and live stream from your camera\nIP65/68 water resistance and Corning Gorilla Glass Victus display\n5G connectivity and speed; Qualcomm Snapdragon 888 5G Mobile Platform",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "1199",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbPwtW0psoLpN7tjuimoi4ayTm2GtqjvOrjw&usqp=CAU"
+  },
+
+  {
+    "title": "Samsung Galaxy Z Fold 3",
+    "detail": "EXPANSIVE SCREEN, CINEMATIC EXPERIENCE: Streaming on the go with this big screen is a big deal; Unfold the massive 7.6 screen* on Galaxy Z Fold5 and lose yourself in your favorite content, no matter where you are\nYOUR GAMING EXPERIENCE, ELEVATED: With Galaxy Z Fold5, enjoy mobile games on the cover screen or unfold the interior screen for a more immersive experience; With an impressive processor, power through with a high refresh rate and minimal input delays\nTHE FUTURE OF DOING MORE: With Dual-App Viewing, you can do more with more screen on Galaxy Z Fold5; Drag and drop photos into a text message, shop two sites side by side or stream videos while checking your feed\nIMPRESSIVE PRECISION. MORE PRODUCTIVITY: Precision meets portability with S Pen** capability on Galaxy Z Fold5; Write directly on the large screen and go from to-do to done\nFULL SCREEN OUTSIDE, MASSIVE SCREEN INSIDE: The 6.2” cover display* is perfect for one-handed scrolling and quick tasks; Or unfold the massive 7.6” interior screen* for everything else\nFOLD IT – DON’T HOLD IT: Put your Galaxy Z Fold5 in Flex Mode and do more at once with hands-free video calling; Chat with your friends while searching for movie times; Or take notes during a video call; It’s easy with Galaxy Z Fold5\nFLEX A WHOLE NEW WAY TO WATCH: Put Galaxy Z Fold5 in Flex Mode and watch hands-free; Simply adjust the screen to your preferred angle and enjoy your favorites while eating, writing or just relaxing",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "1799",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuXtB6pMy8wNXP4NRZDEpXMnt30pH7dc8HBkr8E68btjkvc7FK3lxh92WYhdwuIune_BY&usqp=CAU"
+  },
+  {
+    "title": "Apple iPhone 13",
+    "detail": "iPhone 13 features an all-new camera system powered by A15 Bionic, with a 12-megapixel ƒ/1.8 aperture Wide camera that offers incredible computational photography benefits, including Smart HDR 4, Photographic Styles, Deep Fusion, and Portrait mode.\niPhone SE features the familiar Home button with Touch ID — an easy, private, and secure alternative for logging in to apps, authorizing App Store purchases, making Apple Pay transactions, and more.\n64GB Built-In Memory\nCarrier: This phone is locked to Tracfone, which means this device can only be used on the Tracfone wireless network.\nA highly efficient chip, an enhanced battery, and iOS 15 work together to boost battery life.",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "699",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbGAopBy3-pgzwWvWZpxqMDl9iSQnopqvsg&usqp=CAU"
+  },
+
+  {
+    "title": "LG Wing",
+    "detail": "108MP Triple Camera with 3x Lossless Zoom and Electronic Image Stabilisation (EIS) - titanic main camera that captures clear, high-detail photos with 9-in-1 pixel binning tech that absorbs more light for brighter, more colorful images.\nQualcomm Snapdragon 695 Chipset - With up to 8GB of expandable virtual RAM that will have you swiping and switching between apps at blistering speed.\n50W SUPERVOOC Endurance Edition + 5,000 mAh Battery - A day's power in just 30 minutes. SUPERVOOC Endurance Edition charging and Battery Health Engine technology increase the battery's lifespan and prevent over-charging.\n6.7” 120 Hz Display + Dual Stereo Speakers - Lose yourself in your favorite movies and shows with a massive LCD display and a speedy 120 Hz adaptive refresh rate that saves on battery + 200% Ultra Volume Mode to tune into the dual stereo speakers.\nOxygenOS 13.1 - Fast and Smooth experience and incredible features including Quick Start and Gaming Tools, with Game Focus Mode and improved app optimisation.\n5G Enabled Dual-SIM - The OnePlus Nord N30 is the perfect entry-level 5G phone, featuring premium specs and an affordable price. *5G compatible with T-mobile, Google Fi, Mint Mobile, Metro by TMO, Simple Mobile. 5G available in selected areas, please check with your carrier. (Dual-SIM is SIM & SIM/MicroSD)",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "699",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc1jB1adoVSoBpioPGOrvvTCQmJOnUrMMP9Q&usqp=CAU"
+  },
+
+  {
+    "title": "Motorola Edge 30",
+    "detail": "For USA Buyers: This Smartphone is not compatible/will not work with any CDMA Networks including: VERIZON, SPRINT, US CELLULAR. Please check with your network provider for 3G or 4G/LTE compatibility check before you purchase.\nDual-SIM, SIM CARD 1 & 2 : [2G : GSM 850 / 900 / 1800 / 1900 and/or 3G : HSDPA 850 / 900 / 1700(AWS) / 1900 / 2100 and/or 4G : FDD-LTE 700(B12) / 700(B17) / 700(B28) / 800(B20) / 850(B5) / 850(B26) / 900(B8) / 1500(B32) / 1700|2100(B4) / 1800(B3) / 1900(B2) / 1900(B25) / 2100(B1) TDD-LTE 2300(B40) / 2500(B41) / 2600(B38) / 3500(B42) / 3700(B43) and/or 5G : 1/3/5/7/8/20/28/38/40/41/66/78 SA/NSA]\n6.28 inches, P-OLED, 1080 x 2400 pixels\n128GB Storage, 8GB RAM\nAndroid 12, Qualcomm SM6375 Snapdragon 695 5G (6 nm), Octa-core (2x2.2 GHz Kryo 660 Gold & 6x1.7 GHz Kryo 660 Silver)\n64 MP, f/1.8, (wide), 0.7µm, PDAF, OIS, 13 MP, f/2.2, 120˚ (ultrawide), 1.12µm, AF, Front, 32 MP, f/2.4, (wide), 0.7µm",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "499",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjSOOUT3cSIEJpDngmfiZdcqAcJ9mcOXvS1Q&usqp=CAU"
+  },
+
+  {
+    "title": "Realme GT 5G",
+    "detail": "Compatible with T-Mobile 5G and Verizon 5G. Ready for 5G on other select networks dependent on availability; contact your service provider for details. Compatible with all major 4G U.S. carriers, including Verizon, AT and T, and T-Mobile. It also works with prepaid carriers, including Cricket Wireless, Metro by T-Mobile, Simple Mobile, Total Wireless, Tracfone, Net10, Mint, TracFone, and H2O..Display Resolution : Full HD+ (2400 x 1080) | 405ppi. Bluetooth Technology : Bluetooth 5.3\nUltra-fast 5G performance. Make the most of 5G speed with the MediaTek Dimensity 930, an octa-core processor with frequencies up to 2.2GHz.\n6.5 FHD plus 120Hz display. Enjoy smooth gameplay and seamless scrolling on a razor-sharp display with a blazing-fast refresh rate.\n5G-friendly battery life. Go more than a full day on a single charge of the massive capacity 5000mAh battery.\n50MP camera system. Capture sharp photos day or night with a 50MP main camera—plus take captivating portraits, extreme close-ups, and beautiful selfies.\nPlenty of storage - 256GB. Get tons of room for photos, movies, songs, apps, and games.\nDolby Atmos and stereo speakers. Immerse yourself in multidimensional sound, listening with improved bass, cleaner vocals, and more clarity.",
+    "category": "6585a4c6d90e7364220a13da",
+    "price": "399",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAosxWPcVhMZcBolEJSWVov85sSrBq_MI56w&usqp=CAU"
+  },
+  {
+    "title": "Iphone 15 Pro",
+    "category": "6585a4c6d90e7364220a13da",
+    "detail": "ALL SALES ARE FINAL - THE PHONE IS BUILT FOR THE CLIENT ACCORING TO THEIR ORDER.\nTOTAL FREEDOM - Call anyone, anywhere in the world within the Kryptall network. Be certain your calls are safe, not recorded or tapped to. Full encryption end to end.\nINDUSTRY STANDARD ENCRYPTION - Suitable for use by the military, heads of states, fortune 500 companies, Executives and privacy Advocates throughout the word.\nSAFE AND SECURED - Kryptall starts with hardened, modifies, encrypted VoIP or cellular phone that provides a secure. 256-bit AES, encrypted VoiP call ends to end through a secured network.\nFULL ALL YEAR SUPPORT -Whenever you need an update, support of any kind, troubleshooting or an upgrade, we are here for you. A dedicated professional will always be there to help.\nA TRULY SECURED GLOBAL NETWORK - When privacy is utmost important, contact Kryptall. No other provider has a patent pending user initiated system that guarantee your privacy like Kryptall.",
+    "image": "https://www.apple.com/v/iphone-15-pro/c/images/overview/closer-look/all_colors__eppfcocn9mky_large.jpg",
+    "price": "1299"
+  },
+  {
+    "title": "Mac mini",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "SUPERCHARGED BY M2 — Get more done faster with a next-generation chip. From rich presentations to immersive gaming, M2 flies through work and play. M2 has 8 CPU cores, 10 GPU cores, and up to 24GB unified memory. exceptional speed and performance\nCONNECT WHAT YOU WANT — Mac mini with the M2 chip has two Thunderbolt 4 ports, two USB-A ports, an HDMI port, Wi-Fi 6E, Bluetooth 5.3, Gigabit Ethernet, and a headphone jack. And if you want faster networking speeds, you can configure Mac mini with 10Gb Ethernet for up to 10 times the throughout.\nSIMPLY COMPATIBLE — All your go-to apps run lightning fast on your Mac mini desktop, from Microsoft 365 to Adobe Creative Cloud to Zoom. And over 15,000 apps and plug-ins are optimized for M2.\nEFFICIENT MEMORY — Unified memory on Mac does more than traditional RAM. A single pool of high-bandwidth, low-latency memory allows Apple silicon to move data fast — so everything you do is fluid. Choose up to 24GB memory with M2. More memory means easier multitasking and handling of large files.\nFAST SSD STORAGE — Mac mini comes with all-flash storage for all your photo and video libraries, files, and apps. Choose up to 2TB SSD with M2.\nKEEP IT SAFE AND SECURE — M2 and macOS Ventura give Mac mini industry-leading privacy and security features, including built-in protections against malware and viruses. And the next-generation Secure Enclave helps keep your system and data protected.\nMAC MINI DOES THAT — The Mac mini desktop with M2 is perfect for an impressive range of uses, from creating presentations to photo editing to gaming.",
+    "image": "https://www.bing.com/images/search?view=detailV2&ccid=4B1sddXn&id=D6FE7542B04E4B5E2BCD12A2C963DDA1F9D7BFAD&thid=OIP.4B1sddXn5WqdNvP2u1YDVgHaFK&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.e01d6c75d5e7e56a9d36f3f6bb560356%3frik%3drb%252fX%252baHdY8miEg%26riu%3dhttp%253a%252f%252fupload.wikimedia.org%252fwikipedia%252fcommons%252f2%252f26%252fMac_mini_mid2010_back.jpg%26ehk%3d2bxB7M6BjBt1g9%252bxTUmbHHRMlaRGTXkj7iQ5jXx3EaU%253d%26risl%3d1%26pid%3dImgRaw%26r%3d0&exph=1990&expw=2854&q=mac+mini&simid=607992706303809027&FORM=IRPRST&ck=54624CFC92F38151AE00A0BCE778733C&selectedIndex=2&itb=0",
+    "price": "1599"
+  },
+  {
+    "title": "Mac Studio",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "Immersive 27-inch 5K Retina display with 600 nits of brightness, support for one billion colors, and P3 wide color\n12MP Ultra Wide camera with Center Stage for more engaging video calls\nStudio-quality three-mic array for crystal-clear calls and voice recordings\nSix-speaker sound system with Spatial Audio for an unbelievable listening experience\nOne Thunderbolt 3 port, three USB-C ports\n96W of power delivery to charge your Mac notebook\nConfigurable stand option: Tilt-Adjustable Stand.",
+    "image": "https://www.apple.com/v/mac-studio/f/images/overview/hero/static_front__fmvxob6uyxiu_large.jpg",
+    "price": "1199"
+  },
+  {
+    "title": "Macbook Pro",
+    "category": "6585a6ca9306f231fe13e80d",
+    "detail": "SUPERCHARGED BY M3 PRO OR M3 MAX — The Apple M3 Pro chip, with an up to 12-core CPU and up to 18-core GPU, delivers amazing performance for demanding workflows like manipulating gigapixel panoramas or compiling millions of lines of code. M3 Max, with an up to 16-core CPU and up to 40-core GPU, drives extreme performance for the most advanced workflows like rendering intricate 3D content or developing transformer models with billions of parameters.\nUP TO 18 HOURS OF BATTERY LIFE — Go all day thanks to the power-efficient design of Apple silicon. The MacBook Pro laptop delivers the same exceptional performance whether it’s running on battery or plugged in. (Battery life varies by use and configuration. See apple.com/batteries for more information.)\nBRILLIANT PRO DISPLAY — The 14.2-inch Liquid Retina XDR display features Extreme Dynamic Range, over 1000 nits of brightness for stunning HDR content, up to 600 nits of brightness for SDR content, and pro reference modes for doing your best work on the go. (The display has rounded corners at the top. When measured diagonally, the screen is 14.2 inches. Actual viewable area is less.)\nFULLY COMPATIBLE — All your pro apps run lightning fast — including Adobe Creative Cloud, Apple Xcode, Microsoft 365, SideFX Houdini, MathWorks MATLAB, Medivis SurgicalAR, and many of your favorite iPhone and iPad apps. And with macOS, work and play on your Mac are even more powerful. Elevate your presence on video calls. Access information in all-new ways. And discover even more ways to personalize your Mac. (Apps are available on the App Store.)\nADVANCED CAMERA AND AUDIO — Look sharp and sound great with a 1080p FaceTime HD camera, a studio-quality three-mic array, and a six-speaker sound system with Spatial Audio.",
+    "image": "https://www.apple.com/v/macbook-pro/aj/images/overview/closer-look/3d_viewer_pf_14_16__cnmzk9b7xtpy_large.jpg",
+    "price": "2099"
+  }
 ]
