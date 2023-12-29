@@ -1,8 +1,13 @@
-import React from "react";
+// Libraries
+import { useEffect, useState } from "react";
+// Components
 import Header from "./Header/Header";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer/Footer";
-import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+// Style
+import "react-toastify/dist/ReactToastify.css";
+// Implementation
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {
@@ -47,6 +52,18 @@ const MainLayout = () => {
       <Header categoryList={categoryList} />
       <Outlet context={{ categoryList }} />
       <Footer categoryList={categoryList} />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };
