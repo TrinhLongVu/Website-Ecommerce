@@ -42,7 +42,7 @@ const Home = () => {
       });
   }, []);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
   const [allList, setAllList] = useState([]);
   useEffect(() => {
     fetch(
@@ -50,7 +50,6 @@ const Home = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setTotalPages(json.totalPage);
         setAllList(json.data);
       });

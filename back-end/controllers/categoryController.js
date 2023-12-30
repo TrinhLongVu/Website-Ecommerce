@@ -55,7 +55,7 @@ exports.getPagination = async (req, res) => {
     
         res.status(200).json({
             status: "success",
-            totalPage: Math.ceil(filteredData / query.limit),
+            totalPage: Math.ceil(filteredData.length / query.limit),
             data: paginatedResults
         });
     } catch (err) {

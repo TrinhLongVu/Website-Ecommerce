@@ -7,6 +7,7 @@ import categoryImg from "../../assets/category_bg.jpeg";
 // Components
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
+import Pagination from "../../components/Pagination/Pagination";
 // Pages
 import Error404 from "../Error404/Error404";
 // Style
@@ -19,29 +20,22 @@ const SingleCategory = () => {
 
   const pageCategory = categoryList.find((category) => category.name === name);
 
-  //   const [articleList, setArticleList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(10);
 
-  //   useEffect(() => {
-  //     fetch(
-  //       `http://localhost:8000/api/v1/article/page/pagination?page=1&limit=12&category=${name}`
-  //     )
-  //       .then((res) => res.json())
-  //       .then((json) => {
-  //         setArticleList(json.data);
-  //       });
-  //   }, []);
+  const [productList, setProductList] = useState([]);
 
-  const product = {
-    id: "123",
-    name: "Celestial Glow Crystal Pendant dad add",
-    image:
-      "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    desc: "Illuminate your style with the ethereal beauty of our Celestial Glow Crystal Pendant. This exquisite piece features a radiant crystal encased in a sterling silver setting, capturing the essence of starlight in a timeless design. The pendant exudes a captivating glow that adds a touch of celestial elegance to any outfit, making it the perfect accessory for both casual and formal occasions.",
-    price: "89.99",
-    time: "2 hours ago",
-  };
-
-  const productList = [product, product, product];
+  useEffect(() => {
+    fetch(
+      `https://themegamall.onrender.com/api/v1/category/page?page=${currentPage}&limit=12&category=${name}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        setTotalPages(json.totalPage);
+        setProductList(json.data);
+      });
+  }, [currentPage]);
 
   return (
     <>
@@ -63,6 +57,11 @@ const SingleCategory = () => {
             {pageCategory.name}
           </div>
           <ProductShelf products={productList} />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </>
       ) : (
         <Error404 />
