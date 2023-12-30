@@ -1,5 +1,5 @@
-const Category = require("../models/categoryModel")
-const Product = require("../models/productModel")
+const Category = require("../models/category.model")
+const Product = require("../models/product.model")
 
 exports.getCategory = async (req, res) => {
     try {
@@ -55,7 +55,7 @@ exports.getPagination = async (req, res) => {
     
         res.status(200).json({
             status: "success",
-            totalPage: Math.ceil(filteredData / query.limit),
+            totalPage: Math.ceil(filteredData.length / query.limit),
             data: paginatedResults
         });
     } catch (err) {

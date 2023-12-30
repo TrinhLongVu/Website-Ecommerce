@@ -23,32 +23,38 @@ import "./home.css";
 
 const Home = () => {
   const { categoryList } = useOutletContext();
-  const product = {
-    id: "123",
-    title: "Celestial Glow Crystal Pendant dad add",
-    image:
-      "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    detail:
-      "Illuminate your style with the ethereal beauty of our Celestial Glow Crystal Pendant. This exquisite piece features a radiant crystal encased in a sterling silver setting, capturing the essence of starlight in a timeless design. The pendant exudes a captivating glow that adds a touch of celestial elegance to any outfit, making it the perfect accessory for both casual and formal occasions.",
-    price: "$89.99",
-    time: "2 hours ago",
-  };
+  const [bestSellerList, setBestSellerList] = useState([]);
+  const [latestList, setLatestList] = useState([]);
+  useEffect(() => {
+    fetch(
+      "https://themegamall.onrender.com/api/v1/product?page=1&limit=5&sort=-sold"
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setBestSellerList(json.data);
+      });
+    fetch(
+      "https://themegamall.onrender.com/api/v1/product?page=1&limit=3&sort=-posted_time"
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setLatestList(json.data);
+      });
+  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [allList, setAllList] = useState([]);
+  useEffect(() => {
+    fetch(
+      `https://themegamall.onrender.com/api/v1/product?page=${currentPage}&limit=12`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setTotalPages(json.totalPage);
+        setAllList(json.data);
+      });
+  }, [currentPage]);
 
-  const productList = [product, product, product];
-  const productList2 = [
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-    product,
-  ];
   const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState("");
   const toggleFilter = () => {
@@ -61,7 +67,6 @@ const Home = () => {
   };
 
   const filterList = ["Price: Low to High", "Price: High to Low"];
-
   const selectFilter = (filterType) => {
     setCurrentPage(1);
     setFilter(filterType);
@@ -80,9 +85,6 @@ const Home = () => {
     setFilter("");
     toggleFilter();
   };
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
 
   return (
     <>
@@ -106,7 +108,7 @@ const Home = () => {
           </h2>
         </div>
         <div className="home-section-content">
-          <ProductSlider />
+          <ProductSlider productList={bestSellerList} />
         </div>
       </div>
       <div className="home-section">
@@ -120,7 +122,7 @@ const Home = () => {
         </div>
         <div className="home-section-content">
           <div className="product-container">
-            {productList.map((product, index) => (
+            {latestList.map((product, index) => (
               <ProductPanel key={index} product={product} />
             ))}
           </div>
@@ -150,7 +152,7 @@ const Home = () => {
           )}
         </div>
         <div className="home-section-content">
-          <ProductShelf products={productList2} />
+          <ProductShelf products={allList} />
         </div>
       </div>
       <Pagination

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const passport = require('passport')
 
-const userController = require('../controllers/authenticationController')
+const userController = require('../controllers/authentication.controller')
 
 router
     .route('/account/fail')

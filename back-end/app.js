@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const morgan = require('morgan');
-const productRouter = require('./routes/productRouters.js')
-const userRouter = require('./routes/userRouters.js')
-const authentication = require('./routes/authentication.js')
-const categoryRouter = require('./routes/categoryRouter.js')
+const productRouter = require('./routes/product.routers.js')
+const userRouter = require('./routes/user.routers.js')
+const authentication = require('./routes/authentication.router.js')
+const categoryRouter = require('./routes/category.router.js')
+const cartRouter = require('./routes/cart.router.js')
 const passport = require('passport')
 const session = require('express-session');
 const cookieParser = require('cookie-parser')
@@ -40,5 +41,9 @@ app.use('/api/v1/product', productRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/user', authentication);
 app.use('/api/v1/category', categoryRouter);
+app.use('/api/v1/cart', cartRouter);
+
+const paymentRouter = require('./routes/payment.router.js')
+app.use('/api/v1/payment', paymentRouter);
 
 module.exports = app;

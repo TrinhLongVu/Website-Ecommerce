@@ -48,6 +48,15 @@
     overflow: scroll;
 }
 
+.product-frame-desc::-webkit-scrollbar {
+    display: none;
+}
+
+.product-frame-desc div {
+    text-indent: 20px;
+    margin: 5px 0;
+}
+
 .product-frame-btn-container {
     display: flex;
     justify-content: center;

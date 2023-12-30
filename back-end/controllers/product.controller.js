@@ -1,5 +1,5 @@
-const Product = require('../models/productModel')
-const User = require('../models/userModel')
+const Product = require('../models/product.model')
+const User = require('../models/user.model')
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 
@@ -92,8 +92,8 @@ exports.createProduct = async (req, res) => {
 
 exports.createAllProduct = async (req, res) => {
     try {
-        const filePath = `${__dirname}data\\products.json`.replace('controllers', '');
-        const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8')).product;
+        const filePath = `${__dirname}data\\data.json`.replace('controllers', '');
+        const Products = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
         console.log(Products)
 

@@ -10,6 +10,10 @@ const userSchema = new Schema({
         type: String,
         require: [true, 'A User must have a Password']
     },
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
     Role: {
         type: String,
         default: 'user',
@@ -46,7 +50,11 @@ const userSchema = new Schema({
           },
             quantity: Number
         }
-    ]
+    ],
+    Balance: {
+        type: Number,
+        default: 0
+    }
 })
 // The same create table in sql server and table have name which is lowercase."article" 
 const User = mongoose.model('Users', userSchema);

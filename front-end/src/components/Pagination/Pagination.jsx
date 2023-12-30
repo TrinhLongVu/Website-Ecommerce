@@ -38,7 +38,9 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
     <div className="paging">
       <div
         className="paging-control"
-        onClick={() => setCurrentPage(currentPage === 1 ? 1 : currentPage - 1)}
+        onClick={() =>
+          setCurrentPage(currentPage === 1 ? totalPages : currentPage - 1)
+        }
       >
         <FontAwesomeIcon icon={faChevronLeft} />
       </div>
@@ -58,9 +60,7 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
       <div
         className="paging-control"
         onClick={() =>
-          setCurrentPage(
-            currentPage === totalPages ? totalPages : currentPage + 1
-          )
+          setCurrentPage(currentPage === totalPages ? 1 : currentPage + 1)
         }
       >
         <FontAwesomeIcon icon={faChevronRight} />
