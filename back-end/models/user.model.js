@@ -50,7 +50,11 @@ const userSchema = new Schema({
           },
             quantity: Number
         }
-    ]
+    ],
+    Balance: {
+        type: Number,
+        default: 0
+    }
 })
 // The same create table in sql server and table have name which is lowercase."article" 
 const User = mongoose.model('Users', userSchema);

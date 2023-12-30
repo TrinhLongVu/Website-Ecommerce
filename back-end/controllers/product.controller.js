@@ -1,5 +1,5 @@
-const Product = require('../models/productModel')
-const User = require('../models/userModel')
+const Product = require('../models/product.model')
+const User = require('../models/user.model')
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 
