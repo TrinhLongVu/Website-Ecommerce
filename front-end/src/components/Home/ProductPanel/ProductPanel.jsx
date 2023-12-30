@@ -12,7 +12,7 @@ const ProductPanel = ({ product }) => {
         <div className="product-panel-info">
           <div className="product-panel-title">{product.title}</div>
           <div className="product-panel-desc">{product.detail}</div>
-          <div className="product-panel-price">{product.price}</div>
+          <div className="product-panel-price">${product.price}</div>
         </div>
       </Link>
     </>

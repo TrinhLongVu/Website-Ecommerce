@@ -23,6 +23,24 @@ import "./home.css";
 
 const Home = () => {
   const { categoryList } = useOutletContext();
+  const [bestSellerList, setBestSellerList] = useState([]);
+  const [latestList, setLatestList] = useState([]);
+  useEffect(() => {
+    fetch(
+      "https://themegamall.onrender.com/api/v1/product?page=1&limit=5&sort=-sold"
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setBestSellerList(json.data);
+      });
+    fetch(
+      "https://themegamall.onrender.com/api/v1/product?page=1&limit=3&sort=-posted_time"
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setLatestList(json.data);
+      });
+  }, []);
   const product = {
     id: "123",
     title: "Celestial Glow Crystal Pendant dad add",
@@ -33,8 +51,6 @@ const Home = () => {
     price: "$89.99",
     time: "2 hours ago",
   };
-
-  const productList = [product, product, product];
   const productList2 = [
     product,
     product,
@@ -106,7 +122,7 @@ const Home = () => {
           </h2>
         </div>
         <div className="home-section-content">
-          <ProductSlider />
+          <ProductSlider productList={bestSellerList} />
         </div>
       </div>
       <div className="home-section">
@@ -120,7 +136,7 @@ const Home = () => {
         </div>
         <div className="home-section-content">
           <div className="product-container">
-            {productList.map((product, index) => (
+            {latestList.map((product, index) => (
               <ProductPanel key={index} product={product} />
             ))}
           </div>

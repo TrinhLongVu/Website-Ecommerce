@@ -7,7 +7,7 @@ import "./product-slider.css";
 
 import { Link } from "react-router-dom";
 
-const ProductSlider = () => {
+const ProductSlider = ({ productList }) => {
   const sliderRef = useRef(null);
 
   const scrollLeft = () => {
@@ -38,16 +38,6 @@ const ProductSlider = () => {
       }
     }
   };
-  const product = {
-    name: "Celestial Glow Crystal Pendant",
-    image:
-      "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    desc: "Illuminate your style with the ethereal beauty of our Celestial Glow Crystal Pendant. This exquisite piece features a radiant crystal encased in a sterling silver setting, capturing the essence of starlight in a timeless design. The pendant exudes a captivating glow that adds a touch of celestial elegance to any outfit, making it the perfect accessory for both casual and formal occasions.",
-    price: "$89.99",
-    time: "2 hours ago",
-  };
-
-  const productList = [product, product, product, product, product];
 
   return (
     <div className="product-slider-wrapper">
@@ -61,9 +51,8 @@ const ProductSlider = () => {
               backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.25)), url(${product.image})`,
             }}
           >
-            <h2>{product.name}</h2>
-            <h4>{product.price}</h4>
-            <h5>{product.time}</h5>
+            <h2>{product.title}</h2>
+            <h4>${product.price}</h4>
           </Link>
         ))}
         <div className="product-slider-btn slider-left" onClick={scrollLeft}>
