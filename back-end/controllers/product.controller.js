@@ -5,6 +5,7 @@ const fs = require('fs');
 
 exports.getAllProduct = async (req, res) => {
     try {
+        console.log(req.user)
         const query = req.query;
         const skip = (query.page - 1) * query.limit;
 
