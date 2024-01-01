@@ -43,7 +43,10 @@ app.use('/api/v1/user', authentication);
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/cart', cartRouter);
 
-const paymentRouter = require('./routes/payment.router.js')
-app.use('/api/v1/payment', paymentRouter);
+const paymentRouter1 = require('./routes/payment1.router.js')
+app.use('/api/v1/payment', paymentRouter1);
+
+// 
+// app.use('/api/v1/payment', paymentRouter);
 
 module.exports = app;

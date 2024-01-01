@@ -51,10 +51,15 @@ const userSchema = new Schema({
             quantity: Number
         }
     ],
-    Balance: {
-        type: Array,
-        ref: 'Payment',
-    }
+    Balance: [
+        {
+            payment_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Payment'
+          },
+            balance: Number
+        }
+    ]
 })
 // The same create table in sql server and table have name which is lowercase."article" 
 const User = mongoose.model('Users', userSchema);
