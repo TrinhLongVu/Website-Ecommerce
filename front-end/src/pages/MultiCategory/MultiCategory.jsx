@@ -4,6 +4,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faTag } from "@fortawesome/free-solid-svg-icons";
 
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 
 import "./multi-category.css";
@@ -34,6 +35,7 @@ const MultiCategory = () => {
 
   return (
     <>
+      <Breadcrumbs crumbList={[{ name: "Categories", link: "/categories" }]} />
       {categoryList.map((category, index) => (
         <div key={index} className="home-section">
           <div className="home-section-banner">

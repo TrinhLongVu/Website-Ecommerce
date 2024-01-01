@@ -15,21 +15,20 @@ import "./single-category.css";
 // Implementation
 const SingleCategory = () => {
   const { name } = useParams();
-
   const { categoryList } = useOutletContext();
-
+  const domain =
+    "https://themegamall.onrender.com/api/v1/category/page?limit=12&";
   const pageCategory = categoryList.find((category) => category.name === name);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [name]);
-
   const [productList, setProductList] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState("");
+  useEffect(() => {
+    setCurrentPage(1);
+    setFilter("");
+  }, [name]);
+
   const toggleFilter = () => {
     setShowFilter(!showFilter);
     if (!showFilter) {
@@ -46,23 +45,6 @@ const SingleCategory = () => {
     toggleFilter();
   };
 
-  // useEffect(() => {
-  //   let fetchDomain = "";
-  //   if (filter === "") {
-  //     fetchDomain = `page=${currentPage}&limit=12`;
-  //   } else if (filter === "Price: Low to High") {
-  //     fetchDomain = `page=${currentPage}&limit=12&sort=price`;
-  //   } else if (filter === "Price: High to Low") {
-  //     fetchDomain = `page=${currentPage}&limit=12&sort=-price`;
-  //   }
-  //   fetch(domain + fetchDomain)
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       setTotalPages(json.totalPage);
-  //       setAllList(json.data);
-  //     });
-  // }, [currentPage, filter]);
-
   document.body.addEventListener("click", () => {
     if (!event.target.closest(".filter-box")) {
       setShowFilter(false);
@@ -77,9 +59,15 @@ const SingleCategory = () => {
   };
 
   useEffect(() => {
-    fetch(
-      `https://themegamall.onrender.com/api/v1/category/page?page=${currentPage}&limit=12&category=${name}`
-    )
+    let fetchDomain = "";
+    if (filter === "") {
+      fetchDomain = `category=${name}&page=${currentPage}`;
+    } else if (filter === "Price: Low to High") {
+      fetchDomain = `category=${name}&page=${currentPage}&sort=price`;
+    } else if (filter === "Price: High to Low") {
+      fetchDomain = `category=${name}&page=${currentPage}&sort=-price`;
+    }
+    fetch(domain + fetchDomain)
       .then((res) => res.json())
       .then((json) => {
         setTotalPages(json.totalPage);
@@ -87,9 +75,9 @@ const SingleCategory = () => {
       });
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Add smooth scrolling behavior
+      behavior: "smooth",
     });
-  }, [currentPage, name]);
+  }, [currentPage, filter, name]);
 
   return (
     <>

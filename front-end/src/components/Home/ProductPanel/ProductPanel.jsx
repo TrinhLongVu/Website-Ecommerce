@@ -5,7 +5,7 @@ const ProductPanel = ({ product }) => {
   return (
     <>
       <Link
-        to={`/product/${product.id}`}
+        to={`/product/${product._id}`}
         className="product-panel"
         style={{ backgroundImage: `url(${product.image})` }}
       >
