@@ -21,7 +21,11 @@ const SingleCategory = () => {
   const pageCategory = categoryList.find((category) => category.name === name);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [name]);
 
   const [productList, setProductList] = useState([]);
 
@@ -31,11 +35,14 @@ const SingleCategory = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setTotalPages(json.totalPage);
         setProductList(json.data);
       });
-  }, [currentPage]);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Add smooth scrolling behavior
+    });
+  }, [currentPage, name]);
 
   return (
     <>

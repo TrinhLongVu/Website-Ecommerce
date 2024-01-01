@@ -53,6 +53,10 @@ const Home = () => {
         setTotalPages(json.totalPage);
         setAllList(json.data);
       });
+    window.scrollTo({
+      top: 1350,
+      behavior: "smooth", // Add smooth scrolling behavior
+    });
   }, [currentPage]);
 
   const [showFilter, setShowFilter] = useState(false);

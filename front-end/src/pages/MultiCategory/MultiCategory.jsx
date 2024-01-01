@@ -40,7 +40,7 @@ const MultiCategory = () => {
             <h2>
               <FontAwesomeIcon icon={faTag} /> {category.name}
             </h2>
-            <Link to={category.link} className="show-all-btn">
+            <Link to={`/categories/${category.name}`} className="show-all-btn">
               Show all <FontAwesomeIcon icon={faChevronRight} />
             </Link>
           </div>

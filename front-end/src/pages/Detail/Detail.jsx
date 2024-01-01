@@ -18,9 +18,10 @@ const Detail = () => {
       .then((json) => {
         const productDetail = json.data.detail.split("\n");
         json.data.detail = productDetail;
+        console.log(json.data);
         setProduct(json.data);
       });
-  });
+  }, [id]);
 
   const relatedProduct = {
     id: "123",
