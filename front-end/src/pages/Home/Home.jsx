@@ -25,17 +25,15 @@ const Home = () => {
   const { categoryList } = useOutletContext();
   const [bestSellerList, setBestSellerList] = useState([]);
   const [latestList, setLatestList] = useState([]);
+  const domain = "https://themegamall.onrender.com/api/v1/product?";
+
   useEffect(() => {
-    fetch(
-      "https://themegamall.onrender.com/api/v1/product?page=1&limit=5&sort=-sold"
-    )
+    fetch(domain + "page=1&limit=5&sort=-sold")
       .then((res) => res.json())
       .then((json) => {
         setBestSellerList(json.data);
       });
-    fetch(
-      "https://themegamall.onrender.com/api/v1/product?page=1&limit=3&sort=-posted_time"
-    )
+    fetch(domain + "page=1&limit=3&sort=-posted_time")
       .then((res) => res.json())
       .then((json) => {
         setLatestList(json.data);
@@ -44,20 +42,6 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [allList, setAllList] = useState([]);
-  useEffect(() => {
-    fetch(
-      `https://themegamall.onrender.com/api/v1/product?page=${currentPage}&limit=12`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setTotalPages(json.totalPage);
-        setAllList(json.data);
-      });
-    window.scrollTo({
-      top: 1350,
-      behavior: "smooth", // Add smooth scrolling behavior
-    });
-  }, [currentPage]);
 
   const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState("");
@@ -76,6 +60,23 @@ const Home = () => {
     setFilter(filterType);
     toggleFilter();
   };
+
+  useEffect(() => {
+    let fetchDomain = "";
+    if (filter === "") {
+      fetchDomain = `page=${currentPage}&limit=12`;
+    } else if (filter === "Price: Low to High") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price`;
+    } else if (filter === "Price: High to Low") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=-price`;
+    }
+    fetch(domain + fetchDomain)
+      .then((res) => res.json())
+      .then((json) => {
+        setTotalPages(json.totalPage);
+        setAllList(json.data);
+      });
+  }, [currentPage, filter]);
 
   document.body.addEventListener("click", () => {
     if (!event.target.closest(".filter-box")) {

@@ -2,7 +2,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 // Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTag } from "@fortawesome/free-solid-svg-icons";
+import { faTag, faXmark, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import categoryImg from "../../assets/category_bg.jpeg";
 // Components
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
@@ -28,6 +28,53 @@ const SingleCategory = () => {
   }, [name]);
 
   const [productList, setProductList] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filter, setFilter] = useState("");
+  const toggleFilter = () => {
+    setShowFilter(!showFilter);
+    if (!showFilter) {
+      document.querySelector(".filter-box").style.borderRadius = "8px 8px 0 0";
+    } else {
+      document.querySelector(".filter-box").style.borderRadius = "8px";
+    }
+  };
+
+  const filterList = ["Price: Low to High", "Price: High to Low"];
+  const selectFilter = (filterType) => {
+    setCurrentPage(1);
+    setFilter(filterType);
+    toggleFilter();
+  };
+
+  // useEffect(() => {
+  //   let fetchDomain = "";
+  //   if (filter === "") {
+  //     fetchDomain = `page=${currentPage}&limit=12`;
+  //   } else if (filter === "Price: Low to High") {
+  //     fetchDomain = `page=${currentPage}&limit=12&sort=price`;
+  //   } else if (filter === "Price: High to Low") {
+  //     fetchDomain = `page=${currentPage}&limit=12&sort=-price`;
+  //   }
+  //   fetch(domain + fetchDomain)
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       setTotalPages(json.totalPage);
+  //       setAllList(json.data);
+  //     });
+  // }, [currentPage, filter]);
+
+  document.body.addEventListener("click", () => {
+    if (!event.target.closest(".filter-box")) {
+      setShowFilter(false);
+      document.querySelector(".filter-box").style.borderRadius = "8px";
+    }
+  });
+
+  const unFilter = () => {
+    setCurrentPage(1);
+    setFilter("");
+    toggleFilter();
+  };
 
   useEffect(() => {
     fetch(
@@ -62,6 +109,26 @@ const SingleCategory = () => {
           >
             <FontAwesomeIcon icon={faTag} className="category-banner-icon" />
             {pageCategory.name}
+          </div>
+          <div className="home-section-banner">
+            <div></div>
+            <div className="filter-box" onClick={toggleFilter}>
+              {filter ? filter : "Filter"}
+              {filter ? (
+                <FontAwesomeIcon icon={faXmark} onClick={unFilter} />
+              ) : (
+                <FontAwesomeIcon icon={faAngleDown} />
+              )}
+            </div>
+            {showFilter && (
+              <div className="filter-dropdown">
+                {filterList.map((item, index) => (
+                  <div key={index} onClick={() => selectFilter(item)}>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <ProductShelf products={productList} />
           <Pagination
