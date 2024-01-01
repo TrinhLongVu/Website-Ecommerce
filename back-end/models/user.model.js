@@ -52,8 +52,8 @@ const userSchema = new Schema({
         }
     ],
     Balance: {
-        type: Number,
-        default: 0
+        type: Array,
+        ref: 'Payment',
     }
 })
 // The same create table in sql server and table have name which is lowercase."article" 
