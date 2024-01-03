@@ -5,9 +5,8 @@ const middleware = require('../middeware/auth')
 
 exports.createPaymentAccount = async (req, res, next) => {
     try {
-        const money = req.body.money; // Sửa lại đây nếu giá trị là balance
+        const money = req.body.money;
         const userId = req.params.id;
-        // Kiểm tra xem user có tồn tại không
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({
@@ -24,7 +23,7 @@ exports.createPaymentAccount = async (req, res, next) => {
         const newPayment = await Payment.create(balance);
         user.Balance.push(newPayment)
         console.log(newPayment)
-        await user.save(); // Lưu lại user sau khi thêm payment
+        await user.save();
 
         res.status(200).json({
             status: 'success',
@@ -136,12 +135,12 @@ exports.payMoney = async (req, res, next) => {
         balanceAccount.balance -= totalPrice;
         console.log(user.Transaction)
 
-        // Kiểm tra xem user.Transaction có phải là một mảng không
+
         if (!user.Transaction) {
             user.Transaction = [];
         }
 
-        // Thêm một đối tượng mới vào mảng Transaction
+
         user.Transaction.push({
             cart_id: user.Cart.map(cart => cart.product_id),
             time: new Date()
@@ -149,26 +148,13 @@ exports.payMoney = async (req, res, next) => {
 
         user.Cart.splice(0);
         
-        await user.save(); // Lưu lại user sau khi thêm payment
+        await user.save();
 
         res.status(400).json({
             status: 'success',
             data: user
         })
 
-
-        // if(userBalance < cartBalance){
-        //     res.status(200).json({
-        //         status: 'fail',
-        //         msg: "You do not have enough money to pay this payment"
-        //     });
-        // }
-        // else{
-        //     res.status(200).json({
-        //         status: 'success',
-        //         data: user.Cart
-        //     });
-        // }
     } catch (error) {
         res.status(400).json({
             status: 'fail',
