@@ -15,5 +15,8 @@ router
 router
     .route('/get/:id')
     .get(paymentController.getAllPayment)
+router 
+    .route('/pay/:id')
+    .get(paymentController.payMoney)
 
 module.exports = router;

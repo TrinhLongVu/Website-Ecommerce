@@ -76,10 +76,10 @@ exports.getAllPayment = async (req, res, next) => {
     try {
         const userId = req.params.id;
         const user = await User.findById(userId);
-        if(!user){
+        if (!user) {
             res.status(200).json({
                 status: 'fail',
-                msg: "Can't find anything"
+                msg: "Can't this user"
             });
         }
         const checkBalance = user.Balance
@@ -101,6 +101,78 @@ exports.getAllPayment = async (req, res, next) => {
         res.status(400).json({
             status: 'fail',
             msg: err.message
+        });
+    }
+}
+
+
+exports.payMoney = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const { paymentid, totalPrice } = req.body
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(200).json({
+                status: 'fail',
+                msg: "Can't this user"
+            });
+        }
+
+        const balanceAccount = user.Balance.find(balance => balance.id == paymentid)
+        if (!balanceAccount) {
+            return res.status(200).json({
+                status: 'fail',
+                msg: "Can't find this account in your Balance"
+            });
+        }
+        if (balanceAccount.balance < totalPrice) {
+            return res.status(200).json({
+                status: 'fail',
+                msg: "You do not have enough money to pay this payment"
+            });
+        }
+
+
+        balanceAccount.balance -= totalPrice;
+        console.log(user.Transaction)
+
+        // Kiểm tra xem user.Transaction có phải là một mảng không
+        if (!user.Transaction) {
+            user.Transaction = [];
+        }
+
+        // Thêm một đối tượng mới vào mảng Transaction
+        user.Transaction.push({
+            cart_id: user.Cart.map(cart => cart.product_id),
+            time: new Date()
+        });
+
+        user.Cart.splice(0);
+        
+        await user.save(); // Lưu lại user sau khi thêm payment
+
+        res.status(400).json({
+            status: 'success',
+            data: user
+        })
+
+
+        // if(userBalance < cartBalance){
+        //     res.status(200).json({
+        //         status: 'fail',
+        //         msg: "You do not have enough money to pay this payment"
+        //     });
+        // }
+        // else{
+        //     res.status(200).json({
+        //         status: 'success',
+        //         data: user.Cart
+        //     });
+        // }
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            msg: error.message
         });
     }
 }
