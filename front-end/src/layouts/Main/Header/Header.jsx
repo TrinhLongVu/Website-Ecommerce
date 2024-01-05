@@ -12,7 +12,7 @@ import {
 // Style
 import "./header.css";
 
-const Header = ({ categoryList, userInfo }) => {
+const Header = ({ categoryList, userInfo, setUserInfo }) => {
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
@@ -46,6 +46,11 @@ const Header = ({ categoryList, userInfo }) => {
     if (event.key === "Enter") {
       navigate(`/search/${searchField}`);
     }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setUserInfo(null);
   };
 
   return (
@@ -99,7 +104,7 @@ const Header = ({ categoryList, userInfo }) => {
           </Link>
           <div
             className="avt-dropdown-btn"
-            style={{ backgroundImage: `url("https://i.pravatar.cc/301")` }}
+            style={{ backgroundImage: `url(${userInfo.Image_Avatar})` }}
             onClick={showAvatarDropdown}
           >
             {showAvtDropdown && (
@@ -109,7 +114,7 @@ const Header = ({ categoryList, userInfo }) => {
                   Profile
                 </Link>
                 <hr />
-                <Link>
+                <Link onClick={logOut}>
                   <FontAwesomeIcon
                     icon={faRightFromBracket}
                     className="profile-ico"
