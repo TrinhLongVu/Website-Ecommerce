@@ -36,9 +36,11 @@ const UserInfo = () => {
           }
         );
         const data = await response.json();
-        const dateObj = new Date(data.data.Birthday);
-        const formattedBirthday = format(dateObj, "yyyy-MM-dd");
-        setBirthday(formattedBirthday);
+        if (data.data.Birthday) {
+          const dateObj = new Date(data.data.Birthday);
+          const formattedBirthday = format(dateObj, "yyyy-MM-dd");
+          setBirthday(formattedBirthday);
+        }
         setFullName(data.data.FullName);
         setGender(data.data.Gender);
         setPhone(data.data.PhoneNumber);

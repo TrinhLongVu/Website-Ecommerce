@@ -26,11 +26,7 @@ const Login = () => {
         }
       );
       const data = await response.json();
-      if (data.token) {
-        navigate("/");
-      } else {
-        setError(true);
-      }
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
