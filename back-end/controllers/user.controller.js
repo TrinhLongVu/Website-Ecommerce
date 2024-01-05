@@ -12,7 +12,17 @@ function checkIfElementExists(element, array) {
 //=============================================================================================================
 
 exports.getInfo = async (req, res) => {
-    return req.user;
+    try {
+        res.status(201).json({
+            status: 'success',
+            data: req.user
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            msg: err
+        })
+    }
 }
 
 exports.getAllUsers = async (req, res) => {
