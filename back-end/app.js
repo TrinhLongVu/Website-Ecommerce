@@ -6,6 +6,8 @@ const productRouter = require('./routes/product.routers.js')
 const userRouter = require('./routes/user.routers.js')
 const authentication = require('./routes/authentication.router.js')
 const categoryRouter = require('./routes/category.router.js')
+const vnpayRouter = require('./routes/vnpay.router.js');
+const paymentRouter = require('./routes/mypayment.router.js');
 const cartRouter = require('./routes/cart.router.js')
 const passport = require('passport')
 const session = require('express-session');
@@ -42,11 +44,7 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/user', authentication);
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/cart', cartRouter);
-
-const paymentRouter1 = require('./routes/payment1.router.js');
-app.use('/api/v1/payment1', paymentRouter1);
-
-const paymentRouter = require('./routes/payment.router.js');
 app.use('/api/v1/payment', paymentRouter);
+app.use('/api/v1/vnpay', vnpayRouter);
 
 module.exports = app;
