@@ -19,8 +19,4 @@ router
     .patch(articleController.updateProduct)
     .delete(articleController.deleteProduct)
 
-router
-    .route('/search/:key')
-    .get(articleController.SearchProduct)
-
 module.exports = router;

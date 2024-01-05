@@ -164,38 +164,3 @@ exports.deleteProduct = async (req, res) => {
         })
     }
 }
-
-exports.SearchProduct = async (req, res) => {
-    try {
-        const keyword = req.params.key;
-        const data = await Product.find({
-                $or: [{
-                        title: {
-                            $regex: keyword,
-                            $options: 'i'
-                        }
-                    },
-                    {
-                        category: {
-                            $regex: keyword,
-                            $options: 'i'
-                        }
-                    }
-                ]
-            })
-            .populate({
-                path: 'category'
-            })
-            .exec();
-
-        res.status(200).json({
-            status: "success",
-            data: data
-        });
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            msg: err
-        })
-    };
-}
