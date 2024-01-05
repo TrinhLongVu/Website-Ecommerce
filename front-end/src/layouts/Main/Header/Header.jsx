@@ -12,7 +12,7 @@ import {
 // Style
 import "./header.css";
 
-const Header = ({ categoryList }) => {
+const Header = ({ categoryList, userInfo }) => {
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
@@ -47,8 +47,6 @@ const Header = ({ categoryList }) => {
       navigate(`/search/${searchField}`);
     }
   };
-
-  const authenticated = true;
 
   return (
     <header>
@@ -94,7 +92,7 @@ const Header = ({ categoryList }) => {
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />
         </Link>
       </div>
-      {authenticated ? (
+      {userInfo ? (
         <>
           <Link to="/cart" className="home-shop-cart">
             <FontAwesomeIcon icon={faCartShopping} />

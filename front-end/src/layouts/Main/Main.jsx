@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 // Components
 import Header from "./Header/Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import { ToastContainer } from "react-toastify";
 // Style
@@ -10,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 // Implementation
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
@@ -20,12 +22,12 @@ const MainLayout = () => {
       }
       try {
         const response = await fetch(
-          "https://themegamall.onrender.com/api/v1/user/infomation/user",
+          "http://localhost:8000/api/v1/user/infomation/user",
           {
             credentials: "include",
             method: "GET",
             headers: {
-              // "Content-Type": "application/json",
+              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
           }
@@ -34,9 +36,12 @@ const MainLayout = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-
         const data = await response.json();
-        console.log("Data:", data);
+        if (data.Role === "admin") {
+          navigate("/admin");
+        } else {
+          setUserInfo(data);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -52,7 +57,7 @@ const MainLayout = () => {
   }, []);
   return (
     <>
-      <Header categoryList={categoryList} />
+      <Header categoryList={categoryList} userInfo={userInfo} />
       <Outlet context={{ categoryList }} />
       <Footer categoryList={categoryList} />
       <ToastContainer
