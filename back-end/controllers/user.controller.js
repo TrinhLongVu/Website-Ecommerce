@@ -11,6 +11,10 @@ function checkIfElementExists(element, array) {
 }
 //=============================================================================================================
 
+exports.getInfo = async (req, res) => {
+    return req.user;
+}
+
 exports.getAllUsers = async (req, res) => {
     try {
         const alldata = await User.find()
