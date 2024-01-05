@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
 })
 router.post('/create', paymentController.createPayment);
 router.get('/vnpay_return', paymentController.returnPayment);
-router.post('/buy/:id', paymentController.payProduct);
 
 
 module.exports = router;
