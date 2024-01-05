@@ -14,6 +14,13 @@
     font-weight: bold;
 }
 
+.single-loader-container {
+    height: 770px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .category-banner-icon {
     margin: 0 15px;
 }
