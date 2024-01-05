@@ -65,3 +65,7 @@ exports.getPagination = async (req, res) => {
         });
     }
 }
+
+exports.hidden = (req, res) => {
+    const { category } = req.body;
+}

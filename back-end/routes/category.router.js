@@ -11,4 +11,8 @@ router
     .route('/page')
     .get(category.getPagination)
 
+router
+    .route('/hidden/:id')
+    .get(category.hidden)
+
 module.exports = router;

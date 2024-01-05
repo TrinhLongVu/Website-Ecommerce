@@ -21,7 +21,6 @@ router
 router
     .route('/account/gg/callback')
     .get(passport.authenticate('google', {
-        successRedirect: 'http://localhost:5173',
         failureRedirect: '/api/v1/user/account/fail'
     }), userController.success)
 

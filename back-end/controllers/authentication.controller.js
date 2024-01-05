@@ -12,10 +12,8 @@ exports.success = (req, res) => {
     }, 'your-secret-key', {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 60 * 1000)});
-    res.json({
-        token
-    });
+    res.cookie('token', token, { expires: new Date(Date.now() + 60 * 1000) });
+    res.redirect('http://localhost:5173')
 }
 
 exports.signup = async (req, res) => {
