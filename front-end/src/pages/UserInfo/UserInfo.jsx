@@ -19,8 +19,7 @@ const UserInfo = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-
+      const token = localStorage.getItem("authToken");
       if (!token) {
         navigate("/");
       }

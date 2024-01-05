@@ -57,7 +57,7 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
   };
 
   const logOut = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("authToken");
     setUserInfo(null);
   };
 

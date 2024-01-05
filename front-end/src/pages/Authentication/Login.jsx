@@ -26,27 +26,6 @@ const Login = () => {
         }
       );
       const data = await response.json();
-      localStorage.setItem("token", data.token);
-      if (data.token) {
-        navigate("/");
-      } else {
-        setError(true);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const ggLogin = async () => {
-    try {
-      const response = await fetch(
-        "https://themegamall.onrender.com/api/v1/user/account/login/auth/google",
-        {
-          credentials: "include",
-        }
-      );
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
       if (data.token) {
         navigate("/");
       } else {
@@ -105,7 +84,7 @@ const Login = () => {
         <span>or login with</span>
       </p>
       <Link
-        to="https://themegamall.onrender.com/api/v1/user/account/login/auth/google"
+        to="http://localhost:8000/api/v1/user/account/login/auth/google"
         className="gg-login"
       ></Link>
     </>
