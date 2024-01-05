@@ -12,13 +12,17 @@ router
     .get(middleware.isLoggedAdmin, userController.createAllUser);
 
 router
-    .route('/search/')
+    .route('/search/product')
     .get(userController.searchProduct)
+    
+router
+    .route('/infomation/user')
+    .get(middleware.isLoggedUser, userController.getInfo);
 
 router
     .route('/:id')
     .get(userController.getUser)
     .patch(userController.updateUser)
     .delete(userController.deleteUser);
-
+    
 module.exports = router;

@@ -7,18 +7,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/account/success", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.body) {
-          window.location.href = "/";
-        }
-      });
-  }, []);
-
   const login = async () => {
     const name = document.querySelector("#login-name").value;
     const password = document.querySelector("#login-password").value;
@@ -49,6 +37,26 @@ const Login = () => {
     }
   };
 
+  const ggLogin = async () => {
+    try {
+      const response = await fetch(
+        "https://themegamall.onrender.com/api/v1/user/account/login/auth/google",
+        {
+          credentials: "include",
+        }
+      );
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      if (data.token) {
+        navigate("/");
+      } else {
+        setError(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       login();
@@ -56,7 +64,7 @@ const Login = () => {
   };
   return (
     <>
-      <div action="/api/v1/user/account/Login" method="POST">
+      <div>
         <div className="input-box">
           <FontAwesomeIcon icon={faEnvelope} className="field-ico" />
           <input
@@ -96,7 +104,10 @@ const Login = () => {
       <p>
         <span>or login with</span>
       </p>
-      <button className="gg-login"></button>
+      <Link
+        to="https://themegamall.onrender.com/api/v1/user/account/login/auth/google"
+        className="gg-login"
+      ></Link>
     </>
   );
 };

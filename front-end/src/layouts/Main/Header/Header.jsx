@@ -12,7 +12,7 @@ import {
 // Style
 import "./header.css";
 
-const Header = ({ categoryList }) => {
+const Header = ({ categoryList, userInfo, setUserInfo }) => {
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
@@ -48,7 +48,10 @@ const Header = ({ categoryList }) => {
     }
   };
 
-  const authenticated = true;
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setUserInfo(null);
+  };
 
   return (
     <header>
@@ -94,14 +97,14 @@ const Header = ({ categoryList }) => {
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />
         </Link>
       </div>
-      {authenticated ? (
+      {userInfo ? (
         <>
           <Link to="/cart" className="home-shop-cart">
             <FontAwesomeIcon icon={faCartShopping} />
           </Link>
           <div
             className="avt-dropdown-btn"
-            style={{ backgroundImage: `url("https://i.pravatar.cc/301")` }}
+            style={{ backgroundImage: `url(${userInfo.Image_Avatar})` }}
             onClick={showAvatarDropdown}
           >
             {showAvtDropdown && (
@@ -111,7 +114,7 @@ const Header = ({ categoryList }) => {
                   Profile
                 </Link>
                 <hr />
-                <Link>
+                <Link onClick={logOut}>
                   <FontAwesomeIcon
                     icon={faRightFromBracket}
                     className="profile-ico"

@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const jwt = require('jsonwebtoken');
 exports.isLoggedUser = (req, res, next) => {
+    console.log(req.isAuthenticated())
     if (req.isAuthenticated()) {
         let token;
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -33,6 +34,8 @@ exports.isLoggedUser = (req, res, next) => {
         } else {
             res.send('401', 'Unauthorized')
         }
+    } else {
+        res.status(401).send('Unauthorized')
     }
 }
 
@@ -70,5 +73,7 @@ exports.isLoggedAdmin = (req, res, next) => {
         } else {
             res.send('401', 'Unauthorized')
         }
+    } else {
+        res.status(401).send('Unauthorized')
     }
 }

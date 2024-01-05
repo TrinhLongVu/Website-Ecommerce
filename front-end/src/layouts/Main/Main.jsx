@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 // Components
 import Header from "./Header/Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import { ToastContainer } from "react-toastify";
 // Style
@@ -10,36 +10,43 @@ import "react-toastify/dist/ReactToastify.css";
 // Implementation
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const token = localStorage.getItem("token");
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
 
-  //     if (!token) {
-  //       console.error("Token is missing");
-  //       return;
-  //     }
-  //     try {
-  //       const response = await fetch("http://localhost:8000/api/v1/product", {
-  //         credentials: "include",
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
+      if (!token) {
+        return;
+      }
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/v1/user/infomation/user",
+          {
+            credentials: "include",
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-
-  //       const data = await response.json();
-  //       console.log("Data:", data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        if (data.Role === "admin") {
+          navigate("/admin");
+        } else {
+          setUserInfo(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     fetch("https://themegamall.onrender.com/api/v1/category")
       .then((res) => res.json())
@@ -49,8 +56,12 @@ const MainLayout = () => {
   }, []);
   return (
     <>
-      <Header categoryList={categoryList} />
-      <Outlet context={{ categoryList }} />
+      <Header
+        categoryList={categoryList}
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
+      />
+      <Outlet context={{ categoryList, userInfo }} />
       <Footer categoryList={categoryList} />
       <ToastContainer
         position="top-right"

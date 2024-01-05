@@ -29,5 +29,5 @@ router
     .post(passport.authenticate('local', {
         failureRedirect: '/api/v1/user/account/fail'
     }), userController.success)
-
+  
 module.exports = router;
