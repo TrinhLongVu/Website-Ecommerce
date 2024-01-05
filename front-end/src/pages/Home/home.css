@@ -21,7 +21,7 @@
     flex-wrap: wrap;
 }
 
-.filter-box {
+.home-filter-box,.filter-box {
     padding: 4px 8px;
     width: 180px;
     display: flex;
@@ -60,4 +60,11 @@
 .filter-dropdown div:hover {
     background-color: #ccd1d9;
     color: white;
+}
+
+.home-loader-container {
+    height: 1155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
