@@ -21,7 +21,7 @@ const MainLayout = () => {
       }
       try {
         const response = await fetch(
-          "http://localhost:8000/api/v1/user/infomation/user",
+          "http://localhost:8000/api/v1/user/information/user",
           {
             credentials: "include",
             method: "GET",

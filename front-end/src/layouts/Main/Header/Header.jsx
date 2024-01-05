@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -42,9 +42,18 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
 
   const [searchField, setSearchField] = useState("");
 
+  const search = () => {
+    if (searchField === "") {
+      navigate("/search/!@$");
+    } else {
+      console.log(searchField);
+      navigate(`/search/${searchField}`);
+    }
+  };
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      navigate(`/search/${searchField}`);
+      search();
     }
   };
 
@@ -93,7 +102,7 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
           placeholder="Search Articles"
           onKeyDown={handleKeyPress}
         />
-        <Link to={`/search/${searchField}`} id="search-btn">
+        <Link id="search-btn" onMouseDown={search}>
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />
         </Link>
       </div>

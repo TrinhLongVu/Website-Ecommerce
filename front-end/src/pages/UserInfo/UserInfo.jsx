@@ -20,8 +20,14 @@ const UserInfo = () => {
   useEffect(() => {
     if (userInfo === null) {
       navigate("/");
+    } else {
+      console.log(userInfo);
+      setFullName(userInfo.FullName);
+      setGender(userInfo.Gender);
+      setPhone(userInfo.PhoneNumber);
+      setAddress(userInfo.Address);
     }
-  }, [userInfo]);
+  }, [userInfo, isEditMode]);
 
   const formatDate = (date) => {
     const parts = date.split("-");
@@ -75,7 +81,7 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={userInfo?.FullName}
+              value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               readOnly={!isEditMode}
             />
@@ -99,7 +105,7 @@ const UserInfo = () => {
               type="text"
               id="gender"
               placeholder="Unknown"
-              value={userInfo?.Gender}
+              value={gender}
               onChange={(e) => setGender(e.target.value)}
               readOnly={!isEditMode}
             />
@@ -111,7 +117,7 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={userInfo?.PhoneNumber}
+              value={phone}
               onChange={(e) => setPhone(e.target.value)}
               readOnly={!isEditMode}
             />
@@ -122,7 +128,7 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={userInfo?.Address}
+              value={address}
               onChange={(e) => setAddress(e.target.value)}
               readOnly={!isEditMode}
             />
