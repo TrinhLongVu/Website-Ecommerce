@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./user-info.css";
+import { useOutletContext, useNavigate } from "react-router-dom";
 
 const UserInfo = () => {
+  const navigate = useNavigate();
+  const { userInfo } = useOutletContext();
   const [infoObj, setInfoObj] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [isPending, setPending] = useState(false);
@@ -15,21 +18,16 @@ const UserInfo = () => {
   const [changeAvt, setChangeAvt] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/account/success", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.body) {
-          console.log(json.body);
-          setInfoObj(json.body);
-          setUserAvatar(json.body.Image_Avatar);
-          if (json.body.Role === "writer") {
-            setWriter(true);
-          }
-        }
-      });
-  }, []);
+    if (userInfo === null) {
+      navigate("/");
+    } else {
+      console.log(userInfo);
+      setFullName(userInfo.FullName);
+      setGender(userInfo.Gender);
+      setPhone(userInfo.PhoneNumber);
+      setAddress(userInfo.Address);
+    }
+  }, [userInfo, isEditMode]);
 
   const formatDate = (date) => {
     const parts = date.split("-");
@@ -59,7 +57,7 @@ const UserInfo = () => {
         <div className="info--avt">
           <div
             className="avatar-big"
-            style={{ backgroundImage: `url(${infoObj.Image_Avatar})` }}
+            style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
           ></div>
           {isEditMode && (
             <>

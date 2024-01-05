@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +12,7 @@ import {
 // Style
 import "./header.css";
 
-const Header = ({ categoryList, userInfo }) => {
+const Header = ({ categoryList, userInfo, setUserInfo }) => {
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
@@ -42,10 +42,24 @@ const Header = ({ categoryList, userInfo }) => {
 
   const [searchField, setSearchField] = useState("");
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+  const search = () => {
+    if (searchField === "") {
+      navigate("/search/!@$");
+    } else {
+      console.log(searchField);
       navigate(`/search/${searchField}`);
     }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      search();
+    }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setUserInfo(null);
   };
 
   return (
@@ -88,7 +102,7 @@ const Header = ({ categoryList, userInfo }) => {
           placeholder="Search Articles"
           onKeyDown={handleKeyPress}
         />
-        <Link to={`/search/${searchField}`} id="search-btn">
+        <Link id="search-btn" onMouseDown={search}>
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />
         </Link>
       </div>
@@ -99,7 +113,7 @@ const Header = ({ categoryList, userInfo }) => {
           </Link>
           <div
             className="avt-dropdown-btn"
-            style={{ backgroundImage: `url("https://i.pravatar.cc/301")` }}
+            style={{ backgroundImage: `url(${userInfo.Image_Avatar})` }}
             onClick={showAvatarDropdown}
           >
             {showAvtDropdown && (
@@ -109,7 +123,7 @@ const Header = ({ categoryList, userInfo }) => {
                   Profile
                 </Link>
                 <hr />
-                <Link>
+                <Link onClick={logOut}>
                   <FontAwesomeIcon
                     icon={faRightFromBracket}
                     className="profile-ico"

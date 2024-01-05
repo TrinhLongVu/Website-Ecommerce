@@ -10,19 +10,18 @@ import "react-toastify/dist/ReactToastify.css";
 // Implementation
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        console.error("Token is missing");
         return;
       }
       try {
         const response = await fetch(
-          "http://localhost:8000/api/v1/user/infomation/user",
+          "http://localhost:8000/api/v1/user/information/user",
           {
             credentials: "include",
             method: "GET",
@@ -40,7 +39,7 @@ const MainLayout = () => {
         if (data.Role === "admin") {
           navigate("/admin");
         } else {
-          setUserInfo(data);
+          setUserInfo(data.data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -57,8 +56,12 @@ const MainLayout = () => {
   }, []);
   return (
     <>
-      <Header categoryList={categoryList} userInfo={userInfo} />
-      <Outlet context={{ categoryList }} />
+      <Header
+        categoryList={categoryList}
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
+      />
+      <Outlet context={{ categoryList, userInfo }} />
       <Footer categoryList={categoryList} />
       <ToastContainer
         position="top-right"
