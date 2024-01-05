@@ -10,36 +10,39 @@ import "react-toastify/dist/ReactToastify.css";
 // Implementation
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const token = localStorage.getItem("token");
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
 
-  //     if (!token) {
-  //       console.error("Token is missing");
-  //       return;
-  //     }
-  //     try {
-  //       const response = await fetch("http://localhost:8000/api/v1/product", {
-  //         credentials: "include",
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
+      if (!token) {
+        console.error("Token is missing");
+        return;
+      }
+      try {
+        const response = await fetch(
+          "https://themegamall.onrender.com/api/v1/user/infomation/user",
+          {
+            credentials: "include",
+            method: "GET",
+            headers: {
+              // "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
 
-  //       const data = await response.json();
-  //       console.log("Data:", data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+        const data = await response.json();
+        console.log("Data:", data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     fetch("https://themegamall.onrender.com/api/v1/category")
       .then((res) => res.json())
