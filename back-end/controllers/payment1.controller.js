@@ -3,7 +3,7 @@ const Product = require('../models/product.model');
 const Payment = require('../models/payment.model');
 const middleware = require('../middeware/auth')
 
-exports.createPaymentAccount = async (req, res, next) => {
+exports.createPaymentAccount = async (req, res, next) => { // tạo 1 tài khoản trong user.Balance, tham số truyền vào là số tiền và id của người dùng
     try {
         const money = req.body.money;
         const userId = req.params.id;
@@ -39,7 +39,7 @@ exports.createPaymentAccount = async (req, res, next) => {
     }
 }
 
-exports.getPayment = async (req, res, next) => {
+exports.getPayment = async (req, res, next) => { // get tài khoản của người dùng, tham số truyền vào là id của người dùng và id của tài khoản
 
     try {
         const paymentid = req.body.paymentid;
@@ -70,7 +70,7 @@ exports.getPayment = async (req, res, next) => {
     }
 }
 
-exports.getAllPayment = async (req, res, next) => {
+exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
 
     try {
         const userId = req.params.id;
@@ -105,7 +105,8 @@ exports.getAllPayment = async (req, res, next) => {
 }
 
 
-exports.payMoney = async (req, res, next) => {
+exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số nhận vào là id người dùng, id của tài khoản thanh toán, tổng số tiền của Cart
+                                                // sau khi thanh toán, xóa hết user.Cart và lưu lại lịch sử giao dịch trong user.Transaction
     try {
         const userId = req.params.id;
         const { paymentid, totalPrice } = req.body
@@ -133,8 +134,6 @@ exports.payMoney = async (req, res, next) => {
 
 
         balanceAccount.balance -= totalPrice;
-        console.log(user.Transaction)
-
 
         if (!user.Transaction) {
             user.Transaction = [];

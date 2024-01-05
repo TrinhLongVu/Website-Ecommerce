@@ -1,7 +1,7 @@
 const User = require('../models/user.model')
 const Product = require('../models/product.model');
 
-exports.getCart = async (req, res) => {
+exports.getCart = async (req, res) => { // thông tin trả về là user.Cart và tổng số tiền của Cart
     try {
         const userId = req.params.id;
         const user = await User.findById(userId);
