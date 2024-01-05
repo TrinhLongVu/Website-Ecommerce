@@ -178,7 +178,9 @@ exports.deleteUser = async (req, res) => {
 
 exports.searchProduct = async (req, res) => {
     try {
+        const { page, limit } = req.query;
         const { searchValue } = req.body;
+        const skip = (page - 1) * limit;
 
         const products = await Product.find();
         const categories = await Category.find();
@@ -200,7 +202,8 @@ exports.searchProduct = async (req, res) => {
             return titleMatch || detailMatch || categoryMatch;
         });
 
-        console.log(searchResult.length)
+        
+        const result = searchResult.slice(skip, skip + limit * 1.0);
 
         if (searchResult.length === 0) {
             return res.status(200).json({
@@ -211,7 +214,8 @@ exports.searchProduct = async (req, res) => {
 
         res.status(200).json({
             status: "success",
-            data: searchResult
+            totalPage: Math.ceil(searchResult.length / limit),
+            data: result
         });
     } catch (error) {
         console.error('Error searching for products:', error);
