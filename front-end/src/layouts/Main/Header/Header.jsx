@@ -46,7 +46,6 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
     if (searchField === "") {
       navigate("/search/!@$");
     } else {
-      console.log(searchField);
       navigate(`/search/${searchField}`);
     }
   };
@@ -123,7 +122,7 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
                   Profile
                 </Link>
                 <hr />
-                <Link onClick={logOut}>
+                <Link onMouseDown={logOut}>
                   <FontAwesomeIcon
                     icon={faRightFromBracket}
                     className="profile-ico"
