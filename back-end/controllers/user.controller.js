@@ -182,7 +182,14 @@ exports.searchProduct = async (req, res) => {
         const { searchValue } = req.body;
         const skip = (page - 1) * limit;
 
-        const products = await Product.find();
+        let queryBuilder = Product.find();
+        
+        if (req.query.sort) {
+            const sortBy = req.query.sort.split(',').join(' ');
+            queryBuilder = queryBuilder.sort(sortBy);
+        }
+        const products = await queryBuilder.exec();
+
         const categories = await Category.find();
 
         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
@@ -201,7 +208,6 @@ exports.searchProduct = async (req, res) => {
 
             return titleMatch || detailMatch || categoryMatch;
         });
-
         
         const result = searchResult.slice(skip, skip + limit * 1.0);
 
