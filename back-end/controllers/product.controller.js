@@ -64,7 +64,6 @@ exports.getProduct = async (req, res) => {
 }
 
 exports.createProduct = async (req, res) => {
-    console.log(req.body);
     try {
         const {
             title,
@@ -80,16 +79,14 @@ exports.createProduct = async (req, res) => {
             folder: "images"
         })
         const foundCategory = await Category.findOne({name: category})
-        console.log(foundCategory)
         const product = {
-            Title: title,
-            Detail: detail,
-            Category: foundCategory._id,
+            title: title,
+            detail: detail,
+            category: foundCategory._id,
             posted_time: new Date(),
             price: price,
-            Image: result.url
+            image: result.url
         }
-
         const newProduct = await Product.create(product);
         res.status(201).json({
             status: 'success',
