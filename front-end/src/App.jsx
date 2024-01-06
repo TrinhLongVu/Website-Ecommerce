@@ -12,7 +12,7 @@ import Authentication from "./pages/Authentication/Authentication";
 
 import AdminCategory from "./pages/AdminCategory/AdminCategory";
 import AdminUpload from "./pages/AdminUpload/AdminUpload";
-import AdminUsers from "./pages/AdminUsers/AdminUsers";
+import AdminProducts from "./pages/AdminProducts/AdminProducts";
 import AdminStatistics from "./pages/AdminStatistics/AdminStatistics";
 
 import ScrollTop from "./components/ScrollTop/ScrollTop";
@@ -40,7 +40,7 @@ function App() {
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/category" element={<AdminCategory />} />
           <Route path="/admin/upload" element={<AdminUpload />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="/admin/statistics" element={<AdminStatistics />} />
         </Route>
         <Route path="/authentication">
