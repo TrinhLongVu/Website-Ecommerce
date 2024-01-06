@@ -2,50 +2,64 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/account/success", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.body) {
-          window.location.href = "/";
-        }
-      });
-  }, []);
 
   const login = async () => {
     const name = document.querySelector("#login-name").value;
     const password = document.querySelector("#login-password").value;
-    try {
-      const response = await fetch(
-        "http://localhost:8000/api/v1/user/account/login",
-        {
-          credentials: "include",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: name,
-            password: password,
-          }),
+    if (!name || !password) {
+      toast.error("Please fill all the information", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/v1/user/account/login",
+          {
+            credentials: "include",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: name,
+              password: password,
+            }),
+          }
+        );
+        const data = await response.json();
+        if (data.token) {
+          navigate("/");
         }
-      );
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      if (data.token) {
-        navigate("/");
-      } else {
-        setError(true);
+        if (data.status === "failed") {
+          toast.error(
+            "Something's incorrect. Please try again with the correct login information!!!",
+            {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            }
+          );
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -56,7 +70,7 @@ const Login = () => {
   };
   return (
     <>
-      <div action="/api/v1/user/account/Login" method="POST">
+      <div>
         <div className="input-box">
           <FontAwesomeIcon icon={faEnvelope} className="field-ico" />
           <input
@@ -80,11 +94,6 @@ const Login = () => {
         <div className="forgot-pwd">
           <a href="">Forgot Password ?</a>
         </div>
-        {error && (
-          <div className="auth-error-msg">
-            Something's incorrect! Please try again
-          </div>
-        )}
         <button onClick={login} className="submit-btn">
           LOGIN
         </button>
@@ -96,7 +105,10 @@ const Login = () => {
       <p>
         <span>or login with</span>
       </p>
-      <button className="gg-login"></button>
+      <Link
+        to="http://localhost:8000/api/v1/user/account/login/auth/google"
+        className="gg-login"
+      ></Link>
     </>
   );
 };

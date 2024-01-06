@@ -18,8 +18,8 @@ const Header = () => {
       <NavLink to="/admin/upload" className={classNameFunc}>
         Upload Product
       </NavLink>
-      <NavLink to="/admin/users" className={classNameFunc}>
-        Manage Users
+      <NavLink to="/admin/products" className={classNameFunc}>
+        Manage Products
       </NavLink>
       <NavLink to="/admin/statistics" className={classNameFunc}>
         Statistics

@@ -35,37 +35,53 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
   };
 
   return (
-    <div className="paging">
-      <div
-        className="paging-control"
-        onClick={() =>
-          setCurrentPage(currentPage === 1 ? totalPages : currentPage - 1)
-        }
-      >
-        <FontAwesomeIcon icon={faChevronLeft} />
-      </div>
-      <div className="paging-nums">
-        {getPageNumbers().map((page, index) => (
-          <div
-            key={index}
-            onClick={() => setCurrentPage(page)}
-            className={
-              page === currentPage ? "paging-item paging-active" : "paging-item"
-            }
-          >
-            {page}
+    <>
+      {totalPages === 0 ? (
+        <></>
+      ) : (
+        <div className="paging">
+          {totalPages !== 1 ? (
+            <div
+              className="paging-control"
+              onClick={() =>
+                setCurrentPage(currentPage === 1 ? totalPages : currentPage - 1)
+              }
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className="paging-nums">
+            {getPageNumbers().map((page, index) => (
+              <div
+                key={index}
+                onClick={() => setCurrentPage(page)}
+                className={
+                  page === currentPage
+                    ? "paging-item paging-active"
+                    : "paging-item"
+                }
+              >
+                {page}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div
-        className="paging-control"
-        onClick={() =>
-          setCurrentPage(currentPage === totalPages ? 1 : currentPage + 1)
-        }
-      >
-        <FontAwesomeIcon icon={faChevronRight} />
-      </div>
-    </div>
+          {totalPages !== 1 ? (
+            <div
+              className="paging-control"
+              onClick={() =>
+                setCurrentPage(currentPage === totalPages ? 1 : currentPage + 1)
+              }
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
+    </>
   );
 };
 

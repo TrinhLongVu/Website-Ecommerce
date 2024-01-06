@@ -4,6 +4,23 @@ const Product = require("../models/product.model")
 exports.getCategory = async (req, res) => {
     try {
         const data = await Category.find({});
+        const filteredData = data.filter(product => product.isHidden == false);
+        res.status(201).json({
+            status: "success",
+            data: filteredData,
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            status: "failed",
+            data: err
+        })
+    }
+}
+
+exports.getAdminCategory = async (req, res) => {
+    try {
+        const data = await Category.find({});
         res.status(201).json({
             status: "success",
             data: data,
@@ -63,5 +80,23 @@ exports.getPagination = async (req, res) => {
             status: 'fail',
             msg: err.message
         });
+    }
+}
+
+exports.hidden = async (req, res) => {
+    const { category } = req.body;
+    let cate = await Category.findOne({ name: category })
+    const hidden = cate.isHidden ? false : true 
+    try {
+        await Category.updateOne({ name: category }, { $set: { isHidden: hidden } })
+        res.status(201).json({
+            status: "success"
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            status: "fail",
+            data: err
+        })
     }
 }

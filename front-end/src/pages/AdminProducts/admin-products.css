@@ -1,0 +1,89 @@
+.admin-products {
+    margin-top: 20px;
+    width: 1260px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.admin-products-card {
+    margin: 10px 10px;
+    padding: 20px;
+    width: 295px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.admin-products-card-img {
+    width: 250px;
+    height: 180px;
+    border-radius: 12px;
+    border: 2px solid black;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.admin-products-card-name {
+    margin: 10px 0;
+    height: 50px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.admin-products-card-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.admin-products-card-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 45%;
+    margin: 10px 0;
+    font-size: 20px;
+    border-radius: 12px;
+}
+
+#admin-products-card-update {
+    background-color: #7C93C3;
+}
+
+#admin-products-card-update:hover {
+    background-color: #068DA9;
+    color: white;
+}
+
+#admin-products-card-delete {
+    background-color: #A25772;
+}
+
+#admin-products-card-delete:hover {
+    background-color: red;
+    color: white;
+}
+
+.admin-products-card-btn-icon {
+    margin: 0 5px;
+}
+
+.admin-products-loader-container {
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

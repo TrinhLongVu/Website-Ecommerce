@@ -2,38 +2,48 @@
 import { useEffect, useState } from "react";
 // Components
 import Header from "./Header/Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import { ToastContainer } from "react-toastify";
+import Cookies from "js-cookie";
 // Style
 import "react-toastify/dist/ReactToastify.css";
 // Implementation
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
+    const cookieToken = Cookies.get("token");
+    if (cookieToken !== undefined) {
+      localStorage.setItem("authToken", cookieToken);
+      Cookies.remove("token");
+    }
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      return;
+    }
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        console.error("Token is missing");
-        return;
-      }
       try {
-        const response = await fetch("http://localhost:8000/api/v1/product", {
-          credentials: "include",
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
+        const response = await fetch(
+          "http://localhost:8000/api/v1/user/information/user",
+          {
+            credentials: "include",
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await response.json();
-        console.log("Data:", data);
+        if (data.Role === "admin") {
+          navigate("/admin");
+        } else {
+          setUserInfo(data.data);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -49,8 +59,12 @@ const MainLayout = () => {
   }, []);
   return (
     <>
-      <Header categoryList={categoryList} />
-      <Outlet context={{ categoryList }} />
+      <Header
+        categoryList={categoryList}
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
+      />
+      <Outlet context={{ categoryList, userInfo }} />
       <Footer categoryList={categoryList} />
       <ToastContainer
         position="top-right"

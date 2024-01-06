@@ -1,4 +1,8 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/user.model')
+const bcrypt = require('bcrypt');
+
+
 exports.fail = (req, res) => {
     res.json({
         status: "failed",
@@ -12,9 +16,21 @@ exports.success = (req, res) => {
     }, 'your-secret-key', {
         expiresIn: '5h'
     });
-    res.json({
-        token
+    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.redirect('http://localhost:5173')
+}
+
+exports.successLocal = (req, res) => {
+    const id = req.user._id;
+    const token = jwt.sign({
+        id
+    }, 'your-secret-key', {
+        expiresIn: '5h'
     });
+    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.json({
+        "token": token
+    })
 }
 
 exports.signup = async (req, res) => {
@@ -27,24 +43,30 @@ exports.signup = async (req, res) => {
         if (!UserName || !Password || !ConfirmPassword) {
             return res.status(400).json({
                 status: "fail",
-                msg: "Please fill full information",
+                msg: "Please fill all the information",
             });
         }
         const isTaken = await User.findOne({
-            UserName
+            "UserName": UserName
         });
-
         if (isTaken) {
             return res.status(400).json({
                 status: "fail",
-                msg: "Username is already taken",
+                msg: "Email is already taken",
             });
         }
 
         if (Password != ConfirmPassword) {
             return res.status(400).json({
                 status: "fail",
-                msg: "incorrect Confirm Password",
+                msg: "Confirm password and password don't match",
+            });
+        }
+
+        if (Password.length < 6) {
+            return res.status(400).json({
+                status: "fail",
+                msg: "Password must be at least 6 characters long",
             });
         }
 
@@ -63,7 +85,7 @@ exports.signup = async (req, res) => {
             });
 
             res.status(201).json({
-                status: 'Create success',
+                status: 'success',
                 data: {
                     user: newUser
                 }

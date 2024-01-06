@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const paymentController = require('../controllers/payment.controller')
+const paymentController = require('../controllers/vnpay.controller')
 
 router.get('/', (req, res) => {
     res.json({
@@ -9,6 +9,5 @@ router.get('/', (req, res) => {
 })
 router.post('/create', paymentController.createPayment);
 router.get('/vnpay_return', paymentController.returnPayment);
-
 
 module.exports = router;

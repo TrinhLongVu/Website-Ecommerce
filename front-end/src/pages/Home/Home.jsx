@@ -1,5 +1,5 @@
 // Library
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 // Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,7 @@ import ProductSlider from "../../components/Home/ProductSlider/ProductSlider";
 import ProductPanel from "../../components/Home/ProductPanel/ProductPanel";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 import Pagination from "../../components/Pagination/Pagination";
+import Loader from "../../components/Loader/Loader";
 // Style
 import "./home.css";
 
@@ -25,17 +26,15 @@ const Home = () => {
   const { categoryList } = useOutletContext();
   const [bestSellerList, setBestSellerList] = useState([]);
   const [latestList, setLatestList] = useState([]);
+  const domain = "https://themegamall.onrender.com/api/v1/product?";
+
   useEffect(() => {
-    fetch(
-      "https://themegamall.onrender.com/api/v1/product?page=1&limit=5&sort=-sold"
-    )
+    fetch(domain + "page=1&limit=5&sort=-sold")
       .then((res) => res.json())
       .then((json) => {
         setBestSellerList(json.data);
       });
-    fetch(
-      "https://themegamall.onrender.com/api/v1/product?page=1&limit=3&sort=-posted_time"
-    )
+    fetch(domain + "page=1&limit=3&sort=-posted_time")
       .then((res) => res.json())
       .then((json) => {
         setLatestList(json.data);
@@ -44,25 +43,18 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [allList, setAllList] = useState([]);
-  useEffect(() => {
-    fetch(
-      `https://themegamall.onrender.com/api/v1/product?page=${currentPage}&limit=12`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setTotalPages(json.totalPage);
-        setAllList(json.data);
-      });
-  }, [currentPage]);
 
   const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState("");
+  const prevFilterRef = useRef("all");
+  const prevPage = useRef(1);
   const toggleFilter = () => {
     setShowFilter(!showFilter);
     if (!showFilter) {
-      document.querySelector(".filter-box").style.borderRadius = "8px 8px 0 0";
+      document.querySelector(".home-filter-box").style.borderRadius =
+        "8px 8px 0 0";
     } else {
-      document.querySelector(".filter-box").style.borderRadius = "8px";
+      document.querySelector(".home-filter-box").style.borderRadius = "8px";
     }
   };
 
@@ -73,10 +65,42 @@ const Home = () => {
     toggleFilter();
   };
 
-  document.body.addEventListener("click", () => {
-    if (!event.target.closest(".filter-box")) {
+  const [loadPage, setLoadPage] = useState(false);
+
+  useEffect(() => {
+    if (prevFilterRef.current !== filter) {
+      setLoadPage(true);
+      prevFilterRef.current = filter;
+    }
+    if (prevPage.current !== currentPage) {
+      window.scrollTo({
+        top: 1350,
+        behavior: "smooth", // Add smooth scrolling behavior
+      });
+      prevPage.current = currentPage;
+    }
+    let fetchDomain = "";
+    if (filter === "") {
+      fetchDomain = `page=${currentPage}&limit=12`;
+    } else if (filter === "Price: Low to High") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price`;
+    } else if (filter === "Price: High to Low") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=-price`;
+    }
+    fetch(domain + fetchDomain)
+      .then((res) => res.json())
+      .then((json) => {
+        setTotalPages(json.totalPage);
+        setAllList(json.data);
+        setLoadPage(false);
+      });
+  }, [currentPage, filter]);
+
+  document.body.addEventListener("click", (event) => {
+    const homeFilterBox = document.querySelector(".home-filter-box");
+    if (homeFilterBox && !event.target.closest(".home-filter-box")) {
       setShowFilter(false);
-      document.querySelector(".filter-box").style.borderRadius = "8px";
+      homeFilterBox.style.borderRadius = "8px";
     }
   });
 
@@ -116,9 +140,6 @@ const Home = () => {
           <h2>
             <FontAwesomeIcon icon={faStar} /> Latest Products
           </h2>
-          <Link to="/" className="show-all-btn">
-            Show all <FontAwesomeIcon icon={faChevronRight} />
-          </Link>
         </div>
         <div className="home-section-content">
           <div className="product-container">
@@ -133,7 +154,7 @@ const Home = () => {
           <h2>
             <FontAwesomeIcon icon={faStore} /> Our Products
           </h2>
-          <div className="filter-box" onClick={toggleFilter}>
+          <div className="home-filter-box" onClick={toggleFilter}>
             {filter ? filter : "Filter"}
             {filter ? (
               <FontAwesomeIcon icon={faXmark} onClick={unFilter} />
@@ -151,9 +172,15 @@ const Home = () => {
             </div>
           )}
         </div>
-        <div className="home-section-content">
-          <ProductShelf products={allList} />
-        </div>
+        {loadPage ? (
+          <div className="home-loader-container">
+            <Loader />
+          </div>
+        ) : (
+          <div className="home-section-content">
+            <ProductShelf products={allList} />
+          </div>
+        )}
       </div>
       <Pagination
         totalPages={totalPages}

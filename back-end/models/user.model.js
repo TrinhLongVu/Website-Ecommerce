@@ -45,16 +45,34 @@ const userSchema = new Schema({
     Cart: [
         {
             product_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
-          },
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product'
+            },
             quantity: Number
         }
     ],
-    Balance: {
-        type: Number,
-        default: 0
-    }
+    Balance: [
+        {
+            payment_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Payment'
+            },
+            balance: Number
+        }
+    ],
+    Transaction: [
+        {
+            cart_id: {
+                type: Array,
+                ref: 'Cart'
+            },
+            time: {
+                type: Date,
+                default: new Date()
+            }
+        }
+    ]
+
 })
 // The same create table in sql server and table have name which is lowercase."article" 
 const User = mongoose.model('Users', userSchema);

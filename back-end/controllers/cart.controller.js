@@ -1,10 +1,11 @@
 const User = require('../models/user.model')
 const Product = require('../models/product.model');
 
-exports.getCart = async (req, res) => {
+exports.getCart = async (req, res) => { // thông tin trả về là user.Cart và tổng số tiền của Cart
     try {
         const userId = req.params.id;
         const user = await User.findById(userId);
+        const products = await Product.find();
         if (!user) {
             return res.status(200).json({
                 status: "fail",
@@ -12,9 +13,15 @@ exports.getCart = async (req, res) => {
             });
         }
 
+        let totalPrice = user.Cart.reduce((total, cartItem) => {
+            let product = products.find(product => product.id == cartItem.product_id);
+            return product ? total + cartItem.quantity * product.price : total;
+        }, 0);
+
+
         res.status(201).json({
             status: "success",
-            data: user.Cart
+            data: { cart: user.Cart, totalPrice: totalPrice }
         });
     } catch (err) {
         console.error(err);

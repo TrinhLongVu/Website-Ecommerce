@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +12,7 @@ import {
 // Style
 import "./header.css";
 
-const Header = ({ categoryList }) => {
+const Header = ({ categoryList, userInfo, setUserInfo }) => {
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
@@ -42,13 +42,25 @@ const Header = ({ categoryList }) => {
 
   const [searchField, setSearchField] = useState("");
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+  const search = () => {
+    if (searchField === "") {
+      navigate("/search/!@$");
+    } else {
       navigate(`/search/${searchField}`);
     }
   };
 
-  const authenticated = true;
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      search();
+    }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("authToken");
+    setUserInfo(null);
+    navigate("/");
+  };
 
   return (
     <header>
@@ -87,21 +99,21 @@ const Header = ({ categoryList }) => {
           type="text"
           onChange={(e) => setSearchField(e.target.value)}
           className="search-input"
-          placeholder="Search Articles"
+          placeholder="Search Products"
           onKeyDown={handleKeyPress}
         />
-        <Link to={`/search/${searchField}`} id="search-btn">
+        <Link id="search-btn" onMouseDown={search}>
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />
         </Link>
       </div>
-      {authenticated ? (
+      {userInfo ? (
         <>
           <Link to="/cart" className="home-shop-cart">
             <FontAwesomeIcon icon={faCartShopping} />
           </Link>
           <div
             className="avt-dropdown-btn"
-            style={{ backgroundImage: `url("https://i.pravatar.cc/301")` }}
+            style={{ backgroundImage: `url(${userInfo.Image_Avatar})` }}
             onClick={showAvatarDropdown}
           >
             {showAvtDropdown && (
@@ -111,7 +123,7 @@ const Header = ({ categoryList }) => {
                   Profile
                 </Link>
                 <hr />
-                <Link>
+                <Link onMouseDown={logOut}>
                   <FontAwesomeIcon
                     icon={faRightFromBracket}
                     className="profile-ico"

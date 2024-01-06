@@ -1,5 +1,6 @@
 const moment = require('moment');
 const {sortObject} = require('../helper/index')
+const User = require('../models/user.model')
 
 exports.createPayment = function (req, res, next) {
     console.log("123121231", req.body)
@@ -38,7 +39,7 @@ exports.createPayment = function (req, res, next) {
     vnp_Params['vnp_TxnRef'] = orderId;
     vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + orderId;
     vnp_Params['vnp_OrderType'] = 'other';
-    vnp_Params['vnp_Amount'] = amount * 100;
+    vnp_Params['vnp_Amount'] = amount;
     vnp_Params['vnp_ReturnUrl'] = returnUrl;
     vnp_Params['vnp_IpAddr'] = ipAddr;
     vnp_Params['vnp_CreateDate'] = createDate;
@@ -59,7 +60,7 @@ exports.createPayment = function (req, res, next) {
     res.redirect(vnpUrl)
 }
 
-exports.returnPayment = function (req, res, next) {
+exports.returnPayment = async (req, res, next) => {
     console.log(req.query)
     let vnp_Params = req.query;
 
@@ -82,6 +83,10 @@ exports.returnPayment = function (req, res, next) {
 
     if(secureHash === signed){
         //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
+        let user = await User.findById(req.user._id);
+        await User.findByIdAndUpdate(req.user._id, {Balance: user.Balance + vnp_Params['vnp_Amount']}, {
+            new: true
+        })
         res.redirect('/api/v1/payment')
     } else{
         res.render('success', {code: '97'})
