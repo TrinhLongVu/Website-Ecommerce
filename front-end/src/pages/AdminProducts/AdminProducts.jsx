@@ -22,6 +22,7 @@ const AdminProducts = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [showFilter, setShowFilter] = useState(false);
   const [loadPage, setLoadPage] = useState(false);
+  const [del, setDel] = useState(false);
   const toggleFilter = () => {
     setShowFilter(!showFilter);
     if (!showFilter) {
@@ -64,11 +65,12 @@ const AdminProducts = () => {
     fetch(domain + fetchDomain)
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         setTotalPages(json.totalPage);
         setProductList(json.data);
         setLoadPage(false);
       });
-  }, [currentPage, filter]);
+  }, [currentPage, filter, del]);
 
   document.body.addEventListener("click", (event) => {
     const homeFilterBox = document.querySelector(".home-filter-box");
@@ -84,7 +86,17 @@ const AdminProducts = () => {
     toggleFilter();
   };
 
-  const deleteUser = (id) => {};
+  const deleteProduct = (id) => {
+    fetch(`http://localhost:8000/api/v1/product/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === "success") {
+          setDel(!del);
+        }
+      });
+  };
   return (
     <>
       <div className="home-section">
@@ -142,6 +154,7 @@ const AdminProducts = () => {
                     <div
                       className="admin-products-card-btn"
                       id="admin-products-card-delete"
+                      onClick={() => deleteProduct(product._id)}
                     >
                       <FontAwesomeIcon
                         icon={faCircleXmark}
