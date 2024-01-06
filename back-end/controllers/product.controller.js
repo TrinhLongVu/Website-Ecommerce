@@ -5,27 +5,33 @@ const fs = require('fs');
 
 exports.getAllProduct = async (req, res) => {
     try {
-        console.log(req.user)
         const query = req.query;
         const skip = (query.page - 1) * query.limit;
 
-        let queryBuilder = Product.find().skip(skip).limit(query.limit).populate({
+        let queryBuilder = Product.find()
+        .populate({
             path: 'category',
-            select: 'name'
-        })
+            select: 'name isHidden',
+            match: { isHidden: false}
+        });
+            
         if (query.sort) {
             const sortBy = query.sort.split(',').join(' ');
             queryBuilder = queryBuilder.sort(sortBy);
         }
 
         const result = await queryBuilder.exec();
+
+        let filteredData = result.filter(product => product.category != null);
+        const paginatedResults = filteredData.slice(skip, skip + query.limit * 1.0);
+
         const totalDocuments = await Product.countDocuments();
         const totalPages = Math.ceil(totalDocuments / query.limit);
 
         res.status(200).json({
             status: "success",
             totalPage: totalPages,
-            data: result
+            data: paginatedResults
         });
     } catch (err) {
         res.status(400).json({

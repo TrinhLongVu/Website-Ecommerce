@@ -7,7 +7,7 @@ const productSchema = new Schema({
         required: [true, 'A Product must have a title']
     },
     category: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
         required: [true, 'A Product must have a catagory']
     },

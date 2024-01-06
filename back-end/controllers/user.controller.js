@@ -179,6 +179,7 @@ exports.deleteUser = async (req, res) => {
 exports.searchProduct = async (req, res) => {
     try {
         const { page, limit, search } = req.query;
+        console.log(search)
         
         const skip = (page - 1) * limit;
 

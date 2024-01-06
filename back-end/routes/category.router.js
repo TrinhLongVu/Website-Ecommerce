@@ -12,7 +12,7 @@ router
     .get(category.getPagination)
 
 router
-    .route('/hidden/:id')
-    .get(category.hidden)
+    .route('/hidden')
+    .post(category.hidden)
 
 module.exports = router;

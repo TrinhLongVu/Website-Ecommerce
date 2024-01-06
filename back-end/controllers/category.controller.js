@@ -66,6 +66,20 @@ exports.getPagination = async (req, res) => {
     }
 }
 
-exports.hidden = (req, res) => {
+exports.hidden = async (req, res) => {
     const { category } = req.body;
+    let cate = await Category.findOne({ name: category })
+    const hidden = cate.isHidden ? false : true 
+    try {
+        await Category.updateOne({ name: category }, { $set: { isHidden: hidden } })
+        res.status(201).json({
+            status: "success"
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            status: "fail",
+            data: err
+        })
+    }
 }
