@@ -43,7 +43,7 @@ exports.signup = async (req, res) => {
         if (!UserName || !Password || !ConfirmPassword) {
             return res.status(400).json({
                 status: "fail",
-                msg: "Please fill full information",
+                msg: "Please fill all the information",
             });
         }
         const isTaken = await User.findOne({
@@ -52,14 +52,14 @@ exports.signup = async (req, res) => {
         if (isTaken) {
             return res.status(400).json({
                 status: "fail",
-                msg: "Username is already taken",
+                msg: "Email is already taken",
             });
         }
 
         if (Password != ConfirmPassword) {
             return res.status(400).json({
                 status: "fail",
-                msg: "Incorrect confirm password",
+                msg: "Confirm password and password don't match",
             });
         }
 
@@ -85,7 +85,7 @@ exports.signup = async (req, res) => {
             });
 
             res.status(201).json({
-                status: 'Create success',
+                status: 'success',
                 data: {
                     user: newUser
                 }

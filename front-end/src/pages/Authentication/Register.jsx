@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
-  const [error, setError] = useState("");
-
   const register = async () => {
     const newEmail = document.querySelector("#register-email").value;
     const newPassword = document.querySelector("#register-pass").value;
@@ -28,8 +27,40 @@ const Register = () => {
       );
 
       const res = await response.json();
+      if (res.status === "fail") {
+        toast.error(res.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else if (res.status === "success") {
+        toast.success("Successfully created new account", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        document.querySelector("#register-email").value = "";
+        document.querySelector("#register-pass").value = "";
+        document.querySelector("#register-confirm-pass").value = "";
+      }
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      register();
     }
   };
 
@@ -43,6 +74,7 @@ const Register = () => {
             className="input-field"
             id="register-email"
             placeholder="Email Address"
+            onKeyDown={handleKeyPress}
           />
         </div>
         <div className="input-box">
@@ -52,6 +84,7 @@ const Register = () => {
             className="input-field"
             id="register-pass"
             placeholder="Password"
+            onKeyDown={handleKeyPress}
           />
         </div>
         <div className="input-box">
@@ -61,9 +94,9 @@ const Register = () => {
             className="input-field"
             id="register-confirm-pass"
             placeholder="Confirm Password"
+            onKeyDown={handleKeyPress}
           />
         </div>
-        {error !== "" && <div className="auth-error-msg">{error}</div>}
         <div className="agreed-term">
           By clicking "Register" you agree to our terms and privacy policy.
         </div>
