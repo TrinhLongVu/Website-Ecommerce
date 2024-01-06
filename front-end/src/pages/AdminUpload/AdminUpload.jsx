@@ -108,13 +108,13 @@ const AdminUpload = () => {
         theme: "colored",
       });
     } else {
-      let formData = new FormData();
-      formData.append("title", productName);
-      formData.append("price", productPrice);
-      formData.append("detail", productDetail);
-      formData.append("category", selectedCategory);
-      formData.append("image", image);
       try {
+        let formData = new FormData();
+        formData.append("title", productName);
+        formData.append("price", productPrice);
+        formData.append("detail", productDetail);
+        formData.append("category", selectedCategory);
+        formData.append("image", image);
         setUploading(true);
         const response = await fetch("http://localhost:8000/api/v1/product/", {
           method: "POST",

@@ -37,3 +37,13 @@ exports.getDate = (startDay, endDay) => {
   
 	return result;
 }
+
+exports.getMonth = (year, monthIndex) => {
+	const firstDay = new Date(year, monthIndex, 1);
+	const lastDay = new Date(year, monthIndex + 1, 0);
+  
+	return {
+	  start: firstDay,
+	  end: lastDay
+	};
+}
