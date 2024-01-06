@@ -64,6 +64,10 @@ const Search = () => {
   };
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [key]);
+
+  useEffect(() => {
     if (prevFilterRef.current !== filter) {
       setLoadPage(true);
       prevFilterRef.current = filter;

@@ -1,4 +1,8 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/user.model')
+const bcrypt = require('bcrypt');
+
+
 exports.fail = (req, res) => {
     res.json({
         status: "failed",
@@ -43,9 +47,8 @@ exports.signup = async (req, res) => {
             });
         }
         const isTaken = await User.findOne({
-            UserName
+            "UserName": UserName
         });
-
         if (isTaken) {
             return res.status(400).json({
                 status: "fail",
@@ -56,7 +59,14 @@ exports.signup = async (req, res) => {
         if (Password != ConfirmPassword) {
             return res.status(400).json({
                 status: "fail",
-                msg: "incorrect Confirm Password",
+                msg: "Incorrect confirm password",
+            });
+        }
+
+        if (Password.length < 6) {
+            return res.status(400).json({
+                status: "fail",
+                msg: "Password must be at least 6 characters long",
             });
         }
 

@@ -4,9 +4,10 @@ const Product = require("../models/product.model")
 exports.getCategory = async (req, res) => {
     try {
         const data = await Category.find({});
+        const filteredData = data.filter(product => product.isHidden == false);
         res.status(201).json({
             status: "success",
-            data: data,
+            data: filteredData,
         })
     }
     catch (err) {
