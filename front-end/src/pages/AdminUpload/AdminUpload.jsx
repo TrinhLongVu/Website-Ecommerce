@@ -106,16 +106,15 @@ const AdminUpload = () => {
         theme: "colored",
       });
     } else {
-      let formData = new FormData();
-      formData.append("title", productName);
-      formData.append("price", productPrice);
-      formData.append("detail", productDetail);
-      formData.append("category", selectedCategory);
-      formData.append("image", image);
       try {
-        console.log(formData.get("image"));
-        const response = await fetch("http://localhost:8000/api/v1/product/", {
-          // credentials: "include",
+        let formData = new FormData();
+        formData.append("title", productName);
+        formData.append("price", productPrice);
+        formData.append("detail", productDetail);
+        formData.append("category", selectedCategory);
+        formData.append("image", image);
+        const response = await fetch("http://localhost:8000/api/v1/product", {
+          credentials: "include",
           method: "POST",
           body: formData,
         });
