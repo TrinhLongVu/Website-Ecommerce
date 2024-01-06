@@ -140,9 +140,6 @@ const Home = () => {
           <h2>
             <FontAwesomeIcon icon={faStar} /> Latest Products
           </h2>
-          <Link to="/" className="show-all-btn">
-            Show all <FontAwesomeIcon icon={faChevronRight} />
-          </Link>
         </div>
         <div className="home-section-content">
           <div className="product-container">
