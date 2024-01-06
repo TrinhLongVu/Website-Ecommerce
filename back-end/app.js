@@ -44,7 +44,7 @@ app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/cart', cartRouter);
 
 const paymentRouter1 = require('./routes/payment1.router.js');
-app.use('/api/v1/payment1', paymentRouter1);
+app.use('/api/v1/payment/user', paymentRouter1);
 
 const paymentRouter = require('./routes/payment.router.js');
 app.use('/api/v1/payment', paymentRouter);

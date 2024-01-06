@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const Product = require('../models/product.model');
 const { pseudoRandomBytes } = require('crypto');
 const Category = require('../models/category.model');
+const { search } = require('../app');
 
 //=========================== FUNCTION =========================================================================
 function checkIfElementExists(element, array) {
@@ -179,28 +180,37 @@ exports.deleteUser = async (req, res) => {
 exports.searchProduct = async (req, res) => {
     try {
         const { searchValue } = req.body;
-
         const products = await Product.find();
         const categories = await Category.find();
 
+        let text;
         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
+        if (searchValue.includes(" ")) {
+            text = normalize(searchValue)
+        } else {
+            text = searchValue
+        }
 
         const searchResult = products.filter(product => {
             const normalizedTitle = normalize(product.title);
             const normalizedDetail = normalize(product.detail);
 
-            const titleMatch = normalizedTitle.includes(normalize(searchValue));
-            const detailMatch = normalizedDetail.includes(normalize(searchValue));
-            
+            const titleMatch = normalizedTitle.includes(text);
+            const detailMatch = normalizedDetail.includes(text);
+
             const categoryMatch = categories.some(category => {
+                if (!product.category || !category.name) {
+                    return false; // Skip if product or category properties are undefined
+                }
+
                 const normalizedCategoryName = normalize(category.name);
-                return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
+                return normalizedCategoryName.includes(text) && product.category.includes(category._id);
             });
 
             return titleMatch || detailMatch || categoryMatch;
         });
 
-        console.log(searchResult.length)
+        console.log(`${searchResult.length} produtcs found`)
 
         if (searchResult.length === 0) {
             return res.status(200).json({

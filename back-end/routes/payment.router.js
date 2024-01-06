@@ -10,5 +10,4 @@ router.get('/', (req, res) => {
 router.post('/create', paymentController.createPayment);
 router.get('/vnpay_return', paymentController.returnPayment);
 
-
 module.exports = router;
