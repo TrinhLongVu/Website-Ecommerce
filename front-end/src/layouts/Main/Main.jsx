@@ -16,14 +16,16 @@ const MainLayout = () => {
 
   useEffect(() => {
     const cookieToken = Cookies.get("token");
-    localStorage.setItem("authToken", cookieToken);
+    if (cookieToken !== undefined) {
+      localStorage.setItem("authToken", cookieToken);
+      Cookies.remove("token");
+    }
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      return;
+    }
     const fetchData = async () => {
-      const token = localStorage.getItem("authToken");
-      if (!token) {
-        return;
-      }
       try {
-        console.log(cookieToken);
         const response = await fetch(
           "http://localhost:8000/api/v1/user/information/user",
           {
@@ -41,14 +43,12 @@ const MainLayout = () => {
           navigate("/admin");
         } else {
           setUserInfo(data.data);
-          console.log(data.data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
-    // Cookies.remove("token");
   }, []);
   useEffect(() => {
     fetch("https://themegamall.onrender.com/api/v1/category")

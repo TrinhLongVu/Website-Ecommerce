@@ -12,7 +12,7 @@ exports.success = (req, res) => {
     }, 'your-secret-key', {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 60 * 1000) });
+    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
     res.redirect('http://localhost:5173')
 }
 
@@ -23,7 +23,7 @@ exports.successLocal = (req, res) => {
     }, 'your-secret-key', {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 60 * 1000) });
+    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
     res.json({
         "token": token
     })
