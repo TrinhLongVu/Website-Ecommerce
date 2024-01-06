@@ -19,7 +19,10 @@ const Search = () => {
 
   useEffect(() => {
     setLoadPage(true);
-    fetch("https://themegamall.onrender.com/api/v1/product/search/" + key)
+    fetch(
+      "http://localhost:8000/api/v1/user/search/product?page=1&limit=5&sort=-price&search=" +
+        key
+    )
       .then((res) => res.json())
       .then((json) => {
         if (json.data.length === 0) {

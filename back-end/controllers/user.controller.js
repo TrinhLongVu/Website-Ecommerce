@@ -178,8 +178,8 @@ exports.deleteUser = async (req, res) => {
 
 exports.searchProduct = async (req, res) => {
     try {
-        const { page, limit } = req.query;
-        const { searchValue } = req.body;
+        const { page, limit, search } = req.query;
+        
         const skip = (page - 1) * limit;
 
         let queryBuilder = Product.find();
@@ -198,12 +198,12 @@ exports.searchProduct = async (req, res) => {
             const normalizedTitle = normalize(product.title);
             const normalizedDetail = normalize(product.detail);
 
-            const titleMatch = normalizedTitle.includes(normalize(searchValue));
-            const detailMatch = normalizedDetail.includes(normalize(searchValue));
+            const titleMatch = normalizedTitle.includes(normalize(search));
+            const detailMatch = normalizedDetail.includes(normalize(search));
             
             const categoryMatch = categories.some(category => {
                 const normalizedCategoryName = normalize(category.name);
-                return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
+                return normalizedCategoryName.includes(normalize(search)) && product.category.includes(category._id);
             });
 
             return titleMatch || detailMatch || categoryMatch;

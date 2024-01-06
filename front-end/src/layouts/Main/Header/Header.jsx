@@ -99,7 +99,7 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
           type="text"
           onChange={(e) => setSearchField(e.target.value)}
           className="search-input"
-          placeholder="Search Articles"
+          placeholder="Search Products"
           onKeyDown={handleKeyPress}
         />
         <Link id="search-btn" onMouseDown={search}>
