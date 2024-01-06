@@ -200,7 +200,7 @@ exports.searchProduct = async (req, res) => {
 
             const categoryMatch = categories.some(category => {
                 if (!product.category || !category.name) {
-                    return false; // Skip if product or category properties are undefined
+                    return false;
                 }
 
                 const normalizedCategoryName = normalize(category.name);
