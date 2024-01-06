@@ -2,6 +2,7 @@ const Product = require('../models/product.model')
 const User = require('../models/user.model')
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
+const Category = require('../models/category.model')
 
 exports.getAllProduct = async (req, res) => {
     try {
@@ -63,6 +64,7 @@ exports.getProduct = async (req, res) => {
 }
 
 exports.createProduct = async (req, res) => {
+    console.log(req.body);
     try {
         const {
             title,
@@ -70,17 +72,19 @@ exports.createProduct = async (req, res) => {
             category,
             price
         } = req.body;
+        
         const file = req.files.image;
         const result = await cloudinary.uploader.upload(file.tempFilePath, {
             public_id: `${Date.now()}`,
             resource_type: "auto",
             folder: "images"
         })
-
+        const foundCategory = await Category.findOne({name: category})
+        console.log(foundCategory)
         const product = {
             Title: title,
             Detail: detail,
-            Category: category,
+            Category: foundCategory._id,
             posted_time: new Date(),
             price: price,
             Image: result.url

@@ -8,6 +8,8 @@ import {
 import { useState, useEffect } from "react";
 import ProductFrame from "../../components/ProductFrame/ProductFrame";
 import "./admin-upload.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useOutletContext } from "react-router-dom";
 
 const AdminUpload = () => {
@@ -62,7 +64,101 @@ const AdminUpload = () => {
     setPreviewProduct(previewProduct);
   };
 
-  const uploadProduct = () => {};
+  const uploadProduct = async () => {
+    const productName = document.querySelector(
+      ".admin-upload-input-name"
+    ).value;
+    const productPrice = document.querySelector(
+      ".admin-upload-input-price"
+    ).value;
+    const productDetail = document.querySelector(
+      ".admin-upload-textarea"
+    ).value;
+    if (
+      !productName ||
+      !productPrice ||
+      !productDetail ||
+      !selectedCategory ||
+      !image
+    ) {
+      toast.error(
+        "Looks like you haven't input enough information for your new product",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
+    } else if (isNaN(productPrice)) {
+      toast.error("Price of your product should be a number", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      let formData = new FormData();
+      formData.append("title", productName);
+      formData.append("price", productPrice);
+      formData.append("detail", productDetail);
+      formData.append("category", selectedCategory);
+      formData.append("image", image);
+      try {
+        console.log(formData.get("image"));
+        const response = await fetch("http://localhost:8000/api/v1/product/", {
+          // credentials: "include",
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          toast.success("Your new product has been released in the store!!!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          document.querySelector(".admin-upload-input-name").value = "";
+          document.querySelector(".admin-upload-input-price").value = "";
+          document.querySelector(".admin-upload-textarea").value = "";
+          document.querySelector(".admin-upload-select-title").style.color =
+            "#3e3232";
+          document.querySelector(".admin-upload-select-title").style.opacity =
+            "0.75";
+          setSelectedCategory("");
+          setImage(null);
+          setPreviewImage(null);
+          setPreviewProduct(null);
+        } else {
+          toast.error("Looks like there's some error!!! Please try again", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
 
   return (
     <>
