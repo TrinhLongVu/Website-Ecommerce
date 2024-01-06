@@ -18,7 +18,9 @@ exports.getTotalRevenue = async (req, res) => {
 
 exports.transaction = async (req, res) => {
     try {
-        let days;
+        const result = {};
+        const year = req.query.year || new Date().getFullYear();
+        const users = await User.find();
         if (req.query.week) {
             const today = new Date();
             let startWeek = new Date();
@@ -26,37 +28,45 @@ exports.transaction = async (req, res) => {
 
             startWeek.setDate(today.getDate() - today.getDay() + 1);
             endWeek.setDate(startWeek.getDate() + 6);
-            days = helper.getWeekDates(startWeek, endWeek)
+            let days = helper.getDate(startWeek, endWeek)
+
+            for (const day of days) {
+                result[day] = 0;
+            }
+            for (const day of days) {
+                for (const user of users) {
+                    for (const transaction of user.Transaction) {
+                        if (helper.isDayEqual(transaction.time, day)) {
+                            result[day] += 1;
+                        }
+                    }
+                }
+            }
         } else if (req.query.month) {
-            const today = new Date();
-            let startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-            let endMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
             const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            // for (const user of users) {
-            //     for (const transaction of user.Transaction) {
-            //         if(transaction.time > startMonth && transaction.time < endMonth)
-                    
-            //     }
-            // }
-        }
+            
+            for (const month of months) {
+                result[month] = 0;
+            }
 
-
-        const users = await User.find();
-        const result = {};
-        for (const day of days) {
-            result[day] = 0;
-        }
-        for (const day of days) {
             for (const user of users) {
                 for (const transaction of user.Transaction) {
-                    if (helper.isDayEqual(transaction.time, day)) {
-                        result[day] += 1;
+                    for (let i = 0; i < months.length; i++) {
+                        const {
+                            start,
+                            end
+                        } = helper.getMonth(year, i);
+                        if (transaction.time >= start && transaction.time <= end) {
+                            result[months[i]] += 1;
+                        }
                     }
                 }
             }
         }
+
         res.status(200).json({
             status: 'success',
+            year: year,
             data: result
         })
     } catch (err) {
