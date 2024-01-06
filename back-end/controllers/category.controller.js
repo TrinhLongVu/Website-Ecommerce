@@ -18,6 +18,22 @@ exports.getCategory = async (req, res) => {
     }
 }
 
+exports.getAdminCategory = async (req, res) => {
+    try {
+        const data = await Category.find({});
+        res.status(201).json({
+            status: "success",
+            data: data,
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            status: "failed",
+            data: err
+        })
+    }
+}
+
 exports.addCategory = async (req, res) => {
     try {
         await Category.create(req.body)
