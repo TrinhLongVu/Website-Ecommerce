@@ -26,8 +26,7 @@ exports.getAllProduct = async (req, res) => {
         let filteredData = result.filter(product => product.category != null);
         const paginatedResults = filteredData.slice(skip, skip + query.limit * 1.0);
 
-        const totalDocuments = await Product.countDocuments();
-        const totalPages = Math.ceil(totalDocuments / query.limit);
+        const totalPages = Math.ceil(filteredData.length / query.limit);
 
         res.status(200).json({
             status: "success",
@@ -154,12 +153,9 @@ exports.deleteProduct = async (req, res) => {
     try {
 
         const _id = req.params.id;
-
-        // Find the user by ID and delete it
-        // const deletedProduct = await Product.deleteOne({
-        //     _id
-        // });
-        const deletedUser = await Product.deleteMany();
+        await Product.deleteOne({
+            _id
+        });
 
         res.status(201).json({
             status: 'success',
