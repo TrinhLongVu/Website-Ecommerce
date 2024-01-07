@@ -1,5 +1,12 @@
 const User = require('../models/user.model')
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv')
+const path = require('path');
+dotenv.config({
+    path: path.join(__dirname, '..', 'config.env')
+});
+
+
 exports.isLoggedUser = (req, res, next) => {
     console.log(req.isAuthenticated())
     if (req.isAuthenticated()) {
@@ -15,7 +22,7 @@ exports.isLoggedUser = (req, res, next) => {
         }
 
         if (req.user.Role == 'user') {
-            jwt.verify(token, 'your-secret-key', async (err, data) => {
+            jwt.verify(token, process.env.KEY_TOKEN, async (err, data) => {
                 if (err) {
                     console.error('JWT Verification Failed:', err.message);
                 } else {
@@ -55,7 +62,7 @@ exports.isLoggedAdmin = (req, res, next) => {
         }
 
         if (req.user.Role == 'admin') {
-            jwt.verify(token, 'your-secret-key', async (err, data) => {
+            jwt.verify(token, process.env.KEY_TOKEN, async (err, data) => {
                 if (err) {
                     console.error('JWT Verification Failed:', err.message);
                 } else {

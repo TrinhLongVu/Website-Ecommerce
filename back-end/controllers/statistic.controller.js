@@ -46,7 +46,8 @@ exports.transaction = async (req, res) => {
             const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             
             for (const month of months) {
-                result[month] = 0;
+                result[month].quantity = 0;
+                result[month].balance = 0;
             }
 
             for (const user of users) {
@@ -57,7 +58,8 @@ exports.transaction = async (req, res) => {
                             end
                         } = helper.getMonth(year, i);
                         if (transaction.time >= start && transaction.time <= end) {
-                            result[months[i]] += 1;
+                            result[months[i]].quantity += 1;
+                            result[months[i]].balance += 0;
                         }
                     }
                 }

@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model')
 const bcrypt = require('bcrypt');
+const dotenv = require('dotenv')
+const path = require('path');
+dotenv.config({
+    path: path.join(__dirname, '..', 'config.env')
+});
 
 
 exports.fail = (req, res) => {
@@ -13,7 +18,7 @@ exports.success = (req, res) => {
     const id = req.user._id;
     const token = jwt.sign({
         id
-    }, 'your-secret-key', {
+    }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
     res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
@@ -24,7 +29,7 @@ exports.successLocal = (req, res) => {
     const id = req.user._id;
     const token = jwt.sign({
         id
-    }, 'your-secret-key', {
+    }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
     res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
