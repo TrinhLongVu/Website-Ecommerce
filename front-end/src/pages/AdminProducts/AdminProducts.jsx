@@ -10,11 +10,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
+import Toastify from "../../components/Toastify/Toastify";
 
 import { Link } from "react-router-dom";
-
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import "./admin-products.css";
 
@@ -70,7 +68,6 @@ const AdminProducts = () => {
     fetch(domain + fetchDomain)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setTotalPages(json.totalPage);
         setProductList(json.data);
         setLoadPage(false);
@@ -98,20 +95,21 @@ const AdminProducts = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {
-          toast.success("Successfully removed that product from the store", {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          Toastify(
+            "success",
+            "bottom-right",
+            "Successfully removed that product from the store"
+          );
           if (productList.length === 1 && currentPage > 1) {
             setCurrentPage(currentPage - 1);
           }
           setDel(!del);
+        } else {
+          Toastify(
+            "error",
+            "bottom-right",
+            "Failed to remove that product from the store!!! Please try again"
+          );
         }
       });
   };

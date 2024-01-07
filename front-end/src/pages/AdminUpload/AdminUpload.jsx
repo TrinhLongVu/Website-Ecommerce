@@ -9,8 +9,7 @@ import { useState } from "react";
 import ProductFrame from "../../components/ProductFrame/ProductFrame";
 import Loader from "../../components/Loader/Loader";
 import "./admin-upload.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Toastify from "../../components/Toastify/Toastify";
 import { useOutletContext } from "react-router-dom";
 
 const AdminUpload = () => {
@@ -83,30 +82,13 @@ const AdminUpload = () => {
       !selectedCategory ||
       !image
     ) {
-      toast.error(
-        "Looks like you haven't input enough information for your new product",
-        {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        }
+      Toastify(
+        "error",
+        "top-right",
+        "Looks like you haven't input enough information for your new product"
       );
     } else if (isNaN(productPrice)) {
-      toast.error("Price of your product should be a number", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      Toastify("error", "top-right", "Price of a product should be a number");
     } else {
       try {
         let formData = new FormData();
@@ -122,16 +104,11 @@ const AdminUpload = () => {
         });
 
         if (response.ok) {
-          toast.success("Your new product has been released in the store!!!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          Toastify(
+            "success",
+            "top-right",
+            "Your new product has been released in the store!!!"
+          );
           setUploading(false);
           document.querySelector(".admin-upload-input-name").value = "";
           document.querySelector(".admin-upload-input-price").value = "";
@@ -145,29 +122,19 @@ const AdminUpload = () => {
           setPreviewImage(null);
           setPreviewProduct(null);
         } else {
-          toast.error("Looks like there's some error!!! Please try again", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          Toastify(
+            "error",
+            "top-right",
+            "Looks like there's some error!!! Please try again"
+          );
           setUploading(false);
         }
       } catch (error) {
-        toast.error("Looks like there's some error!!! Please try again", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        Toastify(
+          "error",
+          "top-right",
+          "Looks like there's some error!!! Please try again"
+        );
         setUploading(false);
       }
     }
