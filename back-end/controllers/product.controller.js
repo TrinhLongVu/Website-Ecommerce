@@ -127,7 +127,10 @@ exports.updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
         const newProduct = req.body
-
+        if (newProduct.category) {
+            const foundCategory = await Category.findOne({ name: newProduct.category })
+            newProduct.category = foundCategory._id;
+        }
         if (req.files) {
             const file = req.files.image;
             const result = await cloudinary.uploader.upload(file.tempFilePath, {

@@ -6,9 +6,7 @@ import { faAngleDown, faCircleUp } from "@fortawesome/free-solid-svg-icons";
 
 import ProductFrame from "../../components/ProductFrame/ProductFrame";
 import Loader from "../../components/Loader/Loader";
-
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Toastify from "../../components/Toastify/Toastify";
 
 import "./admin-update.css";
 
@@ -76,16 +74,11 @@ const AdminUpdate = () => {
       ".admin-update-textarea"
     ).value;
     if (isNaN(productPrice)) {
-      toast.error("Price of your product should be a number", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      Toastify(
+        "error",
+        "top-right",
+        "Price of your product should be a number"
+      );
     } else {
       try {
         let formData = new FormData();
@@ -97,22 +90,21 @@ const AdminUpdate = () => {
           formData.append("image", image);
         }
         setUpdating(true);
-        const response = await fetch("http://localhost:8000/api/v1/prod/", {
-          method: "POST",
-          body: formData,
-        });
+        const token = localStorage.getItem("authToken");
+        console.log(token);
+        const response = await fetch(
+          "http://localhost:8000/api/v1/product/" + id,
+          {
+            // headers: {
+            //   Authorization: "Bearer " + token,
+            // },
+            method: "PATCH",
+            body: formData,
+          }
+        );
 
         if (response.ok) {
-          toast.success("Your new product has been released in the store!!!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          Toastify("success", "top-right", "Your product has been updated");
           setUpdating(false);
           document.querySelector(".admin-update-input-name").value = "";
           document.querySelector(".admin-update-input-price").value = "";
@@ -120,30 +112,19 @@ const AdminUpdate = () => {
           setCategory("");
           setImage(null);
         } else {
-          toast.error("Looks like there's some error!!! Please try again", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          Toastify(
+            "error",
+            "top-right",
+            "Looks like there's some error!!! Please try again"
+          );
           setUpdating(false);
         }
       } catch (error) {
-        console.log(error);
-        toast.error("Looks like there's some error!!! Please try again", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        Toastify(
+          "error",
+          "top-right",
+          "Looks like there's some error!!! Please try again"
+        );
         setUpdating(false);
       }
     }
