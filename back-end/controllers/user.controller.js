@@ -123,9 +123,18 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
 
-        const _id = req.params.id;
-
-        const update = await User.findByIdAndUpdate(_id, req.body, {
+        const id = req.params.id;
+        const newUser = req.body
+        if (req.files) {
+            const file = req.files.image;
+            const result = await cloudinary.uploader.upload(file.tempFilePath, {
+                public_id: `${Date.now()}`,
+                resource_type: "auto",
+                folder: "images"
+            })
+            newUser.image = result.url
+        }
+        const update = await User.findByIdAndUpdate(id, newUser, {
             new: true
         });
 
