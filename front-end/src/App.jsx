@@ -12,6 +12,7 @@ import Authentication from "./pages/Authentication/Authentication";
 
 import AdminCategory from "./pages/AdminCategory/AdminCategory";
 import AdminUpload from "./pages/AdminUpload/AdminUpload";
+import AdminUpdate from "./pages/AdminUpdate/AdminUpdate";
 import AdminProducts from "./pages/AdminProducts/AdminProducts";
 import AdminStatistics from "./pages/AdminStatistics/AdminStatistics";
 
@@ -40,7 +41,10 @@ function App() {
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/category" element={<AdminCategory />} />
           <Route path="/admin/upload" element={<AdminUpload />} />
-          <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/products">
+            <Route index element={<AdminProducts />} />
+            <Route path="/admin/products/:id" element={<AdminUpdate />} />
+          </Route>
           <Route path="/admin/statistics" element={<AdminStatistics />} />
         </Route>
         <Route path="/authentication">

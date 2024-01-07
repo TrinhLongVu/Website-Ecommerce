@@ -11,6 +11,11 @@ import {
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 
+import { Link } from "react-router-dom";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./admin-products.css";
 
 const AdminProducts = () => {
@@ -93,6 +98,19 @@ const AdminProducts = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {
+          toast.success("Successfully removed that product from the store", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          if (productList.length === 1 && currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+          }
           setDel(!del);
         }
       });
@@ -142,7 +160,8 @@ const AdminProducts = () => {
                     ${product.price}
                   </div>
                   <div className="admin-products-card-btn-container">
-                    <div
+                    <Link
+                      to={`/admin/products/${product._id}`}
                       className="admin-products-card-btn"
                       id="admin-products-card-update"
                     >
@@ -150,7 +169,7 @@ const AdminProducts = () => {
                         icon={faCircleUp}
                         className="admin-products-card-btn-icon"
                       />
-                    </div>
+                    </Link>
                     <div
                       className="admin-products-card-btn"
                       id="admin-products-card-delete"
