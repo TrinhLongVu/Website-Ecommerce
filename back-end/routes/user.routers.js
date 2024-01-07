@@ -23,6 +23,6 @@ router
     .route('/:id')
     .get(userController.getUser)
     .patch(middleware.isLoggedUser, userController.updateUser)
-    .delete(userController.deleteUser);
+    .delete(middleware.isLoggedUser,userController.deleteUser);
     
 module.exports = router;

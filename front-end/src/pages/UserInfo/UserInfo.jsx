@@ -131,6 +131,21 @@ const UserInfo = () => {
     }
   };
 
+  const deleteUser = async () => {
+    console.log(id);
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/user/` + id, {
+        credentials: "include",
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <Breadcrumbs crumbList={[{ name: "User Information", link: "/user" }]} />
@@ -156,7 +171,7 @@ const UserInfo = () => {
             )}
           </div>
           <div className="info--acc-delete-container">
-            <div className="info--acc-delete">
+            <div className="info--acc-delete" onClick={deleteUser}>
               <FontAwesomeIcon icon={faUserXmark} id="info--acc-del-icon" />
               DELETE
             </div>
