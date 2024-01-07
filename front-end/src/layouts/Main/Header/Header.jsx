@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -42,15 +42,24 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
 
   const [searchField, setSearchField] = useState("");
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+  const search = () => {
+    if (searchField === "") {
+      navigate("/search/!@$");
+    } else {
       navigate(`/search/${searchField}`);
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      search();
+    }
+  };
+
   const logOut = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("authToken");
     setUserInfo(null);
+    navigate("/");
   };
 
   return (
@@ -90,10 +99,10 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
           type="text"
           onChange={(e) => setSearchField(e.target.value)}
           className="search-input"
-          placeholder="Search Articles"
+          placeholder="Search Products"
           onKeyDown={handleKeyPress}
         />
-        <Link to={`/search/${searchField}`} id="search-btn">
+        <Link id="search-btn" onMouseDown={search}>
           <FontAwesomeIcon icon={faMagnifyingGlass} id="search-ico" />
         </Link>
       </div>
@@ -114,7 +123,7 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
                   Profile
                 </Link>
                 <hr />
-                <Link onClick={logOut}>
+                <Link onMouseDown={logOut}>
                   <FontAwesomeIcon
                     icon={faRightFromBracket}
                     className="profile-ico"

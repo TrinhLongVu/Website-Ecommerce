@@ -3,25 +3,55 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./user-info.css";
 import { useOutletContext, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 const UserInfo = () => {
   const navigate = useNavigate();
-  const { userInfo } = useOutletContext();
-  const [infoObj, setInfoObj] = useState({});
+  const [avt, setAvt] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isPending, setPending] = useState(false);
   const [fullName, setFullName] = useState("");
   const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [birthday, setBirthday] = useState("");
   const [changeAvt, setChangeAvt] = useState(null);
+  const [isPending, setPending] = useState(false);
 
   useEffect(() => {
-    if (userInfo === null) {
-      navigate("/");
-    }
-  }, [userInfo]);
+    const fetchData = async () => {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        navigate("/");
+      }
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/v1/user/information/user",
+          {
+            credentials: "include",
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        if (data.data.Birthday) {
+          const dateObj = new Date(data.data.Birthday);
+          const formattedBirthday = format(dateObj, "yyyy-MM-dd");
+          setBirthday(formattedBirthday);
+        }
+        setFullName(data.data.FullName);
+        setGender(data.data.Gender);
+        setPhone(data.data.PhoneNumber);
+        setAddress(data.data.Address);
+        setAvt(data.data.Image_Avatar);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [isEditMode]);
 
   const formatDate = (date) => {
     const parts = date.split("-");
@@ -39,7 +69,7 @@ const UserInfo = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setInfoObj({ ...infoObj, Image_Avatar: reader.result });
+        setAvt(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -51,7 +81,7 @@ const UserInfo = () => {
         <div className="info--avt">
           <div
             className="avatar-big"
-            style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
+            style={{ backgroundImage: `url(${avt})` }}
           ></div>
           {isEditMode && (
             <>
@@ -75,7 +105,7 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={userInfo?.FullName}
+              value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               readOnly={!isEditMode}
             />
@@ -99,7 +129,7 @@ const UserInfo = () => {
               type="text"
               id="gender"
               placeholder="Unknown"
-              value={userInfo?.Gender}
+              value={gender}
               onChange={(e) => setGender(e.target.value)}
               readOnly={!isEditMode}
             />
@@ -111,7 +141,7 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={userInfo?.PhoneNumber}
+              value={phone}
               onChange={(e) => setPhone(e.target.value)}
               readOnly={!isEditMode}
             />
@@ -122,7 +152,7 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={userInfo?.Address}
+              value={address}
               onChange={(e) => setAddress(e.target.value)}
               readOnly={!isEditMode}
             />

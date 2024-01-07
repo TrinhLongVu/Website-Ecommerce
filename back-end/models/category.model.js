@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 const categorySchema = new Schema({
     name: {
         type: String
+    },
+    isHidden: {
+        type: Boolean,
+        default: false
     }
 })
 

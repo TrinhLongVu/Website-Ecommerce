@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Assets
 import { faChevronRight, faTag } from "@fortawesome/free-solid-svg-icons";
 // Components
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import ProductFrame from "../../components/ProductFrame/ProductFrame";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 // Implementation
@@ -32,6 +33,22 @@ const Detail = () => {
 
   return (
     <>
+      <Breadcrumbs
+        crumbList={[
+          {
+            name: product.title,
+            link: "/product/" + id,
+          },
+          {
+            name: product.category?.name,
+            link: "/categories/" + product.category?.name,
+          },
+          {
+            name: "Categories",
+            link: "/categories",
+          },
+        ]}
+      />
       <ProductFrame product={product} />
       <div className="home-section">
         <div className="home-section-banner">

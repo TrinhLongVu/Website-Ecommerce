@@ -1,0 +1,72 @@
+.admin-statistics-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-statistics-row {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.admin-statistics-col {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.admin-statistics-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-statistics-card-body {
+    padding: 15px;
+}
+
+.admin-statistics-text-xs {
+    font-size: 14px;
+}
+
+.admin-statistics-text-success {
+    color: #28a745;
+}
+
+.admin-statistics-text-uppercase {
+    text-transform: uppercase;
+}
+
+.admin-statistics-mb-1 {
+    margin-bottom: 8px;
+}
+
+.admin-statistics-h5 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.admin-statistics-font-weight-bold {
+    font-weight: bold;
+}
+
+.admin-statistics-buttons {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.admin-statistics-buttons button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.admin-statistics-buttons button:hover {
+    background-color: green;
+}

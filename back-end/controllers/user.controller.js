@@ -180,37 +180,32 @@ exports.deleteUser = async (req, res) => {
 exports.searchProduct = async (req, res) => {
     try {
         const { searchValue } = req.body;
+
         const products = await Product.find();
         const categories = await Category.find();
 
-        let text;
         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
-        if (searchValue.includes(" ")) {
-            text = normalize(searchValue)
-        } else {
-            text = searchValue
-        }
 
         const searchResult = products.filter(product => {
             const normalizedTitle = normalize(product.title);
             const normalizedDetail = normalize(product.detail);
 
-            const titleMatch = normalizedTitle.includes(text);
-            const detailMatch = normalizedDetail.includes(text);
-
+            const titleMatch = normalizedTitle.includes(normalize(searchValue));
+            const detailMatch = normalizedDetail.includes(normalize(searchValue));
+            
             const categoryMatch = categories.some(category => {
                 if (!product.category || !category.name) {
                     return false;
                 }
 
                 const normalizedCategoryName = normalize(category.name);
-                return normalizedCategoryName.includes(text) && product.category.includes(category._id);
+                return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
             });
 
             return titleMatch || detailMatch || categoryMatch;
         });
 
-        console.log(`${searchResult.length} produtcs found`)
+        console.log(searchResult.length)
 
         if (searchResult.length === 0) {
             return res.status(200).json({
@@ -221,6 +216,7 @@ exports.searchProduct = async (req, res) => {
 
         res.status(200).json({
             status: "success",
+            // totalPage: Math.ceil(searchResult.length / limit),
             data: searchResult
         });
     } catch (error) {

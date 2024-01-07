@@ -16,7 +16,7 @@ router
     .get(userController.searchProduct)
     
 router
-    .route('/infomation/user')
+    .route('/information/user')
     .get(middleware.isLoggedUser, userController.getInfo);
 
 router
