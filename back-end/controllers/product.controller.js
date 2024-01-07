@@ -128,14 +128,18 @@ exports.updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
         const newProduct = req.body
-        const result = await cloudinary.uploader.upload(file.tempFilePath, {
-            public_id: `${Date.now()}`,
-            resource_type: "auto",
-            folder: "images"
-        })
-        newProduct.image = result.url
 
-        const update = await Product.findByIdAndUpdate(id, req.body, {
+        if (req.files) {
+            const file = req.files.image;
+            const result = await cloudinary.uploader.upload(file.tempFilePath, {
+                public_id: `${Date.now()}`,
+                resource_type: "auto",
+                folder: "images"
+            })
+            newProduct.image = result.url
+        }
+
+        const update = await Product.findByIdAndUpdate(id, newProduct, {
             new: true
         })
         res.status(201).json({
