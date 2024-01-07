@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
-const articleController = require('../controllers/product.controller')
+const productController = require('../controllers/product.controller')
 const middleware = require('../middeware/auth')
 
 router
     .route('/')
-    .get(articleController.getAllProduct)
-    .post(articleController.createProduct)
+    .get(productController.getAllProduct)
+    .post(productController.createProduct)
 
 router
     .route('/create/createAll')
-    .post(articleController.createAllProduct)
+    .post(productController.createAllProduct)
 
 router
     .route('/:id')
-    .get(articleController.getProduct)
-    .patch(articleController.updateProduct)
-    .delete(articleController.deleteProduct)
+    .get(productController.getProduct)
+    .patch(middleware.isLoggedAdmin, productController.updateProduct)
+    .delete(productController.deleteProduct)
 
 module.exports = router;

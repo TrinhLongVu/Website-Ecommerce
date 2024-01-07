@@ -5,6 +5,7 @@ const fs = require('fs');
 const Category = require('../models/category.model')
 
 exports.getAllProduct = async (req, res) => {
+    console.log(req.isAuthenticated())
     try {
         const query = req.query;
         const skip = (query.page - 1) * query.limit;
@@ -124,6 +125,8 @@ exports.createAllProduct = async (req, res) => {
 }
 
 exports.updateProduct = async (req, res) => {
+    console.log(req.isAuthenticated())
+    console.log(req.isAuthenticated())
     try {
         const id = req.params.id;
         const newProduct = req.body

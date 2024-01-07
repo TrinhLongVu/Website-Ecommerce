@@ -41,6 +41,7 @@ exports.isLoggedUser = (req, res, next) => {
 
 
 exports.isLoggedAdmin = (req, res, next) => {
+    console.log(req.isAuthenticated())
     if (req.isAuthenticated()) {
         let token;
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {

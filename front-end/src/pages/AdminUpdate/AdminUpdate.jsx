@@ -95,10 +95,11 @@ const AdminUpdate = () => {
         const response = await fetch(
           "http://localhost:8000/api/v1/product/" + id,
           {
-            // headers: {
-            //   Authorization: "Bearer " + token,
-            // },
+            credentials: "include",
             method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
             body: formData,
           }
         );

@@ -17,22 +17,25 @@ module.exports = passport => {
     })
 
     passport.deserializeUser(async (user, done) => {
-        console.log(user);
-        if (user.type === 'local') {
-            const userLogin = await User.findOne({
-                UserName: user.name
-            });
-            if (userLogin) {
-                return done(null, userLogin);
+        try {
+            console.log(user);
+            if (user.type === 'local') {
+                const userLogin = await User.findOne({ UserName: user.name });
+                if (userLogin) {
+                    return done(null, userLogin);
+                }
+                return done('invalid');
+            } else {
+                const userLogin = await User.findOne({ type: user.type });
+                if (userLogin) {
+                    return done(null, userLogin);
+                }
+                return done('invalid');
             }
-            return done('invalid');
-        } else {
-            const userLogin = await User.findOne({
-                type: user.type
-            });
-            return done(null, userLogin);
+        } catch (err) {
+            return done(err);
         }
-    });
+    });    
 
 
     // username and password get from body

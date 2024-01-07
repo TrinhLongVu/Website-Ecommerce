@@ -9,6 +9,7 @@ const authentication = require('./routes/authentication.router.js')
 const categoryRouter = require('./routes/category.router.js')
 const vnpayRouter = require('./routes/vnpay.router.js');
 const statisticRouter = require('./routes/statistic.router.js');
+const mypayment = require('./routes/mypayment.router.js');
 const cartRouter = require('./routes/cart.router.js')
 const passport = require('passport')
 const session = require('express-session');
@@ -54,16 +55,11 @@ app.use(passport.session());
 p(passport)
 
 app.use('/api/v1/product', productRouter);
-app.use('/api/v1/user', userRouter);
 app.use('/api/v1/user', authentication);
+app.use('/api/v1/user', userRouter);
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/cart', cartRouter);
-
-const paymentRouter1 = require('./routes/mypayment.router.js');
-app.use('/api/v1/payment', paymentRouter1);
-
-// const paymentRouter = require('./routes/payment.router.js');
-// app.use('/api/v1/payment', paymentRouter);
+app.use('/api/v1/payment', mypayment);
 app.use('/api/v1/vnpay', vnpayRouter);
 app.use('/api/v1/statistic', statisticRouter);
 
