@@ -4,8 +4,10 @@ import { faCashRegister, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import { useOutletContext } from "react-router-dom";
 
 const ShopCart = () => {
+  const { userInfo } = useOutletContext();
   const product = {
     name: "Iphone 13 Pro Max",
     category: "Electronics",
@@ -59,6 +61,20 @@ const ShopCart = () => {
           <div className="cart--order-checkout-btn">
             <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
             CHECKOUT
+          </div>
+        </div>
+      </div>
+      <div className="balance">
+        <h2 className="balance-title">Your Current Balance</h2>
+        <div className="balance-content">
+          <div className="balance-card">
+            <div className="balance-card-info">
+              <div className="balance-card-info-name">{userInfo.FullName}</div>
+              <div
+                className="balance-card-info-avt"
+                style={{ backgroundImage: `url(${userInfo.Image_Avatar})` }}
+              ></div>
+            </div>
           </div>
         </div>
       </div>

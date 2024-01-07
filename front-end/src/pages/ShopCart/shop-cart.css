@@ -141,3 +141,48 @@
 #cash-regis-icon {
     margin: 10px;
 }
+
+/* Balance Info */
+.balance {
+    margin: 40px 0 20px;
+}
+
+.balance-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.balance-card {
+    margin: 20px 0;
+    padding: 20px;
+    width: 500px;
+    height: 300px;
+    background: linear-gradient(to right, #00509d, #00afb9);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.balance-card:hover {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.balance-card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+}
+
+.balance-card-info-avt {
+    width: 64px;
+    height: 64px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
