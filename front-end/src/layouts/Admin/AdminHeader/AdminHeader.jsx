@@ -17,8 +17,8 @@ const Header = () => {
       <Link to="/admin" className="logo">
         THE MEGA MALL
       </Link>
-      <NavLink to="/admin/category" className={classNameFunc}>
-        Manage Category
+      <NavLink to="/admin/user" className={classNameFunc}>
+        Manage Users
       </NavLink>
       <NavLink to="/admin/upload" className={classNameFunc}>
         Upload Product

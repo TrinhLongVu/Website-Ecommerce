@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faUserXmark } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./user-info.css";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
@@ -131,21 +131,6 @@ const UserInfo = () => {
     }
   };
 
-  const deleteUser = async () => {
-    console.log(id);
-    try {
-      const response = await fetch(`http://localhost:8000/api/v1/user/` + id, {
-        credentials: "include",
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   return (
     <>
       <Breadcrumbs crumbList={[{ name: "User Information", link: "/user" }]} />
@@ -169,12 +154,6 @@ const UserInfo = () => {
                 />
               </>
             )}
-          </div>
-          <div className="info--acc-delete-container">
-            <div className="info--acc-delete" onClick={deleteUser}>
-              <FontAwesomeIcon icon={faUserXmark} id="info--acc-del-icon" />
-              DELETE
-            </div>
           </div>
         </div>
 

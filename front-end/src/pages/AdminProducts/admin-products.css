@@ -1,3 +1,44 @@
+#add-category-banner {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.add-category-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    height: 50px;
+}
+
+#add-category {
+    padding: 0 10px;
+    width: 300px;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 12px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#add-category-btn {
+    font-size: 20px;
+    width: 80px;
+    height: 100%;
+    border: none;
+    background-color: #CCD1D9;
+    border-radius: 12px;
+}
+
+#add-category-btn:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #29ADB2;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
 .admin-products {
     margin-top: 20px;
     width: 1260px;

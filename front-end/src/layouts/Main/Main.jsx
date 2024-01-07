@@ -40,7 +40,6 @@ const MainLayout = () => {
         );
 
         const data = await response.json();
-        console.log(data);
 
         if (data.data.Role === "admin") {
           navigate("/admin");

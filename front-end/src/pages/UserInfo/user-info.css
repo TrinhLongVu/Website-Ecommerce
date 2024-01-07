@@ -6,34 +6,6 @@
     display: flex;
 }
 
-.info--acc-delete-container {
-    margin: 20px 0;
-    padding-right: 20px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-}
-
-.info--acc-delete {
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
-    background-color: #ff7b7b;
-    border-radius: 12px;
-}
-
-.info--acc-delete:hover {
-    cursor: pointer;
-    background-color: red;
-    color: white;
-}
-
-#info--acc-del-icon {
-    margin-right: 10px;
-}
-
 .info--avt {
     padding: 20px 0;
     display: flex;
