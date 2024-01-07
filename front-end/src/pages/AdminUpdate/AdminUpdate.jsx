@@ -91,7 +91,6 @@ const AdminUpdate = () => {
         }
         setUpdating(true);
         const token = localStorage.getItem("authToken");
-        console.log(token);
         const response = await fetch(
           "http://localhost:8000/api/v1/product/" + id,
           {

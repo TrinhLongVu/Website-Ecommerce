@@ -90,7 +90,11 @@ const AdminProducts = () => {
 
   const deleteProduct = (id) => {
     fetch(`http://localhost:8000/api/v1/product/${id}`, {
+      credentials: "include",
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((json) => {

@@ -7,7 +7,7 @@ const middleware = require('../middeware/auth')
 router
     .route('/')
     .get(productController.getAllProduct)
-    .post(productController.createProduct)
+    .post(middleware.isLoggedAdmin,productController.createProduct)
 
 router
     .route('/create/createAll')
@@ -17,6 +17,6 @@ router
     .route('/:id')
     .get(productController.getProduct)
     .patch(middleware.isLoggedAdmin, productController.updateProduct)
-    .delete(productController.deleteProduct)
+    .delete(middleware.isLoggedAdmin,productController.deleteProduct)
 
 module.exports = router;

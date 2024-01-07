@@ -7,6 +7,11 @@ import "./admin-header.css";
 const Header = () => {
   const classNameFunc = ({ isActive }) =>
     isActive ? "admin-nav admin-nav-active" : "admin-nav";
+
+  const logOut = () => {
+    localStorage.removeItem("authToken");
+    window.location.reload();
+  };
   return (
     <div className="admin--header">
       <Link to="/admin" className="logo">
@@ -24,7 +29,7 @@ const Header = () => {
       <NavLink to="/admin/statistics" className={classNameFunc}>
         Statistics
       </NavLink>
-      <div className="admin-head-logout-btn">
+      <div className="admin-head-logout-btn" onClick={logOut}>
         LOGOUT
         <FontAwesomeIcon icon={faRightToBracket} className="head-login-ico" />
       </div>

@@ -98,11 +98,15 @@ const AdminUpload = () => {
         formData.append("category", selectedCategory);
         formData.append("image", image);
         setUploading(true);
+        const token = localStorage.getItem("authToken");
         const response = await fetch("http://localhost:8000/api/v1/product/", {
+          credentials: "include",
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           body: formData,
         });
-
         if (response.ok) {
           Toastify(
             "success",
