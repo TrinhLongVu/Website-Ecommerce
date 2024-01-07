@@ -8,18 +8,19 @@ const AdminStatistics = () => {
   const [revenueChartData, setRevenueChartData] = useState({});
   const [productSoldChartData, setProductSoldChartData] = useState({});
   const [selectedView, setSelectedView] = useState("byweek"); // Default view
+  const [selectedYear, setSelectedYear] = useState("2024"); // Default year
+
+  const yearsDropdown = ["2020", "2021", "2022", "2023", "2024"];
+
   const generateData = () => {
-    const weeks = ["week 1", "week 2", "week 3", "week 4", "week 5", "week 6", "week 7"];
+    const weeks = ["2023-01-01", "2023-01-02", "2023-01-03", "2023-01-04", "2023-01-05", "2023-01-06", "2023-01-07"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const years = ["2020", "2021", "2022", "2023", "2024"];
 
     const specificData = {
       byweekRevenue: [1000, 149, 1500, 700, 6900, 200, 100],
       byweekProductSold: [2123, 4056, 12692, 23098, 38690, 50210, 60373],
       byMonthRevenue: [2200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       byMonthProductSold: [230, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      byYearRevenue: [10, 20, 30, 33, 40],
-      byYearProductSold: [2123, 4056, 12692, 23098, 38690],
     };
 
     setStatistics(specificData);
@@ -79,39 +80,16 @@ const AdminStatistics = () => {
 
       setRevenueChartData(revenueData);
       setProductSoldChartData(productSoldData);
-    } else if (selectedView === "byYear") {
-      const revenueData = {
-        labels: years,
-        datasets: [
-          {
-            label: "Revenue Gain (by year)",
-            data: specificData.byYearRevenue,
-            borderColor: "#007BFF",
-            fill: false,
-          },
-        ],
-      };
-
-      const productSoldData = {
-        labels: years,
-        datasets: [
-          {
-            label: "Product Sold Gain (by year)",
-            data: specificData.byYearProductSold,
-            borderColor: "#b8860b",
-            fill: false,
-          },
-        ],
-      };
-
-      setRevenueChartData(revenueData);
-      setProductSoldChartData(productSoldData);
     }
   };
 
   useEffect(() => {
     generateData();
-  }, [selectedView]);
+  }, [selectedView, selectedYear]);
+
+  const handleYearChange = (event) => {
+    setSelectedYear(event.target.value);
+  };
 
   return (
     <>
@@ -142,11 +120,22 @@ const AdminStatistics = () => {
               </div>
             </div>
           </div>
-
         </div>
 
 
 
+        {selectedView === "byMonth" && (
+          <div className="admin-statistics-dropdown">
+            <label htmlFor="yearDropdown">Select Year: </label>
+            <select id="yearDropdown" value={selectedYear} onChange={handleYearChange}>
+              {yearsDropdown.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
 
         <div className="admin-statistics-row">
@@ -170,10 +159,21 @@ const AdminStatistics = () => {
             </div>
           </div>
         </div>
+
+        {/* Buttons */}
         <div className="admin-statistics-buttons">
-          <button onClick={() => setSelectedView("byweek")}>By week</button>
-          <button onClick={() => setSelectedView("byMonth")}>By Month</button>
-          <button onClick={() => setSelectedView("byYear")}>By Year</button>
+          <button
+            onClick={() => setSelectedView("byweek")}
+            className={selectedView === "byweek" ? "selected" : ""}
+          >
+            By week
+          </button>
+          <button
+            onClick={() => setSelectedView("byMonth")}
+            className={selectedView === "byMonth" ? "selected" : ""}
+          >
+            By Month
+          </button>
         </div>
       </div>
     </>

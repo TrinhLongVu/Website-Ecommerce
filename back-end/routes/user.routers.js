@@ -17,12 +17,12 @@ router
     
 router
     .route('/information/user')
-    .get(middleware.isLoggedUser, userController.getInfo);
+    .get(userController.getInfo);
 
 router
     .route('/:id')
     .get(userController.getUser)
-    .patch(userController.updateUser)
-    .delete(userController.deleteUser);
+    .patch(middleware.isLoggedUser, userController.updateUser)
+    .delete(middleware.isLoggedUser,userController.deleteUser);
     
 module.exports = router;

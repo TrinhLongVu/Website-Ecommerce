@@ -5,7 +5,7 @@
 }
 
 .cart--order-table {
-    height: 500px;
+    height: 650px;
     width: 60%;
     padding: 10px;
     background-color: white;
@@ -126,18 +126,124 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1B9C85;
-    color: white;
+    background-color: #00afb9;
+    color: black;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 
 .cart--order-checkout-btn:hover {
-    background-color: #BFDB38;
-    color: black;
+    background-color: #00509d;
+    color: white;
     cursor: pointer;
 }
 
 #cash-regis-icon {
     margin: 10px;
+}
+
+/* Balance Info */
+.balance {
+    margin: 40px 0 20px;
+}
+
+.balance-content {
+    display: flex;
+    justify-content: center;
+}
+
+.balance-card {
+    margin: 10px 0;
+    padding: 20px;
+    width: 500px;
+    height: 300px;
+    background: linear-gradient(to right, #00509d, #00afb9);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    user-select: none;
+}
+
+.balance-card:hover {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.balance-card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+}
+
+.balance-card-info-name {
+    width: 370px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.balance-card-info-avt {
+    width: 64px;
+    height: 64px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.balance-card-balance {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 80px;
+    color: white;
+}
+
+.balance-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.balance-card-footer-logo {
+    font-size: 30px;
+    font-family: 'Keania One';
+    font-style: italic;
+    text-align: center;
+    color: #F8E559;
+    width: 150px;
+}
+
+.balance-card-footer-credit {
+    font-size: 20px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8E559;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.balance-card-footer-credit:hover {
+    cursor: pointer;
+    background-color: #BFDB38;
+    color: white;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.balance-card-footer-input {
+    padding: 0 15px;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 12px;
 }

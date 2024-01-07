@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: start;
     max-height: 370px;
-    width: 650px;
+    width: 450px;
     background-color: #f8f8f8;
     margin-right: 20px;
     border-radius: 20px;
@@ -137,4 +137,10 @@
     margin: 10px 0;
     display: flex;
     justify-content: end;
+}
+
+.info-update-loader {
+    width: 200px;
+    display: flex;
+    justify-content: center;
 }

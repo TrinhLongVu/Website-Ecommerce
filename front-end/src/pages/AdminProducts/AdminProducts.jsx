@@ -6,15 +6,23 @@ import {
   faCircleXmark,
   faAngleDown,
   faStore,
+  faTags,
+  faCirclePlus,
+  faEyeSlash,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
+import Toastify from "../../components/Toastify/Toastify";
+
+import { Link, useOutletContext } from "react-router-dom";
 
 import "./admin-products.css";
 
 const AdminProducts = () => {
   const domain = "https://themegamall.onrender.com/api/v1/product?";
+  const { categoryList } = useOutletContext();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [productList, setProductList] = useState([]);
 
   const [filter, setFilter] = useState("");
@@ -50,7 +58,7 @@ const AdminProducts = () => {
     }
     if (prevPage.current !== currentPage) {
       window.scrollTo({
-        top: 0,
+        top: 380,
         behavior: "smooth",
       });
     }
@@ -65,7 +73,6 @@ const AdminProducts = () => {
     fetch(domain + fetchDomain)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setTotalPages(json.totalPage);
         setProductList(json.data);
         setLoadPage(false);
@@ -88,17 +95,76 @@ const AdminProducts = () => {
 
   const deleteProduct = (id) => {
     fetch(`http://localhost:8000/api/v1/product/${id}`, {
+      credentials: "include",
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {
+          Toastify(
+            "success",
+            "bottom-right",
+            "Successfully removed that product from the store"
+          );
+          if (productList.length === 1 && currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+          }
           setDel(!del);
+        } else {
+          Toastify(
+            "error",
+            "bottom-right",
+            "Failed to remove that product from the store!!! Please try again"
+          );
         }
       });
   };
   return (
     <>
+      <div className="home-section">
+        <div className="home-section-banner">
+          <h2>
+            <FontAwesomeIcon icon={faTags} /> Categories
+          </h2>
+        </div>
+        <div className="home-section-content">
+          <div className="categories-list">
+            {categoryList.map((category, idx) => (
+              <div
+                key={idx}
+                className="category-card"
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <div className="category-card-bg"></div>
+                <h3 className="category-card-name">
+                  {hoveredIndex === idx ? (
+                    <FontAwesomeIcon icon={faEyeSlash} />
+                  ) : (
+                    category.name
+                  )}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="home-section">
+        <div className="home-section-banner" id="add-category-banner">
+          <h2>
+            <FontAwesomeIcon icon={faCirclePlus} /> Add Category
+          </h2>
+          <div className="add-category-box">
+            <input type="text" id="add-category" placeholder="Category Name" />
+            <button id="add-category-btn">
+              <FontAwesomeIcon icon={faCirclePlus} />
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="home-section">
         <div className="home-section-banner">
           <h2>
@@ -142,7 +208,8 @@ const AdminProducts = () => {
                     ${product.price}
                   </div>
                   <div className="admin-products-card-btn-container">
-                    <div
+                    <Link
+                      to={`/admin/products/${product._id}`}
                       className="admin-products-card-btn"
                       id="admin-products-card-update"
                     >
@@ -150,7 +217,7 @@ const AdminProducts = () => {
                         icon={faCircleUp}
                         className="admin-products-card-btn-icon"
                       />
-                    </div>
+                    </Link>
                     <div
                       className="admin-products-card-btn"
                       id="admin-products-card-delete"

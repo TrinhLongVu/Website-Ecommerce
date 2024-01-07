@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Toastify from "../../components/Toastify/Toastify";
 
 const Register = () => {
   const register = async () => {
@@ -28,27 +27,9 @@ const Register = () => {
 
       const res = await response.json();
       if (res.status === "fail") {
-        toast.error(res.msg, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        Toastify("error", "top-right", res.msg);
       } else if (res.status === "success") {
-        toast.success("Successfully created new account", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        Toastify("success", "top-right", "Successfully created new account");
         document.querySelector("#register-email").value = "";
         document.querySelector("#register-pass").value = "";
         document.querySelector("#register-confirm-pass").value = "";

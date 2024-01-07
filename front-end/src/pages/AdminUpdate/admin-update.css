@@ -1,0 +1,224 @@
+.admin-update-title {
+    margin: 50px 0 30px;
+}
+
+.admin-update {
+    margin: 30px 0;
+    width: 1260px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-update-left {
+    width: 850px;
+}
+
+.admin-update-info {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-update-info-side {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.admin-update-input-name,
+.admin-update-input-price {
+    background-color: white;
+    padding: 0 15px;
+    margin: 10px 0;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.admin-update-input-name:focus,
+.admin-update-input-price:focus {
+    outline: none;
+}
+
+.admin-update-select {
+    position: relative;
+    background-color: white;
+    padding: 0 15px;
+    margin: 10px 0;
+    height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.admin-update-select-title {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+#admin-update-show-list-icon {
+    font-size: 20px;
+}
+
+.admin-update-select-list {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    background-color: white;
+    z-index: 5;
+    border-radius: 0 0 15px 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.admin-update-select-list div {
+    user-select: none;
+    padding: 15px;
+    height: 50px;
+    color: #3e3232;
+    opacity: 0.75;
+}
+
+.admin-update-select-list div:hover {
+    background-color: #ccd1d9;
+    color: white;
+}
+
+#admin-update-title {
+    width: 60%;
+}
+
+#admin-update-category {
+    width: 37%;
+}
+
+#admin-update-price {
+    width: 100%;
+}
+
+.admin-update-content {
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.admin-update-content-container {
+    margin: 10px 0;
+    padding: 20px;
+    width: 100%;
+    height: 400px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.admin-update-textarea {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    border: none;
+}
+
+.admin-update-textarea:focus {
+    outline: none;
+}
+
+.admin-update-right {
+    width: 370px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.admin-update-thumbnail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px;
+    margin: 10px 0;
+    width: 100%;
+    height: 300px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.admin-update-thumbnail-frame {
+    width: 100%;
+    height: 250px;
+    border-radius: 15px;
+    background-color: #ccd1d9;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #3e3232;
+    opacity: 0.75;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.admin-update-thumbnail-upload {
+    margin: 10px 0;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    background-color: #29ADB2;
+    border-radius: 10px;
+}
+
+.admin-update-thumbnail-upload:hover {
+    background-color: #C5E898;
+    color: white;
+}
+
+.admin-update-control {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.admin-update-control-item {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+
+.admin-update-control-item:hover {
+    background-color: #1640D6;
+    color: white;
+}
+
+.admin-update-control-ico {
+    margin-right: 10px;
+}
+
+#admin-update-control-publish:hover {
+    background-color: #f81539bf;
+}

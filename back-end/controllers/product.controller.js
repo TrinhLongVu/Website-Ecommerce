@@ -5,6 +5,7 @@ const fs = require('fs');
 const Category = require('../models/category.model')
 
 exports.getAllProduct = async (req, res) => {
+    console.log(req.isAuthenticated())
     try {
         const query = req.query;
         const skip = (query.page - 1) * query.limit;
@@ -124,17 +125,26 @@ exports.createAllProduct = async (req, res) => {
 }
 
 exports.updateProduct = async (req, res) => {
+    console.log(req.isAuthenticated())
+    console.log(req.isAuthenticated())
     try {
         const id = req.params.id;
         const newProduct = req.body
-        const result = await cloudinary.uploader.upload(file.tempFilePath, {
-            public_id: `${Date.now()}`,
-            resource_type: "auto",
-            folder: "images"
-        })
-        newProduct.image = result.url
+        if (newProduct.category) {
+            const foundCategory = await Category.findOne({ name: newProduct.category })
+            newProduct.category = foundCategory._id;
+        }
+        if (req.files) {
+            const file = req.files.image;
+            const result = await cloudinary.uploader.upload(file.tempFilePath, {
+                public_id: `${Date.now()}`,
+                resource_type: "auto",
+                folder: "images"
+            })
+            newProduct.image = result.url
+        }
 
-        const update = await Product.findByIdAndUpdate(id, req.body, {
+        const update = await Product.findByIdAndUpdate(id, newProduct, {
             new: true
         })
         res.status(201).json({

@@ -2,6 +2,11 @@ const User = require('../models/user.model')
 const Product = require('../models/product.model');
 const Payment = require('../models/payment.model');
 const middleware = require('../middeware/auth')
+const dotenv = require('dotenv')
+
+dotenv.config({
+    path: './config.env'
+});
 
 exports.createPaymentAccount = async (req, res, next) => { // tạo 1 tài khoản trong user.Balance, tham số truyền vào là số tiền và id của người dùng
     try {
@@ -22,7 +27,6 @@ exports.createPaymentAccount = async (req, res, next) => { // tạo 1 tài kho�
 
         const newPayment = await Payment.create(balance);
         user.Balance.push(newPayment)
-        console.log(newPayment)
         await user.save();
 
         res.status(200).json({
@@ -106,11 +110,18 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
 
 
 exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số nhận vào là id người dùng, id của tài khoản thanh toán, tổng số tiền của Cart
-                                                // sau khi thanh toán, xóa hết user.Cart và lưu lại lịch sử giao dịch trong user.Transaction
+    // sau khi thanh toán, xóa hết user.Cart và lưu lại lịch sử giao dịch trong user.Transaction
     try {
         const userId = req.params.id;
-        const { paymentid, totalPrice } = req.body
         const user = await User.findById(userId);
+        if(user.Cart.length == 0){
+            return res.status(200).json({
+                status: 'fail',
+                msg: "You dont have any Cart to pay"
+            });
+        }
+        const { paymentid, totalPrice } = req.body
+        console.log(user)
         if (!user) {
             return res.status(200).json({
                 status: 'fail',
@@ -132,6 +143,11 @@ exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số
             });
         }
 
+        const adminId = process.env.ADMINID;
+        const admin = await User.findById(adminId)
+
+        console.log(admin.Balance[0])
+        admin.Balance[0].balance += totalPrice;
 
         balanceAccount.balance -= totalPrice;
 
@@ -139,15 +155,27 @@ exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số
             user.Transaction = [];
         }
 
+        if (!admin.Transaction) {
+            admin.Transaction = [];
+        }
+
+        admin.Transaction.push({
+            user_id: user.id,
+            cart_id: user.Cart.map(cart => cart.product_id),
+            time: new Date()
+        });
+
 
         user.Transaction.push({
+            user_id: user.id,
             cart_id: user.Cart.map(cart => cart.product_id),
             time: new Date()
         });
 
         user.Cart.splice(0);
-        
+
         await user.save();
+        await admin.save();
 
         res.status(400).json({
             status: 'success',

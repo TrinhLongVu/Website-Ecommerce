@@ -2,8 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Toastify from "../../components/Toastify/Toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,16 +11,7 @@ const Login = () => {
     const name = document.querySelector("#login-name").value;
     const password = document.querySelector("#login-password").value;
     if (!name || !password) {
-      toast.error("Please fill all the information", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      Toastify("error", "top-right", "Please fill all the information");
     } else {
       try {
         const response = await fetch(
@@ -43,18 +33,10 @@ const Login = () => {
           navigate("/");
         }
         if (data.status === "failed") {
-          toast.error(
-            "Something's incorrect. Please try again with the correct login information!!!",
-            {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-            }
+          Toastify(
+            "error",
+            "top-right",
+            "Something's incorrect. Please try again with the correct login information!!!"
           );
         }
       } catch (error) {

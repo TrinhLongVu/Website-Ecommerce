@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const Product = require('../models/product.model');
 const { pseudoRandomBytes } = require('crypto');
 const Category = require('../models/category.model');
+const { search } = require('../app');
+const cloudinary = require('cloudinary').v2;
 
 //=========================== FUNCTION =========================================================================
 function checkIfElementExists(element, array) {
@@ -122,9 +124,18 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
 
-        const _id = req.params.id;
-
-        const update = await User.findByIdAndUpdate(_id, req.body, {
+        const id = req.params.id;
+        const newUser = req.body
+        if (req.files) {
+            const file = req.files.image;
+            const result = await cloudinary.uploader.upload(file.tempFilePath, {
+                public_id: `${Date.now()}`,
+                resource_type: "auto",
+                folder: "images"
+            })
+            newUser.Image_Avatar = result.url
+        }
+        const update = await User.findByIdAndUpdate(id, newUser, {
             new: true
         });
 
@@ -176,15 +187,66 @@ exports.deleteUser = async (req, res) => {
     }
 }
 
+// exports.searchProduct = async (req, res) => {
+//     try {
+//         const { searchValue } = req.body;
+
+//         const products = await Product.find();
+//         const categories = await Category.find();
+
+//         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
+
+// const searchResult = products.filter(product => {
+//     const normalizedTitle = normalize(product.title);
+//     const normalizedDetail = normalize(product.detail);
+
+//     const titleMatch = normalizedTitle.includes(normalize(searchValue));
+//     const detailMatch = normalizedDetail.includes(normalize(searchValue));
+
+//     const categoryMatch = categories.some(category => {
+//         if (!product.category || !category.name) {
+//             return false;
+//         }
+
+//         const normalizedCategoryName = normalize(category.name);
+//         return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
+//     });
+
+//     return titleMatch || detailMatch || categoryMatch;
+// });
+
+//         console.log(searchResult.length)
+
+//         if (searchResult.length === 0) {
+//             return res.status(200).json({
+//                 status: "fail",
+//                 message: "Can't find what you want"
+//             });
+//         }
+
+//         res.status(200).json({
+//             status: "success",
+//             // totalPage: Math.ceil(searchResult.length / limit),
+//             data: searchResult
+//         });
+//     } catch (error) {
+//         console.error('Error searching for products:', error);
+//         res.status(500).json({
+//             success: false,
+//             error: 'Internal Server Error'
+//         });
+//     }
+// };
+
 exports.searchProduct = async (req, res) => {
     try {
         const { page, limit, search } = req.query;
         console.log(search)
-        
+
         const skip = (page - 1) * limit;
 
         let queryBuilder = Product.find();
-        
+
         if (req.query.sort) {
             const sortBy = req.query.sort.split(',').join(' ');
             queryBuilder = queryBuilder.sort(sortBy);
@@ -201,15 +263,20 @@ exports.searchProduct = async (req, res) => {
 
             const titleMatch = normalizedTitle.includes(normalize(search));
             const detailMatch = normalizedDetail.includes(normalize(search));
-            
+
             const categoryMatch = categories.some(category => {
+                if (!product.category || !category.name) {
+                    return false;
+                }
+
                 const normalizedCategoryName = normalize(category.name);
                 return normalizedCategoryName.includes(normalize(search)) && product.category.includes(category._id);
             });
 
             return titleMatch || detailMatch || categoryMatch;
         });
-        
+
+
         const result = searchResult.slice(skip, skip + limit * 1.0);
 
         if (searchResult.length === 0) {
