@@ -1,9 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./shop-cart.css";
-import { faCashRegister, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCashRegister,
+  faCreditCard,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import Toastify from "../../components/Toastify/Toastify";
 import { useOutletContext } from "react-router-dom";
 
 const ShopCart = () => {
@@ -18,6 +23,22 @@ const ShopCart = () => {
   const [cart, setCart] = useState([product, product, product]);
 
   const removeFromCart = () => {};
+
+  const credit = () => {
+    const creditAmount = document.querySelector(
+      ".balance-card-footer-input"
+    ).value;
+    if (creditAmount === "") {
+      Toastify("error", "bottom-center", "Please enter credit amount!");
+    } else if (isNaN(creditAmount)) {
+      Toastify("error", "bottom-center", "Credit amount must be a number!");
+    } else if (creditAmount <= 0) {
+      Toastify("error", "bottom-center", "Credit amount must be positive!");
+    } else {
+      Toastify("success", "bottom-center", "Your credit has been added");
+      document.querySelector(".balance-card-footer-input").value = "";
+    }
+  };
 
   return (
     <>
@@ -62,18 +83,26 @@ const ShopCart = () => {
             <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
             CHECKOUT
           </div>
-        </div>
-      </div>
-      <div className="balance">
-        <h2 className="balance-title">Your Current Balance</h2>
-        <div className="balance-content">
           <div className="balance-card">
             <div className="balance-card-info">
-              <div className="balance-card-info-name">{userInfo.FullName}</div>
+              <div className="balance-card-info-name">{userInfo?.FullName}</div>
               <div
                 className="balance-card-info-avt"
-                style={{ backgroundImage: `url(${userInfo.Image_Avatar})` }}
+                style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
               ></div>
+            </div>
+            <div className="balance-card-balance">$1863</div>
+            <div className="balance-card-footer">
+              <div className="balance-card-footer-logo">THE MEGA MALL</div>
+              <input
+                type="text"
+                placeholder="$"
+                className="balance-card-footer-input"
+                onKeyDown={(e) => e.key === "Enter" && credit()}
+              />
+              <div className="balance-card-footer-credit" onClick={credit}>
+                <FontAwesomeIcon icon={faCreditCard} />
+              </div>
             </div>
           </div>
         </div>
