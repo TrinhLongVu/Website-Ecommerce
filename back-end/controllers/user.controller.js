@@ -5,6 +5,7 @@ const Product = require('../models/product.model');
 const { pseudoRandomBytes } = require('crypto');
 const Category = require('../models/category.model');
 const { search } = require('../app');
+const cloudinary = require('cloudinary').v2;
 
 //=========================== FUNCTION =========================================================================
 function checkIfElementExists(element, array) {
@@ -132,7 +133,7 @@ exports.updateUser = async (req, res) => {
                 resource_type: "auto",
                 folder: "images"
             })
-            newUser.image = result.url
+            newUser.Image_Avatar = result.url
         }
         const update = await User.findByIdAndUpdate(id, newUser, {
             new: true

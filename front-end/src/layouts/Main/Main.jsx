@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 const MainLayout = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
+  const [userChange, changeUser] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const MainLayout = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [userChange]);
   useEffect(() => {
     fetch("https://themegamall.onrender.com/api/v1/category")
       .then((res) => res.json())
@@ -67,7 +68,7 @@ const MainLayout = () => {
         userInfo={userInfo}
         setUserInfo={setUserInfo}
       />
-      <Outlet context={{ categoryList, userInfo }} />
+      <Outlet context={{ categoryList, userInfo, userChange, changeUser }} />
       <Footer categoryList={categoryList} />
       <ToastContainer
         position="top-right"

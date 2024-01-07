@@ -166,3 +166,9 @@
     display: flex;
     justify-content: end;
 }
+
+.info-update-loader {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
