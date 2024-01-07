@@ -179,9 +179,19 @@ exports.deleteUser = async (req, res) => {
 
 exports.searchProduct = async (req, res) => {
     try {
-        const { searchValue } = req.body;
+        const { page, limit, search } = req.query;
+        console.log(search)
 
-        const products = await Product.find();
+        const skip = (page - 1) * limit;
+
+        let queryBuilder = Product.find();
+
+        if (req.query.sort) {
+            const sortBy = req.query.sort.split(',').join(' ');
+            queryBuilder = queryBuilder.sort(sortBy);
+        }
+        const products = await queryBuilder.exec();
+
         const categories = await Category.find();
 
         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
@@ -192,7 +202,7 @@ exports.searchProduct = async (req, res) => {
 
             const titleMatch = normalizedTitle.includes(normalize(searchValue));
             const detailMatch = normalizedDetail.includes(normalize(searchValue));
-            
+
             const categoryMatch = categories.some(category => {
                 if (!product.category || !category.name) {
                     return false;
@@ -205,7 +215,7 @@ exports.searchProduct = async (req, res) => {
             return titleMatch || detailMatch || categoryMatch;
         });
 
-        console.log(searchResult.length)
+        const result = searchResult.slice(skip, skip + limit * 1.0);
 
         if (searchResult.length === 0) {
             return res.status(200).json({
@@ -216,8 +226,8 @@ exports.searchProduct = async (req, res) => {
 
         res.status(200).json({
             status: "success",
-            // totalPage: Math.ceil(searchResult.length / limit),
-            data: searchResult
+            totalPage: Math.ceil(searchResult.length / limit),
+            data: result
         });
     } catch (error) {
         console.error('Error searching for products:', error);
