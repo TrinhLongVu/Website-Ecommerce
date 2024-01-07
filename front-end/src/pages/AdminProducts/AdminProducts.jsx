@@ -11,6 +11,11 @@ import {
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 
+import { Link } from "react-router-dom";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./admin-products.css";
 
 const AdminProducts = () => {
@@ -22,6 +27,7 @@ const AdminProducts = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [showFilter, setShowFilter] = useState(false);
   const [loadPage, setLoadPage] = useState(false);
+  const [del, setDel] = useState(false);
   const toggleFilter = () => {
     setShowFilter(!showFilter);
     if (!showFilter) {
@@ -64,11 +70,12 @@ const AdminProducts = () => {
     fetch(domain + fetchDomain)
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         setTotalPages(json.totalPage);
         setProductList(json.data);
         setLoadPage(false);
       });
-  }, [currentPage, filter]);
+  }, [currentPage, filter, del]);
 
   document.body.addEventListener("click", (event) => {
     const homeFilterBox = document.querySelector(".home-filter-box");
@@ -84,7 +91,30 @@ const AdminProducts = () => {
     toggleFilter();
   };
 
-  const deleteUser = (id) => {};
+  const deleteProduct = (id) => {
+    fetch(`http://localhost:8000/api/v1/product/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === "success") {
+          toast.success("Successfully removed that product from the store", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          if (productList.length === 1 && currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+          }
+          setDel(!del);
+        }
+      });
+  };
   return (
     <>
       <div className="home-section">
@@ -130,7 +160,8 @@ const AdminProducts = () => {
                     ${product.price}
                   </div>
                   <div className="admin-products-card-btn-container">
-                    <div
+                    <Link
+                      to={`/admin/products/${product._id}`}
                       className="admin-products-card-btn"
                       id="admin-products-card-update"
                     >
@@ -138,10 +169,11 @@ const AdminProducts = () => {
                         icon={faCircleUp}
                         className="admin-products-card-btn-icon"
                       />
-                    </div>
+                    </Link>
                     <div
                       className="admin-products-card-btn"
                       id="admin-products-card-delete"
+                      onClick={() => deleteProduct(product._id)}
                     >
                       <FontAwesomeIcon
                         icon={faCircleXmark}

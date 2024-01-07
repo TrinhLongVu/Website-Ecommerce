@@ -62,6 +62,9 @@ const userSchema = new Schema({
     ],
     Transaction: [
         {
+            user_id:{
+                type: String
+            },
             cart_id: {
                 type: Array,
                 ref: 'Cart'

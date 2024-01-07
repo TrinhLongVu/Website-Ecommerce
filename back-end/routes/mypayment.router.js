@@ -18,6 +18,6 @@ router
     
 router 
     .route('/pay/:id')
-    .get(paymentController.payMoney)
+    .post(paymentController.payMoney)
 
 module.exports = router;

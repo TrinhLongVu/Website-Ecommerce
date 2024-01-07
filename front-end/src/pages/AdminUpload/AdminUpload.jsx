@@ -5,8 +5,9 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProductFrame from "../../components/ProductFrame/ProductFrame";
+import Loader from "../../components/Loader/Loader";
 import "./admin-upload.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +17,7 @@ const AdminUpload = () => {
   const { categoryList } = useOutletContext();
   const [showList, setShowList] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const toggleList = () => {
     setShowList(!showList);
@@ -106,16 +108,15 @@ const AdminUpload = () => {
         theme: "colored",
       });
     } else {
-      let formData = new FormData();
-      formData.append("title", productName);
-      formData.append("price", productPrice);
-      formData.append("detail", productDetail);
-      formData.append("category", selectedCategory);
-      formData.append("image", image);
       try {
-        console.log(formData.get("image"));
+        let formData = new FormData();
+        formData.append("title", productName);
+        formData.append("price", productPrice);
+        formData.append("detail", productDetail);
+        formData.append("category", selectedCategory);
+        formData.append("image", image);
+        setUploading(true);
         const response = await fetch("http://localhost:8000/api/v1/product/", {
-          // credentials: "include",
           method: "POST",
           body: formData,
         });
@@ -131,6 +132,7 @@ const AdminUpload = () => {
             progress: undefined,
             theme: "colored",
           });
+          setUploading(false);
           document.querySelector(".admin-upload-input-name").value = "";
           document.querySelector(".admin-upload-input-price").value = "";
           document.querySelector(".admin-upload-textarea").value = "";
@@ -153,9 +155,20 @@ const AdminUpload = () => {
             progress: undefined,
             theme: "colored",
           });
+          setUploading(false);
         }
       } catch (error) {
-        console.error("Error:", error);
+        toast.error("Looks like there's some error!!! Please try again", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        setUploading(false);
       }
     }
   };
@@ -252,11 +265,17 @@ const AdminUpload = () => {
               id="admin-upload-control-publish"
               onClick={uploadProduct}
             >
-              <FontAwesomeIcon
-                icon={faUpload}
-                className="admin-upload-control-ico"
-              />
-              Upload
+              {uploading ? (
+                <Loader />
+              ) : (
+                <>
+                  <FontAwesomeIcon
+                    icon={faUpload}
+                    className="admin-upload-control-ico"
+                  />
+                  Upload
+                </>
+              )}
             </div>
           </div>
         </div>

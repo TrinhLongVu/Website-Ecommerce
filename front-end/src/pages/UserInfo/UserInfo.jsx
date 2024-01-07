@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faUserXmark } from "@fortawesome/free-solid-svg-icons";
 import "./user-info.css";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import { format } from "date-fns";
 
 const UserInfo = () => {
@@ -15,7 +16,6 @@ const UserInfo = () => {
   const [address, setAddress] = useState("");
   const [birthday, setBirthday] = useState("");
   const [changeAvt, setChangeAvt] = useState(null);
-  const [isPending, setPending] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,6 +46,7 @@ const UserInfo = () => {
         setPhone(data.data.PhoneNumber);
         setAddress(data.data.Address);
         setAvt(data.data.Image_Avatar);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -77,25 +78,34 @@ const UserInfo = () => {
 
   return (
     <>
+      <Breadcrumbs crumbList={[{ name: "User Information", link: "/user" }]} />
       <div className="info-avt-container">
-        <div className="info--avt">
-          <div
-            className="avatar-big"
-            style={{ backgroundImage: `url(${avt})` }}
-          ></div>
-          {isEditMode && (
-            <>
-              <label htmlFor="info--avt-upload" className="info--avt-change">
-                <FontAwesomeIcon icon={faEdit} id="info--avt-edit" />
-                Change Avatar
-              </label>
-              <input
-                type="file"
-                id="info--avt-upload"
-                onChange={handleAvatarChange}
-              />
-            </>
-          )}
+        <div className="info-left-contaier">
+          <div className="info--avt">
+            <div
+              className="avatar-big"
+              style={{ backgroundImage: `url(${avt})` }}
+            ></div>
+            {isEditMode && (
+              <>
+                <label htmlFor="info--avt-upload" className="info--avt-change">
+                  <FontAwesomeIcon icon={faEdit} id="info--avt-edit" />
+                  Change Avatar
+                </label>
+                <input
+                  type="file"
+                  id="info--avt-upload"
+                  onChange={handleAvatarChange}
+                />
+              </>
+            )}
+          </div>
+          <div className="info--acc-delete-container">
+            <div className="info--acc-delete">
+              <FontAwesomeIcon icon={faUserXmark} id="info--acc-del-icon" />
+              DELETE
+            </div>
+          </div>
         </div>
 
         <div className="info">
