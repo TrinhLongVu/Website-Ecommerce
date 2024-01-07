@@ -177,6 +177,57 @@ exports.deleteUser = async (req, res) => {
     }
 }
 
+// exports.searchProduct = async (req, res) => {
+//     try {
+//         const { searchValue } = req.body;
+
+//         const products = await Product.find();
+//         const categories = await Category.find();
+
+//         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
+
+// const searchResult = products.filter(product => {
+//     const normalizedTitle = normalize(product.title);
+//     const normalizedDetail = normalize(product.detail);
+
+//     const titleMatch = normalizedTitle.includes(normalize(searchValue));
+//     const detailMatch = normalizedDetail.includes(normalize(searchValue));
+
+//     const categoryMatch = categories.some(category => {
+//         if (!product.category || !category.name) {
+//             return false;
+//         }
+
+//         const normalizedCategoryName = normalize(category.name);
+//         return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
+//     });
+
+//     return titleMatch || detailMatch || categoryMatch;
+// });
+
+//         console.log(searchResult.length)
+
+//         if (searchResult.length === 0) {
+//             return res.status(200).json({
+//                 status: "fail",
+//                 message: "Can't find what you want"
+//             });
+//         }
+
+//         res.status(200).json({
+//             status: "success",
+//             // totalPage: Math.ceil(searchResult.length / limit),
+//             data: searchResult
+//         });
+//     } catch (error) {
+//         console.error('Error searching for products:', error);
+//         res.status(500).json({
+//             success: false,
+//             error: 'Internal Server Error'
+//         });
+//     }
+// };
+
 exports.searchProduct = async (req, res) => {
     try {
         const { page, limit, search } = req.query;
@@ -200,8 +251,8 @@ exports.searchProduct = async (req, res) => {
             const normalizedTitle = normalize(product.title);
             const normalizedDetail = normalize(product.detail);
 
-            const titleMatch = normalizedTitle.includes(normalize(searchValue));
-            const detailMatch = normalizedDetail.includes(normalize(searchValue));
+            const titleMatch = normalizedTitle.includes(normalize(search));
+            const detailMatch = normalizedDetail.includes(normalize(search));
 
             const categoryMatch = categories.some(category => {
                 if (!product.category || !category.name) {
@@ -209,11 +260,12 @@ exports.searchProduct = async (req, res) => {
                 }
 
                 const normalizedCategoryName = normalize(category.name);
-                return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
+                return normalizedCategoryName.includes(normalize(search)) && product.category.includes(category._id);
             });
 
             return titleMatch || detailMatch || categoryMatch;
         });
+
 
         const result = searchResult.slice(skip, skip + limit * 1.0);
 
