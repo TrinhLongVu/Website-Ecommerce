@@ -19,6 +19,7 @@ const AdminUpdate = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const [image, setImage] = useState(null);
   const [updating, setUpdating] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -43,7 +44,7 @@ const AdminUpdate = () => {
         setProduct(json.data);
         setPreviewImage(json.data.image);
       });
-  }, [id]);
+  }, [id, updated]);
 
   const toggleList = () => {
     setShowList(!showList);
@@ -106,11 +107,12 @@ const AdminUpdate = () => {
         if (response.ok) {
           Toastify("success", "top-right", "Your product has been updated");
           setUpdating(false);
-          document.querySelector(".admin-update-input-name").value = "";
-          document.querySelector(".admin-update-input-price").value = "";
-          document.querySelector(".admin-update-textarea").value = "";
-          setCategory("");
           setImage(null);
+          setUpdated(!updated);
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
         } else {
           Toastify(
             "error",
