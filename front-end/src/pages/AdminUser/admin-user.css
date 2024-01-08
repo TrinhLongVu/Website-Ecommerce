@@ -1,3 +1,71 @@
+.admin-user-add {
+    margin: 20px 0;
+    display: flex;
+}
+
+.admin-user-add-form {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+}
+
+.admin-user-add-form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-user-add-form-row-item {
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+}
+
+.admin-user-add-inp {
+    background-color: white;
+    padding: 0 15px;
+    margin: 10px 0;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.admin-user-add-inp:focus {
+    outline: none;
+}
+
+#admin-user-add-name-item {
+    width: 60%;
+}
+
+.admin-user-add-btn {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-user-add-btn-icon {
+    font-size: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: #00afb9;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    width: 90px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.admin-user-add-btn-icon:hover {
+    background-color: #00509d;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
 .admin-user {
     width: 1260px;
     display: flex;
