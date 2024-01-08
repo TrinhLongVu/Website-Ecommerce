@@ -108,8 +108,11 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
       </div>
       {userInfo ? (
         <>
-          <Link to="/cart" className="home-shop-cart">
+          <Link to="/cart" className="head-shop-cart">
             <FontAwesomeIcon icon={faCartShopping} />
+            {userInfo.Cart > 0 && (
+              <div className="head-cart-num">{userInfo.Cart.length}</div>
+            )}
           </Link>
           <div
             className="avt-dropdown-btn"

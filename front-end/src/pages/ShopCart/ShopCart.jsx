@@ -1,26 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./shop-cart.css";
 import {
+  faCartPlus,
   faCashRegister,
   faCreditCard,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import Toastify from "../../components/Toastify/Toastify";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const ShopCart = () => {
+  const navigate = useNavigate();
   const { userInfo } = useOutletContext();
-  const product = {
-    name: "Iphone 13 Pro Max",
-    category: "Electronics",
-    price: 89.99,
-    img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-  };
-
-  const [cart, setCart] = useState([product, product, product]);
 
   const removeFromCart = () => {};
 
@@ -47,24 +41,36 @@ const ShopCart = () => {
       />
       <div className="shop-cart">
         <div className="cart--order-table">
-          {cart.map((item, idx) => (
-            <div key={idx} className="cart--item">
-              <div
-                className="cart--item-img"
-                style={{
-                  backgroundImage: `url("${item.img}")`,
-                }}
-              ></div>
-              <div className="cart--item-info">
-                <div className="cart--item-name">{item.name}</div>
-                <div className="cart--item-category">{item.category}</div>
-                <div className="cart--item-price">${item.price}</div>
+          {userInfo?.Cart.length === 0 ? (
+            <div className="msg-box">
+              <FontAwesomeIcon icon={faCartPlus} className="msg-icon" />
+              <div>
+                Looks like there is no item in your shopping cart yet!!!
               </div>
-              <div className="cart--item-clear" onClick={removeFromCart}>
-                <FontAwesomeIcon icon={faXmark} />
-              </div>
+              <div>Would you like to put some in before checking out?</div>
             </div>
-          ))}
+          ) : (
+            <>
+              {userInfo?.Cart.map((item, idx) => (
+                <div key={idx} className="cart--item">
+                  <div
+                    className="cart--item-img"
+                    style={{
+                      backgroundImage: `url("${item.img}")`,
+                    }}
+                  ></div>
+                  <div className="cart--item-info">
+                    <div className="cart--item-name">{item.name}</div>
+                    <div className="cart--item-category">{item.category}</div>
+                    <div className="cart--item-price">${item.price}</div>
+                  </div>
+                  <div className="cart--item-clear" onClick={removeFromCart}>
+                    <FontAwesomeIcon icon={faXmark} />
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
         <div className="cart--order-checkout">
           <div className="cart--order-checkout-info">
@@ -72,7 +78,7 @@ const ShopCart = () => {
             <hr className="cart--order-checkout-info-hr" />
             <div className="cart--order-checkout-info-row">
               <div>Total Item(s) :</div>
-              <div>3</div>
+              <div>{userInfo?.Cart.length}</div>
             </div>
             <div className="cart--order-checkout-info-row">
               <div>Total Price :</div>

@@ -14,6 +14,23 @@
     overflow-y: scroll;
 }
 
+.msg-box {
+    height: 100%;
+    font-family: 'Inter';
+    font-size: 20px;
+    color: #3e3232;
+    opacity: 0.75;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.msg-icon {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
 .cart--item {
     margin-bottom: 5px;
     padding: 10px;
