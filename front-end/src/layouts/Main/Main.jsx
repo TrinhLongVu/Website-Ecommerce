@@ -23,6 +23,7 @@ const MainLayout = () => {
     }
     const token = localStorage.getItem("authToken");
     if (!token) {
+      navigate("/");
       return;
     }
     const fetchData = async () => {
@@ -49,6 +50,7 @@ const MainLayout = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
         localStorage.removeItem("authToken");
+        navigate("/");
       }
     };
     fetchData();
