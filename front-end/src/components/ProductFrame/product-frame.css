@@ -10,7 +10,7 @@
 .product-frame-thumbnail {
     width: 50%;
     height: 100%;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
     border-radius: 15px 0 0 15px;
