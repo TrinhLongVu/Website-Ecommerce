@@ -21,8 +21,8 @@ router
 
 router
     .route('/:id')
-    .get(userController.getUser)
+    .get(middleware.isLoggedAdmin,userController.getUser)
     .patch(middleware.isLoggedUser, userController.updateUser)
-    .delete(middleware.isLoggedUser,userController.deleteUser);
+    .delete(middleware.isLoggedAdmin,userController.deleteUser);
     
 module.exports = router;

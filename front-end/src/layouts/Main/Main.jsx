@@ -48,7 +48,6 @@ const MainLayout = () => {
           setUserInfo(data.data);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
         localStorage.removeItem("authToken");
         navigate("/");
       }
