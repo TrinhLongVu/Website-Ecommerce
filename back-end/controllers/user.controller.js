@@ -29,10 +29,13 @@ exports.getInfo = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const alldata = await User.find()
-
+        const query = req.query;
+        const skip = (query.page - 1) * query.limit;
+        const alldata = await User.find().skip(skip).limit(query.limit)
+        const totalPage = Math.ceil(await User.countDocuments() / query.limit)
         res.status(201).json({
             status: 'success',
+            totalPage: totalPage,
             data: alldata
         })
     } catch (err) {

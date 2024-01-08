@@ -20,6 +20,7 @@ const AdminUser = () => {
   const [showList, setShowList] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
   const roleList = ["admin", "user"];
+  const [listChange, setListChange] = useState(false);
 
   const toggleList = () => {
     setShowList(!showList);
@@ -39,20 +40,61 @@ const AdminUser = () => {
     toggleList();
   };
 
-  const [del, setDel] = useState(false);
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
-  const addUser = () => {
+  const addUser = async () => {
     const newEmail = document.querySelector("#admin-user-add-email").value;
     const newPass = document.querySelector("#admin-user-add-pass").value;
     const newName = document.querySelector("#admin-user-add-name").value;
-    console.log(newName);
-    console.log(newPass);
-    console.log(newEmail);
-    console.log(selectedRole);
+    if (!isValidEmail(newEmail)) {
+      Toastify("error", "top-right", "Invalid email");
+      return;
+    }
+    if (!newEmail || !newPass || !newName || !selectedRole) {
+      Toastify(
+        "error",
+        "top-right",
+        "Looks like you haven't input enough information for your new product"
+      );
+      return;
+    }
+    const response = await fetch(
+      "http://localhost:8000/api/v1/user/create/newUser",
+      {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: JSON.stringify({
+          UserName: newEmail,
+          Password: newPass,
+          FullName: newName,
+          Role: selectedRole,
+        }),
+      }
+    );
+    const json = await response.json();
+    if (json.status === "success") {
+      Toastify("success", "top-right", "Successfully added new user");
+      setListChange(!listChange);
+    } else if (json.status === "fail") {
+      Toastify("error", "top-right", json.message);
+    } else {
+      Toastify(
+        "error",
+        "top-right",
+        "Something's wrong. Please try again later!!!"
+      );
+    }
   };
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/", {
+    fetch("http://localhost:8000/api/v1/user/?page=1&limit=10", {
       credentials: "include",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -62,7 +104,7 @@ const AdminUser = () => {
       .then((json) => {
         setUserList(json.data);
       });
-  }, [del]);
+  }, [listChange]);
 
   const deleteUser = async (id) => {
     Swal.fire({
@@ -90,7 +132,7 @@ const AdminUser = () => {
                 text: "User has been successfully deleted.",
                 icon: "success",
               });
-              setDel(!del);
+              setListChange(!listChange);
             } else {
               Swal.fire({
                 title: "Error while deleting!",
