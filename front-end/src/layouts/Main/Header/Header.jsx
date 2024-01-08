@@ -110,8 +110,10 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
         <>
           <Link to="/cart" className="head-shop-cart">
             <FontAwesomeIcon icon={faCartShopping} />
-            {userInfo.Cart > 0 && (
-              <div className="head-cart-num">{userInfo.Cart.length}</div>
+            {userInfo.Cart.length > 0 && (
+              <div className="head-cart-num">
+                {userInfo.Cart.reduce((sum, item) => sum + item.quantity, 0)}
+              </div>
             )}
           </Link>
           <div
