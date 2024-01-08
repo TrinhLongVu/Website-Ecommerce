@@ -92,6 +92,44 @@ exports.createAllUser = async (req, res) => {
 
 }
 
+exports.createUser = async (req, res) => {
+    try {
+        const user = req.body;
+
+        const isTaken = await User.findOne({
+            "UserName": user.UserName
+        });
+        if (isTaken) {
+            return res.status(400).json({
+                status: "fail",
+                msg: "Email is already taken",
+            });
+        }
+
+        bcrypt.hash(user.Password, 10, async function (err, hash) {
+            if (err) {
+                retur(err);
+            }
+            await User.create({
+                UserName: user.UserName,
+                Role: user.Role,
+                FullName: user.FullName,
+                Password: hash
+            });
+        })
+        
+        res.status(201).json({
+            status: 'success'
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            msg: err
+        })
+    }
+
+}
+
 exports.getUser = async (req, res) => {
     try {
 

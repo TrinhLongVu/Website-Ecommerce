@@ -79,6 +79,7 @@ exports.signup = async (req, res) => {
             UserName: UserName,
             Password: Password,
         }
+        const fullname = NewBody.UserName.split("@")[0]
         const saltRounds = 10
         bcrypt.hash(NewBody.Password, saltRounds, async function (err, hash) {
             if (err) {
@@ -86,6 +87,7 @@ exports.signup = async (req, res) => {
             }
             const newUser = await User.create({
                 UserName: NewBody.UserName,
+                FullName: fullname,
                 Password: hash
             });
 

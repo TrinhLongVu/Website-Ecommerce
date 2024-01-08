@@ -9,7 +9,11 @@ router
 
 router
     .route('/create/createAll')
-    .get(middleware.isLoggedAdmin, userController.createAllUser);
+    .post(middleware.isLoggedAdmin, userController.createAllUser);
+
+router
+    .route('/create/newUser')
+    .post(userController.createUser);    
 
 router
     .route('/search/product')
