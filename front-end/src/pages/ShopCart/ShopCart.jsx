@@ -74,8 +74,6 @@ const ShopCart = () => {
         </div>
         <div className="cart--order-checkout">
           <div className="cart--order-checkout-info">
-            <div className="cart--order-checkout-info-title">Summary</div>
-            <hr className="cart--order-checkout-info-hr" />
             <div className="cart--order-checkout-info-row">
               <div>Total Item(s) :</div>
               <div>{userInfo?.Cart.length}</div>
@@ -85,6 +83,18 @@ const ShopCart = () => {
               <div>$3</div>
             </div>
           </div>
+          <div className="cart--order-checkout-inp-title">Contact</div>
+          <input
+            type="text"
+            className="cart--order-checkout-info-inp"
+            placeholder="Please tell us your contact number"
+          />
+          <div className="cart--order-checkout-inp-title">Address</div>
+          <input
+            type="text"
+            className="cart--order-checkout-info-inp"
+            placeholder="Please tell us where to ship this order"
+          />
           <div className="cart--order-checkout-btn">
             <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
             CHECKOUT

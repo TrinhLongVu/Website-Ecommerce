@@ -7,6 +7,7 @@ import Search from "./pages/Search/Search";
 import ShopCart from "./pages/ShopCart/ShopCart";
 import UserInfo from "./pages/UserInfo/UserInfo";
 import Error404 from "./pages/Error404/Error404";
+import History from "./pages/History/History";
 
 import Authentication from "./pages/Authentication/Authentication";
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/search/:key" element={<Search />} />
           <Route path="/product/:id" element={<Detail />} />
           <Route path="/user" element={<UserInfo />} />
+          <Route path="/history" element={<History />} />
           <Route path="/cart" element={<ShopCart />} />
           <Route path="*" element={<Error404 />} />
         </Route>

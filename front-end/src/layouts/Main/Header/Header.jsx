@@ -8,6 +8,7 @@ import {
   faRightFromBracket,
   faRightToBracket,
   faCartShopping,
+  faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
 // Style
 import "./header.css";
@@ -126,6 +127,13 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
                 <Link to="/user">
                   <FontAwesomeIcon icon={faUser} className="profile-ico" />
                   Profile
+                </Link>
+                <Link to="/history">
+                  <FontAwesomeIcon
+                    icon={faBagShopping}
+                    className="profile-ico"
+                  />
+                  Purchased
                 </Link>
                 <hr />
                 <Link onMouseDown={logOut}>
