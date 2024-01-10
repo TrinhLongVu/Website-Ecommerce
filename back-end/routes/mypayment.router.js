@@ -20,4 +20,8 @@ router
     .route('/pay/:id')
     .post(paymentController.payMoney)
 
+router 
+    .route('/create/verify')
+    .get(paymentController.Verify)
+
 module.exports = router;

@@ -43,30 +43,29 @@ const userSchema = new Schema({
         type: String,
         default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBXqRKXezHfKsAvXX2HOz0QO_5dvdAj5s0Bg&usqp=CAU"
     },
-    Cart: [
-        {
-            product_id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Product'
-            },
-            quantity: Number
+    Cart: [{
+        product_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        },
+        quantity: Number
+    }],
+    Balance: [{
+        payment_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Payment'
+        },
+        balance: {
+            type: Number,
+            default: 0
         }
-    ],
-    Balance: [
-        {
-            payment_id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Payment'
-            },
-            balance: {
-                type: Number,
-                default: 0
-            }
-        }
-    ],
-    Transaction: [
-        {
-            user_id:{
+    }],
+    AccountPayment: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Payment'
+    },
+    Transaction: [{
+            user_id: {
                 type: String,
                 default: ''
             },
@@ -79,11 +78,11 @@ const userSchema = new Schema({
                 type: Date,
                 default: new Date()
             },
-            
+
         }
-        
+
     ],
-    TotalMoneyTransaction:{
+    TotalMoneyTransaction: {
         type: Number,
         default: 0
     }
