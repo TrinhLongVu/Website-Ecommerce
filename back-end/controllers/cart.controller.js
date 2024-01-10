@@ -4,24 +4,39 @@ const Product = require('../models/product.model');
 exports.getCart = async (req, res) => { // thông tin trả về là user.Cart và tổng số tiền của Cart
     try {
         const userId = req.params.id;
-        const user = await User.findById(userId);
+        const user = await User.findById(userId)
         const products = await Product.find();
         if (!user) {
-            return res.status(200).json({
+            return res.status(404).json({
                 status: "fail",
                 data: "Cannot find this user"
             });
         }
+        const cartData = []
 
-        let totalPrice = user.Cart.reduce((total, cartItem) => {
-            let product = products.find(product => product.id == cartItem.product_id);
-            return product ? total + cartItem.quantity * product.price : total;
-        }, 0);
+        const totalPrice = await user.Cart.reduce(async (totalPromise, cartItem) => {
+            const total = await totalPromise;
+        
+            try {
+                const product = await Product.findById(cartItem.product_id);
+                cartData.push(product);
+                if (product) {
+                    return total + cartItem.quantity * product.price;
+                } else {
+                    return total;
+                }
+            } catch (error) {
+                return total;
+            }
+        }, Promise.resolve(0));
 
 
         res.status(201).json({
             status: "success",
-            data: { cart: user.Cart, totalPrice: totalPrice }
+            data: {
+                cart: cartData,
+                totalPrice: totalPrice
+            }
         });
     } catch (err) {
         console.error(err);
@@ -35,7 +50,10 @@ exports.getCart = async (req, res) => { // thông tin trả về là user.Cart v
 
 exports.addCart = async (req, res) => {
     try {
-        const { product_id, quantity } = req.body;
+        const {
+            product_id,
+            quantity
+        } = req.body;
         const userId = req.params.id;
         const user = await User.findById(userId);
         if (!user) {
@@ -86,7 +104,10 @@ exports.addCart = async (req, res) => {
 
 exports.minusCart = async (req, res) => {
     try {
-        const { product_id, quantity } = req.body;
+        const {
+            product_id,
+            quantity
+        } = req.body;
         const userId = req.params.id;
 
         // Check if the product is already in the cart
@@ -140,7 +161,9 @@ exports.minusCart = async (req, res) => {
 
 exports.deleteCart = async (req, res) => {
     try {
-        const { product_id } = req.body;
+        const {
+            product_id
+        } = req.body;
         const userId = req.params.id;
         // Check if the product is already in the cart
         const user = await User.findById(userId);
