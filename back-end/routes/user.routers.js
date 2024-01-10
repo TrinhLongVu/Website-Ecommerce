@@ -13,7 +13,7 @@ router
 
 router
     .route('/create/newUser')
-    .post(userController.createUser);    
+    .post(middleware.isLoggedAdmin,userController.createUser);    
 
 router
     .route('/search/product')

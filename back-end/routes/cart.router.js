@@ -9,7 +9,8 @@ router
 
 router
     .route('/add/:id')
-    .post(middleware.isLoggedUser,userController.addCart);
+    // .post(middleware.isLoggedUser,userController.addCart);
+    .post(userController.addCart);
 
 router
     .route('/minus/:id')

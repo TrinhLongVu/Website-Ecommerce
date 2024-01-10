@@ -121,7 +121,8 @@ exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số
             });
         }
         const { paymentid, totalPrice } = req.body
-        console.log(user)
+
+        const price = parseFloat(totalPrice)
         if (!user) {
             return res.status(200).json({
                 status: 'fail',
@@ -136,7 +137,7 @@ exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số
                 msg: "Can't find this account in your Balance"
             });
         }
-        if (balanceAccount.balance < totalPrice) {
+        if (balanceAccount.balance < price) {
             return res.status(200).json({
                 status: 'fail',
                 msg: "You do not have enough money to pay this payment"
@@ -145,11 +146,14 @@ exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số
 
         const adminId = process.env.ADMINID;
         const admin = await User.findById(adminId)
+        
 
-        console.log(admin.Balance[0])
-        admin.Balance[0].balance += totalPrice;
 
-        balanceAccount.balance -= totalPrice;
+        admin.Balance[0].balance += price;
+        admin.TotalMoneyTransaction += price;
+        user.TotalMoneyTransaction += price;
+
+        balanceAccount.balance -= price;
 
         if (!user.Transaction) {
             user.Transaction = [];

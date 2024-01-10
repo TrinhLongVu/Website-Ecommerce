@@ -10,6 +10,10 @@ import "./product-frame.css";
 const ProductFrame = ({ product }) => {
   const { userInfo, userChange, changeUser } = useOutletContext();
   const addToCart = () => {
+    if (!userInfo) {
+      Toastify("error", "top-right", "Please login to add product to cart");
+      return;
+    }
     if (product.isPreview === true) {
       return;
     }
