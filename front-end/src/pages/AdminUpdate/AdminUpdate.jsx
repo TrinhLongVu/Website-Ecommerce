@@ -1,6 +1,7 @@
+//
 import { useEffect, useState } from "react";
-import { useParams, useOutletContext } from "react-router-dom";
-
+import { Link, useParams, useOutletContext } from "react-router-dom";
+//
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faCircleUp } from "@fortawesome/free-solid-svg-icons";
 
@@ -134,6 +135,9 @@ const AdminUpdate = () => {
 
   return (
     <>
+      <div>
+        <Link>d</Link>
+      </div>
       <ProductFrame product={product} />
       <h1 className="admin-update-title">Update Product</h1>
       <div className="admin-update">

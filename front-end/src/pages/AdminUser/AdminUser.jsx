@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleUp,
@@ -10,12 +10,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Toastify from "../../components/Toastify/Toastify";
-
 import Swal from "sweetalert2";
+import Pagination from "../../components/Pagination/Pagination";
 
 import "./admin-user.css";
 
 const AdminUser = () => {
+  const { adminId } = useOutletContext();
   const [userList, setUserList] = useState([]);
   const [showList, setShowList] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
@@ -93,8 +94,11 @@ const AdminUser = () => {
     }
   };
 
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/?page=1&limit=10", {
+    fetch(`http://localhost:8000/api/v1/user/?page=${currentPage}&limit=10`, {
       credentials: "include",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -102,9 +106,10 @@ const AdminUser = () => {
     })
       .then((res) => res.json())
       .then((json) => {
+        setTotalPages(json.totalPage);
         setUserList(json.data);
       });
-  }, [listChange]);
+  }, [listChange, currentPage]);
 
   const deleteUser = async (id) => {
     Swal.fire({
@@ -250,7 +255,7 @@ const AdminUser = () => {
                       className="admin-user-card-btn-icon"
                     />
                   </Link>
-                  {user.Role !== "admin" && (
+                  {user._id !== adminId && (
                     <div
                       className="admin-user-card-btn"
                       id="admin-user-card-delete"
@@ -265,6 +270,11 @@ const AdminUser = () => {
                 </div>
               </div>
             ))}
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </div>
         </div>
       </div>
