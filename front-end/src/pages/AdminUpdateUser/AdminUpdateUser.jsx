@@ -71,12 +71,24 @@ const AdminUpdateUser = () => {
     const phone = document.querySelector("#info-inp-phone").value;
     const address = document.querySelector("#info-inp-address").value;
     const birthday = document.querySelector("#info-inp-birthday").value;
-    formData.append("FullName", fullName);
-    formData.append("Gender", gender);
-    formData.append("PhoneNumber", phone);
-    formData.append("Address", address);
-    formData.append("Birthday", formatDate(birthday));
-    formData.append("image", changeAvt);
+    if (fullName) {
+      formData.append("FullName", fullName);
+    }
+    if (gender) {
+      formData.append("Gender", gender);
+    }
+    if (phone) {
+      formData.append("PhoneNumber", phone);
+    }
+    if (address) {
+      formData.append("Address", address);
+    }
+    if (birthday) {
+      formData.append("Birthday", formatDate(birthday));
+    }
+    if (changeAvt) {
+      formData.append("image", changeAvt);
+    }
     try {
       setUpdating(true);
       const response = await fetch(`http://localhost:8000/api/v1/user/` + id, {

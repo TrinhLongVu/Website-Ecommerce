@@ -11,14 +11,9 @@ import { format } from "date-fns";
 const UserInfo = () => {
   const navigate = useNavigate();
   const { userChange, changeUser } = useOutletContext();
-  const [id, setId] = useState("");
+  const [infoObj, setInfoObj] = useState({});
   const [avt, setAvt] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [fullName, setFullName] = useState("");
-  const [gender, setGender] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [birthday, setBirthday] = useState("");
   const [changeAvt, setChangeAvt] = useState(null);
   const [updating, setUpdating] = useState(false);
 
@@ -44,14 +39,10 @@ const UserInfo = () => {
         if (data.data.Birthday) {
           const dateObj = new Date(data.data.Birthday);
           const formattedBirthday = format(dateObj, "yyyy-MM-dd");
-          setBirthday(formattedBirthday);
+          data.data.Birthday = formattedBirthday;
         }
-        setFullName(data.data.FullName);
-        setGender(data.data.Gender);
-        setPhone(data.data.PhoneNumber);
-        setAddress(data.data.Address);
         setAvt(data.data.Image_Avatar);
-        setId(data.data._id);
+        setInfoObj(data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -67,6 +58,11 @@ const UserInfo = () => {
 
   const saveInfoChanges = async () => {
     let formData = new FormData();
+    const fullName = document.querySelector("#info-inp-fullname").value;
+    const gender = document.querySelector("#info-inp-gender").value;
+    const phone = document.querySelector("#info-inp-phone").value;
+    const address = document.querySelector("#info-inp-address").value;
+    const birthday = document.querySelector("#info-inp-birthday").value;
     if (fullName) {
       formData.append("FullName", fullName);
     }
@@ -87,14 +83,17 @@ const UserInfo = () => {
     }
     try {
       setUpdating(true);
-      const response = await fetch(`http://localhost:8000/api/v1/user/` + id, {
-        credentials: "include",
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `http://localhost:8000/api/v1/user/` + infoObj._id,
+        {
+          credentials: "include",
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         Toastify(
@@ -164,8 +163,8 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              defaultValue={infoObj.FullName}
+              id="info-inp-fullname"
               readOnly={!isEditMode}
             />
           </div>
@@ -174,9 +173,9 @@ const UserInfo = () => {
             <input
               className="info-inp"
               type="date"
-              value={birthday}
               placeholder="Unknown"
-              onChange={(e) => setBirthday(e.target.value)}
+              defaultValue={infoObj.Birthday}
+              id="info-inp-birthday"
               readOnly={!isEditMode}
             />
           </div>
@@ -186,10 +185,9 @@ const UserInfo = () => {
             <input
               className="info-inp"
               type="text"
-              id="gender"
               placeholder="Unknown"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              defaultValue={infoObj.Gender}
+              id="info-inp-gender"
               readOnly={!isEditMode}
             />
           </div>
@@ -200,8 +198,8 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              defaultValue={infoObj.PhoneNumber}
+              id="info-inp-phone"
               readOnly={!isEditMode}
             />
           </div>
@@ -211,8 +209,8 @@ const UserInfo = () => {
               className="info-inp"
               type="text"
               placeholder="Unknown"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              defaultValue={infoObj.Address}
+              id="info-inp-address"
               readOnly={!isEditMode}
             />
           </div>
