@@ -108,7 +108,6 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
     }
 }
 
-
 exports.payMoney = async (req, res, next) => {
     try {
         const userId = req.params.id;
@@ -197,7 +196,8 @@ exports.Verify = async (req, res, next) => {
     try {
         // req.user.token;
 
-        const id = "req.user._id"
+        // const id = "req.user._id"
+        const id = "659ebfb3a8dc9b4a55e37d3e"
         const url = 'http://localhost:3001/api/v1/payment/verify';
         try {
             const response = await fetch(url, {
@@ -215,7 +215,8 @@ exports.Verify = async (req, res, next) => {
             }
     
             const result = await response.json();
-            req.user.token = result.token;
+            // req.user.token = result.token;
+            console.log(result.token)
         } catch (error) {
             console.error('Error:', error.message);
         }
@@ -225,6 +226,39 @@ exports.Verify = async (req, res, next) => {
             status: 'success'
         })
 
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            msg: error.message
+        });
+    }
+}
+
+exports.paytest = async (req, res) => {
+    try {
+        // req.user.token;
+        const url = 'http://localhost:3001/api/v1/payment/pay';
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWViZmIzYThkYzliNGE1NWUzN2QzZSIsImlhdCI6MTcwNDk2OTcwNiwiZXhwIjoxNzA0OTY5NzY2fQ.3llznLIOiZEruLF-FBvTrx52uIyxuTeKa_v42ogKK1E",
+                    money: 1200
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+        res.status(200).json({
+            status: 'success'
+        })
     } catch (error) {
         res.status(400).json({
             status: 'fail',

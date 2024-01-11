@@ -87,83 +87,35 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
 }
 
 
-exports.payMoney = async (req, res, next) => {  // thanh toán tiền, tham số nhận vào là id người dùng, id của tài khoản thanh toán, tổng số tiền của Cart
-    // sau khi thanh toán, xóa hết user.Cart và lưu lại lịch sử giao dịch trong user.Transaction
+exports.payMoney = async (req, res) => { 
     try {
-        const userId = req.params.id;
-        const user = await User.findById(userId);
-        if(user.Cart.length == 0){
-            return res.status(200).json({
-                status: 'fail',
-                msg: "You dont have any Cart to pay"
-            });
-        }
-        const { paymentid, totalPrice } = req.body
+        const token = req.body.token;
 
-        const price = parseFloat(totalPrice)
-        if (!user) {
-            return res.status(200).json({
-                status: 'fail',
-                msg: "Can't this user"
-            });
-        }
-
-        const balanceAccount = user.Balance.find(balance => balance.id == paymentid)
-        if (!balanceAccount) {
-            return res.status(200).json({
-                status: 'fail',
-                msg: "Can't find this account in your Balance"
-            });
-        }
-        if (balanceAccount.balance < price) {
-            return res.status(200).json({
-                status: 'fail',
-                msg: "You do not have enough money to pay this payment"
-            });
-        }
-
-        const adminId = process.env.ADMINID;
-        const admin = await User.findById(adminId)
+        jwt.verify(token, process.env.KEY_TOKEN_PAYMENT, async (err, data) => {
+            if (err) {
+                console.error('JWT Verification Failed:', err.message);
+                return res.status(401).json({
+                    status: 'error',
+                    msg: 'Unauthorized',
+                });
+            }
         
-
-
-        admin.Balance[0].balance += price;
-        admin.TotalMoneyTransaction += price;
-        user.TotalMoneyTransaction += price;
-
-        balanceAccount.balance -= price;
-
-        if (!user.Transaction) {
-            user.Transaction = [];
-        }
-
-        if (!admin.Transaction) {
-            admin.Transaction = [];
-        }
-
-        admin.Transaction.push({
-            user_id: user.id,
-            cart_id: user.Cart.map(cart => cart.product_id),
-            time: new Date()
+            try {
+                const user = await User.findById(data.id);
+                // handle payment...........................................
+                console.log(user);
+        
+                res.status(200).json({
+                    status: 'success'
+                });
+            } catch (error) {
+                console.error('Error fetching user from database:', error.message);
+                return res.status(500).json({
+                    status: 'error',
+                    msg: 'Internal Server Error',
+                });
+            }
         });
-
-
-        user.Transaction.push({
-            user_id: user.id,
-            cart_id: user.Cart.map(cart => cart.product_id),
-            time: new Date()
-        });
-
-        user.Cart.splice(0);
-
-        await user.save();
-        await admin.save();
-
-        res.status(400).json({
-            status: 'success',
-            data: user
-        })
-
     } catch (error) {
         res.status(400).json({
             status: 'fail',
