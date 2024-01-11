@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./admin-update-user.css";
 import { useParams, useOutletContext, useNavigate } from "react-router-dom";
 import Toastify from "../../components/Toastify/Toastify";
@@ -29,7 +29,6 @@ const AdminUpdateUser = () => {
           }
         );
         const data = await response.json();
-        console.log(data.data);
         if (data.data.Birthday) {
           const dateObj = new Date(data.data.Birthday);
           const formattedBirthday = format(dateObj, "yyyy-MM-dd");
@@ -142,6 +141,9 @@ const AdminUpdateUser = () => {
 
   return (
     <>
+      <div className="admin-navigate-back">
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </div>
       <div className="info-avt-container">
         <div className="info-left-contaier">
           <div className="info--avt">
