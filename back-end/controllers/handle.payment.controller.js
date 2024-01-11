@@ -2,6 +2,7 @@ const User = require('../models/user.model')
 const Product = require('../models/product.model');
 const Payment = require('../models/payment.model');
 const jwt = require('jsonwebtoken');
+const Transaction = require('../models/transaction.model');
 const middleware = require('../middeware/auth')
 const dotenv = require('dotenv')
 
@@ -9,20 +10,7 @@ dotenv.config({
     path: './config.env'
 });
 
-exports.payMoney = async (req, res, next) => {
-    try {
-        res.status(200).json({
-            status: 'success',
-        });
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            msg: err.message
-        });
-    }
-}
-
-exports.history = async (req, res, next) => { 
+exports.history = async (req, res, next) => {
     try {
         const paymentid = req.body.paymentid;
 
@@ -87,7 +75,7 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
 }
 
 
-exports.payMoney = async (req, res) => { 
+exports.payMoney = async (req, res) => {
     try {
         const token = req.body.token;
 
@@ -99,12 +87,73 @@ exports.payMoney = async (req, res) => {
                     msg: 'Unauthorized',
                 });
             }
-        
+
             try {
-                const user = await User.findById(data.id);
-                // handle payment...........................................
-                console.log(user);
-        
+                const user = await User.findById(data.id)
+                    .populate({
+                        path: 'AccountPayment',
+                        select: 'balance'
+                    })
+                if (!user.AccountPayment) {
+                    user.AccountPayment = '';
+                }
+
+                if (user.Cart.length == 0) {
+                    return res.status(400).json({
+                        status: 'fail',
+                        msg: "You dont have any Cart to pay"
+                    });
+                }
+                const price = req.body.price;
+                if (!user) {
+                    return res.status(400).json({
+                        status: 'fail',
+                        msg: "Can't this user"
+                    });
+                }
+                if (user.AccountPayment.balance < price) {
+                    return res.status(400).json({
+                        status: 'fail',
+                        msg: "You do not have enough money to pay this payment"
+                    });
+                }
+
+                const adminId = process.env.ADMINID;
+                const admin = await User.findById(adminId)
+                    .populate({
+                        path: 'AccountPayment',
+                        select: 'balance'
+                    })
+                
+                const AccountAdmin = await Payment.findById(admin.AccountPayment._id)
+                const AccountUser = await Payment.findById(user.AccountPayment._id)
+                AccountAdmin.balance += price;
+                admin.TotalMoneyTransaction += price;
+                user.TotalMoneyTransaction += price;
+                AccountUser.balance -= price;
+                if (!user.Transaction) {
+                    user.Transaction = [];
+                }
+
+                if (!admin.Transaction) {
+                    admin.Transaction = [];
+                }
+                
+                const transaction = {
+                    idUser: user.id,
+                    cart_id: user.Cart.map(cart => cart.product_id),
+                    time: new Date()
+                }
+                const idTransaction = await Transaction.create(transaction);
+                user.Transaction.push(idTransaction)
+                admin.Transaction.push(idTransaction)
+                
+                user.Cart.splice(0);
+                
+                await user.save();
+                await admin.save();
+                await AccountAdmin.save();
+                await AccountUser.save();
                 res.status(200).json({
                     status: 'success'
                 });
@@ -124,15 +173,15 @@ exports.payMoney = async (req, res) => {
     }
 }
 
-exports.verify = async (req, res, next) => {  
+exports.verify = async (req, res, next) => {
     try {
         const id = req.body.id;
         const token = jwt.sign({
             id
         }, process.env.KEY_TOKEN_PAYMENT, {
-            expiresIn: '60s'
+            expiresIn: '1h'
         });
-        
+
         res.status(200).json({
             status: 'success',
             token: token

@@ -17,15 +17,11 @@ router
     .get(paymentController.getAllPayment)
     
 router 
-    .route('/pay/:id')
+    .route('/pay/product')
     .post(paymentController.payMoney)
 
 router 
     .route('/create/verify')
     .get(paymentController.Verify)
-
-router 
-    .route('/pay/test/a')
-    .post(paymentController.paytest)
 
 module.exports = router;
