@@ -493,7 +493,7 @@
     "title": "Mac mini",
     "category": "6585a6ca9306f231fe13e80d",
     "detail": "SUPERCHARGED BY M2 — Get more done faster with a next-generation chip. From rich presentations to immersive gaming, M2 flies through work and play. M2 has 8 CPU cores, 10 GPU cores, and up to 24GB unified memory. exceptional speed and performance\nCONNECT WHAT YOU WANT — Mac mini with the M2 chip has two Thunderbolt 4 ports, two USB-A ports, an HDMI port, Wi-Fi 6E, Bluetooth 5.3, Gigabit Ethernet, and a headphone jack. And if you want faster networking speeds, you can configure Mac mini with 10Gb Ethernet for up to 10 times the throughout.\nSIMPLY COMPATIBLE — All your go-to apps run lightning fast on your Mac mini desktop, from Microsoft 365 to Adobe Creative Cloud to Zoom. And over 15,000 apps and plug-ins are optimized for M2.\nEFFICIENT MEMORY — Unified memory on Mac does more than traditional RAM. A single pool of high-bandwidth, low-latency memory allows Apple silicon to move data fast — so everything you do is fluid. Choose up to 24GB memory with M2. More memory means easier multitasking and handling of large files.\nFAST SSD STORAGE — Mac mini comes with all-flash storage for all your photo and video libraries, files, and apps. Choose up to 2TB SSD with M2.\nKEEP IT SAFE AND SECURE — M2 and macOS Ventura give Mac mini industry-leading privacy and security features, including built-in protections against malware and viruses. And the next-generation Secure Enclave helps keep your system and data protected.\nMAC MINI DOES THAT — The Mac mini desktop with M2 is perfect for an impressive range of uses, from creating presentations to photo editing to gaming.",
-    "image": "https://www.bing.com/images/search?view=detailV2&ccid=4B1sddXn&id=D6FE7542B04E4B5E2BCD12A2C963DDA1F9D7BFAD&thid=OIP.4B1sddXn5WqdNvP2u1YDVgHaFK&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.e01d6c75d5e7e56a9d36f3f6bb560356%3frik%3drb%252fX%252baHdY8miEg%26riu%3dhttp%253a%252f%252fupload.wikimedia.org%252fwikipedia%252fcommons%252f2%252f26%252fMac_mini_mid2010_back.jpg%26ehk%3d2bxB7M6BjBt1g9%252bxTUmbHHRMlaRGTXkj7iQ5jXx3EaU%253d%26risl%3d1%26pid%3dImgRaw%26r%3d0&exph=1990&expw=2854&q=mac+mini&simid=607992706303809027&FORM=IRPRST&ck=54624CFC92F38151AE00A0BCE778733C&selectedIndex=2&itb=0",
+    "image": "https://m.media-amazon.com/images/I/61La8PAa42L.__AC_SY445_SX342_QL70_FMwebp_.jpg",
     "price": "1599"
   },
   {
@@ -509,5 +509,75 @@
     "detail": "SUPERCHARGED BY M3 PRO OR M3 MAX — The Apple M3 Pro chip, with an up to 12-core CPU and up to 18-core GPU, delivers amazing performance for demanding workflows like manipulating gigapixel panoramas or compiling millions of lines of code. M3 Max, with an up to 16-core CPU and up to 40-core GPU, drives extreme performance for the most advanced workflows like rendering intricate 3D content or developing transformer models with billions of parameters.\nUP TO 18 HOURS OF BATTERY LIFE — Go all day thanks to the power-efficient design of Apple silicon. The MacBook Pro laptop delivers the same exceptional performance whether it’s running on battery or plugged in. (Battery life varies by use and configuration. See apple.com/batteries for more information.)\nBRILLIANT PRO DISPLAY — The 14.2-inch Liquid Retina XDR display features Extreme Dynamic Range, over 1000 nits of brightness for stunning HDR content, up to 600 nits of brightness for SDR content, and pro reference modes for doing your best work on the go. (The display has rounded corners at the top. When measured diagonally, the screen is 14.2 inches. Actual viewable area is less.)\nFULLY COMPATIBLE — All your pro apps run lightning fast — including Adobe Creative Cloud, Apple Xcode, Microsoft 365, SideFX Houdini, MathWorks MATLAB, Medivis SurgicalAR, and many of your favorite iPhone and iPad apps. And with macOS, work and play on your Mac are even more powerful. Elevate your presence on video calls. Access information in all-new ways. And discover even more ways to personalize your Mac. (Apps are available on the App Store.)\nADVANCED CAMERA AND AUDIO — Look sharp and sound great with a 1080p FaceTime HD camera, a studio-quality three-mic array, and a six-speaker sound system with Spatial Audio.",
     "image": "https://www.apple.com/v/macbook-pro/aj/images/overview/closer-look/3d_viewer_pf_14_16__cnmzk9b7xtpy_large.jpg",
     "price": "2099"
+  },
+  {
+    "title": "KODAK PIXPRO FZ45",
+    "category": "",
+    "detail": "For those times when a photo isn't enough, the FZ45 can record 1080p Full HD video so you can capture all of the action - however large or small.\nThe FZ45 is our answer to portability and convenience. Take this camera anywhere you go and rely on the convenience of AA batteries to never miss a shot or capturing that special moment to cherish for years.",
+    "image": "https://m.media-amazon.com/images/I/51focgMS+JL._AC_SX466_.jpg",
+    "price": "94"
+  },
+  {
+    "title": "KODAK PIXPRO WPZ2",
+    "category": "",
+    "detail": "Waterproof to 15m (49') - 2m (6') Shockproof Rating - Dustproof\nWiFi Connectivity - 1080P Full HD Video - Vlogging Camera\n16 MegaPixel BSI CMOS Sensor - 4X Optical Zoom - Digital Image Stabilization\nRechargeable Li-Ion Battery - 2.7 inch LCD Screen\nSD Card Compatibility: At least Class 4, no larger than 32GB (microSD, microSDHC) - MMC Card not supported\nWhat's In the Box: WPZ2 Camera, Rechargeable Li-Ion Battery, USB Cable, AC Adapter, Wrist Strap, Quick Start Guide, warranty card, and service card",
+    "image": "https://m.media-amazon.com/images/I/5186bjryKaL._AC_SX466_.jpg",
+    "price": "139"
+  },
+  {
+    "title": "KODAK PIXPRO AZ405",
+    "category": "",
+    "detail": "40X Optical Zoom - 24mm Wide Angle Lens\n20 Megapixel CMOS Sensor\n1080P Full HD Video - Vlogging Camera\nSD Card Compatibility: At least Class 10, no larger than 512GB (SD, SDHC, SDXC)\n3 inch LCD Screen - Optical Image Stabilization (OIS) - AA Batteries",
+    "image": "https://m.media-amazon.com/images/I/81C9A0E+8TL._AC_SX466_.jpg",
+    "price": "185"
+  },
+  {
+    "title": "Minolta MND20",
+    "category": "",
+    "detail": "Preserve the moment with stunning high-resolution photos suitable for cropping or enlarging with the 44MP Photo Resolution\nGives your video greater vividness and clarity than standard-definition video with the 2.7 Quad HD Video Resolution\nCapture close-up details or shoot from a distance with the 16X digital zoom lens\nEasily compose shots and review photos with the 2.9 inch LCD Monitor",
+    "image": "https://m.media-amazon.com/images/I/716tvPXAlGL._AC_SX466_.jpg",
+    "price": "80"
+  },
+  {
+    "title": "Polaroid IS048",
+    "category": "",
+    "detail": "The Polaroid IS048 Waterproof Instant Sharing Digital Camera is the ultimate digital action camera for beginners and experts alike! Our instant camera shoots in HD 720p, giving you a great vlogging camera or camera for YouTube adventures. The video camera camcorder is also excellent for those in need of sport cameras or homemade movie cameras, giving you 16 Megapixel still photos at the push of a button!\nNeed some new blogging or YouTube equipment that can handle a little wear and tear? The Polaroid waterproof camera is certified to work as an underwater camera for depths of up to 10ft, giving you great vlog cameras or video cameras for vacations and poolside events! Our digital video camera is a great point and shoot camera for all sorts of photography and video, giving you a video recorder and HD camera that can handle almost anything!\nThe Polaroid IS048 HD video camera is simple to use and compatible with most camera mounts, making it a great recording camera for YouTube and other social media sites. The simple design also makes this a great Polaroid camera for kids! Whether you need a sports camera for the big game or a HD camcorder for the summer, our video recording equipment and professional video camera accessories have everything you need to capture the moment!",
+    "image": "https://m.media-amazon.com/images/I/81oIUft1nHL._AC_SX466_.jpg",
+    "price": "38"
+  },
+  {
+    "title": "Minolta Pro Shot",
+    "category": "",
+    "detail": "Captures Sharp Images And Full Hd (1080P) Video\n20-Megapixel Cmos Sensor And 67X Optical Zoom\n3 inch Lcd Display\nHas 14 Scene Modes, Face Detection, Smile Detection, Blink Detection, Photo Touch-Up, Continuous Shooting Mode, 360° Panorama Shooting And Built-In Flash With Red-Eye Reduction",
+    "image": "https://m.media-amazon.com/images/I/715TmXMikWL._AC_SX466_.jpg",
+    "price": "384"
+  },
+  {
+    "title": "Canon EOS Rebel T7",
+    "category": "",
+    "detail": "24.1 Megapixel CMOS (APS-C) sensor with is 100–6400 (H: 12800)\nBuilt-in Wi-Fi and NFC technology\n9-Point AF system and AI Servo AF\nOptical Viewfinder with approx 95% viewing coverage\nUse the EOS Utility Webcam Beta Software (Mac and Windows) to turn your compatible Canon camera into a high-quality webcam. Compatible Lenses- Canon EF Lenses (including EF-S lenses, excluding EF-M lenses)",
+    "image": "https://m.media-amazon.com/images/I/71EWRyqzw0L._AC_SX466_.jpg",
+    "price": "412"
+  },
+  {
+    "title": "Sony Cyber-shot DSC-HX10V",
+    "category": "",
+    "detail": "18.2 megapixels Exmor R CMOS sensor for superior low-light performance\n16X optical zoom\n3.0-inch LCD\nBackground Defocus highlights your subject like a DSLR\nHigh speed AF improves focus speed",
+    "image": "https://m.media-amazon.com/images/I/71JOso4qCmL._AC_SX466_.jpg",
+    "price": "155"
+  },
+  {
+    "title": "Panasonic LUMIX FZ300",
+    "category": "",
+    "detail": "Panasonic’s exclusive 4K photo technology uses 30 frames per second in high resolution 4K ultra HD video to extract them as photos; You’ll never miss that moment again\n24x zoom (25 600 millimeter with Full zoom range F2; 8 aperture for enhanced low light shooting meeting the stringent quality standards established by Leica\nThe 12.1 Megapixel high sensitivity MOS sensor with the venus engine excels in diffraction compensation, yielding images that are crisp and Free from artifacts associated with small aperture settings\nSplash Proof/dustproof rugged camera design with tight seals on every Joint, dial and button, so it stands up to harsh weather conditions and challenging",
+    "image": "https://m.media-amazon.com/images/I/81xVbbwlqlL._AC_SX466_.jpg",
+    "price": "497"
+  },
+  {
+    "title": "Samsung WB1100F",
+    "category": "",
+    "detail": "Share your best photos instantly with Family and Friends with Built-in Wi-Fi with NFC\nSMART features - Social Media Upload, E-mail, Photo beam, Direct Link, Mobile Link, PC Auto-backup, Remote Viewfinder, All Share\n35x Optical Zoom for stunning long distance shots with ease\n720p HD VideoCCD Image Sensor",
+    "image": "https://m.media-amazon.com/images/I/61WO5oO9ZXL._AC_SX466_.jpg",
+    "price": "299"
   }
 ]
