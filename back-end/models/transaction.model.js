@@ -6,15 +6,21 @@ const transaction = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    cart_id: {
+        type: Array,
+        ref: 'Cart',
+        default: ''
+    },
     time: {
         type: Date,
         default: new Date()
     },
-    transaction: {
-        type: String,
-        default: 'user',
-        require: [true, 'A User must have a role']
-    }
+    // transaction: {
+    //     type: Number,
+    //     default: 'user',
+    //     require: [true, 'A User must have a role']
+    // },
+
 })
 
 const Transaction = mongoose.model('Transaction', transaction);
