@@ -10,18 +10,20 @@ import {
   faCirclePlus,
   faEyeSlash,
   faXmark,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 import Toastify from "../../components/Toastify/Toastify";
-
+import Swal from "sweetalert2";
 import { Link, useOutletContext } from "react-router-dom";
 
 import "./admin-products.css";
 
 const AdminProducts = () => {
   const domain = "https://themegamall.onrender.com/api/v1/product?";
-  const { categoryList } = useOutletContext();
+  const { categoryList, categoryUpdate, setCategoryUpdate } =
+    useOutletContext();
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [productList, setProductList] = useState([]);
 
@@ -30,7 +32,7 @@ const AdminProducts = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [showFilter, setShowFilter] = useState(false);
   const [loadPage, setLoadPage] = useState(false);
-  const [del, setDel] = useState(false);
+  const [listChange, setListChange] = useState(false);
   const toggleFilter = () => {
     setShowFilter(!showFilter);
     if (!showFilter) {
@@ -77,7 +79,7 @@ const AdminProducts = () => {
         setProductList(json.data);
         setLoadPage(false);
       });
-  }, [currentPage, filter, del]);
+  }, [currentPage, filter, listChange]);
 
   document.body.addEventListener("click", (event) => {
     const homeFilterBox = document.querySelector(".home-filter-box");
@@ -93,34 +95,98 @@ const AdminProducts = () => {
     toggleFilter();
   };
 
-  const deleteProduct = (id) => {
-    fetch(`http://localhost:8000/api/v1/product/${id}`, {
+  const hideCategory = (name) => {
+    fetch("http://localhost:8000/api/v1/category/hidden", {
       credentials: "include",
-      method: "DELETE",
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
       },
+      body: JSON.stringify({
+        category: name,
+      }),
     })
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {
-          Toastify(
-            "success",
-            "bottom-right",
-            "Successfully removed that product from the store"
-          );
-          if (productList.length === 1 && currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-          }
-          setDel(!del);
-        } else {
-          Toastify(
-            "error",
-            "bottom-right",
-            "Failed to remove that product from the store!!! Please try again"
-          );
+          setCategoryUpdate(!categoryUpdate);
+          setListChange(!listChange);
         }
       });
+  };
+
+  const addCategory = () => {
+    const newCategory = document.querySelector("#add-category").value;
+    if (newCategory === "") {
+      Toastify("error", "top-right", "Please input new category name");
+    } else {
+      fetch("http://localhost:8000/api/v1/category/admin", {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: JSON.stringify({
+          name: newCategory,
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.status === "success") {
+            setCategoryUpdate(!categoryUpdate);
+            document.querySelector("#add-category").value = "";
+            Toastify(
+              "success",
+              "top-right",
+              "Successfully added a new category"
+            );
+          }
+        });
+    }
+  };
+
+  const deleteProduct = (id) => {
+    Swal.fire({
+      title: "Are you sure you want to do this?",
+      text: "You will never see this product in your store again!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch("http://localhost:8000/api/v1/product/" + id, {
+          credentials: "include",
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            if (json.status === "success") {
+              Swal.fire({
+                title: "Product deleted!",
+                text: "Successfully removed that product from your store",
+                icon: "success",
+              });
+              if (productList.length === 1 && currentPage > 1) {
+                setCurrentPage(currentPage - 1);
+              }
+              setListChange(!listChange);
+            } else {
+              Swal.fire({
+                title: "Error while removing!",
+                text: "There's some error!!! Please try again later",
+                icon: "error",
+              });
+            }
+          });
+      }
+    });
   };
   return (
     <>
@@ -136,15 +202,34 @@ const AdminProducts = () => {
               <div
                 key={idx}
                 className="category-card"
+                onClick={() => hideCategory(category.name)}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <div className="category-card-bg"></div>
                 <h3 className="category-card-name">
-                  {hoveredIndex === idx ? (
-                    <FontAwesomeIcon icon={faEyeSlash} />
+                  {category.isHidden ? (
+                    <>
+                      {hoveredIndex === idx ? (
+                        <FontAwesomeIcon icon={faEye} />
+                      ) : (
+                        <>
+                          <FontAwesomeIcon
+                            icon={faEyeSlash}
+                            className="admin-hidden-category"
+                          />
+                          {category.name}
+                        </>
+                      )}
+                    </>
                   ) : (
-                    category.name
+                    <>
+                      {hoveredIndex === idx ? (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                      ) : (
+                        category.name
+                      )}
+                    </>
                   )}
                 </h3>
               </div>
@@ -159,7 +244,7 @@ const AdminProducts = () => {
           </h2>
           <div className="add-category-box">
             <input type="text" id="add-category" placeholder="Category Name" />
-            <button id="add-category-btn">
+            <button id="add-category-btn" onClick={addCategory}>
               <FontAwesomeIcon icon={faCirclePlus} />
             </button>
           </div>

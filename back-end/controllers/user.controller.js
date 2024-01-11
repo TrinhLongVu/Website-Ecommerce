@@ -29,10 +29,13 @@ exports.getInfo = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const alldata = await User.find()
-
+        const query = req.query;
+        const skip = (query.page - 1) * query.limit;
+        const alldata = await User.find().skip(skip).limit(query.limit)
+        const totalPage = Math.ceil(await User.countDocuments() / query.limit)
         res.status(201).json({
             status: 'success',
+            totalPage: totalPage,
             data: alldata
         })
     } catch (err) {
@@ -79,6 +82,44 @@ exports.createAllUser = async (req, res) => {
                 console.error(`Error creating user with username '${UserName}':`, error);
             }
         }
+
+        res.status(201).json({
+            status: 'success'
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            msg: err
+        })
+    }
+
+}
+
+exports.createUser = async (req, res) => {
+    try {
+        const user = req.body;
+
+        const isTaken = await User.findOne({
+            "UserName": user.UserName
+        });
+        if (isTaken) {
+            return res.status(400).json({
+                status: "fail",
+                msg: "Email is already taken",
+            });
+        }
+
+        bcrypt.hash(user.Password, 10, async function (err, hash) {
+            if (err) {
+                retur(err);
+            }
+            await User.create({
+                UserName: user.UserName,
+                Role: user.Role,
+                FullName: user.FullName,
+                Password: hash
+            });
+        })
 
         res.status(201).json({
             status: 'success'
@@ -196,24 +237,24 @@ exports.deleteUser = async (req, res) => {
 
 //         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
 
-// const searchResult = products.filter(product => {
-//     const normalizedTitle = normalize(product.title);
-//     const normalizedDetail = normalize(product.detail);
+//         const searchResult = products.filter(product => {
+//             const normalizedTitle = normalize(product.title);
+//             const normalizedDetail = normalize(product.detail);
 
-//     const titleMatch = normalizedTitle.includes(normalize(searchValue));
-//     const detailMatch = normalizedDetail.includes(normalize(searchValue));
+//             const titleMatch = normalizedTitle.includes(normalize(searchValue));
+//             const detailMatch = normalizedDetail.includes(normalize(searchValue));
 
-//     const categoryMatch = categories.some(category => {
-//         if (!product.category || !category.name) {
-//             return false;
-//         }
+//             const categoryMatch = categories.some(category => {
+//                 if (!product.category || !category.name || !Array.isArray(product.category)) {
+//                     return false;
+//                 }
 
-//         const normalizedCategoryName = normalize(category.name);
-//         return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
-//     });
+//                 const normalizedCategoryName = normalize(category.name);
+//                 return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
+//             });
 
-//     return titleMatch || detailMatch || categoryMatch;
-// });
+//             return titleMatch || detailMatch || categoryMatch;
+//         });
 
 //         console.log(searchResult.length)
 
@@ -226,7 +267,6 @@ exports.deleteUser = async (req, res) => {
 
 //         res.status(200).json({
 //             status: "success",
-//             // totalPage: Math.ceil(searchResult.length / limit),
 //             data: searchResult
 //         });
 //     } catch (error) {
@@ -238,10 +278,11 @@ exports.deleteUser = async (req, res) => {
 //     }
 // };
 
+
 exports.searchProduct = async (req, res) => {
     try {
         const { page, limit, search } = req.query;
-        console.log(search)
+        console.log('page: ', page, ' limit: ',limit,' search: ',search)
 
         const skip = (page - 1) * limit;
 
@@ -255,7 +296,7 @@ exports.searchProduct = async (req, res) => {
 
         const categories = await Category.find();
 
-        const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
+        const normalize = (text) => (text ? text.replace(/\s/g, '').toLowerCase() : '');
 
         const searchResult = products.filter(product => {
             const normalizedTitle = normalize(product.title);
@@ -265,7 +306,7 @@ exports.searchProduct = async (req, res) => {
             const detailMatch = normalizedDetail.includes(normalize(search));
 
             const categoryMatch = categories.some(category => {
-                if (!product.category || !category.name) {
+                if (!product.category || !category.name || !Array.isArray(product.category)) {
                     return false;
                 }
 
@@ -275,7 +316,6 @@ exports.searchProduct = async (req, res) => {
 
             return titleMatch || detailMatch || categoryMatch;
         });
-
 
         const result = searchResult.slice(skip, skip + limit * 1.0);
 

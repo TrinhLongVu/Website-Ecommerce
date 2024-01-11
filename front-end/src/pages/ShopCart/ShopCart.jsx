@@ -1,28 +1,61 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./shop-cart.css";
 import {
+  faCartPlus,
   faCashRegister,
   faCreditCard,
+  faMinus,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import Toastify from "../../components/Toastify/Toastify";
 import { useOutletContext } from "react-router-dom";
 
 const ShopCart = () => {
   const { userInfo } = useOutletContext();
-  const product = {
-    name: "Iphone 13 Pro Max",
-    category: "Electronics",
-    price: 89.99,
-    img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+  const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [cartChange, changeCart] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/cart/get/" + userInfo?._id, {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setTotalPrice(json.data.totalPrice);
+        setCart(json.data.cart);
+      });
+  }, [userInfo, cartChange]);
+
+  const removeFromCart = (id) => {
+    fetch("http://localhost:8000/api/v1/cart/minus/" + userInfo?._id, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+      body: JSON.stringify({
+        product_id: id,
+        quantity: 1,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status === "success") {
+          changeCart(!cartChange);
+          Toastify("success", "top-right", "Removed an item from cart");
+        } else {
+          Toastify("error", "top-right", "Something went wrong");
+        }
+      });
   };
-
-  const [cart, setCart] = useState([product, product, product]);
-
-  const removeFromCart = () => {};
 
   const credit = () => {
     const creditAmount = document.querySelector(
@@ -40,6 +73,18 @@ const ShopCart = () => {
     }
   };
 
+  const checkOut = () => {
+    const telNum = document.querySelector("#tel-num").value;
+    const address = document.querySelector("#address").value;
+    if (telNum === "" || address === "") {
+      Toastify(
+        "error",
+        "top-right",
+        "Please fill in all the information before checking out!"
+      );
+    }
+  };
+
   return (
     <>
       <Breadcrumbs
@@ -47,39 +92,79 @@ const ShopCart = () => {
       />
       <div className="shop-cart">
         <div className="cart--order-table">
-          {cart.map((item, idx) => (
-            <div key={idx} className="cart--item">
-              <div
-                className="cart--item-img"
-                style={{
-                  backgroundImage: `url("${item.img}")`,
-                }}
-              ></div>
-              <div className="cart--item-info">
-                <div className="cart--item-name">{item.name}</div>
-                <div className="cart--item-category">{item.category}</div>
-                <div className="cart--item-price">${item.price}</div>
+          {cart.length === 0 ? (
+            <div className="msg-box">
+              <FontAwesomeIcon icon={faCartPlus} className="msg-icon" />
+              <div>
+                Looks like there is no item in your shopping cart yet!!!
               </div>
-              <div className="cart--item-clear" onClick={removeFromCart}>
-                <FontAwesomeIcon icon={faXmark} />
-              </div>
+              <div>Would you like to put some in before checking out?</div>
             </div>
-          ))}
+          ) : (
+            <>
+              {cart?.map((item, idx) => (
+                <div key={idx} className="cart--item">
+                  <div
+                    className="cart--item-img"
+                    style={{
+                      backgroundImage: `url("${item.product.image}")`,
+                    }}
+                  ></div>
+                  <div className="cart--item-info">
+                    <div className="cart--item-name">{item.product.title}</div>
+                    <div className="cart--item-category">
+                      {item.product.category.name}
+                    </div>
+                    <div className="cart--item-price">
+                      ${item.product.price}
+                    </div>
+                  </div>
+                  <div className="cart--item-quantity">
+                    <div className="cart--item-quantity-title">Quantity</div>
+                    {item.quantity}
+                  </div>
+
+                  <div
+                    className="cart--item-clear"
+                    onClick={() => removeFromCart(item.product._id)}
+                  >
+                    {item.quantity > 1 ? (
+                      <FontAwesomeIcon icon={faMinus} />
+                    ) : (
+                      <FontAwesomeIcon icon={faXmark} />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
         <div className="cart--order-checkout">
           <div className="cart--order-checkout-info">
-            <div className="cart--order-checkout-info-title">Summary</div>
-            <hr className="cart--order-checkout-info-hr" />
             <div className="cart--order-checkout-info-row">
               <div>Total Item(s) :</div>
-              <div>3</div>
+              <div>{userInfo?.Cart.length}</div>
             </div>
             <div className="cart--order-checkout-info-row">
               <div>Total Price :</div>
-              <div>$3</div>
+              <div>${totalPrice}</div>
             </div>
           </div>
-          <div className="cart--order-checkout-btn">
+          <div className="cart--order-checkout-inp-title">Contact</div>
+          <input
+            type="text"
+            className="cart--order-checkout-info-inp"
+            id="tel-num"
+            placeholder="Please tell us your contact number"
+          />
+          <div className="cart--order-checkout-inp-title">Address</div>
+          <input
+            type="text"
+            className="cart--order-checkout-info-inp"
+            id="address"
+            placeholder="Please tell us where to ship this order"
+          />
+          <div className="cart--order-checkout-btn" onClick={checkOut}>
             <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
             CHECKOUT
           </div>

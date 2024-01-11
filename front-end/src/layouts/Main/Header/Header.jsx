@@ -8,6 +8,7 @@ import {
   faRightFromBracket,
   faRightToBracket,
   faCartShopping,
+  faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
 // Style
 import "./header.css";
@@ -108,8 +109,13 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
       </div>
       {userInfo ? (
         <>
-          <Link to="/cart" className="home-shop-cart">
+          <Link to="/cart" className="head-shop-cart">
             <FontAwesomeIcon icon={faCartShopping} />
+            {userInfo.Cart.length > 0 && (
+              <div className="head-cart-num">
+                {userInfo.Cart.reduce((sum, item) => sum + item.quantity, 0)}
+              </div>
+            )}
           </Link>
           <div
             className="avt-dropdown-btn"
@@ -121,6 +127,13 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
                 <Link to="/user">
                   <FontAwesomeIcon icon={faUser} className="profile-ico" />
                   Profile
+                </Link>
+                <Link to="/history">
+                  <FontAwesomeIcon
+                    icon={faBagShopping}
+                    className="profile-ico"
+                  />
+                  Purchased
                 </Link>
                 <hr />
                 <Link onMouseDown={logOut}>

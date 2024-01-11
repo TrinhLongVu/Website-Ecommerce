@@ -9,7 +9,11 @@ router
 
 router
     .route('/create/createAll')
-    .get(middleware.isLoggedAdmin, userController.createAllUser);
+    .post(middleware.isLoggedAdmin, userController.createAllUser);
+
+router
+    .route('/create/newUser')
+    .post(middleware.isLoggedAdmin,userController.createUser);    
 
 router
     .route('/search/product')
@@ -21,8 +25,8 @@ router
 
 router
     .route('/:id')
-    .get(userController.getUser)
-    .patch(middleware.isLoggedUser, userController.updateUser)
-    .delete(middleware.isLoggedUser,userController.deleteUser);
+    .get(middleware.isLoggedAdmin,userController.getUser)
+    .patch(middleware.isLogged, userController.updateUser)
+    .delete(middleware.isLoggedAdmin,userController.deleteUser);
     
 module.exports = router;

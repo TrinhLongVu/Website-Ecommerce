@@ -7,7 +7,9 @@ import Cookies from "js-cookie";
 
 const Admin = () => {
   const navigate = useNavigate();
+  const [adminId, setAdminId] = useState("");
   const [categoryList, setCategoryList] = useState([]);
+  const [categoryUpdate, setCategoryUpdate] = useState(false);
 
   useEffect(() => {
     const cookieToken = Cookies.get("token");
@@ -35,8 +37,11 @@ const Admin = () => {
         );
 
         const data = await response.json();
+
         if (data.data.Role === "user") {
           navigate("/");
+        } else {
+          setAdminId(data.data._id);
         }
       } catch (error) {
         navigate("/");
@@ -47,16 +52,23 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://themegamall.onrender.com/api/v1/category")
+    fetch("http://localhost:8000/api/v1/category/admin", {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((json) => {
         setCategoryList(json.data);
       });
-  }, []);
+  }, [categoryUpdate]);
   return (
     <>
       <AdminHeader />
-      <Outlet context={{ categoryList, setCategoryList }} />
+      <Outlet
+        context={{ adminId, categoryList, categoryUpdate, setCategoryUpdate }}
+      />
       <ToastContainer
         position="top-right"
         autoClose={5000}

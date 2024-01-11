@@ -14,7 +14,7 @@
 
 .category-card {
     margin: 10px 15px;
-    width: 210px;
+    min-width: 210px;
     height: 50px;
     border-radius: 12px;
     display: flex;
@@ -33,7 +33,7 @@
 }
 
 .category-card-bg {
-    width: 210px;
+    min-width: 210px;
     height: 48px;
     border-radius: 12px;
 }

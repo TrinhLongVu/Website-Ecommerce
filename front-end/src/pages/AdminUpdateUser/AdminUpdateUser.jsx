@@ -1,37 +1,30 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import "./user-info.css";
-import { useOutletContext, useNavigate } from "react-router-dom";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import { faEdit, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import "./admin-update-user.css";
+import { useParams, useOutletContext, useNavigate } from "react-router-dom";
 import Toastify from "../../components/Toastify/Toastify";
 import Loader from "../../components/Loader/Loader";
 import { format } from "date-fns";
 
-const UserInfo = () => {
-  const navigate = useNavigate();
-  const { userChange, changeUser } = useOutletContext();
-  const [infoObj, setInfoObj] = useState({});
+const AdminUpdateUser = () => {
+  const { id } = useParams();
   const [avt, setAvt] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [infoObj, setInfoObj] = useState({});
   const [changeAvt, setChangeAvt] = useState(null);
   const [updating, setUpdating] = useState(false);
+  const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("authToken");
-      if (!token) {
-        navigate("/");
-      }
       try {
         const response = await fetch(
-          "http://localhost:8000/api/v1/user/information/user",
+          "http://localhost:8000/api/v1/user/" + id,
           {
             credentials: "include",
-            method: "GET",
             headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
             },
           }
         );
@@ -41,6 +34,20 @@ const UserInfo = () => {
           const formattedBirthday = format(dateObj, "yyyy-MM-dd");
           data.data.Birthday = formattedBirthday;
         }
+        const isoDate = new Date(data.data.createdAt);
+        const formattedDate = isoDate.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
+        const formattedTime = isoDate.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        });
+        const formattedDateTime = `${formattedDate}, ${formattedTime}`;
+        data.data.createdAt = formattedDateTime;
         setAvt(data.data.Image_Avatar);
         setInfoObj(data.data);
       } catch (error) {
@@ -48,7 +55,7 @@ const UserInfo = () => {
       }
     };
     fetchData();
-  }, [isEditMode]);
+  }, [id, isEditMode, updated]);
 
   const formatDate = (date) => {
     const parts = date.split("-");
@@ -83,17 +90,14 @@ const UserInfo = () => {
     }
     try {
       setUpdating(true);
-      const response = await fetch(
-        `http://localhost:8000/api/v1/user/` + infoObj._id,
-        {
-          credentials: "include",
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-          body: formData,
-        }
-      );
+      const response = await fetch(`http://localhost:8000/api/v1/user/` + id, {
+        credentials: "include",
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: formData,
+      });
 
       if (response.ok) {
         Toastify(
@@ -102,8 +106,8 @@ const UserInfo = () => {
           "Successfully update your information"
         );
         setChangeAvt(null);
-        changeUser(!userChange);
         setIsEditMode(false);
+        setUpdated(!updated);
       } else {
         setChangeAvt(null);
         Toastify(
@@ -113,7 +117,12 @@ const UserInfo = () => {
         );
       }
     } catch (error) {
-      console.error("Error:", error);
+      setChangeAvt(null);
+      Toastify(
+        "error",
+        "top-right",
+        "Looks like you there is some error!!! Please try again"
+      );
     }
     setUpdating(false);
   };
@@ -132,7 +141,9 @@ const UserInfo = () => {
 
   return (
     <>
-      <Breadcrumbs crumbList={[{ name: "User Information", link: "/user" }]} />
+      <div className="admin-navigate-back">
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </div>
       <div className="info-avt-container">
         <div className="info-left-contaier">
           <div className="info--avt">
@@ -157,6 +168,38 @@ const UserInfo = () => {
         </div>
 
         <div className="info">
+          {infoObj.type === "local" && (
+            <div className="info-field">
+              <h3 className="title-input">Email</h3>
+              <input
+                className="info-inp"
+                type="text"
+                placeholder="Unknown"
+                value={infoObj.UserName}
+                readOnly
+              />
+            </div>
+          )}
+          <div className="info-field">
+            <h3 className="title-input">Created</h3>
+            <input
+              className="info-inp"
+              type="text"
+              placeholder="Unknown"
+              value={infoObj.createdAt}
+              readOnly
+            />
+          </div>
+          <div className="info-field">
+            <h3 className="title-input">Role</h3>
+            <input
+              className="info-inp"
+              type="text"
+              placeholder="Unknown"
+              value={infoObj.Role}
+              readOnly
+            />
+          </div>
           <div className="info-field">
             <h3 className="title-input">Full Name</h3>
             <input
@@ -173,7 +216,6 @@ const UserInfo = () => {
             <input
               className="info-inp"
               type="date"
-              placeholder="Unknown"
               defaultValue={infoObj.Birthday}
               id="info-inp-birthday"
               readOnly={!isEditMode}
@@ -257,4 +299,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default AdminUpdateUser;

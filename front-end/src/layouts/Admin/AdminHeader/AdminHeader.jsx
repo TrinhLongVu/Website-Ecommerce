@@ -17,7 +17,7 @@ const Header = () => {
       <Link to="/admin" className="logo">
         THE MEGA MALL
       </Link>
-      <NavLink to="/admin/user" className={classNameFunc}>
+      <NavLink to="/admin/users" className={classNameFunc}>
         Manage Users
       </NavLink>
       <NavLink to="/admin/upload" className={classNameFunc}>
@@ -26,8 +26,8 @@ const Header = () => {
       <NavLink to="/admin/products" className={classNameFunc}>
         Manage Products
       </NavLink>
-      <NavLink to="/admin/statistics" className={classNameFunc}>
-        Statistics
+      <NavLink to="/admin/orders" className={classNameFunc}>
+        Manage Orders
       </NavLink>
       <div className="admin-head-logout-btn" onClick={logOut}>
         LOGOUT

@@ -129,3 +129,7 @@
     justify-content: center;
     align-items: center;
 }
+
+.admin-hidden-category {
+    margin: 0 8px;
+}

@@ -40,44 +40,43 @@ const userSchema = new Schema({
         type: String
     },
     Image_Avatar: {
-        type: String
+        type: String,
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBXqRKXezHfKsAvXX2HOz0QO_5dvdAj5s0Bg&usqp=CAU"
     },
-    Cart: [
-        {
-            product_id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Product'
-            },
-            quantity: Number
+    Cart: [{
+        product_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        },
+        quantity: Number
+    }],
+    Balance: [{
+        payment_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Payment'
+        },
+        balance: {
+            type: Number,
+            default: 0
         }
-    ],
-    Balance: [
-        {
-            payment_id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Payment'
-            },
-            balance: Number
-        }
-    ],
+    }],
+    AccountPayment: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Payment',
+        default: null
+    },
     Transaction: [
         {
-            user_id:{
-                type: String
-            },
-            cart_id: {
-                type: Array,
-                ref: 'Cart'
-            },
-            time: {
-                type: Date,
-                default: new Date()
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Transaction',
         }
-    ]
-
+    ],
+    TotalMoneyTransaction: {
+        type: Number,
+        default: 0
+    }
 })
-// The same create table in sql server and table have name which is lowercase."article" 
+
 const User = mongoose.model('Users', userSchema);
 
 module.exports = User;
