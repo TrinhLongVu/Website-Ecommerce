@@ -18,8 +18,12 @@ exports.getCart = async (req, res) => { // thông tin trả về là user.Cart v
             const total = await totalPromise;
         
             try {
-                const product = await Product.findById(cartItem.product_id);
-                cartData.push(product);
+                const product = await Product.findById(cartItem.product_id).populate({
+                    path: 'category',
+                    select: 'name'
+                });
+                const quantity = cartItem.quantity;
+                cartData.push({product, quantity});
                 if (product) {
                     return total + cartItem.quantity * product.price;
                 } else {

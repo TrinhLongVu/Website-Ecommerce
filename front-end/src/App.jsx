@@ -22,6 +22,7 @@ import ScrollTop from "./components/ScrollTop/ScrollTop";
 
 import Main from "./layouts/Main/Main";
 import Admin from "./layouts/Admin/Admin";
+import AdminOrder from "./pages/AdminOrder/AdminOrder";
 
 function App() {
   return (
@@ -42,16 +43,17 @@ function App() {
           <Route path="*" element={<Error404 />} />
         </Route>
         <Route path="/admin" element={<Admin />}>
+          <Route index element={<AdminStatistics />} />
           <Route path="/admin/users">
             <Route index element={<AdminUser />} />
             <Route path="/admin/users/:id" element={<AdminUpdateUser />} />
           </Route>
           <Route path="/admin/upload" element={<AdminUpload />} />
+          <Route path="/admin/orders" element={<AdminOrder />} />
           <Route path="/admin/products">
             <Route index element={<AdminProducts />} />
             <Route path="/admin/products/:id" element={<AdminUpdate />} />
           </Route>
-          <Route path="/admin/statistics" element={<AdminStatistics />} />
         </Route>
         <Route path="/authentication">
           <Route

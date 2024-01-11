@@ -82,6 +82,14 @@ const AdminUser = () => {
     const json = await response.json();
     if (json.status === "success") {
       Toastify("success", "top-right", "Successfully added new user");
+      document.querySelector("#admin-user-add-email").value = "";
+      document.querySelector("#admin-user-add-pass").value = "";
+      document.querySelector("#admin-user-add-name").value = "";
+      document.querySelector(".admin-upload-select-title").style.color =
+        "#3e3232";
+      document.querySelector(".admin-upload-select-title").style.opacity =
+        "0.75";
+      setSelectedRole("");
       setListChange(!listChange);
     } else if (json.status === "fail") {
       Toastify("error", "top-right", json.message);
@@ -137,6 +145,9 @@ const AdminUser = () => {
                 text: "User has been successfully deleted.",
                 icon: "success",
               });
+              if (userList.length === 1 && currentPage > 1) {
+                setCurrentPage(currentPage - 1);
+              }
               setListChange(!listChange);
             } else {
               Swal.fire({
