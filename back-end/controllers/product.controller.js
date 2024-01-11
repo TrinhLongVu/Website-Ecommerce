@@ -5,9 +5,12 @@ const fs = require('fs');
 const Category = require('../models/category.model')
 
 exports.getAllProduct = async (req, res) => {
-    console.log(req.isAuthenticated())
     try {
         const query = req.query;
+        let arrayfilter = [];
+        if (query.filter) {
+            arrayfilter = query.filter.split(',')
+        }
         const skip = (query.page - 1) * query.limit;
 
         let queryBuilder = Product.find()
@@ -24,7 +27,16 @@ exports.getAllProduct = async (req, res) => {
 
         const result = await queryBuilder.exec();
 
-        let filteredData = result.filter(product => product.category != null);
+        let filteredData = result.filter(product => {
+            let check = true;
+            if (query.filter) {
+                check = false
+                if (product.price >= arrayfilter[0] && product.price <= arrayfilter[1]){
+                    check = true
+                }
+            }
+            return product.category != null && check
+        });
         const paginatedResults = filteredData.slice(skip, skip + query.limit * 1.0);
 
         const totalPages = Math.ceil(filteredData.length / query.limit);

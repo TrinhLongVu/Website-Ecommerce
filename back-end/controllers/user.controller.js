@@ -281,11 +281,13 @@ exports.deleteUser = async (req, res) => {
 
 exports.searchProduct = async (req, res) => {
     try {
-        const { page, limit, search } = req.query;
-        console.log('page: ', page, ' limit: ',limit,' search: ',search)
+        const { page, limit, search, filter } = req.query;
+        let arrayfilter = [];
+        if (filter) {
+            arrayfilter = filter.split(',')
+        }
 
         const skip = (page - 1) * limit;
-
         let queryBuilder = Product.find();
 
         if (req.query.sort) {
@@ -296,6 +298,7 @@ exports.searchProduct = async (req, res) => {
 
         const categories = await Category.find();
 
+       
         const normalize = (text) => (text ? text.replace(/\s/g, '').toLowerCase() : '');
 
         const searchResult = products.filter(product => {
@@ -314,9 +317,16 @@ exports.searchProduct = async (req, res) => {
                 return normalizedCategoryName.includes(normalize(search)) && product.category.includes(category._id);
             });
 
-            return titleMatch || detailMatch || categoryMatch;
-        });
+            let check = true;
+            if (filter) {
+                check = false
+                if (product.price >= arrayfilter[0] && product.price <= arrayfilter[1]){
+                    check = true
+                }
+            }
 
+            return (titleMatch || detailMatch || categoryMatch) && check;
+        });
         const result = searchResult.slice(skip, skip + limit * 1.0);
 
         if (searchResult.length === 0) {
