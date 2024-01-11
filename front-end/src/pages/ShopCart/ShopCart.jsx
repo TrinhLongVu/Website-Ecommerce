@@ -15,6 +15,20 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 const ShopCart = () => {
   const navigate = useNavigate();
   const { userInfo } = useOutletContext();
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/cart/get/" + userInfo?._id, {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setCart(json.data.cart);
+      });
+  }, [userInfo]);
 
   const removeFromCart = () => {};
 
@@ -31,6 +45,18 @@ const ShopCart = () => {
     } else {
       Toastify("success", "bottom-center", "Your credit has been added");
       document.querySelector(".balance-card-footer-input").value = "";
+    }
+  };
+
+  const checkOut = () => {
+    const telNum = document.querySelector("#tel-num").value;
+    const address = document.querySelector("#address").value;
+    if (telNum === "" || address === "") {
+      Toastify(
+        "error",
+        "top-right",
+        "Please fill in all the information before checking out!"
+      );
     }
   };
 
@@ -51,18 +77,22 @@ const ShopCart = () => {
             </div>
           ) : (
             <>
-              {userInfo?.Cart.map((item, idx) => (
+              {cart?.map((item, idx) => (
                 <div key={idx} className="cart--item">
                   <div
                     className="cart--item-img"
                     style={{
-                      backgroundImage: `url("${item.img}")`,
+                      backgroundImage: `url("${item.image}")`,
                     }}
                   ></div>
                   <div className="cart--item-info">
-                    <div className="cart--item-name">{item.name}</div>
+                    <div className="cart--item-name">{item.title}</div>
                     <div className="cart--item-category">{item.category}</div>
                     <div className="cart--item-price">${item.price}</div>
+                  </div>
+                  <div className="cart--item-quantity">
+                    <div className="cart--item-quantity-title">Quantity</div>
+                    {item.quantity}
                   </div>
                   <div className="cart--item-clear" onClick={removeFromCart}>
                     <FontAwesomeIcon icon={faXmark} />
@@ -87,15 +117,17 @@ const ShopCart = () => {
           <input
             type="text"
             className="cart--order-checkout-info-inp"
+            id="tel-num"
             placeholder="Please tell us your contact number"
           />
           <div className="cart--order-checkout-inp-title">Address</div>
           <input
             type="text"
             className="cart--order-checkout-info-inp"
+            id="address"
             placeholder="Please tell us where to ship this order"
           />
-          <div className="cart--order-checkout-btn">
+          <div className="cart--order-checkout-btn" onClick={checkOut}>
             <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
             CHECKOUT
           </div>

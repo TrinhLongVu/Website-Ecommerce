@@ -46,14 +46,14 @@
     height: 150px;
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     border-radius: 12px;
     border: 2px solid black;
 }
 
 .cart--item-info {
-    margin: 0 20px;
-    width: 430px;
+    margin-left: 10px;
+    width: 350px;
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -61,7 +61,6 @@
 }
 
 .cart--item-name {
-    font-family: 'REM', serif;
     font-size: 25px;
     width: 100%;
     white-space: nowrap;
@@ -70,15 +69,23 @@
 }
 
 .cart--item-category {
-    font-family: 'REM', serif;
     font-size: 20px;
 }
 
 .cart--item-price {
-    font-family: 'REM', serif;
     font-size: 20px;
     color: #3e3232;
     opacity: 0.75;
+}
+
+.cart--item-quantity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+    height: 70px;
+    margin: 0 20px;
 }
 
 .cart--item-clear {
