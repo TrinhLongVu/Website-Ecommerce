@@ -62,25 +62,14 @@ const userSchema = new Schema({
     }],
     AccountPayment: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Payment'
+        ref: 'Payment',
+        default: null
     },
-    Transaction: [{
-            user_id: {
-                type: String,
-                default: ''
-            },
-            cart_id: {
-                type: Array,
-                ref: 'Cart',
-                default: ''
-            },
-            time: {
-                type: Date,
-                default: new Date()
-            },
-
+    Transaction: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Transaction',
         }
-
     ],
     TotalMoneyTransaction: {
         type: Number,

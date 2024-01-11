@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const Product = require('../models/product.model');
 const Payment = require('../models/payment.model');
+const Transaction = require('../models/transaction.model');
 const middleware = require('../middeware/auth')
 const dotenv = require('dotenv')
 
@@ -20,15 +21,22 @@ exports.createPaymentAccount = async (req, res, next) => { // tạo 1 tài kho�
             });
         }
 
+        if (!user.AccountPayment) {
+            user.AccountPayment = ''
+        }
+        else {
+            return res.status(404).json({
+                status: 'fail',
+                msg: 'You already have payment account'
+            });
+        }
+
         const balance = {
             balance: money
         }
-
-
         const newPayment = await Payment.create(balance);
-        user.Balance.push(newPayment)
+        user.AccountPayment = newPayment;
         await user.save();
-
         res.status(200).json({
             status: 'success',
             data: {
@@ -43,55 +51,21 @@ exports.createPaymentAccount = async (req, res, next) => { // tạo 1 tài kho�
     }
 }
 
-exports.getPayment = async (req, res, next) => { // get tài khoản của người dùng, tham số truyền vào là id của người dùng và id của tài khoản
-
-    try {
-        const paymentid = req.body.paymentid;
-
-        const userId = req.params.id;
-        const user = await User.findById(userId);
-
-        const checkBalance = user.Balance.find(payment => payment._id == paymentid)
-
-        if (checkBalance) {
-            res.status(200).json({
-                status: 'success',
-                data: {
-                    Payment: checkBalance
-                }
-            });
-        } else {
-            res.status(200).json({
-                status: 'fail',
-                msg: "Can't find anything"
-            });
-        }
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            msg: err.message
-        });
-    }
-}
-
 exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
 
     try {
         const userId = req.params.id;
-        const user = await User.findById(userId);
-        if (!user) {
-            res.status(200).json({
-                status: 'fail',
-                msg: "Can't this user"
-            });
-        }
-        const checkBalance = user.Balance
+        const user = await User.findById(userId)
+            .populate({
+                path: 'AccountPayment',
+                select: 'balance'
+            })
 
-        if (checkBalance) {
+        if (user.AccountPayment) {
             res.status(200).json({
                 status: 'success',
                 data: {
-                    Payment: checkBalance
+                    UserBalance: user.AccountPayment.balance
                 }
             });
         } else {
@@ -112,15 +86,23 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
 exports.payMoney = async (req, res, next) => {
     try {
         const userId = req.params.id;
-        const user = await User.findById(userId);   
-        if(user.Cart.length == 0){
+        const user = await User.findById(userId)
+            .populate({
+                path: 'AccountPayment',
+                select: 'balance'
+            })
+        if (!user.AccountPayment) {
+            user.AccountPayment = '';
+        }
+
+        console.log(user.AccountPayment.balance)
+        if (user.Cart.length == 0) {
             return res.status(200).json({
                 status: 'fail',
                 msg: "You dont have any Cart to pay"
             });
         }
-        const { paymentid, totalPrice } = req.body
-
+        const { totalPrice } = req.body
         const price = parseFloat(totalPrice)
         if (!user) {
             return res.status(200).json({
@@ -129,14 +111,7 @@ exports.payMoney = async (req, res, next) => {
             });
         }
 
-        const balanceAccount = user.Balance.find(balance => balance.id == paymentid)
-        if (!balanceAccount) {
-            return res.status(200).json({
-                status: 'fail',
-                msg: "Can't find this account in your Balance"
-            });
-        }
-        if (balanceAccount.balance < price) {
+        if (user.AccountPayment.balance < price) {
             return res.status(200).json({
                 status: 'fail',
                 msg: "You do not have enough money to pay this payment"
@@ -145,15 +120,14 @@ exports.payMoney = async (req, res, next) => {
 
         const adminId = process.env.ADMINID;
         const admin = await User.findById(adminId)
-        
-
-
-        admin.Balance[0].balance += price;
-        admin.TotalMoneyTransaction += price;
-        user.TotalMoneyTransaction += price;
-
-        balanceAccount.balance -= price;
-
+            .populate({
+                path: 'AccountPayment',
+                select: 'balance'
+            })
+        // admin.AccountPayment.balance += price;
+        // admin.TotalMoneyTransaction += price;
+        // user.TotalMoneyTransaction += price;
+        // user.AccountPayment.balance -= price;
         if (!user.Transaction) {
             user.Transaction = [];
         }
@@ -162,18 +136,15 @@ exports.payMoney = async (req, res, next) => {
             admin.Transaction = [];
         }
 
-        admin.Transaction.push({
-            user_id: user.id,
+        const transaction = {
+            idUser: user.id,
             cart_id: user.Cart.map(cart => cart.product_id),
             time: new Date()
-        });
-
-
-        user.Transaction.push({
-            user_id: user.id,
-            cart_id: user.Cart.map(cart => cart.product_id),
-            time: new Date()
-        });
+        }
+        const idTransaction = await Transaction.create(transaction);
+        console.log(idTransaction)
+        user.Transaction.push(idTransaction)
+        admin.Transaction.push(idTransaction)
 
         user.Cart.splice(0);
 
@@ -193,7 +164,7 @@ exports.payMoney = async (req, res, next) => {
     }
 }
 
-exports.Verify = async (req, res, next) => { 
+exports.Verify = async (req, res, next) => {
     try {
         // req.user.token;
 
@@ -209,21 +180,21 @@ exports.Verify = async (req, res, next) => {
                     id: id
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-    
+
             const result = await response.json();
             req.user.token = result.token;
         } catch (error) {
             console.error('Error:', error.message);
         }
-      
+
         req.
-        res.status(200).json({
-            status: 'success'
-        })
+            res.status(200).json({
+                status: 'success'
+            })
 
     } catch (error) {
         res.status(400).json({
