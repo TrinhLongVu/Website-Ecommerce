@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model')
+const Payment = require('../models/payment.model')
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv')
 const path = require('path');
@@ -85,9 +86,18 @@ exports.signup = async (req, res) => {
             if (err) {
                 return next(err);
             }
+
+            let newPayment;
+            try {
+                newPayment = await Payment.create({balance: 0});
+            } catch (error) {
+                console.error("Error creating payment:", error);
+            }
+            console.log(newPayment)
             const newUser = await User.create({
                 UserName: NewBody.UserName,
                 FullName: fullname,
+                AccountPayment: newPayment._id,
                 Password: hash
             });
 
