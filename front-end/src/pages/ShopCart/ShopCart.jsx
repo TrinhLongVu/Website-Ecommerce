@@ -14,10 +14,10 @@ import Toastify from "../../components/Toastify/Toastify";
 import { useOutletContext } from "react-router-dom";
 
 const ShopCart = () => {
-  const { userInfo } = useOutletContext();
+  const { userInfo, userChange, changeUser } = useOutletContext();
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [cartChange, changeCart] = useState(false);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/cart/get/" + userInfo?._id, {
@@ -31,7 +31,17 @@ const ShopCart = () => {
         setTotalPrice(json.data.totalPrice);
         setCart(json.data.cart);
       });
-  }, [userInfo, cartChange]);
+    fetch("http://localhost:8000/api/v1/payment/get/" + userInfo?._id, {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setBalance(json.data.UserBalance);
+      });
+  }, [userInfo]);
 
   const removeFromCart = (id) => {
     fetch("http://localhost:8000/api/v1/cart/minus/" + userInfo?._id, {
@@ -49,28 +59,12 @@ const ShopCart = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {
-          changeCart(!cartChange);
+          changeUser(!userChange);
           Toastify("success", "top-right", "Removed an item from cart");
         } else {
           Toastify("error", "top-right", "Something went wrong");
         }
       });
-  };
-
-  const credit = () => {
-    const creditAmount = document.querySelector(
-      ".balance-card-footer-input"
-    ).value;
-    if (creditAmount === "") {
-      Toastify("error", "bottom-center", "Please enter credit amount!");
-    } else if (isNaN(creditAmount)) {
-      Toastify("error", "bottom-center", "Credit amount must be a number!");
-    } else if (creditAmount <= 0) {
-      Toastify("error", "bottom-center", "Credit amount must be positive!");
-    } else {
-      Toastify("success", "bottom-center", "Your credit has been added");
-      document.querySelector(".balance-card-footer-input").value = "";
-    }
   };
 
   const checkOut = () => {
@@ -92,7 +86,7 @@ const ShopCart = () => {
       />
       <div className="shop-cart">
         <div className="cart--order-table">
-          {cart.length === 0 ? (
+          {cart?.length === 0 ? (
             <div className="msg-box">
               <FontAwesomeIcon icon={faCartPlus} className="msg-icon" />
               <div>
@@ -176,16 +170,12 @@ const ShopCart = () => {
                 style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
               ></div>
             </div>
-            <div className="balance-card-balance">$1863</div>
+            <div className="balance-card-balance">
+              ${balance.toLocaleString()}
+            </div>
             <div className="balance-card-footer">
               <div className="balance-card-footer-logo">THE MEGA MALL</div>
-              <input
-                type="text"
-                placeholder="$"
-                className="balance-card-footer-input"
-                onKeyDown={(e) => e.key === "Enter" && credit()}
-              />
-              <div className="balance-card-footer-credit" onClick={credit}>
+              <div className="balance-card-footer-credit">
                 <FontAwesomeIcon icon={faCreditCard} />
               </div>
             </div>
