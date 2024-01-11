@@ -12,7 +12,7 @@ router
     .get(payment.history)
     
 router 
-    .route('/pay/:id')
+    .route('/pay')
     .post(payment.payMoney)
 
 module.exports = router;

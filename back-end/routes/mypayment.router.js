@@ -24,4 +24,8 @@ router
     .route('/create/verify')
     .get(paymentController.Verify)
 
+router 
+    .route('/pay/test/a')
+    .post(paymentController.paytest)
+
 module.exports = router;
