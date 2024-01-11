@@ -156,8 +156,9 @@ exports.payMoney = async (req, res, next) => {
 
         ////
         // const token = req.user.token;
+        // req.body.price
 
-        const url = 'http://localhost:3001/api/v1/payment/pay';
+        const url = 'https://paymentmegamall.onrender.com/api/v1/payment/pay';
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -165,7 +166,7 @@ exports.payMoney = async (req, res, next) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OTkzZWM4NTY2NjJkNjk4NTQyYjhlNCIsImlhdCI6MTcwNDk4MjIzMSwiZXhwIjoxNzA0OTg1ODMxfQ.MXaS6thwJvXNzuFGKQ8XGPCOhXwRlW0dqT2jU99E30E",
+                    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OTkzZWM4NTY2NjJkNjk4NTQyYjhlNCIsImlhdCI6MTcwNDk4NzQ1OSwiZXhwIjoxNzA0OTkxMDU5fQ.0LmZbVVE8Bt2t2sZjOO2jiUEoRUxdMYdu_OVHn-oeTc",
                     price: 1200
                 }),
             });
@@ -174,24 +175,23 @@ exports.payMoney = async (req, res, next) => {
                 const data = await response.json();
                 const serverMsg = data.msg;
                 res.status(200).json({
-                    status: 'success',
+                    status: 'fail',
                     msg: serverMsg
                 })
             } else {
-                res.status(400).json({
-                    status: 'fail',
-                    msg: error.message
-                });
+                res.status(200).json({
+                    status: 'success'
+                })
             }
         } catch (error) {
-            console.error('Error:', error.message);
+            console.error('Error:', error);
         }
     
 
     } catch (error) {
         res.status(400).json({
             status: 'fail',
-            msg: error.message
+            msg: error
         });
     }
 }
@@ -200,9 +200,9 @@ exports.Verify = async (req, res, next) => {
     try {
         // req.user.token;
 
-        // const id = "req.user._id"
+        // const id = req.user._id
         const id = "65993ec856662d698542b8e4"
-        const url = 'http://localhost:3001/api/v1/payment/verify';
+        const url = 'https://paymentmegamall.onrender.com/api/v1/payment/verify';
         try {
             const response = await fetch(url, {
                 method: 'POST',
