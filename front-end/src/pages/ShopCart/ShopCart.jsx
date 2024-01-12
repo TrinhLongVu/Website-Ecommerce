@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +16,7 @@ import Swal from "sweetalert2";
 
 import "./shop-cart.css";
 const ShopCart = () => {
+  const navigate = useNavigate();
   const { userInfo, userChange, changeUser } = useOutletContext();
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -129,6 +130,40 @@ const ShopCart = () => {
     }
   };
 
+  const payVn = () => {
+    const telNum = document.querySelector("#tel-num").value;
+    const address = document.querySelector("#address").value;
+    if (totalPrice === 0) {
+      Toastify("error", "top-right", "Your shopping cart is empty");
+      return;
+    } else if (telNum === "" || address === "") {
+      Toastify(
+        "error",
+        "top-right",
+        "Please fill in all the information before checking out!"
+      );
+      return;
+    } else {
+      fetch("http://localhost:8000/api/v1/vnpay/create", {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: JSON.stringify({
+          amount: totalPrice * 100,
+          bankCode: "VNBANK",
+          language: "vn",
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          window.location.href = json.vnpUrl;
+        });
+    }
+  };
+
   return (
     <>
       <Breadcrumbs
@@ -216,7 +251,7 @@ const ShopCart = () => {
             <div
               className="cart--order-checkout-btn"
               id="vnpay"
-              onClick={checkOut}
+              onClick={payVn}
             ></div>
           </div>
           <div className="balance-card">

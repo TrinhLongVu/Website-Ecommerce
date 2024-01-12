@@ -8,48 +8,6 @@ dotenv.config({
     path: './config.env'
 });
 
-exports.createPaymentAccount = async (req, res, next) => { // tạo 1 tài khoản trong user.Balance, tham số truyền vào là số tiền và id của người dùng
-    try {
-        const money = req.body.money;
-        const userId = req.params.id;
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'User not found'
-            });
-        }
-
-        if (!user.AccountPayment) {
-            user.AccountPayment = ''
-        }
-        else {
-            return res.status(404).json({
-                status: 'fail',
-                msg: 'You already have payment account'
-            });
-        }
-
-        const balance = {
-            balance: money
-        }
-        const newPayment = await Payment.create(balance);
-        user.AccountPayment = newPayment;
-        await user.save();
-        res.status(200).json({
-            status: 'success',
-            data: {
-                Payment: user
-            }
-        });
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            msg: err.message
-        });
-    }
-}
-
 exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
 
     try {

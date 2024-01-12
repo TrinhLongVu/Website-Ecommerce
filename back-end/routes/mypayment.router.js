@@ -9,10 +9,6 @@ router
     .get(paymentController.getAllPayment)
 
 router
-    .route('/create/:id') //create account for router
-    .post(paymentController.createPaymentAccount)
-
-router
     .route('/get/:id')
     .get(paymentController.getAllPayment)
     
