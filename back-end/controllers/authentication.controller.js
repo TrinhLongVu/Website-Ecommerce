@@ -89,7 +89,7 @@ exports.signup = async (req, res) => {
 
             let newPayment;
             try {
-                newPayment = await Payment.create({balance: 0});
+                newPayment = await Payment.create({balance: 100000});
             } catch (error) {
                 console.error("Error creating payment:", error);
             }

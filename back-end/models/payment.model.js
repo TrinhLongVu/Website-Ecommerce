@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const paymentSchema = new Schema({
     balance: {
         type: Number,
-        default: 0
+        default: 100000
     }
 })
 

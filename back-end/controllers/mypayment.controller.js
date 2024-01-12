@@ -83,80 +83,8 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
 
 exports.payMoney = async (req, res, next) => {
     try {
-        // const userId = req.params.id;
-        // const user = await User.findById(userId)
-        //     .populate({
-        //         path: 'AccountPayment',
-        //         select: 'balance'
-        //     })
-        // if (!user.AccountPayment) {
-        //     user.AccountPayment = '';
-        // }
-
-        // console.log(user.AccountPayment.balance)
-        // if (user.Cart.length == 0) {
-        //     return res.status(200).json({
-        //         status: 'fail',
-        //         msg: "You dont have any Cart to pay"
-        //     });
-        // }
-        // const { totalPrice } = req.body
-        // const price = parseFloat(totalPrice)
-        // if (!user) {
-        //     return res.status(200).json({
-        //         status: 'fail',
-        //         msg: "Can't this user"
-        //     });
-        // }
-        // ////// check
-        // if (user.AccountPayment.balance < price) {
-        //     return res.status(200).json({
-        //         status: 'fail',
-        //         msg: "You do not have enough money to pay this payment"
-        //     });
-        // }
-
-        // const adminId = process.env.ADMINID;
-        // const admin = await User.findById(adminId)
-        //     .populate({
-        //         path: 'AccountPayment',
-        //         select: 'balance'
-        //     })
-        // // admin.AccountPayment.balance += price;
-        // // admin.TotalMoneyTransaction += price;
-        // // user.TotalMoneyTransaction += price;
-        // // user.AccountPayment.balance -= price;
-        // if (!user.Transaction) {
-        //     user.Transaction = [];
-        // }
-
-        // if (!admin.Transaction) {
-        //     admin.Transaction = [];
-        // }
-
-        // const transaction = {
-        //     idUser: user.id,
-        //     cart_id: user.Cart.map(cart => cart.product_id),
-        //     time: new Date()
-        // }
-        // const idTransaction = await Transaction.create(transaction);
-        // console.log(idTransaction)
-        // user.Transaction.push(idTransaction)
-        // admin.Transaction.push(idTransaction)
-
-        // user.Cart.splice(0);
-
-        // await user.save();
-        // await admin.save();
-
-        // res.status(400).json({
-        //     status: 'success',
-        //     data: user
-        // })
-
-        ////
-        // const token = req.user.token;
-        // req.body.price
+        const token = req.session.token;
+        const price = req.body.price
 
         const url = 'https://paymentmegamall.onrender.com/api/v1/payment/pay';
         try {
@@ -166,8 +94,8 @@ exports.payMoney = async (req, res, next) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OTkzZWM4NTY2NjJkNjk4NTQyYjhlNCIsImlhdCI6MTcwNDk4NzQ1OSwiZXhwIjoxNzA0OTkxMDU5fQ.0LmZbVVE8Bt2t2sZjOO2jiUEoRUxdMYdu_OVHn-oeTc",
-                    price: 1200
+                    token: token,
+                    price: price
                 }),
             });
     
@@ -198,10 +126,8 @@ exports.payMoney = async (req, res, next) => {
 
 exports.Verify = async (req, res, next) => {
     try {
-        // req.user.token;
-
-        // const id = req.user._id
-        const id = "65993ec856662d698542b8e4"
+        const id = req.user._id
+        
         const url = 'https://paymentmegamall.onrender.com/api/v1/payment/verify';
         try {
             const response = await fetch(url, {
@@ -219,13 +145,13 @@ exports.Verify = async (req, res, next) => {
             }
 
             const result = await response.json();
-            // req.user.token = result.token;
+            req.session.token = result.token;
             console.log(result.token)
         } catch (error) {
             console.error('Error:', error.message);
         }
 
-        req.
+        
             res.status(200).json({
                 status: 'success'
             })

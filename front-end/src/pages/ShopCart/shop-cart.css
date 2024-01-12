@@ -160,9 +160,14 @@
     outline: none;
 }
 
+.cart--order-checkout-btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .cart--order-checkout-btn {
     margin: 20px 0;
-    width: 100%;
+    width: 48%;
     height: 60px;
     font-size: 20px;
     display: flex;
@@ -172,6 +177,17 @@
     color: black;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+#vnpay {
+    background: url('../../assets/vnpay.png'), white;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#vnpay:hover {
+    background-color: #F1B4BB;
 }
 
 .cart--order-checkout-btn:hover {

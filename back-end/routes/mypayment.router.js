@@ -18,10 +18,10 @@ router
     
 router 
     .route('/pay/product')
-    .post(paymentController.payMoney)
+    .post(middleware.isLoggedUser,paymentController.payMoney)
 
 router 
     .route('/create/verify')
-    .get(paymentController.Verify)
+    .get(middleware.isLoggedUser,paymentController.Verify)
 
 module.exports = router;

@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./shop-cart.css";
 import {
   faCartPlus,
   faCashRegister,
@@ -8,11 +10,11 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import Toastify from "../../components/Toastify/Toastify";
-import { useOutletContext } from "react-router-dom";
+import Swal from "sweetalert2";
 
+import "./shop-cart.css";
 const ShopCart = () => {
   const { userInfo, userChange, changeUser } = useOutletContext();
   const [cart, setCart] = useState([]);
@@ -70,12 +72,60 @@ const ShopCart = () => {
   const checkOut = () => {
     const telNum = document.querySelector("#tel-num").value;
     const address = document.querySelector("#address").value;
-    if (telNum === "" || address === "") {
+    if (totalPrice === 0) {
+      Toastify("error", "top-right", "Your shopping cart is empty");
+      return;
+    } else if (telNum === "" || address === "") {
       Toastify(
         "error",
         "top-right",
         "Please fill in all the information before checking out!"
       );
+      return;
+    } else {
+      fetch("http://localhost:8000/api/v1/payment/create/verify", {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.status === "success") {
+            Swal.fire({
+              title: "Are you sure you want to do this?",
+              text: "You won't be able to revert this!",
+              icon: "warning",
+              showCancelButton: true,
+              timer: 60000,
+              timerProgressBar: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                fetch("http://localhost:8000/api/v1/payment/pay/product", {
+                  credentials: "include",
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem(
+                      "authToken"
+                    )}`,
+                  },
+                  body: JSON.stringify({
+                    price: totalPrice,
+                  }),
+                })
+                  .then((res) => res.json())
+                  .then((json) => {
+                    console.log(json);
+                  });
+              }
+            });
+          }
+        });
     }
   };
 
@@ -158,9 +208,16 @@ const ShopCart = () => {
             id="address"
             placeholder="Please tell us where to ship this order"
           />
-          <div className="cart--order-checkout-btn" onClick={checkOut}>
-            <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
-            CHECKOUT
+          <div className="cart--order-checkout-btn-container">
+            <div className="cart--order-checkout-btn" onClick={checkOut}>
+              <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
+              CHECKOUT
+            </div>
+            <div
+              className="cart--order-checkout-btn"
+              id="vnpay"
+              onClick={checkOut}
+            ></div>
           </div>
           <div className="balance-card">
             <div className="balance-card-info">

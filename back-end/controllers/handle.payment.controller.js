@@ -179,7 +179,7 @@ exports.verify = async (req, res, next) => {
         const token = jwt.sign({
             id
         }, process.env.KEY_TOKEN_PAYMENT, {
-            expiresIn: '1h'
+            expiresIn: '60s'
         });
 
         res.status(200).json({
