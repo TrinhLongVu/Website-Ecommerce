@@ -74,12 +74,20 @@ const Search = () => {
       <Breadcrumbs crumbList={[{ name: "Search", link: `/search/${key}` }]} />
       <div className="home-section-banner">
         <div className="srch--title">Search results for: "{key}"</div>
-        <Filter
-          filter={filter}
-          filterList={filterList}
-          setFilter={setFilter}
-          setCurrentPage={setCurrentPage}
-        />
+        <div className="srch--filter-container">
+          <Filter
+            filter={filter}
+            filterList={filterList}
+            setFilter={setFilter}
+            setCurrentPage={setCurrentPage}
+          />
+          <Filter
+            filter={filter}
+            filterList={filterList}
+            setFilter={setFilter}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
       </div>
       {loadPage ? (
         <div className="srch--loader-container">
