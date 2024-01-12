@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router();
 const payment = require('../controllers/handle.payment.controller')
-const middleware = require('../middeware/auth')
 
 router
     .route('/verify')

@@ -77,7 +77,7 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
 
 exports.payMoney = async (req, res) => {
     try {
-        const token = req.body.token;
+        const {token, phone, address} = req.body;
 
         jwt.verify(token, process.env.KEY_TOKEN_PAYMENT, async (err, data) => {
             if (err) {
@@ -142,7 +142,10 @@ exports.payMoney = async (req, res) => {
                 const transaction = {
                     idUser: user.id,
                     cart_id: user.Cart.map(cart => cart.product_id),
-                    time: new Date()
+                    time: new Date(),
+                    moneyTransaction: price,
+                    address: address,
+                    phone: phone
                 }
                 const idTransaction = await Transaction.create(transaction);
                 user.Transaction.push(idTransaction)

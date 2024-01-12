@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const transaction = new Schema({
     idUser: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'users'
     },
     cart_id: {
         type: Array,
-        ref: 'Cart',
+        ref: 'products',
         default: []
     },
     time: {
@@ -18,13 +18,15 @@ const transaction = new Schema({
     moneyTransaction: {
         type: Number,
         default: 0
+    },
+    address: {
+        type: String,
+        default: "no address"
+    },
+    phone: {
+        type: Number,
+        default: 0
     }
-    // transaction: {
-    //     type: Number,
-    //     default: 'user',
-    //     require: [true, 'A User must have a role']
-    // },
-
 })
 
 const Transaction = mongoose.model('Transaction', transaction);

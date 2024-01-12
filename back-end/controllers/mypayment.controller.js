@@ -1,14 +1,11 @@
 const User = require('../models/user.model')
-const Product = require('../models/product.model');
-const Payment = require('../models/payment.model');
-const middleware = require('../middeware/auth')
 const dotenv = require('dotenv')
 
 dotenv.config({
     path: './config.env'
 });
 
-exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
+exports.getAllPayment = async (req, res) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
 
     try {
         const userId = req.params.id;
@@ -39,10 +36,10 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
     }
 }
 
-exports.payMoney = async (req, res, next) => {
+exports.payMoney = async (req, res) => {
     try {
         const token = req.session.token;
-        const price = req.body.price
+        const { price, address, phone } = req.body;
 
         const url = 'https://paymentmegamall.onrender.com/api/v1/payment/pay';
         try {
@@ -53,7 +50,9 @@ exports.payMoney = async (req, res, next) => {
                 },
                 body: JSON.stringify({
                     token: token,
-                    price: price
+                    price: price,
+                    address: address,
+                    phone: phone
                 }),
             });
     
@@ -82,7 +81,7 @@ exports.payMoney = async (req, res, next) => {
     }
 }
 
-exports.Verify = async (req, res, next) => {
+exports.Verify = async (req, res) => {
     try {
         const id = req.user._id
         
@@ -118,6 +117,29 @@ exports.Verify = async (req, res, next) => {
         res.status(400).json({
             status: 'fail',
             msg: error.message
+        });
+    }
+}
+
+exports.getTransaction = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id)
+            .populate({
+                path: 'Transaction',
+                populate: {
+                    path: 'cart_id',
+                }
+            })  
+        
+        res.status(200).json({
+            status: "success",
+            data: user
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            msg: error
         });
     }
 }
