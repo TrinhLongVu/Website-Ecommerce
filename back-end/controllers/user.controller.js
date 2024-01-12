@@ -270,7 +270,7 @@ exports.searchProduct = async (req, res) => {
                 }
             }
 
-            const checkcate = product.name == filtercategory
+            const checkcate = product.category.name == filtercategory
 
             return (titleMatch || detailMatch || categoryMatch) && check && checkcate;
         });
