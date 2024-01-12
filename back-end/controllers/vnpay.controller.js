@@ -116,7 +116,8 @@ exports.returnPayment = async (req, res, next) => {
         const transaction = {
                     idUser: user.id,
                     cart_id: user.Cart.map(cart => cart.product_id),
-                    time: new Date()
+                    time: new Date(),
+                    moneyTransaction: vnp_Params['vnp_Amount'],
                 }
         const idTransaction = await Transaction.create(transaction);
         user.Transaction.push(idTransaction)

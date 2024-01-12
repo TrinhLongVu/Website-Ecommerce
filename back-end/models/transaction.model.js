@@ -9,12 +9,16 @@ const transaction = new Schema({
     cart_id: {
         type: Array,
         ref: 'Cart',
-        default: ''
+        default: []
     },
     time: {
         type: Date,
         default: new Date()
     },
+    moneyTransaction: {
+        type: Number,
+        default: 0
+    }
     // transaction: {
     //     type: Number,
     //     default: 'user',
