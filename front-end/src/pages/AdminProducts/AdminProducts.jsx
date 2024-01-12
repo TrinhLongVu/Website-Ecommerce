@@ -43,7 +43,7 @@ const AdminProducts = () => {
     }
   };
 
-  const filterList = ["Price: Low to High", "Price: High to Low"];
+  const filterList = ["Below $1000", "$1000 to $2000", "Above $2000"];
   const selectFilter = (filterType) => {
     setCurrentPage(1);
     setFilter(filterType);
@@ -67,10 +67,12 @@ const AdminProducts = () => {
     let fetchDomain = "";
     if (filter === "") {
       fetchDomain = `page=${currentPage}&limit=12`;
-    } else if (filter === "Price: Low to High") {
-      fetchDomain = `page=${currentPage}&limit=12&sort=price`;
-    } else if (filter === "Price: High to Low") {
-      fetchDomain = `page=${currentPage}&limit=12&sort=-price`;
+    } else if (filter === "Below $1000") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price&filter=0,1000`;
+    } else if (filter === "$1000 to $2000") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price&filter=1000,2000`;
+    } else if (filter === "Above $2000") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price&filter=2000,10000`;
     }
     fetch(domain + fetchDomain)
       .then((res) => res.json())

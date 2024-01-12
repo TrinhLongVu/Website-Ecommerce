@@ -3,16 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 // Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faAngleDown,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 // Components
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import ProductShelf from "../../components/ProductShelf/ProductShelf";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
+import Filter from "../../components/Filter/Filter";
 // Style
 import "./search.css";
 const Search = () => {
@@ -26,45 +23,14 @@ const Search = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
-  const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState("");
+  const filterList = ["Below $1000", "$1000 to $2000", "Above $2000"];
   const prevFilterRef = useRef("all");
   const prevPage = useRef(1);
 
-  const toggleFilter = () => {
-    setShowFilter(!showFilter);
-    if (!showFilter) {
-      document.querySelector(".home-filter-box").style.borderRadius =
-        "8px 8px 0 0";
-    } else {
-      document.querySelector(".home-filter-box").style.borderRadius = "8px";
-    }
-  };
-
-  const filterList = ["Price: Low to High", "Price: High to Low"];
-  const selectFilter = (filterType) => {
-    setCurrentPage(1);
-    setFilter(filterType);
-    toggleFilter();
-  };
-
-  document.body.addEventListener("click", (event) => {
-    const homeFilterBox = document.querySelector(".home-filter-box");
-    if (homeFilterBox && !event.target.closest(".home-filter-box")) {
-      setShowFilter(false);
-      homeFilterBox.style.borderRadius = "8px";
-    }
-  });
-
-  const unFilter = () => {
-    setCurrentPage(1);
-    setFilter("");
-    toggleFilter();
-  };
-
   useEffect(() => {
     setCurrentPage(1);
+    setFilter("");
   }, [key]);
 
   useEffect(() => {
@@ -75,17 +41,19 @@ const Search = () => {
     if (prevPage.current !== currentPage) {
       window.scrollTo({
         top: 0,
-        behavior: "smooth", // Add smooth scrolling behavior
+        behavior: "smooth",
       });
       prevPage.current = currentPage;
     }
     let fetchDomain = "";
     if (filter === "") {
       fetchDomain = `page=${currentPage}&search=${key}`;
-    } else if (filter === "Price: Low to High") {
-      fetchDomain = `page=${currentPage}&search=${key}&sort=price`;
-    } else if (filter === "Price: High to Low") {
-      fetchDomain = `page=${currentPage}&search=${key}&sort=-price`;
+    } else if (filter === "Below $1000") {
+      fetchDomain = `page=${currentPage}&search=${key}&sort=price&filter=0,1000`;
+    } else if (filter === "$1000 to $2000") {
+      fetchDomain = `page=${currentPage}&search=${key}&sort=price&filter=1000,2000`;
+    } else if (filter === "Above $2000") {
+      fetchDomain = `page=${currentPage}&search=${key}&sort=price&filter=2000,100000`;
     }
     fetch(domain + fetchDomain)
       .then((res) => res.json())
@@ -106,23 +74,12 @@ const Search = () => {
       <Breadcrumbs crumbList={[{ name: "Search", link: `/search/${key}` }]} />
       <div className="home-section-banner">
         <div className="srch--title">Search results for: "{key}"</div>
-        <div className="home-filter-box" onClick={toggleFilter}>
-          {filter ? filter : "Filter"}
-          {filter ? (
-            <FontAwesomeIcon icon={faXmark} onClick={unFilter} />
-          ) : (
-            <FontAwesomeIcon icon={faAngleDown} />
-          )}
-        </div>
-        {showFilter && (
-          <div className="filter-dropdown">
-            {filterList.map((item, index) => (
-              <div key={index} onClick={() => selectFilter(item)}>
-                {item}
-              </div>
-            ))}
-          </div>
-        )}
+        <Filter
+          filter={filter}
+          filterList={filterList}
+          setFilter={setFilter}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
       {loadPage ? (
         <div className="srch--loader-container">

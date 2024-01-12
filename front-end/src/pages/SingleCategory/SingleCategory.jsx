@@ -113,7 +113,7 @@ const SingleCategory = () => {
         <div className="home-section-banner">
           <div></div>
           <div className="filter-box" onClick={toggleFilter}>
-            {filter ? filter : "Filter"}
+            {filter ? filter : "Sort by"}
             {filter ? (
               <FontAwesomeIcon icon={faXmark} onClick={unFilter} />
             ) : (
