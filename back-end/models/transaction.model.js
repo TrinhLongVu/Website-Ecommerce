@@ -24,8 +24,8 @@ const transaction = new Schema({
         default: "no address"
     },
     phone: {
-        type: Number,
-        default: 0
+        type: String,
+        default: "no phone"
     }
 })
 
