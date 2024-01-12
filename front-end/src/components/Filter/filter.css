@@ -1,3 +1,7 @@
+.filter--container {
+    position: relative;
+}
+
 .filter-box {
     padding: 4px 8px;
     width: 180px;

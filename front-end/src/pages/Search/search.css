@@ -3,7 +3,9 @@
 }
 
 .srch--filter-container {
+    width: 380px;
     display: flex;
+    justify-content: space-between;
 }
 
 .srch--loader-container {

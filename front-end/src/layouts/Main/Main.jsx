@@ -23,7 +23,6 @@ const MainLayout = () => {
     }
     const token = localStorage.getItem("authToken");
     if (!token) {
-      navigate("/");
       return;
     }
     const fetchData = async () => {

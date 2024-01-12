@@ -82,11 +82,12 @@ const SingleCategory = () => {
           }}
         >
           <FontAwesomeIcon icon={faTag} className="category-banner-icon" />
-          {pageCategory.name}
+          {pageCategory?.name}
         </div>
         <div className="home-section-banner">
           <div></div>
           <Filter
+            filterName={"Price"}
             filter={filter}
             filterList={filterList}
             setFilter={setFilter}
