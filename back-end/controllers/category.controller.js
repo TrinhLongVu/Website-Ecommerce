@@ -52,6 +52,10 @@ exports.addCategory = async (req, res) => {
 exports.getPagination = async (req, res) => {
     try {
         const query = req.query;
+        let arrayfilter = [];
+        if (query.filter) {
+            arrayfilter = query.filter.split(',')
+        }
         const skip = (query.page - 1) * query.limit;
     
         let data = Product.find()
@@ -67,7 +71,16 @@ exports.getPagination = async (req, res) => {
         }
 
         const result = await data.exec();
-        let filteredData = result.filter(product => product.category != null);
+        let filteredData = result.filter(product => {
+            let check = true;
+            if (query.filter) {
+                check = false
+                if (product.price >= arrayfilter[0] && product.price <= arrayfilter[1]){
+                    check = true
+                }
+            }
+            return product.category != null && check
+        });
         const paginatedResults = filteredData.slice(skip, skip + query.limit * 1.0);
     
         res.status(200).json({
