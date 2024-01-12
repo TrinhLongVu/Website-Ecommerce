@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./admin-update-user.css";
-import { useParams, useOutletContext, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Toastify from "../../components/Toastify/Toastify";
 import Loader from "../../components/Loader/Loader";
 import { format } from "date-fns";

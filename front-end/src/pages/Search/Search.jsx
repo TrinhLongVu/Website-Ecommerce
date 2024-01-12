@@ -1,6 +1,6 @@
 // Library
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 // Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -23,20 +23,31 @@ const Search = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [filter, setFilter] = useState("");
-  const filterList = ["Below $1000", "$1000 to $2000", "Above $2000"];
-  const prevFilterRef = useRef("all");
   const prevPage = useRef(1);
+  // Filter
+  //-- Price
+  const [priceFilter, setPriceFilter] = useState("");
+  const priceFilterList = ["Below $1000", "$1000 to $2000", "Above $2000"];
+  const prevPriceFilter = useRef("price");
+  //-- Category
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const { categoryList } = useOutletContext();
+  const categoryFilterList = categoryList.map((category) => category.name);
+  const prevCategoryFilter = useRef("category");
 
   useEffect(() => {
     setCurrentPage(1);
-    setFilter("");
+    setPriceFilter("");
   }, [key]);
 
   useEffect(() => {
-    if (prevFilterRef.current !== filter) {
+    if (prevPriceFilter.current !== priceFilter) {
       setLoadPage(true);
-      prevFilterRef.current = filter;
+      prevPriceFilter.current = priceFilter;
+    }
+    if (prevCategoryFilter.current !== categoryFilter) {
+      setLoadPage(true);
+      prevCategoryFilter.current = categoryFilter;
     }
     if (prevPage.current !== currentPage) {
       window.scrollTo({
@@ -45,19 +56,23 @@ const Search = () => {
       });
       prevPage.current = currentPage;
     }
-    let fetchDomain = "";
-    if (filter === "") {
-      fetchDomain = `page=${currentPage}&search=${key}`;
-    } else if (filter === "Below $1000") {
-      fetchDomain = `page=${currentPage}&search=${key}&sort=price&filter=0,1000`;
-    } else if (filter === "$1000 to $2000") {
-      fetchDomain = `page=${currentPage}&search=${key}&sort=price&filter=1000,2000`;
-    } else if (filter === "Above $2000") {
-      fetchDomain = `page=${currentPage}&search=${key}&sort=price&filter=2000,100000`;
+    let fetchDomain = `page=${currentPage}&search=${key}`;
+    let priceFetchDomain = "";
+    if (priceFilter === "Below $1000") {
+      priceFetchDomain = "&sort=price&filter=0,1000";
+    } else if (priceFilter === "$1000 to $2000") {
+      priceFetchDomain = "&sort=price&filter=1000,2000";
+    } else if (priceFilter === "Above $2000") {
+      priceFetchDomain = "&sort=price&filter=2000,100000";
     }
-    fetch(domain + fetchDomain)
+    let categoryFetchDomain = "";
+    if (categoryFilter !== "") {
+      categoryFetchDomain = "&filtercategory=" + categoryFilter;
+    }
+    fetch(domain + fetchDomain + priceFetchDomain + categoryFetchDomain)
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         if (json.status === "fail") {
           setEmpty(true);
         } else {
@@ -67,19 +82,29 @@ const Search = () => {
         }
         setLoadPage(false);
       });
-  }, [key, currentPage, filter]);
+  }, [key, currentPage, priceFilter, categoryFilter]);
 
   return (
     <>
       <Breadcrumbs crumbList={[{ name: "Search", link: `/search/${key}` }]} />
       <div className="home-section-banner">
         <div className="srch--title">Search results for: "{key}"</div>
-        <Filter
-          filter={filter}
-          filterList={filterList}
-          setFilter={setFilter}
-          setCurrentPage={setCurrentPage}
-        />
+        <div className="srch--filter-container">
+          <Filter
+            filterName={"Category"}
+            filter={categoryFilter}
+            filterList={categoryFilterList}
+            setFilter={setCategoryFilter}
+            setCurrentPage={setCurrentPage}
+          />
+          <Filter
+            filterName={"Price"}
+            filter={priceFilter}
+            filterList={priceFilterList}
+            setFilter={setPriceFilter}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
       </div>
       {loadPage ? (
         <div className="srch--loader-container">
@@ -90,8 +115,13 @@ const Search = () => {
           {empty ? (
             <div className="no-res-msg-box">
               <FontAwesomeIcon icon={faMagnifyingGlass} className="msg-icon" />
-              <div>Looks like there are no articles fit with your search!</div>
-              <div>Try using different keywords or check your spelling.</div>
+              <div>
+                Looks like there are no products fit with your search criteria!
+              </div>
+              <div>
+                Try using different keywords, check your spelling or use another
+                filter.
+              </div>
             </div>
           ) : (
             <>

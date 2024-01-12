@@ -2,6 +2,12 @@
     font-size: 20px;
 }
 
+.srch--filter-container {
+    width: 380px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .srch--loader-container {
     height: 500px;
     display: flex;

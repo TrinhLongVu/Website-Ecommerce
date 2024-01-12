@@ -270,8 +270,8 @@ exports.searchProduct = async (req, res) => {
                 }
             }
 
-            const checkcate = product.category.name == filtercategory
-            
+            const checkcate = product.category.name == filtercategory || filtercategory == null
+
             return (titleMatch || detailMatch || categoryMatch) && check && checkcate;
         });
         const result = searchResult.slice(skip, skip + limit * 1.0);

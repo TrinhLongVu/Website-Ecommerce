@@ -125,6 +125,7 @@ const Home = () => {
             <FontAwesomeIcon icon={faStore} /> Our Products
           </h2>
           <Filter
+            filterName={"Price"}
             filter={filter}
             filterList={filterList}
             setFilter={setFilter}
