@@ -122,15 +122,6 @@
     border-radius: 12px;
 }
 
-.cart--order-checkout-info-title {
-    font-size: 30px;
-    margin: 20px 0;
-}
-
-.cart--order-checkout-info-hr {
-    width: 100%;
-}
-
 .cart--order-checkout-info-row {
     padding: 10px 20px;
     width: 100%;
@@ -177,6 +168,10 @@
     color: black;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+#load-checkout {
+    background-color: white;
 }
 
 #vnpay {

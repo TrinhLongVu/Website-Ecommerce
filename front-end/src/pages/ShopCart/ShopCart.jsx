@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,15 +12,16 @@ import {
 
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import Toastify from "../../components/Toastify/Toastify";
+import Loader from "../../components/Loader/Loader";
 import Swal from "sweetalert2";
 
 import "./shop-cart.css";
 const ShopCart = () => {
-  const navigate = useNavigate();
   const { userInfo, userChange, changeUser } = useOutletContext();
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [balance, setBalance] = useState(0);
+  const [loadCheckout, setLoadCheckout] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/cart/get/" + userInfo?._id, {
@@ -84,6 +85,7 @@ const ShopCart = () => {
       );
       return;
     } else {
+      setLoadCheckout(true);
       fetch("http://localhost:8000/api/v1/payment/create/verify", {
         credentials: "include",
         headers: {
@@ -94,16 +96,17 @@ const ShopCart = () => {
         .then((res) => res.json())
         .then((json) => {
           if (json.status === "success") {
+            setLoadCheckout(false);
             Swal.fire({
-              title: "Are you sure you want to do this?",
+              title: "Are you sure you want to checkout this order?",
               text: "You won't be able to revert this!",
-              icon: "warning",
+              icon: "info",
               showCancelButton: true,
               timer: 60000,
               timerProgressBar: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Yes, delete it!",
+              confirmButtonText: "Yes!",
             }).then((result) => {
               if (result.isConfirmed) {
                 fetch("http://localhost:8000/api/v1/payment/pay/product", {
@@ -117,11 +120,28 @@ const ShopCart = () => {
                   },
                   body: JSON.stringify({
                     price: totalPrice,
+                    phone: telNum,
+                    address: address,
                   }),
                 })
                   .then((res) => res.json())
                   .then((json) => {
-                    console.log(json);
+                    if (json.status === "success") {
+                      Toastify(
+                        "success",
+                        "top-right",
+                        "Successful checked out for the order"
+                      );
+                      document.querySelector("#tel-num").value = "";
+                      document.querySelector("#address").value = "";
+                      changeUser(!userChange);
+                    } else {
+                      Toastify(
+                        "error",
+                        "top-right",
+                        "Something went wrong. Please try again later"
+                      );
+                    }
                   });
               }
             });
@@ -155,6 +175,8 @@ const ShopCart = () => {
           amount: totalPrice * 100,
           bankCode: "VNBANK",
           language: "vn",
+          phone: telNum,
+          address: address,
         }),
       })
         .then((res) => res.json())
@@ -244,10 +266,16 @@ const ShopCart = () => {
             placeholder="Please tell us where to ship this order"
           />
           <div className="cart--order-checkout-btn-container">
-            <div className="cart--order-checkout-btn" onClick={checkOut}>
-              <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
-              CHECKOUT
-            </div>
+            {loadCheckout ? (
+              <div className="cart--order-checkout-btn" id="load-checkout">
+                <Loader />
+              </div>
+            ) : (
+              <div className="cart--order-checkout-btn" onClick={checkOut}>
+                <FontAwesomeIcon icon={faCashRegister} id="cash-regis-icon" />
+                CHECKOUT
+              </div>
+            )}
             <div
               className="cart--order-checkout-btn"
               id="vnpay"

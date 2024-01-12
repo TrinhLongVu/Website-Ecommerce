@@ -75,9 +75,18 @@ module.exports = passport => {
             if (user) {
                 return done(null, user);
             }
+
+            let newPayment;
+            try {
+                newPayment = await Payment.create({balance: 100000});
+            } catch (error) {
+                console.error("Error creating payment:", error);
+            }
+
             const newUser = new User({
                 FullName: profile.displayName,
                 type: profile.id,
+                AccountPayment: newPayment._id,
                 Image_Avatar: profile.photos[0].value
             });
 
