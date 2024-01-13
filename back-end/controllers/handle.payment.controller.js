@@ -10,70 +10,30 @@ dotenv.config({
     path: './config.env'
 });
 
-exports.history = async (req, res, next) => {
+exports.create = async (req, res) => {
     try {
-        const paymentid = req.body.paymentid;
-
-        const userId = req.params.id;
-        const user = await User.findById(userId);
-
-        const checkBalance = user.Balance.find(payment => payment._id == paymentid)
-
-        if (checkBalance) {
-            res.status(200).json({
-                status: 'success',
-                data: {
-                    Payment: checkBalance
-                }
+        const id = req.body.id;
+        try {
+            const newPayment = await Payment.create({balance: 100000});
+            const update = await User.findByIdAndUpdate(id, {
+                AccountPayment: newPayment._id,
+            }, {
+                new: true
             });
-        } else {
             res.status(200).json({
-                status: 'fail',
-                msg: "Can't find anything"
-            });
+                status: "success"
+            })
+        } catch (error) {
+            console.error("Error creating payment:", error);
         }
-    } catch (err) {
+
+    } catch (error) {
         res.status(400).json({
             status: 'fail',
-            msg: err.message
+            msg: error.message
         });
     }
 }
-
-exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
-
-    try {
-        const userId = req.params.id;
-        const user = await User.findById(userId);
-        if (!user) {
-            res.status(200).json({
-                status: 'fail',
-                msg: "Can't this user"
-            });
-        }
-        const checkBalance = user.Balance
-
-        if (checkBalance) {
-            res.status(200).json({
-                status: 'success',
-                data: {
-                    Payment: checkBalance
-                }
-            });
-        } else {
-            res.status(200).json({
-                status: 'fail',
-                msg: "Can't find anything"
-            });
-        }
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            msg: err.message
-        });
-    }
-}
-
 
 exports.payMoney = async (req, res) => {
     try {

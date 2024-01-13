@@ -108,10 +108,9 @@ exports.Verify = async (req, res) => {
             console.error('Error:', error.message);
         }
 
-        
-            res.status(200).json({
-                status: 'success'
-            })
+        res.status(200).json({
+            status: 'success'
+        })
 
     } catch (error) {
         res.status(400).json({
@@ -126,14 +125,23 @@ exports.getTransaction = async (req, res) => {
         const user = await User.findById(req.params.id)
             .populate({
                 path: 'Transaction',
+                select: 'Transaction time',
                 populate: {
                     path: 'cart_id',
+                    select: 'product_id quantity',
+                    populate: {
+                        path: 'product_id',
+                        select: 'title image category',
+                        populate: {
+                            path: 'category',
+                            select: 'name'
+                        }
+                    }
                 }
             })  
-        
         res.status(200).json({
             status: "success",
-            data: user
+            data: user.Transaction
         })
 
     } catch (error) {

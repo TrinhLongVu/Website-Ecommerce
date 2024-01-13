@@ -77,21 +77,28 @@ module.exports = passport => {
                 return done(null, user);
             }
 
-            let newPayment;
-            try {
-                newPayment = await Payment.create({balance: 100000});
-            } catch (error) {
-                console.error("Error creating payment:", error);
-            }
-
             const newUser = new User({
                 FullName: profile.displayName,
                 type: profile.id,
-                AccountPayment: newPayment._id,
                 Image_Avatar: profile.photos[0].value
             });
 
             const create = await User.create(newUser);
+
+            const response = await fetch("http://localhost:3001/api/v1/payment/create", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: create._id
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
             return done(null, create);
         }
     ))
