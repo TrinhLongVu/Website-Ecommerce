@@ -8,33 +8,10 @@ dotenv.config({
     path: path.join(__dirname, '..', 'config.env')
 });
 
-
-exports.signout = (req, res) => {
-    try {
-        delete req.session.authToken;
-    } catch (err) {
-        res.status(401).json({
-            status: "failed",
-        })
-    }
-}
-
 exports.fail = (req, res) => {
     res.status(401).json({
         status: "failed",
     })
-}
-
-exports.getAuthtoken = (req, res) => {
-    try {
-        res.status(200).json({
-            authToken: req.session.authToken 
-        })
-    } catch (err) {
-        res.status(400).json({
-            status: "fail" 
-        })
-    }
 }
 
 exports.success = (req, res) => {
@@ -44,8 +21,7 @@ exports.success = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    req.session.authToken = token;
-    // res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
     res.redirect('http://localhost:5173')
 }
 
@@ -56,8 +32,7 @@ exports.successLocal = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    req.session.authToken = token;
-    // res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
     res.json({
         "token": token
     })

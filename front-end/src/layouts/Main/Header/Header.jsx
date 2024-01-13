@@ -63,16 +63,9 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
   };
 
   const logOut = () => {
-    fetch("https://themegamall.onrender.com//api/v1/user/account/signout", {
-      credentials: "include",
-    }).then((res) => {
-      res.json().then((json) => {
-        console.log(json);
-      });
-    });
-    // localStorage.removeItem("authToken");
-    // setUserInfo(null);
-    // navigate("/");
+    localStorage.removeItem("authToken");
+    setUserInfo(null);
+    navigate("/");
   };
 
   return (

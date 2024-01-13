@@ -21,7 +21,7 @@ router
     
 router
     .route('/information/user')
-    .get(middleware.isLogged,userController.getInfo);
+    .get(userController.getInfo);
 
 router
     .route('/:id')

@@ -10,7 +10,7 @@ const Register = () => {
     const newPassword2 = document.querySelector("#register-confirm-pass").value;
     try {
       const response = await fetch(
-        "https://themegamall.onrender.com/api/v1/user/account/signup",
+        "http://localhost:8000/api/v1/user/account/signup",
         {
           credentials: "include",
           headers: {
