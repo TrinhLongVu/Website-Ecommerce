@@ -77,7 +77,11 @@ exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài 
 
 exports.payMoney = async (req, res) => {
     try {
-        const {token, phone, address} = req.body;
+        const {
+            token,
+            phone,
+            address
+        } = req.body;
 
         jwt.verify(token, process.env.KEY_TOKEN_PAYMENT, async (err, data) => {
             if (err) {
@@ -124,7 +128,7 @@ exports.payMoney = async (req, res) => {
                         path: 'AccountPayment',
                         select: 'balance'
                     })
-                
+
                 const AccountAdmin = await Payment.findById(admin.AccountPayment._id)
                 const AccountUser = await Payment.findById(user.AccountPayment._id)
                 AccountAdmin.balance += price;
@@ -138,10 +142,15 @@ exports.payMoney = async (req, res) => {
                 if (!admin.Transaction) {
                     admin.Transaction = [];
                 }
-                
+
                 const transaction = {
                     idUser: user.id,
-                    cart_id: user.Cart.map(cart => cart.product_id),
+                    cart_id: user.Cart.map(cart => {
+                        return {
+                            product_id: cart.product_id,
+                            quantity: cart.quantity
+                        }
+                    }),
                     time: new Date(),
                     moneyTransaction: price,
                     address: address,
@@ -150,9 +159,9 @@ exports.payMoney = async (req, res) => {
                 const idTransaction = await Transaction.create(transaction);
                 user.Transaction.push(idTransaction)
                 admin.Transaction.push(idTransaction)
-                
+
                 user.Cart.splice(0);
-                
+
                 await user.save();
                 await admin.save();
                 await AccountAdmin.save();
