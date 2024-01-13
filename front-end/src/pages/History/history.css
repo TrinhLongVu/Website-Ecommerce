@@ -6,6 +6,7 @@
 }
 
 .history-order {
+    margin: 10px 0;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -13,9 +14,59 @@
 }
 
 .history-order-banner {
+    padding: 0 20px;
     width: 100%;
     height: 100px;
-    background-color: aqua;
+    background-color: #2CBC63;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.history-order-banner-avt {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 2px solid black;
+}
+
+.history-order-banner-info {
+    font-size: 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+#order-name {
+    width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#order-tel {
+    justify-content: center;
+    width: 150px;
+}
+
+#order-address {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+    width: 450px;
+}
+
+#order-price {
+    flex-direction: column;
+    justify-content: center;
+    width: 100px;
 }
 
 .history-order-content {
@@ -28,6 +79,8 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    z-index: -5;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .history-order-item {
@@ -46,7 +99,7 @@
     width: 150px;
     height: 100px;
     background-position: center center;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     border-radius: 12px;
 }

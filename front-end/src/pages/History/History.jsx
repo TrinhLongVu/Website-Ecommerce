@@ -1,8 +1,26 @@
+import { useState, useEffect } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 import "./history.css";
+import { useOutletContext } from "react-router-dom";
 
 const History = () => {
+  const { userInfo } = useOutletContext();
+  const [historyList, setHistoryList] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/payment/transaction/" + userInfo?._id, {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json.data.Transaction);
+        setHistoryList(json.data.Transaction);
+      });
+  }, [userInfo]);
+
   const product = {
     title: "Iphone 13 Pro Max",
     category: "Smartphone",
@@ -20,33 +38,53 @@ const History = () => {
         crumbList={[{ name: "Your Purchased History", link: "/history" }]}
       />
       <div className="history-list">
-        <div className="history-order">
-          <div className="history-order-banner"></div>
-          <div className="history-order-content">
-            {productList.map((product, index) => (
-              <div className="history-order-item">
-                <div
-                  className="history-order-item-img"
-                  style={{ backgroundImage: `url(${product.image})` }}
-                ></div>
-                <div className="history-order-item-info">
-                  <div className="history-order-item-title">
-                    {product.title}
-                  </div>
-                  <div>{product.category}</div>
-                </div>
-                <div className="history-order-item-num">
-                  <div>Price</div>
-                  <div>${product.price}</div>
-                </div>
-                <div className="history-order-item-num">
-                  <div>Quantity</div>
-                  <div>{product.quantity}</div>
-                </div>
+        {historyList.map((order, index) => (
+          <div className="history-order">
+            <div className="history-order-banner">
+              <div
+                className="history-order-banner-avt"
+                style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
+              ></div>
+              <div className="history-order-banner-info" id="order-name">
+                {userInfo?.FullName}
               </div>
-            ))}
+              <div className="history-order-banner-info" id="order-tel">
+                {order.phone}
+              </div>
+              <div className="history-order-banner-info" id="order-address">
+                {order.address}
+              </div>
+              <div className="history-order-banner-info" id="order-price">
+                <div>Total</div>
+                <div>${order.moneyTransaction}</div>
+              </div>
+            </div>
+            <div className="history-order-content">
+              {order.cart_id.map((product, index) => (
+                <div className="history-order-item">
+                  <div
+                    className="history-order-item-img"
+                    style={{ backgroundImage: `url(${product.image})` }}
+                  ></div>
+                  <div className="history-order-item-info">
+                    <div className="history-order-item-title">
+                      {product.title}
+                    </div>
+                    <div>{product.category}</div>
+                  </div>
+                  <div className="history-order-item-num">
+                    <div>Price</div>
+                    <div>${product.price}</div>
+                  </div>
+                  <div className="history-order-item-num">
+                    <div>Quantity</div>
+                    <div>{product.quantity}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </>
   );

@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useOutletContext } from "react-router-dom";
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faCircleUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faCircleUp,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 import ProductFrame from "../../components/ProductFrame/ProductFrame";
 import Loader from "../../components/Loader/Loader";
@@ -135,9 +139,9 @@ const AdminUpdate = () => {
 
   return (
     <>
-      <div>
-        <Link>d</Link>
-      </div>
+      <Link className="admin-navigate-back" to="/admin/products">
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </Link>
       <ProductFrame product={product} />
       <h1 className="admin-update-title">Update Product</h1>
       <div className="admin-update">
