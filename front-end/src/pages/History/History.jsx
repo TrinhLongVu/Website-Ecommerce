@@ -31,6 +31,23 @@ const History = () => {
   };
 
   const productList = [product, product, product];
+  const formatTime = (time) => {
+    const dateTime = new Date(time);
+    const hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const day = dateTime.getDate();
+    const month = dateTime.getMonth() + 1;
+    const year = dateTime.getFullYear();
+    const formattedTime = `${hours < 10 ? "0" : ""}${hours}:${
+      minutes < 10 ? "0" : ""
+    }${minutes}`;
+    const formattedDate = `${day < 10 ? "0" : ""}${day}/${
+      month < 10 ? "0" : ""
+    }${month}/${year}`;
+
+    const result = `${formattedTime}, ${formattedDate}`;
+    return result;
+  };
 
   return (
     <>
@@ -48,8 +65,9 @@ const History = () => {
               <div className="history-order-banner-info" id="order-name">
                 {userInfo?.FullName}
               </div>
-              <div className="history-order-banner-info" id="order-tel">
-                {order.phone}
+              <div className="history-order-banner-info" id="order-time-tel">
+                <div>{formatTime(order.time)}</div>
+                <div>{order.phone}</div>
               </div>
               <div className="history-order-banner-info" id="order-address">
                 {order.address}
