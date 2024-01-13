@@ -9,6 +9,10 @@ router
     .get(userController.fail);
 
 router
+    .route('/account/signout')
+    .get(userController.signout);
+
+router
     .route('/account/getAuth')
     .get(userController.getAuthtoken);
 

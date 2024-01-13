@@ -9,6 +9,16 @@ dotenv.config({
 });
 
 
+exports.signout = (req, res) => {
+    try {
+        delete req.session.authToken;
+    } catch (err) {
+        res.status(401).json({
+            status: "failed",
+        })
+    }
+}
+
 exports.fail = (req, res) => {
     res.status(401).json({
         status: "failed",
