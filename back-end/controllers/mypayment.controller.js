@@ -122,6 +122,8 @@ exports.Verify = async (req, res) => {
 
 exports.getTransaction = async (req, res) => {
     try {
+        const query = req.query;
+        const skip = (query.page - 1) * query.limit;
         const user = await User.findById(req.params.id)
             .populate({
                 path: 'Transaction',
@@ -138,10 +140,13 @@ exports.getTransaction = async (req, res) => {
                         }
                     }
                 }
-            })  
+            })
+        
+        let Transaction = user.Transaction;
+        const paginatedResults = Transaction.slice(skip, skip + query.limit * 1.0);
         res.status(200).json({
             status: "success",
-            data: user.Transaction
+            data: paginatedResults
         })
 
     } catch (error) {
