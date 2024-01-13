@@ -113,3 +113,21 @@ exports.hidden = async (req, res) => {
         })
     }
 }
+
+exports.update = async (req, res) => {
+    const { category, newcategory } = req.body;
+    try {
+        const cate = await Category.findOne({ name: category });
+        const newcate = await Category.updateOne({ _id: cate._id }, { name: newcategory });
+        res.status(200).json({
+            status: "success",
+            data: newcate
+        })
+    }
+    catch (err) {
+        res.status(400).json({
+            status: "fail",
+            data: err
+        })
+    }
+}
