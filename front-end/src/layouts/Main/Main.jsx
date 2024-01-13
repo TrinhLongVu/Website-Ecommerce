@@ -16,19 +16,22 @@ const MainLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const cookieToken = Cookies.get("token");
-    if (cookieToken !== undefined) {
-      localStorage.setItem("authToken", cookieToken);
-      Cookies.remove("token");
-    }
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      return;
-    }
+    // if (localStorage.getItem("authToken") === null) {
+    //   fetch("https://themegamall.onrender.com/api/v1/user/account/getAuth", {
+    //     credentials: "include",
+    //   }).then((res) => {
+    //     res.json().then((json) => {
+    //       console.log(json);
+    //       if (json.authToken) {
+    //         localStorage.setItem("authToken", json.authToken);
+    //       }
+    //     });
+    //   });
+    // }
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/v1/user/information/user",
+          "https://themegamall.onrender.com/api/v1/user/information/user",
           {
             credentials: "include",
             method: "GET",
@@ -51,8 +54,11 @@ const MainLayout = () => {
         navigate("/");
       }
     };
-    fetchData();
-  }, [userChange]);
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      fetchData();
+    }
+  }, [userInfo, userChange]);
   useEffect(() => {
     fetch("https://themegamall.onrender.com/api/v1/category")
       .then((res) => res.json())
