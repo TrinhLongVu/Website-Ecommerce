@@ -10,9 +10,21 @@ dotenv.config({
 
 
 exports.fail = (req, res) => {
-    res.json({
+    res.status(401).json({
         status: "failed",
     })
+}
+
+exports.getAuthtoken = (req, res) => {
+    try {
+        res.status(200).json({
+            authToken: req.session.authToken 
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: "fail" 
+        })
+    }
 }
 
 exports.success = (req, res) => {
@@ -22,7 +34,8 @@ exports.success = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    req.session.authToken = token;
+    // res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
     res.redirect('http://localhost:5173')
 }
 
@@ -33,7 +46,8 @@ exports.successLocal = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    req.session.authToken = token;
+    // res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
     res.json({
         "token": token
     })
