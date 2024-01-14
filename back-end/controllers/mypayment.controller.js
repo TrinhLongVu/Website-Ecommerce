@@ -1,5 +1,7 @@
 const User = require('../models/user.model')
 const dotenv = require('dotenv')
+const https = require('https');
+const fs = require('fs');
 
 dotenv.config({
     path: './config.env'
@@ -39,46 +41,79 @@ exports.getAllPayment = async (req, res) => { // lấy ra tất cả tài khoả
 exports.payMoney = async (req, res) => {
     try {
         const token = req.session.token;
-        const {
-            price,
-            address,
-            phone
-        } = req.body;
+        console.log("pay token: ",token);
+        const { price, address, phone } = req.body;
 
-        const url = 'https://paymentmegamall.onrender.com/api/v1/payment/pay';
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    token: token,
-                    price: price,
-                    address: address,
-                    phone: phone
-                }),
+        const paymentOptions = {
+            hostname: 'localhost',
+            port: 3001,
+            path: '/api/v1/payment/pay',
+            method: 'POST',
+            ca: fs.readFileSync('./openssl/cert.pem', 'utf8'),
+            headers: {
+                'creatatial': 'true',
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const paymentRequest = https.request(paymentOptions, (paymentResponse) => {
+            let data = '';
+            paymentResponse.on('data', (d) => {
+                data += d;
             });
-
-            if (!response.ok) {
-                const data = await response.json();
-                const serverMsg = data.msg;
-                res.status(200).json({
-                    status: 'fail',
-                    msg: serverMsg
-                })
-            } else {
+            paymentResponse.on('end', () => {
                 res.status(200).json({
                     status: 'success'
-                })
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
+                });
+            });
+        });
 
+        paymentRequest.on('error', (error) => {
+            console.error(error);
+        });
+
+        paymentRequest.write(JSON.stringify({
+            token: token,
+            price: price,
+            address: address,
+            phone: phone
+        }));
+        paymentRequest.end();
+
+
+        // const url = 'https://localhost:3001/api/v1/payment/pay';
+        // try {
+        //     const response = await fetch(url, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             token: token,
+        //             price: price,
+        //             address: address,
+        //             phone: phone
+        //         }),
+        //     });
+
+        //     if (!response.ok) {
+        //         const data = await response.json();
+        //         const serverMsg = data.msg;
+        //         res.status(200).json({
+        //             status: 'fail',
+        //             msg: serverMsg
+        //         })
+        //     } else {
+        //         res.status(200).json({
+        //             status: 'success'
+        //         })
+        //     }
+        // } catch (error) {
+        //     console.error('Error:', error);
+        // } 
 
     } catch (error) {
-        res.status(400).json({
+        res.status(405).json({
             status: 'fail',
             msg: error
         });
@@ -87,34 +122,63 @@ exports.payMoney = async (req, res) => {
 
 exports.Verify = async (req, res) => {
     try {
-        const id = req.user._id
+        const https = require('https');
 
-        const url = 'https://paymentmegamall.onrender.com/api/v1/payment/verify';
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: id
-                }),
+        const url = 'https://localhost:3001/api/v1/payment/verify';
+        const id = req.user.id; // replace with the actual id
+
+        const data = JSON.stringify({
+            id: id
+        });
+
+        const options = {
+            hostname: 'localhost',
+            port: 3001,
+            path: '/api/v1/payment/verify',
+            method: 'POST',
+            ca: fs.readFileSync('./openssl/cert.pem', 'utf8'),
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': data.length,
+            },
+        };
+
+        const request = https.request(options, (response) => {
+            let result = '';
+
+            response.on('data', (chunk) => {
+                result += chunk;
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            response.on('end', () => {
+                try {
+                    result = JSON.parse(result);
+                    req.session.token = result.token;
+                    console.log("token:", req.session.token);
+                    res.status(200).json({
+                        status: 'success'
+                    });
+                } catch (error) {
+                    console.error('Error parsing response:', error.message);
+                    res.status(500).json({
+                        status: 'error',
+                        msg: 'Error parsing response'
+                    });
+                }
 
-            const result = await response.json();
-            req.session.token = result.token;
-            console.log(result.token)
-        } catch (error) {
+            });
+        });
+
+        request.on('error', (error) => {
             console.error('Error:', error.message);
-        }
+        });
 
-        res.status(200).json({
-            status: 'success'
-        })
+        // Send the JSON payload
+        request.write(data);
+
+        // End the requestuest
+        request.end();
+        console.log("123456",req.session.token)
 
     } catch (error) {
         res.status(400).json({
@@ -136,21 +200,21 @@ exports.getTransaction = async (req, res) => {
             .populate({
                 path: 'Transaction',
                 populate: [{
-                    path: 'cart_id',
-                    select: 'product_id quantity',
-                    populate: {
-                        path: 'product_id',
-                        select: 'title image category price',
+                        path: 'cart_id',
+                        select: 'product_id quantity',
                         populate: {
-                            path: 'category',
-                            select: 'name'
+                            path: 'product_id',
+                            select: 'title image category price',
+                            populate: {
+                                path: 'category',
+                                select: 'name'
+                            }
                         }
+                    },
+                    {
+                        path: 'idUser',
+                        select: 'FullName'
                     }
-                },
-                {
-                    path: 'idUser',
-                    select: 'FullName'
-                }
                 ]
 
             })

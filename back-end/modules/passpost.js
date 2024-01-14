@@ -85,7 +85,7 @@ module.exports = passport => {
 
             const create = await User.create(newUser);
 
-            const response = await fetch("https://paymentmegamall.onrender.com/api/v1/payment/create", {
+            const response = await fetch("https://localhost:3001/api/v1/payment/create", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
