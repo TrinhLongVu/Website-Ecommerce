@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const transaction = new Schema({
     idUser: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'Users'
     },
     cart_id: [{
         product_id: {

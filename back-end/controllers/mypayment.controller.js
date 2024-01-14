@@ -39,7 +39,11 @@ exports.getAllPayment = async (req, res) => { // lấy ra tất cả tài khoả
 exports.payMoney = async (req, res) => {
     try {
         const token = req.session.token;
-        const { price, address, phone } = req.body;
+        const {
+            price,
+            address,
+            phone
+        } = req.body;
 
         const url = 'https://paymentmegamall.onrender.com/api/v1/payment/pay';
         try {
@@ -55,7 +59,7 @@ exports.payMoney = async (req, res) => {
                     phone: phone
                 }),
             });
-    
+
             if (!response.ok) {
                 const data = await response.json();
                 const serverMsg = data.msg;
@@ -71,7 +75,7 @@ exports.payMoney = async (req, res) => {
         } catch (error) {
             console.error('Error:', error);
         }
-    
+
 
     } catch (error) {
         res.status(400).json({
@@ -84,7 +88,7 @@ exports.payMoney = async (req, res) => {
 exports.Verify = async (req, res) => {
     try {
         const id = req.user._id
-        
+
         const url = 'https://paymentmegamall.onrender.com/api/v1/payment/verify';
         try {
             const response = await fetch(url, {
@@ -123,30 +127,43 @@ exports.Verify = async (req, res) => {
 exports.getTransaction = async (req, res) => {
     try {
         const query = req.query;
+        let id = req.params.id;
+        if (query.role == 'admin') {
+            id = process.env.ADMINID;
+        }
         const skip = (query.page - 1) * query.limit;
-        const user = await User.findById(req.params.id)
+        const user = await User.findById(id)
             .populate({
                 path: 'Transaction',
-                select: 'Transaction time',
-                populate: {
+                select: 'Transaction time address phone',
+                populate: [{
                     path: 'cart_id',
                     select: 'product_id quantity',
                     populate: {
                         path: 'product_id',
-                        select: 'title image category',
+                        select: 'title image category price',
                         populate: {
                             path: 'category',
                             select: 'name'
                         }
                     }
+                },
+                {
+                    path: 'idUser',
+                    select: 'FullName'
                 }
+                ]
+
             })
-        
+
+
         let Transaction = user.Transaction;
         const paginatedResults = Transaction.slice(skip, skip + query.limit * 1.0);
+        const totalpage = Math.ceil(Transaction.length / query.limit)
         res.status(200).json({
             status: "success",
-            data: paginatedResults
+            data: paginatedResults,
+            totalPage: totalpage
         })
 
     } catch (error) {
