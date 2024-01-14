@@ -41,7 +41,7 @@ exports.getAllPayment = async (req, res) => { // lấy ra tất cả tài khoả
 exports.payMoney = async (req, res) => {
     try {
         const token = req.session.token;
-        console.log(token);
+        console.log("pay token: ",token);
         const { price, address, phone } = req.body;
 
         const paymentOptions = {
@@ -125,7 +125,7 @@ exports.Verify = async (req, res) => {
         const https = require('https');
 
         const url = 'https://localhost:3001/api/v1/payment/verify';
-        const id = 'your_id'; // replace with the actual id
+        const id = req.user.id; // replace with the actual id
 
         const data = JSON.stringify({
             id: id
@@ -143,16 +143,29 @@ exports.Verify = async (req, res) => {
             },
         };
 
-        const request = https.request(options, (res) => {
+        const request = https.request(options, (response) => {
             let result = '';
 
-            res.on('data', (chunk) => {
+            response.on('data', (chunk) => {
                 result += chunk;
             });
 
-            res.on('end', () => {
-                result = JSON.parse(result)
-                req.session.token = result.token;
+            response.on('end', () => {
+                try {
+                    result = JSON.parse(result);
+                    req.session.token = result.token;
+                    console.log("token:", req.session.token);
+                    res.status(200).json({
+                        status: 'success'
+                    });
+                } catch (error) {
+                    console.error('Error parsing response:', error.message);
+                    res.status(500).json({
+                        status: 'error',
+                        msg: 'Error parsing response'
+                    });
+                }
+
             });
         });
 
@@ -165,34 +178,7 @@ exports.Verify = async (req, res) => {
 
         // End the requestuest
         request.end();
-
-
-        // const url = 'https://localhost:3001/api/v1/payment/verify';
-        // try {
-        //     const response = await fetch(url, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             id: id
-        //         }),
-        //     });
-
-        //     if (!response.ok) {
-        //         throw new Error(`HTTP error! Status: ${response.status}`);
-        //     }
-
-        //     const result = await response.json();
-        //     req.session.token = result.token;
-        //     console.log(result.token)
-        // } catch (error) {
-        //     console.error('Error:', error.message);
-        // }
-
-        res.status(200).json({
-            status: 'success'
-        })
+        console.log("123456",req.session.token)
 
     } catch (error) {
         res.status(400).json({
