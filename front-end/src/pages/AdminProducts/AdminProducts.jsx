@@ -20,7 +20,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import "./admin-products.css";
 
 const AdminProducts = () => {
-  const domain = "https://themegamall.onrender.com/api/v1/product?";
+  const domain = "http://localhost:8000/api/v1/product?";
   const { categoryList, categoryUpdate, setCategoryUpdate } =
     useOutletContext();
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -98,6 +98,30 @@ const AdminProducts = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
+        if (result.value === "") {
+          Swal.fire({
+            title: "Invalid input!",
+            text: "Please enter something for new name for the category",
+            icon: "error",
+          });
+          return;
+        } else if (result.value === name) {
+          Swal.fire({
+            title: "Exsisting name!",
+            text: "New name for the category should be differnt from the old one",
+            icon: "error",
+          });
+          return;
+        } else if (
+          categoryList.some((category) => category.name === result.value)
+        ) {
+          Swal.fire({
+            title: "Exsisting Category!",
+            text: "New name for the category shouldn't be the same as the existing one",
+            icon: "error",
+          });
+          return;
+        }
         fetch("http://localhost:8000/api/v1/category/update", {
           credentials: "include",
           method: "PATCH",
@@ -135,7 +159,15 @@ const AdminProducts = () => {
   const addCategory = () => {
     const newCategory = document.querySelector("#add-category").value;
     if (newCategory === "") {
-      Toastify("error", "top-right", "Please input new category name");
+      Toastify(
+        "error",
+        "top-right",
+        "Please input a name for the new category"
+      );
+      return;
+    } else if (categoryList.some((category) => category.name === newCategory)) {
+      Toastify("error", "top-right", "This category already exists");
+      return;
     } else {
       fetch("http://localhost:8000/api/v1/category/admin", {
         credentials: "include",
@@ -269,7 +301,12 @@ const AdminProducts = () => {
             <FontAwesomeIcon icon={faCirclePlus} /> Add Category
           </h2>
           <div className="add-category-box">
-            <input type="text" id="add-category" placeholder="Category Name" />
+            <input
+              type="text"
+              id="add-category"
+              placeholder="Category Name"
+              onKeyDown={(e) => e.key === "Enter" && addCategory()}
+            />
             <button id="add-category-btn" onClick={addCategory}>
               <FontAwesomeIcon icon={faCirclePlus} />
             </button>

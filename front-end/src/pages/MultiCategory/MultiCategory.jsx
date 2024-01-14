@@ -21,7 +21,7 @@ const MultiCategory = () => {
       try {
         const fetchPromises = categoryList.map(async (category) => {
           const response = await fetch(
-            `https://themegamall.onrender.com/api/v1/category/page?page=1&limit=4&category=${category.name}`
+            `http://localhost:8000/api/v1/category/page?page=1&limit=4&category=${category.name}`
           );
           const json = await response.json();
           return json.data;

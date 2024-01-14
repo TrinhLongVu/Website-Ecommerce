@@ -25,7 +25,7 @@ const Home = () => {
   const { categoryList } = useOutletContext();
   const [bestSellerList, setBestSellerList] = useState([]);
   const [latestList, setLatestList] = useState([]);
-  const domain = "https://themegamall.onrender.com/api/v1/product?";
+  const domain = "http://localhost:8000/api/v1/product?";
 
   useEffect(() => {
     fetch(domain + "page=1&limit=5&sort=-sold")

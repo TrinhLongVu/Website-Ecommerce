@@ -39,7 +39,7 @@ const AdminUpdate = () => {
   };
 
   useEffect(() => {
-    fetch("https://themegamall.onrender.com/api/v1/product/" + id)
+    fetch("http://localhost:8000/api/v1/product/" + id)
       .then((res) => res.json())
       .then((json) => {
         setCategory(json.data.category.name);

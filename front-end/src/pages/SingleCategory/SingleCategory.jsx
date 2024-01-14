@@ -14,8 +14,7 @@ import Filter from "../../components/Filter/Filter";
 import "./single-category.css";
 // Implementation
 const SingleCategory = () => {
-  const domain =
-    "https://themegamall.onrender.com/api/v1/category/page?limit=8&";
+  const domain = "http://localhost:8000/api/v1/category/page?limit=8&";
   const { name } = useParams();
   const prevNameRef = useRef("");
   const prevFilter = useRef("all");
