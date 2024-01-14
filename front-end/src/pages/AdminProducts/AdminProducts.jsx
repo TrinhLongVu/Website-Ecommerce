@@ -4,12 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleUp,
   faCircleXmark,
-  faAngleDown,
   faStore,
   faTags,
   faCirclePlus,
   faEyeSlash,
-  faXmark,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import Filter from "../../components/Filter/Filter";

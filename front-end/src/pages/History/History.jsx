@@ -8,16 +8,21 @@ const History = () => {
   const { userInfo } = useOutletContext();
   const [historyList, setHistoryList] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/payment/transaction/" + userInfo?._id, {
-      credentials: "include",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    })
+    fetch(
+      "http://localhost:8000/api/v1/payment/transaction/" +
+        userInfo?._id +
+        "?limit=5&page=1",
+      {
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.data.Transaction);
-        setHistoryList(json.data.Transaction);
+        console.log(json);
+        setHistoryList(json.data);
       });
   }, [userInfo]);
 
@@ -88,7 +93,7 @@ const History = () => {
                     <div className="history-order-item-title">
                       {product.title}
                     </div>
-                    <div>{product.category}</div>
+                    <div>{product.category.name}</div>
                   </div>
                   <div className="history-order-item-num">
                     <div>Price</div>

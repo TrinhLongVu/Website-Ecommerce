@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -211,7 +211,10 @@ const ShopCart = () => {
                       backgroundImage: `url("${item.product.image}")`,
                     }}
                   ></div>
-                  <div className="cart--item-info">
+                  <Link
+                    className="cart--item-info"
+                    to={`/product/${item.product._id}`}
+                  >
                     <div className="cart--item-name">{item.product.title}</div>
                     <div className="cart--item-category">
                       {item.product.category.name}
@@ -219,7 +222,7 @@ const ShopCart = () => {
                     <div className="cart--item-price">
                       ${item.product.price}
                     </div>
-                  </div>
+                  </Link>
                   <div className="cart--item-quantity">
                     <div className="cart--item-quantity-title">Quantity</div>
                     {item.quantity}
