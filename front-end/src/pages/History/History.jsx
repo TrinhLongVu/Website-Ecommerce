@@ -15,7 +15,7 @@ const History = () => {
     fetch(
       "http://localhost:8000/api/v1/payment/transaction/" +
         userInfo?._id +
-        `?limit=5&page=${currentPage}`,
+        `?limit=3&page=${currentPage}`,
       {
         credentials: "include",
         headers: {
@@ -96,7 +96,6 @@ const History = () => {
                       <div className="history-order-item-title">
                         {product.product_id.title}
                       </div>
-                      <div>{product.product_id.category.name}</div>
                     </div>
                     <div className="history-order-item-num">
                       <div>Price</div>

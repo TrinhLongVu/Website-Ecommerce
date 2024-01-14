@@ -23,6 +23,7 @@ const AdminOrder = () => {
     )
       .then((res) => res.json())
       .then((json) => {
+        console.log(json.data);
         setOrderList(json.data);
         setTotalPages(json.totalPage);
       });
@@ -63,7 +64,9 @@ const AdminOrder = () => {
               <div className="history-order-banner">
                 <div
                   className="history-order-banner-avt"
-                  // style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
+                  style={{
+                    backgroundImage: `url(${order.idUser.Image_Avatar})`,
+                  }}
                 ></div>
                 <div className="history-order-banner-info" id="order-name">
                   {order.idUser.FullName}
@@ -96,7 +99,6 @@ const AdminOrder = () => {
                       <div className="history-order-item-title">
                         {product.product_id.title}
                       </div>
-                      <div>{product.product_id.category.name}</div>
                     </div>
                     <div className="history-order-item-num">
                       <div>Price</div>
