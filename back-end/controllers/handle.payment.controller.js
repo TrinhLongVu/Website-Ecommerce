@@ -145,7 +145,7 @@ exports.payMoney = async (req, res) => {
     }
 }
 
-exports.verify = async (req, res, next) => {
+exports.verify = async (req, res) => {
     try {
         const id = req.body.id;
         const token = jwt.sign({
@@ -164,5 +164,39 @@ exports.verify = async (req, res, next) => {
             status: 'fail',
             msg: error.message
         });
+    }
+}
+
+exports.getHistory = async (req, res) => {
+    try {
+        let id = req.params.id;
+        console.log(id)
+        const user = await User.findById(id)
+            .populate({
+                path: 'Transaction',
+                populate: [{
+                        path: 'cart_id',
+                        select: 'product_id quantity',
+                        populate: {
+                            path: 'product_id',
+                            select: 'title image price'
+                        }
+                    },
+                    {
+                        path: 'idUser',
+                        select: 'FullName Image_Avatar'
+                    }
+                ]
+
+            })
+        res.status(200).json({
+            status: "success",
+            data: user
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            data: err
+        })
     }
 }

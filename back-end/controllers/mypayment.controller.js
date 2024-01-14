@@ -7,8 +7,7 @@ dotenv.config({
     path: './config.env'
 });
 
-exports.getAllPayment = async (req, res) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
-
+exports.getAllPayment = async (req, res) => {
     try {
         const userId = req.params.id;
         const user = await User.findById(userId)
@@ -113,15 +112,14 @@ exports.Verify = async (req, res) => {
         const request = https.request(options, (response) => {
             let result = '';
 
-            response.on('data', (chunk) => {
-                result += chunk;
+            response.on('data', (d) => {
+                result += d;
             });
 
             response.on('end', () => {
                 try {
                     result = JSON.parse(result);
                     req.session.token = result.token;
-                    console.log("token:", req.session.token);
                     res.status(200).json({
                         status: 'success'
                     });
@@ -132,7 +130,6 @@ exports.Verify = async (req, res) => {
                         msg: 'Error parsing response'
                     });
                 }
-
             });
         });
 
@@ -157,40 +154,50 @@ exports.getTransaction = async (req, res) => {
         if (query.role == 'admin') {
             id = process.env.ADMINID;
         }
+        console.log(id)
         const skip = (query.page - 1) * query.limit;
-        const user = await User.findById(id)
-            .populate({
-                path: 'Transaction',
-                populate: [{
-                        path: 'cart_id',
-                        select: 'product_id quantity',
-                        populate: {
-                            path: 'product_id',
-                            select: 'title image category price',
-                            populate: {
-                                path: 'category',
-                                select: 'name'
-                            }
-                        }
-                    },
-                    {
-                        path: 'idUser',
-                        select: 'FullName'
-                    }
-                ]
+        
+        const options = {
+            hostname: 'localhost',
+            port: 3001,
+            path: '/api/v1/payment/history/' + id,
+            method: 'GET',
+            ca: fs.readFileSync('./openssl/cert.pem', 'utf8'),
+            headers: {
+                'creatatial': 'true',
+                'Content-Type': 'application/json'
+            }
+        };
 
-            })
+        const request = https.get(options, (response) => {
+            let data = '';
+            response.on('data', (d) => {
+                data += d;
+            });
 
-
-        let Transaction = user.Transaction;
-        const paginatedResults = Transaction.slice(skip, skip + query.limit * 1.0);
-        const totalpage = Math.ceil(Transaction.length / query.limit)
-        res.status(200).json({
-            status: "success",
-            data: paginatedResults,
-            totalPage: totalpage
-        })
-
+            response.on('end', () => {
+                try {
+                    const user = JSON.parse(data).data;
+                    let Transaction = user.Transaction;
+                    const paginatedResults = Transaction.slice(skip, skip + query.limit * 1.0);
+                    const totalpage = Math.ceil(Transaction.length / query.limit)
+                    res.status(200).json({
+                        status: "success",
+                        data: paginatedResults,
+                        totalPage: totalpage
+                    })
+                } catch (error) {
+                    res.status(500).json({
+                        status: 'error',
+                        msg: 'Error parsing response'
+                    });
+                }
+            });
+        });
+        request.on('error', (e) => {
+        console.error(`Error: ${e.message}`);
+        });
+        request.end();
     } catch (error) {
         res.status(400).json({
             status: 'fail',

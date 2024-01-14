@@ -13,10 +13,9 @@ router
 router 
     .route('/pay')
     .post(payment.payMoney)
-// router 
-//     .route('/')
-//     .get((req, res) => {
-//         console.log("!212124")
-//     })
+
+router 
+    .route('/history/:id')
+    .get(payment.getHistory)
 
 module.exports = router;
