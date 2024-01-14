@@ -1,9 +1,11 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model')
-const Payment = require('../models/payment.model')
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv')
 const path = require('path');
+const https = require('https');
+const fs = require('fs');
+
 dotenv.config({
     path: path.join(__dirname, '..', 'config.env')
 });
@@ -21,7 +23,9 @@ exports.success = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.cookie('token', token, {
+        expires: new Date(Date.now() + 30 * 1000)
+    });
     res.redirect('http://localhost:5173')
 }
 
@@ -32,7 +36,9 @@ exports.successLocal = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.cookie('token', token, {
+        expires: new Date(Date.now() + 30 * 1000)
+    });
     res.json({
         "token": token
     })
@@ -90,20 +96,47 @@ exports.signup = async (req, res) => {
                 FullName: fullname,
                 Password: hash
             });
-            const response = await fetch("https://paymentmegamall.onrender.com/api/v1/payment/create", {
+            
+            const options = {
+                hostname: 'localhost',
+                port: 3001,
+                path: '/api/v1/payment/create',
                 method: 'POST',
+                ca: fs.readFileSync('./openssl/cert.pem', 'utf8'),
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: newUser._id
-                }),
+                    'creatatial': 'true',
+                    'Content-Type': 'application/json'
+                }
+            };
+            
+            const req = https.request(options, (res) => {
+                let data = '';
+            
+                // A chunk of data has been received.
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+            
+                // The whole response has been received.
+                res.on('end', () => {
+                    console.log(data); // Process the response data here
+                });
             });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
+            
+            // Handle errors
+            req.on('error', (error) => {
+                console.error(error);
+            });
+            console.log(newUser._id)
+            // Send the JSON payload
+            req.write(JSON.stringify({
+                id: newUser._id
+            }));
+            
+            // End the request
+            req.end();
+            
+            console.log("Q21")
             res.status(201).json({
                 status: 'success',
                 data: {

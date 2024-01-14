@@ -9,6 +9,12 @@ const passport = require('passport')
 const session = require('express-session');
 const cookieParser = require('cookie-parser')
 const p = require('./modules/passpost.js')
+const fs = require('fs');
+
+const privateKey = fs.readFileSync('./openssl/key.pem', 'utf8');
+const certificate = fs.readFileSync('./openssl/cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+const https = require('https');
 
 const cloudinary = require('cloudinary').v2;
 
@@ -34,7 +40,7 @@ app.use(session({
 }))
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:8000',
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
@@ -51,4 +57,5 @@ p(passport)
 app.use('/api/v1/payment', mypayment);
 app.use('/api/v1/vnpay', vnpayRouter);
 
-module.exports = app;
+const httpsServer = https.createServer(credentials, app);   
+module.exports = httpsServer;

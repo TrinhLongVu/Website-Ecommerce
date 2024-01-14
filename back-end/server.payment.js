@@ -1,4 +1,4 @@
-const app = require('./app.payment')
+const httpsServer = require('./app.payment')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 
@@ -15,6 +15,5 @@ mongoose.connect(DB, {
 })
     .then(() => console.log('Connected!'));
 
-app.listen(PORT, () => {
-    console.log(`App running on http://localhost:${PORT}`)
-})
+
+httpsServer.listen(PORT);
