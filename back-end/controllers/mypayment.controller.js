@@ -80,38 +80,6 @@ exports.payMoney = async (req, res) => {
         }));
         paymentRequest.end();
 
-
-        // const url = 'https://localhost:3001/api/v1/payment/pay';
-        // try {
-        //     const response = await fetch(url, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             token: token,
-        //             price: price,
-        //             address: address,
-        //             phone: phone
-        //         }),
-        //     });
-
-        //     if (!response.ok) {
-        //         const data = await response.json();
-        //         const serverMsg = data.msg;
-        //         res.status(200).json({
-        //             status: 'fail',
-        //             msg: serverMsg
-        //         })
-        //     } else {
-        //         res.status(200).json({
-        //             status: 'success'
-        //         })
-        //     }
-        // } catch (error) {
-        //     console.error('Error:', error);
-        // } 
-
     } catch (error) {
         res.status(405).json({
             status: 'fail',
@@ -124,8 +92,7 @@ exports.Verify = async (req, res) => {
     try {
         const https = require('https');
 
-        const url = 'https://localhost:3001/api/v1/payment/verify';
-        const id = req.user.id; // replace with the actual id
+        const id = req.user.id;
 
         const data = JSON.stringify({
             id: id
@@ -172,13 +139,8 @@ exports.Verify = async (req, res) => {
         request.on('error', (error) => {
             console.error('Error:', error.message);
         });
-
-        // Send the JSON payload
         request.write(data);
-
-        // End the requestuest
         request.end();
-        console.log("123456",req.session.token)
 
     } catch (error) {
         res.status(400).json({
