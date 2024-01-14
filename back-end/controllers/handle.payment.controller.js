@@ -200,3 +200,33 @@ exports.getHistory = async (req, res) => {
         })
     }
 }
+
+exports.getBalance = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findById(userId)
+            .populate({
+                path: 'AccountPayment',
+                select: 'balance'
+            })
+
+        if (user.AccountPayment) {
+            res.status(200).json({
+                status: 'success',
+                data: {
+                    UserBalance: user.AccountPayment.balance
+                }
+            });
+        } else {
+            res.status(200).json({
+                status: 'fail',
+                msg: "Can't find anything"
+            });
+        }
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            data: err
+        })
+    }
+}

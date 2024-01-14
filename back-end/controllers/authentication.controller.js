@@ -109,34 +109,15 @@ exports.signup = async (req, res) => {
                 }
             };
             
-            const req = https.request(options, (res) => {
-                let data = '';
-            
-                // A chunk of data has been received.
-                res.on('data', (chunk) => {
-                    data += chunk;
-                });
-            
-                // The whole response has been received.
-                res.on('end', () => {
-                    console.log(data); // Process the response data here
-                });
-            });
-            
-            // Handle errors
+            const req = https.request(options);
             req.on('error', (error) => {
                 console.error(error);
             });
-            console.log(newUser._id)
-            // Send the JSON payload
             req.write(JSON.stringify({
                 id: newUser._id
             }));
-            
-            // End the request
             req.end();
             
-            console.log("Q21")
             res.status(201).json({
                 status: 'success',
                 data: {

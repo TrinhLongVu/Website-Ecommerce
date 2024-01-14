@@ -18,4 +18,8 @@ router
     .route('/history/:id')
     .get(payment.getHistory)
 
+router 
+    .route('/balance/:id')
+    .get(payment.getBalance)
+
 module.exports = router;

@@ -5,6 +5,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const Payment = require('../models/payment.model')
 const dotenv = require('dotenv')
 const path = require('path');
+const https = require('https');
+const fs = require('fs');
 dotenv.config({
     path: path.join(__dirname, '..', 'config.env')
 });
@@ -84,20 +86,26 @@ module.exports = passport => {
             });
 
             const create = await User.create(newUser);
-
-            const response = await fetch("https://localhost:3001/api/v1/payment/create", {
+            const options = {
+                hostname: 'localhost',
+                port: 3001,
+                path: '/api/v1/payment/create',
                 method: 'POST',
+                ca: fs.readFileSync('./openssl/cert.pem', 'utf8'),
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: create._id
-                }),
+                    'creatatial': 'true',
+                    'Content-Type': 'application/json'
+                }
+            };
+            
+            const req = https.request(options);
+            req.on('error', (error) => {
+                console.error(error);
             });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            req.write(JSON.stringify({
+                id: create._id
+            }));
+            req.end();
 
             return done(null, create);
         }

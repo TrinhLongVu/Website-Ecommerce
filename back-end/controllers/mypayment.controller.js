@@ -9,26 +9,42 @@ dotenv.config({
 
 exports.getAllPayment = async (req, res) => {
     try {
-        const userId = req.params.id;
-        const user = await User.findById(userId)
-            .populate({
-                path: 'AccountPayment',
-                select: 'balance'
-            })
+        let id = req.params.id;
+        
+        const options = {
+            hostname: 'localhost',
+            port: 3001,
+            path: '/api/v1/payment/balance/' + id,
+            method: 'GET',
+            ca: fs.readFileSync('./openssl/cert.pem', 'utf8'),
+            headers: {
+                'creatatial': 'true',
+                'Content-Type': 'application/json'
+            }
+        };
 
-        if (user.AccountPayment) {
-            res.status(200).json({
-                status: 'success',
-                data: {
-                    UserBalance: user.AccountPayment.balance
+        const request = https.get(options, (response) => {
+            let data = '';
+            response.on('data', (d) => {
+                data += d;
+            });
+
+            response.on('end', () => {
+                try {
+                    const balance = JSON.parse(data);
+                    res.status(200).json(balance)
+                } catch (error) {
+                    res.status(500).json({
+                        status: 'error',
+                        msg: 'Error parsing response'
+                    });
                 }
             });
-        } else {
-            res.status(200).json({
-                status: 'fail',
-                msg: "Can't find anything"
-            });
-        }
+        });
+        request.on('error', (e) => {
+        console.error(`Error: ${e.message}`);
+        });
+        request.end();
     } catch (err) {
         res.status(400).json({
             status: 'fail',
