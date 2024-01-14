@@ -9,82 +9,112 @@ const AdminStatistics = () => {
   const [productSoldChartData, setProductSoldChartData] = useState({});
   const [selectedView, setSelectedView] = useState("byweek"); // Default view
   const [selectedYear, setSelectedYear] = useState("2024"); // Default year
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [totalProductSold, setTotalProductSold] = useState(0);
 
-  const yearsDropdown = ["2020", "2021", "2022", "2023", "2024"];
+  const yearsDropdown = ["2021", "2022", "2023", "2024"];
 
-  const generateData = () => {
-    const weeks = ["2023-01-01", "2023-01-02", "2023-01-03", "2023-01-04", "2023-01-05", "2023-01-06", "2023-01-07"];
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const fetchData = async (isWeek, year) => {
+    const endpoint = isWeek
+      ? "http://localhost:8000/api/v1/statistic/transaction?week=true"
+      : `http://localhost:8000/api/v1/statistic/transaction?month=true&year=${year}`;
 
-    const specificData = {
-      byweekRevenue: [1000, 149, 1500, 700, 6900, 200, 100],
-      byweekProductSold: [2123, 4056, 12692, 23098, 38690, 50210, 60373],
-      byMonthRevenue: [2200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      byMonthProductSold: [230, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    };
+    try {
+      const response = await fetch(endpoint, { credentials: "include" });
+      const data = await response.json();
+      console.log(data);
 
-    setStatistics(specificData);
+      return data;
+    } catch (error) {
+      console.error("Error fetching transaction data:", error);
+      return null;
+    }
+  };
 
-    // Prepare data for Chart.js based on selected view
-    if (selectedView === "byweek") {
-      const revenueData = {
-        labels: weeks,
-        datasets: [
-          {
-            label: "Revenue Gain (by week)",
-            data: specificData.byweekRevenue,
-            borderColor: "#007BFF",
-            fill: false,
-          },
-        ],
-      };
+  const getData= async () => {
+    try {
+      if (selectedView === "byweek") {
+        const weekData = await fetchData(true);
+        setStatistics((prevData) => ({ ...prevData, byweek: weekData?.data || {} }));
 
-      const productSoldData = {
-        labels: weeks,
-        datasets: [
-          {
-            label: "Product Sold Gain (by week)",
-            data: specificData.byweekProductSold,
-            borderColor: "#b8860b",
-            fill: false,
-          },
-        ],
-      };
+        const labels = Object.keys(weekData?.data || {});
+        const revenueData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Revenue Gain (by week)",
+              data: Object.values(weekData?.data || {}).map((week) => week.balance),
+              borderColor: "#007BFF",
+              fill: false,
+            },
+          ],
+        };
+        setRevenueChartData(revenueData);
 
-      setRevenueChartData(revenueData);
-      setProductSoldChartData(productSoldData);
-    } else if (selectedView === "byMonth") {
-      const revenueData = {
-        labels: months,
-        datasets: [
-          {
-            label: "Revenue Gain (by month)",
-            data: specificData.byMonthRevenue,
-            borderColor: "#007BFF",
-            fill: false,
-          },
-        ],
-      };
+        const totalRevenue = Object.values(weekData?.data || {}).reduce((total, week) => total + week.balance, 0);
+        setTotalRevenue(totalRevenue);
 
-      const productSoldData = {
-        labels: months,
-        datasets: [
-          {
-            label: "Product Sold Gain (by month)",
-            data: specificData.byMonthProductSold,
-            borderColor: "#b8860b",
-            fill: false,
-          },
-        ],
-      };
+        const productSoldData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Product Sold Quantity (by week)",
+              data: Object.values(weekData?.data || {}).map((week) => week.quantity),
+              borderColor: "#b8860b",
+              fill: false,
+            },
+          ],
+        };
+        setProductSoldChartData(productSoldData);
 
-      setRevenueChartData(revenueData);
-      setProductSoldChartData(productSoldData);
+        const totalProductSold = Object.values(weekData?.data || {}).reduce((total, week) => total + week.quantity, 0);
+        setTotalProductSold(totalProductSold);
+      } 
+      
+      else if (selectedView === "byMonth") {
+        const monthData = await fetchData(false, selectedYear);
+        setStatistics((prevData) => ({ ...prevData, byMonth: monthData?.data || {} }));
+
+        const labels = Object.keys(monthData?.data || {});
+        const revenueData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Revenue Gain (by month)",
+              data: Object.values(monthData?.data || {}).map((month) => month.balance),
+              borderColor: "#007BFF",
+              fill: false,
+            },
+          ],
+        };
+        setRevenueChartData(revenueData);
+
+        const totalRevenue = Object.values(monthData?.data || {}).reduce((total, month) => total + month.balance, 0);
+        setTotalRevenue(totalRevenue);
+
+        const productSoldData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Product Sold Quantity (by month)",
+              data: Object.values(monthData?.data || {}).map((month) => month.quantity),
+              borderColor: "#b8860b",
+              fill: false,
+            },
+          ],
+        };
+        setProductSoldChartData(productSoldData);
+
+        const totalProductSold = Object.values(monthData?.data || {}).reduce((total, month) => total + month.quantity, 0);
+        setTotalProductSold(totalProductSold);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    generateData();
+    getData();
   }, [selectedView, selectedYear]);
 
   const handleYearChange = (event) => {
@@ -102,7 +132,7 @@ const AdminStatistics = () => {
                   Total Revenue
                 </div>
                 <div className="admin-statistics-h5 admin-statistics-font-weight-bold">
-                  $ 100000
+                  $ {totalRevenue}
                 </div>
               </div>
             </div>
@@ -112,17 +142,15 @@ const AdminStatistics = () => {
             <div className="admin-statistics-card">
               <div className="admin-statistics-card-body">
                 <div className="admin-statistics-text-xs admin-statistics-font-weight-bold admin-statistics-text-success admin-statistics-text-uppercase mb-1">
-                  Total Product Sold
+                  Total Product Sold Quantity
                 </div>
                 <div className="admin-statistics-h5 admin-statistics-font-weight-bold">
-                  23000
+                  {totalProductSold}
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
 
         {selectedView === "byMonth" && (
           <div className="admin-statistics-dropdown">
@@ -136,7 +164,6 @@ const AdminStatistics = () => {
             </select>
           </div>
         )}
-
 
         <div className="admin-statistics-row">
           <div className="admin-statistics-col">
@@ -160,13 +187,12 @@ const AdminStatistics = () => {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="admin-statistics-buttons">
           <button
             onClick={() => setSelectedView("byweek")}
             className={selectedView === "byweek" ? "selected" : ""}
           >
-            By week
+            By Week
           </button>
           <button
             onClick={() => setSelectedView("byMonth")}
