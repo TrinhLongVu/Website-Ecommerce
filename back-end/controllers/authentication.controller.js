@@ -90,7 +90,7 @@ exports.signup = async (req, res) => {
                 FullName: fullname,
                 Password: hash
             });
-            const response = await fetch("http://localhost:3001/api/v1/payment/create", {
+            const response = await fetch("https://paymentmegamall.onrender.com/api/v1/payment/create", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
