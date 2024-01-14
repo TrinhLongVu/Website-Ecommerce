@@ -21,4 +21,8 @@ router
     .route('/hidden')
     .post(category.hidden)
 
+router
+    .route('/update')
+    .patch(category.update)
+
 module.exports = router;

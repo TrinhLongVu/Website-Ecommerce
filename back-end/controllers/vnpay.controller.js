@@ -1,6 +1,13 @@
 const moment = require('moment');
 const {sortObject} = require('../helper/index')
 const User = require('../models/user.model')
+const Transaction = require('../models/transaction.model')
+const Payment = require('../models/payment.model')
+const dotenv = require('dotenv')
+
+dotenv.config({
+    path: './config.env'
+});
 
 exports.createPayment = function (req, res, next) {
     console.log("123121231", req.body)
@@ -39,7 +46,7 @@ exports.createPayment = function (req, res, next) {
     vnp_Params['vnp_TxnRef'] = orderId;
     vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + orderId;
     vnp_Params['vnp_OrderType'] = 'other';
-    vnp_Params['vnp_Amount'] = amount;
+    vnp_Params['vnp_Amount'] = amount * 100;
     vnp_Params['vnp_ReturnUrl'] = returnUrl;
     vnp_Params['vnp_IpAddr'] = ipAddr;
     vnp_Params['vnp_CreateDate'] = createDate;
@@ -57,7 +64,10 @@ exports.createPayment = function (req, res, next) {
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
     console.log(vnpUrl)
-    res.redirect(vnpUrl)
+    // res.redirect(vnpUrl)
+    res.status(200).json({
+        vnpUrl: vnpUrl
+    })
 }
 
 exports.returnPayment = async (req, res, next) => {
@@ -83,11 +93,40 @@ exports.returnPayment = async (req, res, next) => {
 
     if(secureHash === signed){
         //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
-        let user = await User.findById(req.user._id);
-        await User.findByIdAndUpdate(req.user._id, {Balance: user.Balance + vnp_Params['vnp_Amount']}, {
-            new: true
-        })
-        res.redirect('/api/v1/payment')
+        const user = await User.findById(req.user.id)
+                    .populate({
+                        path: 'AccountPayment',
+                        select: 'balance'
+                    })
+        const adminId = process.env.ADMINID;
+        const admin = await User.findById(adminId)
+                    .populate({
+                        path: 'AccountPayment',
+                        select: 'balance'
+                    })
+        const AccountAdmin = await Payment.findById(admin.AccountPayment._id)
+        AccountAdmin.balance += vnp_Params['vnp_Amount'];
+        if (!user.Transaction) {
+            user.Transaction = [];
+        }
+
+        if (!admin.Transaction) {
+            admin.Transaction = [];
+        }
+        const transaction = {
+                    idUser: user.id,
+                    cart_id: user.Cart.map(cart => cart.product_id),
+                    time: new Date(),
+                    moneyTransaction: vnp_Params['vnp_Amount'],
+                }
+        const idTransaction = await Transaction.create(transaction);
+        user.Transaction.push(idTransaction)
+        admin.Transaction.push(idTransaction)
+        user.Cart.splice(0);
+        await user.save();
+        await admin.save();
+        await AccountAdmin.save();
+        res.redirect('http://localhost:5173/cart')
     } else{
         res.render('success', {code: '97'})
     }

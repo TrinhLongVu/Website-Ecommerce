@@ -23,7 +23,6 @@ const MainLayout = () => {
     }
     const token = localStorage.getItem("authToken");
     if (!token) {
-      navigate("/");
       return;
     }
     const fetchData = async () => {
@@ -55,7 +54,7 @@ const MainLayout = () => {
     fetchData();
   }, [userChange]);
   useEffect(() => {
-    fetch("https://themegamall.onrender.com/api/v1/category")
+    fetch("http://localhost:8000/api/v1/category")
       .then((res) => res.json())
       .then((json) => {
         setCategoryList(json.data);

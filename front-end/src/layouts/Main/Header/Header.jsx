@@ -10,6 +10,7 @@ import {
   faCartShopping,
   faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
+import Toastify from "../../../components/Toastify/Toastify";
 // Style
 import "./header.css";
 
@@ -45,7 +46,11 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
 
   const search = () => {
     if (searchField === "") {
-      navigate("/search/!@$");
+      Toastify(
+        "error",
+        "top-right",
+        "Please input some keywords before searching"
+      );
     } else {
       navigate(`/search/${searchField}`);
     }

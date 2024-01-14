@@ -4,14 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleUp,
   faCircleXmark,
-  faAngleDown,
   faStore,
   faTags,
   faCirclePlus,
   faEyeSlash,
-  faXmark,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
+import Filter from "../../components/Filter/Filter";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 import Toastify from "../../components/Toastify/Toastify";
@@ -21,7 +20,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import "./admin-products.css";
 
 const AdminProducts = () => {
-  const domain = "https://themegamall.onrender.com/api/v1/product?";
+  const domain = "http://localhost:8000/api/v1/product?";
   const { categoryList, categoryUpdate, setCategoryUpdate } =
     useOutletContext();
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -30,25 +29,10 @@ const AdminProducts = () => {
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [showFilter, setShowFilter] = useState(false);
   const [loadPage, setLoadPage] = useState(false);
   const [listChange, setListChange] = useState(false);
-  const toggleFilter = () => {
-    setShowFilter(!showFilter);
-    if (!showFilter) {
-      document.querySelector(".home-filter-box").style.borderRadius =
-        "8px 8px 0 0";
-    } else {
-      document.querySelector(".home-filter-box").style.borderRadius = "8px";
-    }
-  };
 
-  const filterList = ["Price: Low to High", "Price: High to Low"];
-  const selectFilter = (filterType) => {
-    setCurrentPage(1);
-    setFilter(filterType);
-    toggleFilter();
-  };
+  const filterList = ["Below $1000", "$1000 to $2000", "Above $2000"];
 
   const prevFilterRef = useRef("all");
   const prevPage = useRef(1);
@@ -67,10 +51,12 @@ const AdminProducts = () => {
     let fetchDomain = "";
     if (filter === "") {
       fetchDomain = `page=${currentPage}&limit=12`;
-    } else if (filter === "Price: Low to High") {
-      fetchDomain = `page=${currentPage}&limit=12&sort=price`;
-    } else if (filter === "Price: High to Low") {
-      fetchDomain = `page=${currentPage}&limit=12&sort=-price`;
+    } else if (filter === "Below $1000") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price&filter=0,1000`;
+    } else if (filter === "$1000 to $2000") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price&filter=1000,2000`;
+    } else if (filter === "Above $2000") {
+      fetchDomain = `page=${currentPage}&limit=12&sort=price&filter=2000,100000`;
     }
     fetch(domain + fetchDomain)
       .then((res) => res.json())
@@ -80,20 +66,6 @@ const AdminProducts = () => {
         setLoadPage(false);
       });
   }, [currentPage, filter, listChange]);
-
-  document.body.addEventListener("click", (event) => {
-    const homeFilterBox = document.querySelector(".home-filter-box");
-    if (homeFilterBox && !event.target.closest(".home-filter-box")) {
-      setShowFilter(false);
-      homeFilterBox.style.borderRadius = "8px";
-    }
-  });
-
-  const unFilter = () => {
-    setCurrentPage(1);
-    setFilter("");
-    toggleFilter();
-  };
 
   const hideCategory = (name) => {
     fetch("http://localhost:8000/api/v1/category/hidden", {
@@ -116,10 +88,86 @@ const AdminProducts = () => {
       });
   };
 
+  const upgradeCategory = (name) => {
+    Swal.fire({
+      title: "Update Category",
+      input: "text",
+      inputPlaceholder: "Enter new category name",
+      showCancelButton: true,
+      confirmButtonText: "Submit",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (result.value === "") {
+          Swal.fire({
+            title: "Invalid input!",
+            text: "Please enter something for new name for the category",
+            icon: "error",
+          });
+          return;
+        } else if (result.value === name) {
+          Swal.fire({
+            title: "Exsisting name!",
+            text: "New name for the category should be differnt from the old one",
+            icon: "error",
+          });
+          return;
+        } else if (
+          categoryList.some((category) => category.name === result.value)
+        ) {
+          Swal.fire({
+            title: "Exsisting Category!",
+            text: "New name for the category shouldn't be the same as the existing one",
+            icon: "error",
+          });
+          return;
+        }
+        fetch("http://localhost:8000/api/v1/category/update", {
+          credentials: "include",
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+          body: JSON.stringify({
+            category: name,
+            newcategory: result.value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            console.log(json);
+            if (json.status === "success") {
+              setCategoryUpdate(!categoryUpdate);
+              Swal.fire({
+                title: "Category Updated!",
+                text: `Successfully updated category name from "${name}" to "${result.value}"`,
+                icon: "success",
+              });
+            } else {
+              Swal.fire({
+                title: "Error while updating!",
+                text: "There's some error!!! Please try again later",
+                icon: "error",
+              });
+            }
+          });
+      }
+    });
+  };
+
   const addCategory = () => {
     const newCategory = document.querySelector("#add-category").value;
     if (newCategory === "") {
-      Toastify("error", "top-right", "Please input new category name");
+      Toastify(
+        "error",
+        "top-right",
+        "Please input a name for the new category"
+      );
+      return;
+    } else if (categoryList.some((category) => category.name === newCategory)) {
+      Toastify("error", "top-right", "This category already exists");
+      return;
     } else {
       fetch("http://localhost:8000/api/v1/category/admin", {
         credentials: "include",
@@ -196,42 +244,52 @@ const AdminProducts = () => {
             <FontAwesomeIcon icon={faTags} /> Categories
           </h2>
         </div>
-        <div className="home-section-content">
-          <div className="categories-list">
+        <div className="admin-products-section-content">
+          <div className="admin-products-categories-list">
             {categoryList.map((category, idx) => (
-              <div
-                key={idx}
-                className="category-card"
-                onClick={() => hideCategory(category.name)}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="category-card-bg"></div>
-                <h3 className="category-card-name">
-                  {category.isHidden ? (
-                    <>
-                      {hoveredIndex === idx ? (
-                        <FontAwesomeIcon icon={faEye} />
-                      ) : (
-                        <>
-                          <FontAwesomeIcon
-                            icon={faEyeSlash}
-                            className="admin-hidden-category"
-                          />
-                          {category.name}
-                        </>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {hoveredIndex === idx ? (
-                        <FontAwesomeIcon icon={faEyeSlash} />
-                      ) : (
-                        category.name
-                      )}
-                    </>
-                  )}
-                </h3>
+              <div className="admin-products-category-container">
+                <div
+                  key={idx}
+                  className="category-card"
+                  onClick={() => hideCategory(category.name)}
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <div className="category-card-bg"></div>
+                  <h3 className="category-card-name">
+                    {category.isHidden ? (
+                      <>
+                        {hoveredIndex === idx ? (
+                          <FontAwesomeIcon icon={faEye} />
+                        ) : (
+                          <>
+                            <FontAwesomeIcon
+                              icon={faEyeSlash}
+                              className="admin-hidden-category"
+                            />
+                            {category.name}
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {hoveredIndex === idx ? (
+                          <FontAwesomeIcon icon={faEyeSlash} />
+                        ) : (
+                          category.name
+                        )}
+                      </>
+                    )}
+                  </h3>
+                </div>
+                <div className="category-card-upgrade-container">
+                  <div
+                    className="category-card-upgrade-btn"
+                    onClick={() => upgradeCategory(category.name)}
+                  >
+                    <FontAwesomeIcon icon={faCircleUp} />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -243,7 +301,12 @@ const AdminProducts = () => {
             <FontAwesomeIcon icon={faCirclePlus} /> Add Category
           </h2>
           <div className="add-category-box">
-            <input type="text" id="add-category" placeholder="Category Name" />
+            <input
+              type="text"
+              id="add-category"
+              placeholder="Category Name"
+              onKeyDown={(e) => e.key === "Enter" && addCategory()}
+            />
             <button id="add-category-btn" onClick={addCategory}>
               <FontAwesomeIcon icon={faCirclePlus} />
             </button>
@@ -255,23 +318,13 @@ const AdminProducts = () => {
           <h2>
             <FontAwesomeIcon icon={faStore} /> Products
           </h2>
-          <div className="home-filter-box" onClick={toggleFilter}>
-            {filter ? filter : "Filter"}
-            {filter ? (
-              <FontAwesomeIcon icon={faXmark} onClick={unFilter} />
-            ) : (
-              <FontAwesomeIcon icon={faAngleDown} />
-            )}
-          </div>
-          {showFilter && (
-            <div className="filter-dropdown">
-              {filterList.map((item, index) => (
-                <div key={index} onClick={() => selectFilter(item)}>
-                  {item}
-                </div>
-              ))}
-            </div>
-          )}
+          <Filter
+            filterName={"Price"}
+            filter={filter}
+            filterList={filterList}
+            setFilter={setFilter}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
         <div className="admin-products">
           {loadPage ? (

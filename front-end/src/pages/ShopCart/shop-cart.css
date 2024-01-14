@@ -58,6 +58,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: black;
+    text-decoration: none;
 }
 
 .cart--item-name {
@@ -122,15 +124,6 @@
     border-radius: 12px;
 }
 
-.cart--order-checkout-info-title {
-    font-size: 30px;
-    margin: 20px 0;
-}
-
-.cart--order-checkout-info-hr {
-    width: 100%;
-}
-
 .cart--order-checkout-info-row {
     padding: 10px 20px;
     width: 100%;
@@ -160,9 +153,14 @@
     outline: none;
 }
 
+.cart--order-checkout-btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .cart--order-checkout-btn {
     margin: 20px 0;
-    width: 100%;
+    width: 48%;
     height: 60px;
     font-size: 20px;
     display: flex;
@@ -172,6 +170,21 @@
     color: black;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+#load-checkout {
+    background-color: white;
+}
+
+#vnpay {
+    background: url('../../assets/vnpay.png'), white;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#vnpay:hover {
+    background-color: #F1B4BB;
 }
 
 .cart--order-checkout-btn:hover {
@@ -270,14 +283,6 @@
     align-items: center;
     background-color: #F8E559;
     border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-
-.balance-card-footer-credit:hover {
-    cursor: pointer;
-    background-color: #BFDB38;
-    color: white;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 .balance-card-footer-input {

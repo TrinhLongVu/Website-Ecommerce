@@ -10,74 +10,38 @@ dotenv.config({
     path: './config.env'
 });
 
-exports.history = async (req, res, next) => {
+exports.create = async (req, res) => {
     try {
-        const paymentid = req.body.paymentid;
-
-        const userId = req.params.id;
-        const user = await User.findById(userId);
-
-        const checkBalance = user.Balance.find(payment => payment._id == paymentid)
-
-        if (checkBalance) {
-            res.status(200).json({
-                status: 'success',
-                data: {
-                    Payment: checkBalance
-                }
+        const id = req.body.id;
+        try {
+            const newPayment = await Payment.create({balance: 100000});
+            const update = await User.findByIdAndUpdate(id, {
+                AccountPayment: newPayment._id,
+            }, {
+                new: true
             });
-        } else {
             res.status(200).json({
-                status: 'fail',
-                msg: "Can't find anything"
-            });
+                status: "success"
+            })
+        } catch (error) {
+            console.error("Error creating payment:", error);
         }
-    } catch (err) {
+
+    } catch (error) {
         res.status(400).json({
             status: 'fail',
-            msg: err.message
+            msg: error.message
         });
     }
 }
-
-exports.getAllPayment = async (req, res, next) => { // lấy ra tất cả tài khoản của người dùng, tham số truyền vào là id người dùng
-
-    try {
-        const userId = req.params.id;
-        const user = await User.findById(userId);
-        if (!user) {
-            res.status(200).json({
-                status: 'fail',
-                msg: "Can't this user"
-            });
-        }
-        const checkBalance = user.Balance
-
-        if (checkBalance) {
-            res.status(200).json({
-                status: 'success',
-                data: {
-                    Payment: checkBalance
-                }
-            });
-        } else {
-            res.status(200).json({
-                status: 'fail',
-                msg: "Can't find anything"
-            });
-        }
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            msg: err.message
-        });
-    }
-}
-
 
 exports.payMoney = async (req, res) => {
     try {
-        const token = req.body.token;
+        const {
+            token,
+            phone,
+            address
+        } = req.body;
 
         jwt.verify(token, process.env.KEY_TOKEN_PAYMENT, async (err, data) => {
             if (err) {
@@ -124,7 +88,7 @@ exports.payMoney = async (req, res) => {
                         path: 'AccountPayment',
                         select: 'balance'
                     })
-                
+
                 const AccountAdmin = await Payment.findById(admin.AccountPayment._id)
                 const AccountUser = await Payment.findById(user.AccountPayment._id)
                 AccountAdmin.balance += price;
@@ -138,18 +102,26 @@ exports.payMoney = async (req, res) => {
                 if (!admin.Transaction) {
                     admin.Transaction = [];
                 }
-                
+
                 const transaction = {
                     idUser: user.id,
-                    cart_id: user.Cart.map(cart => cart.product_id),
-                    time: new Date()
+                    cart_id: user.Cart.map(cart => {
+                        return {
+                            product_id: cart.product_id,
+                            quantity: cart.quantity
+                        }
+                    }),
+                    time: new Date(),
+                    moneyTransaction: price,
+                    address: address,
+                    phone: phone
                 }
                 const idTransaction = await Transaction.create(transaction);
                 user.Transaction.push(idTransaction)
                 admin.Transaction.push(idTransaction)
-                
+
                 user.Cart.splice(0);
-                
+
                 await user.save();
                 await admin.save();
                 await AccountAdmin.save();
@@ -173,13 +145,13 @@ exports.payMoney = async (req, res) => {
     }
 }
 
-exports.verify = async (req, res, next) => {
+exports.verify = async (req, res) => {
     try {
         const id = req.body.id;
         const token = jwt.sign({
             id
         }, process.env.KEY_TOKEN_PAYMENT, {
-            expiresIn: '1h'
+            expiresIn: '60s'
         });
 
         res.status(200).json({
@@ -192,5 +164,69 @@ exports.verify = async (req, res, next) => {
             status: 'fail',
             msg: error.message
         });
+    }
+}
+
+exports.getHistory = async (req, res) => {
+    try {
+        let id = req.params.id;
+        console.log(id)
+        const user = await User.findById(id)
+            .populate({
+                path: 'Transaction',
+                populate: [{
+                        path: 'cart_id',
+                        select: 'product_id quantity',
+                        populate: {
+                            path: 'product_id',
+                            select: 'title image price'
+                        }
+                    },
+                    {
+                        path: 'idUser',
+                        select: 'FullName Image_Avatar'
+                    }
+                ]
+
+            })
+        res.status(200).json({
+            status: "success",
+            data: user
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            data: err
+        })
+    }
+}
+
+exports.getBalance = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findById(userId)
+            .populate({
+                path: 'AccountPayment',
+                select: 'balance'
+            })
+
+        if (user.AccountPayment) {
+            res.status(200).json({
+                status: 'success',
+                data: {
+                    UserBalance: user.AccountPayment.balance
+                }
+            });
+        } else {
+            res.status(200).json({
+                status: 'fail',
+                msg: "Can't find anything"
+            });
+        }
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            data: err
+        })
     }
 }

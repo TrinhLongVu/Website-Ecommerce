@@ -1,16 +1,17 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model')
-const Payment = require('../models/payment.model')
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv')
 const path = require('path');
+const https = require('https');
+const fs = require('fs');
+
 dotenv.config({
     path: path.join(__dirname, '..', 'config.env')
 });
 
-
 exports.fail = (req, res) => {
-    res.json({
+    res.status(401).json({
         status: "failed",
     })
 }
@@ -22,7 +23,9 @@ exports.success = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.cookie('token', token, {
+        expires: new Date(Date.now() + 30 * 1000)
+    });
     res.redirect('http://localhost:5173')
 }
 
@@ -33,7 +36,9 @@ exports.successLocal = (req, res) => {
     }, process.env.KEY_TOKEN, {
         expiresIn: '5h'
     });
-    res.cookie('token', token, { expires: new Date(Date.now() + 30 * 1000) });
+    res.cookie('token', token, {
+        expires: new Date(Date.now() + 30 * 1000)
+    });
     res.json({
         "token": token
     })
@@ -86,21 +91,33 @@ exports.signup = async (req, res) => {
             if (err) {
                 return next(err);
             }
-
-            let newPayment;
-            try {
-                newPayment = await Payment.create({balance: 0});
-            } catch (error) {
-                console.error("Error creating payment:", error);
-            }
-            console.log(newPayment)
             const newUser = await User.create({
                 UserName: NewBody.UserName,
                 FullName: fullname,
-                AccountPayment: newPayment._id,
                 Password: hash
             });
-
+            
+            const options = {
+                hostname: 'localhost',
+                port: 3001,
+                path: '/api/v1/payment/create',
+                method: 'POST',
+                ca: fs.readFileSync('./openssl/cert.pem', 'utf8'),
+                headers: {
+                    'creatatial': 'true',
+                    'Content-Type': 'application/json'
+                }
+            };
+            
+            const req = https.request(options);
+            req.on('error', (error) => {
+                console.error(error);
+            });
+            req.write(JSON.stringify({
+                id: newUser._id
+            }));
+            req.end();
+            
             res.status(201).json({
                 status: 'success',
                 data: {

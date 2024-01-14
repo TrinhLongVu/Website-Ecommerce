@@ -1,18 +1,25 @@
 const express = require('express')
 const router = express.Router();
 const payment = require('../controllers/handle.payment.controller')
-const middleware = require('../middeware/auth')
 
 router
     .route('/verify')
     .post(payment.verify)
 
 router
-    .route('/get/:id')
-    .get(payment.history)
-    
+    .route('/create')
+    .post(payment.create)
+
 router 
     .route('/pay')
     .post(payment.payMoney)
+
+router 
+    .route('/history/:id')
+    .get(payment.getHistory)
+
+router 
+    .route('/balance/:id')
+    .get(payment.getBalance)
 
 module.exports = router;

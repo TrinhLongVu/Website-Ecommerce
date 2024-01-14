@@ -52,6 +52,10 @@ exports.addCategory = async (req, res) => {
 exports.getPagination = async (req, res) => {
     try {
         const query = req.query;
+        let arrayfilter = [];
+        if (query.filter) {
+            arrayfilter = query.filter.split(',')
+        }
         const skip = (query.page - 1) * query.limit;
     
         let data = Product.find()
@@ -67,7 +71,16 @@ exports.getPagination = async (req, res) => {
         }
 
         const result = await data.exec();
-        let filteredData = result.filter(product => product.category != null);
+        let filteredData = result.filter(product => {
+            let check = true;
+            if (query.filter) {
+                check = false
+                if (product.price >= arrayfilter[0] && product.price <= arrayfilter[1]){
+                    check = true
+                }
+            }
+            return product.category != null && check
+        });
         const paginatedResults = filteredData.slice(skip, skip + query.limit * 1.0);
     
         res.status(200).json({
@@ -95,6 +108,24 @@ exports.hidden = async (req, res) => {
     }
     catch (err) {
         res.status(500).json({
+            status: "fail",
+            data: err
+        })
+    }
+}
+
+exports.update = async (req, res) => {
+    const { category, newcategory } = req.body;
+    try {
+        const cate = await Category.findOne({ name: category });
+        const newcate = await Category.updateOne({ _id: cate._id }, { name: newcategory });
+        res.status(200).json({
+            status: "success",
+            data: newcate
+        })
+    }
+    catch (err) {
+        res.status(400).json({
             status: "fail",
             data: err
         })

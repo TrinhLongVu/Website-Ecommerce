@@ -2,16 +2,8 @@ const fs = require('fs').promises;
 const User = require('../models/user.model')
 const bcrypt = require('bcrypt');
 const Product = require('../models/product.model');
-const { pseudoRandomBytes } = require('crypto');
 const Category = require('../models/category.model');
-const { search } = require('../app');
 const cloudinary = require('cloudinary').v2;
-
-//=========================== FUNCTION =========================================================================
-function checkIfElementExists(element, array) {
-    return array.includes(element);
-}
-//=============================================================================================================
 
 exports.getInfo = async (req, res) => {
     try {
@@ -228,65 +220,20 @@ exports.deleteUser = async (req, res) => {
     }
 }
 
-// exports.searchProduct = async (req, res) => {
-//     try {
-//         const { searchValue } = req.body;
-
-//         const products = await Product.find();
-//         const categories = await Category.find();
-
-//         const normalize = (text) => text.replace(/\s/g, '').toLowerCase();
-
-//         const searchResult = products.filter(product => {
-//             const normalizedTitle = normalize(product.title);
-//             const normalizedDetail = normalize(product.detail);
-
-//             const titleMatch = normalizedTitle.includes(normalize(searchValue));
-//             const detailMatch = normalizedDetail.includes(normalize(searchValue));
-
-//             const categoryMatch = categories.some(category => {
-//                 if (!product.category || !category.name || !Array.isArray(product.category)) {
-//                     return false;
-//                 }
-
-//                 const normalizedCategoryName = normalize(category.name);
-//                 return normalizedCategoryName.includes(normalize(searchValue)) && product.category.includes(category._id);
-//             });
-
-//             return titleMatch || detailMatch || categoryMatch;
-//         });
-
-//         console.log(searchResult.length)
-
-//         if (searchResult.length === 0) {
-//             return res.status(200).json({
-//                 status: "fail",
-//                 message: "Can't find what you want"
-//             });
-//         }
-
-//         res.status(200).json({
-//             status: "success",
-//             data: searchResult
-//         });
-//     } catch (error) {
-//         console.error('Error searching for products:', error);
-//         res.status(500).json({
-//             success: false,
-//             error: 'Internal Server Error'
-//         });
-//     }
-// };
-
-
 exports.searchProduct = async (req, res) => {
     try {
-        const { page, limit, search } = req.query;
-        console.log('page: ', page, ' limit: ',limit,' search: ',search)
+        const { page, limit, search, filter, filtercategory } = req.query;
+        let arrayfilter = [];
+        if (filter) {
+            arrayfilter = filter.split(',')
+        }
 
         const skip = (page - 1) * limit;
-
-        let queryBuilder = Product.find();
+        let queryBuilder = Product.find()
+            .populate({
+            path: 'category',
+            select: 'name'
+        })
 
         if (req.query.sort) {
             const sortBy = req.query.sort.split(',').join(' ');
@@ -296,6 +243,7 @@ exports.searchProduct = async (req, res) => {
 
         const categories = await Category.find();
 
+       
         const normalize = (text) => (text ? text.replace(/\s/g, '').toLowerCase() : '');
 
         const searchResult = products.filter(product => {
@@ -314,9 +262,18 @@ exports.searchProduct = async (req, res) => {
                 return normalizedCategoryName.includes(normalize(search)) && product.category.includes(category._id);
             });
 
-            return titleMatch || detailMatch || categoryMatch;
-        });
+            let check = true;
+            if (filter) {
+                check = false
+                if (product.price >= arrayfilter[0] && product.price <= arrayfilter[1]){
+                    check = true
+                }
+            }
 
+            const checkcate = product.category.name == filtercategory || filtercategory == null
+
+            return (titleMatch || detailMatch || categoryMatch) && check && checkcate;
+        });
         const result = searchResult.slice(skip, skip + limit * 1.0);
 
         if (searchResult.length === 0) {
