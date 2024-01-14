@@ -48,10 +48,6 @@ const History = () => {
     return result;
   };
 
-  const changePage = () => {
-    console.log(1);
-  };
-
   return (
     <>
       <Breadcrumbs

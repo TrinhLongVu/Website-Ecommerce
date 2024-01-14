@@ -13,8 +13,7 @@ import Filter from "../../components/Filter/Filter";
 // Style
 import "./search.css";
 const Search = () => {
-  const domain =
-    "https://themegamall.onrender.com/api/v1/user/search/product?limit=8&";
+  const domain = "http://localhost:8000/api/v1/user/search/product?limit=8&";
   const { key } = useParams();
 
   const [productList, setProductList] = useState([]);

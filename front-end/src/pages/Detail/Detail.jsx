@@ -15,18 +15,21 @@ const Detail = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://themegamall.onrender.com/api/v1/product/" + id)
+    fetch("http://localhost:8000/api/v1/product/" + id)
       .then((res) => res.json())
       .then((json) => {
         const productDetail = json.data.detail.split("\n");
         json.data.detail = productDetail;
         setProduct(json.data);
         fetch(
-          `https://themegamall.onrender.com/api/v1/category/page?page=1&limit=4&category=${json.data.category.name}`
+          `http://localhost:8000/api/v1/category/page?page=1&limit=5&category=${json.data.category.name}`
         )
           .then((relatedRes) => relatedRes.json())
           .then((relatedJson) => {
-            setRelatedProducts(relatedJson.data);
+            const filteredRelated = relatedJson.data.filter(
+              (product) => product._id !== id
+            );
+            setRelatedProducts(filteredRelated.slice(0, 4));
           });
       });
   }, [id]);
