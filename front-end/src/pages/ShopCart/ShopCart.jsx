@@ -71,6 +71,12 @@ const ShopCart = () => {
       });
   };
 
+  const validatePhone = (phoneNumber) => {
+    const vietnamesePhoneNumberPattern =
+      /^(0[1-9]|11|12|13|14|15|16|17|18|19)[0-9]{8}$/;
+    return vietnamesePhoneNumberPattern.test(phoneNumber);
+  };
+
   const checkOut = () => {
     const telNum = document.querySelector("#tel-num").value;
     const address = document.querySelector("#address").value;
@@ -83,6 +89,9 @@ const ShopCart = () => {
         "top-right",
         "Please fill in all the information before checking out!"
       );
+      return;
+    } else if (!validatePhone(telNum)) {
+      Toastify("error", "top-right", "Invalid phone number");
       return;
     } else {
       setLoadCheckout(true);

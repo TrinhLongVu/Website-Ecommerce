@@ -161,7 +161,6 @@ exports.getTransaction = async (req, res) => {
         const user = await User.findById(id)
             .populate({
                 path: 'Transaction',
-                select: 'Transaction time address phone',
                 populate: [{
                         path: 'cart_id',
                         select: 'product_id quantity',
