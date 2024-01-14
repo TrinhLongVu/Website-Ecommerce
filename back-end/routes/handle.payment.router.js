@@ -7,9 +7,9 @@ router
     .post(payment.verify)
 
 router
-    .route('/get/:id')
-    .get(payment.history)
-    
+    .route('/create')
+    .post(payment.create)
+
 router 
     .route('/pay')
     .post(payment.payMoney)

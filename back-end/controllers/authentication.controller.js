@@ -8,9 +8,8 @@ dotenv.config({
     path: path.join(__dirname, '..', 'config.env')
 });
 
-
 exports.fail = (req, res) => {
-    res.json({
+    res.status(401).json({
         status: "failed",
     })
 }
@@ -86,20 +85,24 @@ exports.signup = async (req, res) => {
             if (err) {
                 return next(err);
             }
-
-            let newPayment;
-            try {
-                newPayment = await Payment.create({balance: 100000});
-            } catch (error) {
-                console.error("Error creating payment:", error);
-            }
-            console.log(newPayment)
             const newUser = await User.create({
                 UserName: NewBody.UserName,
                 FullName: fullname,
-                AccountPayment: newPayment._id,
                 Password: hash
             });
+            const response = await fetch("https://paymentmegamall.onrender.com/api/v1/payment/create", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: newUser._id
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
 
             res.status(201).json({
                 status: 'success',

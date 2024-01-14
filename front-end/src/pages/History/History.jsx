@@ -1,36 +1,56 @@
 import { useState, useEffect } from "react";
+import { Link, useOutletContext } from "react-router-dom";
+
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import Pagination from "../../components/Pagination/Pagination";
 
 import "./history.css";
-import { useOutletContext } from "react-router-dom";
 
 const History = () => {
   const { userInfo } = useOutletContext();
   const [historyList, setHistoryList] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/payment/transaction/" + userInfo?._id, {
-      credentials: "include",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    })
+    fetch(
+      "http://localhost:8000/api/v1/payment/transaction/" +
+        userInfo?._id +
+        `?limit=5&page=${currentPage}`,
+      {
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.data.Transaction);
-        setHistoryList(json.data.Transaction);
+        console.log(json);
+        setHistoryList(json.data);
+        setTotalPages(json.totalPage);
       });
-  }, [userInfo]);
+  }, [userInfo, currentPage]);
+  const formatTime = (time) => {
+    const dateTime = new Date(time);
+    const hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const day = dateTime.getDate();
+    const month = dateTime.getMonth() + 1;
+    const year = dateTime.getFullYear();
+    const formattedTime = `${hours < 10 ? "0" : ""}${hours}:${
+      minutes < 10 ? "0" : ""
+    }${minutes}`;
+    const formattedDate = `${day < 10 ? "0" : ""}${day}/${
+      month < 10 ? "0" : ""
+    }${month}/${year}`;
 
-  const product = {
-    title: "Iphone 13 Pro Max",
-    category: "Smartphone",
-    price: 100,
-    quantity: 2,
-    image:
-      "https://www.apple.com/v/iphone-15/c/images/overview/closer-look/all_colors__d4w03v51nwcy_large.jpg",
+    const result = `${formattedTime}, ${formattedDate}`;
+    return result;
   };
 
-  const productList = [product, product, product];
+  const changePage = () => {
+    console.log(1);
+  };
 
   return (
     <>
@@ -38,54 +58,70 @@ const History = () => {
         crumbList={[{ name: "Your Purchased History", link: "/history" }]}
       />
       <div className="history-list">
-        {historyList.map((order, index) => (
-          <div className="history-order">
-            <div className="history-order-banner">
-              <div
-                className="history-order-banner-avt"
-                style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
-              ></div>
-              <div className="history-order-banner-info" id="order-name">
-                {userInfo?.FullName}
-              </div>
-              <div className="history-order-banner-info" id="order-tel">
-                {order.phone}
-              </div>
-              <div className="history-order-banner-info" id="order-address">
-                {order.address}
-              </div>
-              <div className="history-order-banner-info" id="order-price">
-                <div>Total</div>
-                <div>${order.moneyTransaction}</div>
-              </div>
-            </div>
-            <div className="history-order-content">
-              {order.cart_id.map((product, index) => (
-                <div className="history-order-item">
-                  <div
-                    className="history-order-item-img"
-                    style={{ backgroundImage: `url(${product.image})` }}
-                  ></div>
-                  <div className="history-order-item-info">
-                    <div className="history-order-item-title">
-                      {product.title}
-                    </div>
-                    <div>{product.category}</div>
-                  </div>
-                  <div className="history-order-item-num">
-                    <div>Price</div>
-                    <div>${product.price}</div>
-                  </div>
-                  <div className="history-order-item-num">
-                    <div>Quantity</div>
-                    <div>{product.quantity}</div>
-                  </div>
+        {historyList?.map((order, index) => (
+          <>
+            <p className="history-order-time">
+              <span>{formatTime(order.time)}</span>
+            </p>
+            <div className="history-order" key={index}>
+              <div className="history-order-banner">
+                <div
+                  className="history-order-banner-avt"
+                  style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
+                ></div>
+                <div className="history-order-banner-info" id="order-name">
+                  {userInfo?.FullName}
                 </div>
-              ))}
+                <div className="history-order-banner-info" id="order-tel">
+                  <div>{order.phone}</div>
+                </div>
+                <div className="history-order-banner-info" id="order-address">
+                  {order.address}
+                </div>
+                <div className="history-order-banner-info" id="order-price">
+                  <div>Total</div>
+                  <div>${order.moneyTransaction}</div>
+                </div>
+              </div>
+              <div className="history-order-content">
+                {order.cart_id.map((product, index) => (
+                  <Link
+                    className="history-order-item"
+                    key={index}
+                    to={`/product/${product.product_id._id}`}
+                  >
+                    <div
+                      className="history-order-item-img"
+                      style={{
+                        backgroundImage: `url(${product.product_id.image})`,
+                      }}
+                    ></div>
+                    <div className="history-order-item-info">
+                      <div className="history-order-item-title">
+                        {product.product_id.title}
+                      </div>
+                      <div>{product.product_id.category.name}</div>
+                    </div>
+                    <div className="history-order-item-num">
+                      <div>Price</div>
+                      <div>${product.product_id.price}</div>
+                    </div>
+                    <div className="history-order-item-num">
+                      <div>Quantity</div>
+                      <div>{product.quantity}</div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          </>
         ))}
       </div>
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };

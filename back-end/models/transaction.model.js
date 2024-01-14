@@ -4,13 +4,15 @@ const Schema = mongoose.Schema;
 const transaction = new Schema({
     idUser: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'Users'
     },
-    cart_id: {
-        type: Array,
-        ref: 'products',
-        default: []
-    },
+    cart_id: [{
+        product_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'products'
+        },
+        quantity: Number
+    }],
     time: {
         type: Date,
         default: new Date()
