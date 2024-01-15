@@ -25,7 +25,6 @@ const History = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setHistoryList(json.data);
         setTotalPages(json.totalPage);
       });

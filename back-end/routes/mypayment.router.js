@@ -5,11 +5,11 @@ const middleware = require('../middeware/auth')
 
 router
     .route('/get/:id')
-    .get(paymentController.getAllPayment)
+    .get(middleware.isLoggedUser,paymentController.getAllPayment)
 
 router
     .route('/transaction/:id')
-    .get(paymentController.getTransaction)
+    .get(middleware.isLogged,paymentController.getTransaction)
     
 router 
     .route('/pay/product')

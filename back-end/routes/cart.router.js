@@ -5,16 +5,15 @@ const middleware = require('../middeware/auth')
 
 router
     .route('/get/:id')
-    .get(userController.getCart);
+    .get(middleware.isLoggedUser,userController.getCart);
 
 router
     .route('/add/:id')
-    // .post(middleware.isLoggedUser,userController.addCart);
-    .post(userController.addCart);
+    .post(middleware.isLoggedUser,userController.addCart);
 
 router
     .route('/minus/:id')
-    .post(userController.minusCart);
+    .post(middleware.isLoggedUser,userController.minusCart);
 
 router
     .route('/delete/:id')

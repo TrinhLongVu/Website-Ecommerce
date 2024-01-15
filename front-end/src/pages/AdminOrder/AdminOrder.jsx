@@ -23,7 +23,6 @@ const AdminOrder = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.data);
         setOrderList(json.data);
         setTotalPages(json.totalPage);
       });
