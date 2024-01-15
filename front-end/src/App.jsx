@@ -1,34 +1,41 @@
+// --- Libraries Imports ---
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Detail from "./pages/Detail/Detail";
-import MultiCategory from "./pages/MultiCategory/MultiCategory";
-import SingleCategory from "./pages/SingleCategory/SingleCategory";
-import Search from "./pages/Search/Search";
-import ShopCart from "./pages/ShopCart/ShopCart";
-import UserInfo from "./pages/UserInfo/UserInfo";
-import Error404 from "./pages/Error404/Error404";
-import History from "./pages/History/History";
-
-import Authentication from "./pages/Authentication/Authentication";
-
-import AdminUser from "./pages/AdminUser/AdminUser";
-import AdminUpload from "./pages/AdminUpload/AdminUpload";
-import AdminUpdate from "./pages/AdminUpdate/AdminUpdate";
-import AdminUpdateUser from "./pages/AdminUpdateUser/AdminUpdateUser";
-import AdminProducts from "./pages/AdminProducts/AdminProducts";
-import AdminStatistics from "./pages/AdminStatistics/AdminStatistics";
-
-import ScrollTop from "./components/ScrollTop/ScrollTop";
-
+// --- Main Layout Imports ---
 import Main from "./layouts/Main/Main";
+// === Main's Page Imports ===
+import Home from "./pages/Main/Home/Home";
+import Detail from "./pages/Main/Detail/Detail";
+import MultiCategory from "./pages/Main/MultiCategory/MultiCategory";
+import SingleCategory from "./pages/Main/SingleCategory/SingleCategory";
+import Search from "./pages/Main/Search/Search";
+import ShopCart from "./pages/Main/ShopCart/ShopCart";
+import UserInfo from "./pages/Main/UserInfo/UserInfo";
+import History from "./pages/Main/History/History";
+import Error404 from "./pages/Main/Error404/Error404";
+// --- Admin Layout Imports ---
 import Admin from "./layouts/Admin/Admin";
-import AdminOrder from "./pages/AdminOrder/AdminOrder";
-
+// === Admin's Page Imports ===
+import AdminStatistics from "./pages/Admin/AdminStatistics/AdminStatistics";
+import AdminUser from "./pages/Admin/AdminUser/AdminUser";
+import AdminUpdateUser from "./pages/Admin/AdminUpdateUser/AdminUpdateUser";
+import AdminUpload from "./pages/Admin/AdminUpload/AdminUpload";
+import AdminProducts from "./pages/Admin/AdminProducts/AdminProducts";
+import AdminUpdate from "./pages/Admin/AdminUpdate/AdminUpdate";
+import AdminOrder from "./pages/Admin/AdminOrder/AdminOrder";
+// --- Auth Layout Imports ---
+import Auth from "./layouts/Auth/Auth";
+// === Auth's Page Imports ===
+import Login from "./pages/Auth/Login/Login";
+import Register from "./pages/Auth/Register/Register";
+// --- Components Imports ---
+import ScrollTop from "./components/ScrollTop/ScrollTop";
+// --- Implementation ---
 function App() {
   return (
     <>
       <ScrollTop />
       <Routes>
+        {/* Main Layout */}
         <Route path="/" element={<Main />}>
           <Route index element={<Home />} />
           <Route path="/categories">
@@ -42,6 +49,7 @@ function App() {
           <Route path="/cart" element={<ShopCart />} />
           <Route path="*" element={<Error404 />} />
         </Route>
+        {/* Admin Layout */}
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminStatistics />} />
           <Route path="/admin/users">
@@ -55,15 +63,10 @@ function App() {
             <Route path="/admin/products/:id" element={<AdminUpdate />} />
           </Route>
         </Route>
-        <Route path="/authentication">
-          <Route
-            path="/authentication/login"
-            element={<Authentication authenType={"Login"} />}
-          />
-          <Route
-            path="/authentication/register"
-            element={<Authentication authenType={"Register"} />}
-          />
+        {/* Auth Layout */}
+        <Route path="/auth" element={<Auth />}>
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
         </Route>
       </Routes>
     </>

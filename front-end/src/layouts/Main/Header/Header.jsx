@@ -153,7 +153,7 @@ const Header = ({ categoryList, userInfo, setUserInfo }) => {
           </div>
         </>
       ) : (
-        <Link to="/authentication/login" className="head-login-btn">
+        <Link to="/auth/login" className="head-login-btn">
           LOGIN
           <FontAwesomeIcon icon={faRightToBracket} className="head-login-ico" />
         </Link>
