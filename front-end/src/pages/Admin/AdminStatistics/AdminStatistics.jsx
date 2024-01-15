@@ -31,7 +31,7 @@ const AdminStatistics = () => {
     }
   };
 
-  const getData= async () => {
+  const getData = async () => {
     try {
       if (selectedView === "byweek") {
         const weekData = await fetchData(true);
@@ -69,9 +69,7 @@ const AdminStatistics = () => {
 
         const totalProductSold = Object.values(weekData?.data || {}).reduce((total, week) => total + week.quantity, 0);
         setTotalProductSold(totalProductSold);
-      } 
-      
-      else if (selectedView === "byMonth") {
+      } else if (selectedView === "byMonth") {
         const monthData = await fetchData(false, selectedYear);
         setStatistics((prevData) => ({ ...prevData, byMonth: monthData?.data || {} }));
 
@@ -119,6 +117,27 @@ const AdminStatistics = () => {
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
+  };
+
+  const chartOptions = {
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const label = context.dataset.label || '';
+            const value = context.formattedValue;
+            return `${label}: $${value}`;
+          },
+        },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: (value) => `$${value}`,
+        },
+      },
+    },
   };
 
   return (
@@ -169,7 +188,7 @@ const AdminStatistics = () => {
           <div className="admin-statistics-col">
             <div className="line-chart-container">
               {revenueChartData && revenueChartData.labels ? (
-                <Line data={revenueChartData} />
+                <Line data={revenueChartData} options={chartOptions} />
               ) : (
                 <p>Loading chart...</p>
               )}
