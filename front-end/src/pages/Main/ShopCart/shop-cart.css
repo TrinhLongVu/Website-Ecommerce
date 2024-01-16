@@ -177,7 +177,7 @@
 }
 
 #vnpay {
-    background: url('../../assets/vnpay.png'), white;
+    background: url('../../../assets/vnpay.png'), white;
     background-size: 50px;
     background-repeat: no-repeat;
     background-position: center center;
