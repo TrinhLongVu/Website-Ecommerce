@@ -9,7 +9,7 @@ router
 
 router
     .route('/transaction/:id')
-    .get(middleware.isLogged,paymentController.getTransaction)
+    .get(paymentController.getTransaction)
     
 router 
     .route('/pay/product')
