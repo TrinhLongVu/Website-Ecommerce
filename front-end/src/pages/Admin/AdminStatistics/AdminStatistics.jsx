@@ -7,16 +7,16 @@ const AdminStatistics = () => {
   const [statistics, setStatistics] = useState({});
   const [revenueChartData, setRevenueChartData] = useState({});
   const [productSoldChartData, setProductSoldChartData] = useState({});
-  const [selectedView, setSelectedView] = useState("byweek"); // Default view
+  const [selectedView, setSelectedView] = useState("byday"); // Default view
   const [selectedYear, setSelectedYear] = useState("2024"); // Default year
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [totalProductSold, setTotalProductSold] = useState(0);
 
   const yearsDropdown = ["2021", "2022", "2023", "2024"];
 
-  const fetchData = async (isWeek, year) => {
-    const endpoint = isWeek
-      ? "http://localhost:8000/api/v1/statistic/transaction?week=true"
+  const fetchData = async (isDay, year) => {
+    const endpoint = isDay
+      ? "http://localhost:8000/api/v1/statistic/transaction?day=true"
       : `http://localhost:8000/api/v1/statistic/transaction?month=true&year=${year}`;
 
     try {
@@ -37,21 +37,23 @@ const AdminStatistics = () => {
 
   const getData = async () => {
     try {
-      if (selectedView === "byweek") {
-        const weekData = await fetchData(true);
+      if (selectedView === "byday") {
+        const dayData = await fetchData(true);
         setStatistics((prevData) => ({
           ...prevData,
-          byweek: weekData?.data || {},
+          byday: dayData?.data || {},
         }));
 
-        const labels = Object.keys(weekData?.data || {});
+        const labels = Object.keys(dayData?.data || {});
+        const formattedLabels = labels.map((date) => formatDate(date));
+
         const revenueData = {
-          labels: labels,
+          labels: formattedLabels,
           datasets: [
             {
-              label: "Revenue Gain (by week)",
-              data: Object.values(weekData?.data || {}).map(
-                (week) => week.balance
+              label: "Revenue Gain (by day)",
+              data: Object.values(dayData?.data || {}).map(
+                (day) => day.balance
               ),
               borderColor: "#007BFF",
               fill: false,
@@ -60,19 +62,19 @@ const AdminStatistics = () => {
         };
         setRevenueChartData(revenueData);
 
-        const totalRevenue = Object.values(weekData?.data || {}).reduce(
-          (total, week) => total + week.balance,
+        const totalRevenue = Object.values(dayData?.data || {}).reduce(
+          (total, day) => total + day.balance,
           0
         );
         setTotalRevenue(totalRevenue);
 
         const productSoldData = {
-          labels: labels,
+          labels: formattedLabels,
           datasets: [
             {
-              label: "Product Sold Quantity (by week)",
-              data: Object.values(weekData?.data || {}).map(
-                (week) => week.quantity
+              label: "Product Sold Quantity (by day)",
+              data: Object.values(dayData?.data || {}).map(
+                (day) => day.quantity
               ),
               borderColor: "#b8860b",
               fill: false,
@@ -81,8 +83,8 @@ const AdminStatistics = () => {
         };
         setProductSoldChartData(productSoldData);
 
-        const totalProductSold = Object.values(weekData?.data || {}).reduce(
-          (total, week) => total + week.quantity,
+        const totalProductSold = Object.values(dayData?.data || {}).reduce(
+          (total, day) => total + day.quantity,
           0
         );
         setTotalProductSold(totalProductSold);
@@ -94,8 +96,10 @@ const AdminStatistics = () => {
         }));
 
         const labels = Object.keys(monthData?.data || {});
+        const formattedLabels = labels.map((date) => formatDate(date));
+
         const revenueData = {
-          labels: labels,
+          labels: formattedLabels,
           datasets: [
             {
               label: "Revenue Gain (by month)",
@@ -116,7 +120,7 @@ const AdminStatistics = () => {
         setTotalRevenue(totalRevenue);
 
         const productSoldData = {
-          labels: labels,
+          labels: formattedLabels,
           datasets: [
             {
               label: "Product Sold Quantity (by month)",
@@ -149,8 +153,14 @@ const AdminStatistics = () => {
     setSelectedYear(event.target.value);
   };
 
-  const formatNumber = (number) => {
-    return number.toLocaleString("en-US");
+  const formatNumber = (value) => {
+    return value.toLocaleString("en-US");
+  };
+
+  const formatDate = (value) => {
+    const date = new Date(value);
+    const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+    return date.toLocaleDateString(options);
   };
 
   const chartOptionsRevenue = {
@@ -270,10 +280,10 @@ const AdminStatistics = () => {
 
         <div className="admin-statistics-buttons">
           <button
-            onClick={() => setSelectedView("byweek")}
-            className={selectedView === "byweek" ? "selected" : ""}
+            onClick={() => setSelectedView("byday")}
+            className={selectedView === "byday" ? "selected" : ""}
           >
-            By Week
+            By Day
           </button>
           <button
             onClick={() => setSelectedView("byMonth")}
