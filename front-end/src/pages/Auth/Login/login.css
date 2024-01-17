@@ -1,0 +1,34 @@
+.forgot-pwd {
+    margin-top: 15px;
+    display: flex;
+    justify-content: end;
+}
+
+.forgot-pwd>a {
+    text-decoration: none;
+    color: black;
+}
+
+p {
+    width: 50%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 20px 0 20px;
+}
+
+p span {
+    background-color: #f8f8f8;
+    padding: 0 10px;
+}
+
+.gg-login {
+    width: 64px;
+    height: 64px;
+    background-image: url("../../../assets/gg.png");
+    border: solid 1px black;
+    border-radius: 32px;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+}

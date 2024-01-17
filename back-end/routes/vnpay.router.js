@@ -3,12 +3,8 @@ const router = express.Router();
 const paymentController = require('../controllers/vnpay.controller')
 const middleware = require('../middeware/auth')
 
-router.get('/', (req, res) => {
-    res.json({
-        status: 'success' 
-    })
-})
+router.get('/', paymentController.createPayment);
 router.post('/create',middleware.isLoggedUser, paymentController.createPayment);
-router.get('/vnpay_return',middleware.isLoggedUser, paymentController.returnPayment);
+router.get('/vnpay_return', paymentController.returnPayment);
 
 module.exports = router;

@@ -9,7 +9,7 @@ dotenv.config({
 
 exports.getAllPayment = async (req, res) => {
     try {
-        let id = req.params.id;
+        let id = req.user._id;
         
         const options = {
             hostname: 'localhost',

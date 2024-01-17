@@ -63,15 +63,12 @@ exports.createPayment = function (req, res, next) {
     let signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex"); 
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
-    console.log(vnpUrl)
-    // res.redirect(vnpUrl)
     res.status(200).json({
         vnpUrl: vnpUrl
     })
 }
 
 exports.returnPayment = async (req, res, next) => {
-    console.log(req.query)
     let vnp_Params = req.query;
 
     let secureHash = vnp_Params['vnp_SecureHash'];
@@ -115,9 +112,14 @@ exports.returnPayment = async (req, res, next) => {
         }
         const transaction = {
                     idUser: user.id,
-                    cart_id: user.Cart.map(cart => cart.product_id),
+                    cart_id: user.Cart.map(cart => {
+                        return {
+                            product_id: cart.product_id,
+                            quantity: cart.quantity
+                        }
+                    }),
                     time: new Date(),
-                    moneyTransaction: vnp_Params['vnp_Amount'],
+                    moneyTransaction: vnp_Params['vnp_Amount'] / 100,
                 }
         const idTransaction = await Transaction.create(transaction);
         user.Transaction.push(idTransaction)
@@ -130,4 +132,10 @@ exports.returnPayment = async (req, res, next) => {
     } else{
         res.render('success', {code: '97'})
     }
+}
+
+exports.success = (req, res) => {
+    res.json({
+        status: 'success' 
+    })
 }

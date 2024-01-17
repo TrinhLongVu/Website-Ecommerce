@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Russo+One&display=swap');
+
+.body-404 {
+    padding: 100px 0;
+    width: 1260px;
+    height: 800px;
+    background-image: url('../../../assets/bg_404.jpeg');
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.title-404 {
+    display: flex;
+    justify-content: center;
+    font-family: 'Russo One';
+    font-size: 155px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.error-404-icon {
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 110px;
+}
+
+.explain-404 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Russo One';
+    letter-spacing: 8px
+}
+
+.nav-btn {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+    border-radius: 5px;
+    background-color: #CCD1D9;
+    width: 190px;
+    height: 60px;
+    font-size: 25px;
+    font-family: 'Russo One';
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-404:hover {
+    background-color: #00AFC1;
+    color: white;
+}

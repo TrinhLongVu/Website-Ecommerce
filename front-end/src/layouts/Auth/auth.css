@@ -1,0 +1,89 @@
+.auth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 980px;
+    background-image: url("../../assets/bg-auth.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.authen-frame {
+    width: 500px;
+    height: 600px;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.authen-title {
+    font-size: 50px;
+}
+
+.input-box {
+    margin-top: 30px;
+    height: 55px;
+    width: 350px;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.field-ico {
+    font-size: 30px;
+    margin: 0 5px;
+}
+
+.input-field {
+    font-size: 15px;
+    height: 55px;
+    width: 280px;
+    border: none;
+    background-color: #f8f8f8;
+    outline: none;
+}
+
+.submit-btn {
+    margin-top: 25px;
+    width: 350px;
+    height: 55px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    background-color: #e1e1e1;
+    font-size: 30px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #F2CD5C;
+    color: white;
+}
+
+.authen-route {
+    margin-top: 30px;
+}
+
+.authen-route a {
+    text-decoration: none;
+    color: #0766AD;
+}
+
+.authen-route a:hover {
+    color: #29ADB2;
+}

@@ -52,7 +52,7 @@ const ProductSlider = ({ productList }) => {
             }}
           >
             <h2>{product.title}</h2>
-            <h4>${product.price}</h4>
+            <h4>${product.price?.toLocaleString()}</h4>
           </Link>
         ))}
         <div className="product-slider-btn slider-left" onClick={scrollLeft}>

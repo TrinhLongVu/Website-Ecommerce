@@ -12,7 +12,9 @@ const ProductCard = ({ product }) => {
         <div className="product-card-title">{product.title}</div>
         <div className="product-card-para">{product.detail}</div>
         <div className="product-card-price-row">
-          <div className="product-card-price">${product.price}</div>
+          <div className="product-card-price">
+            ${product.price?.toLocaleString()}
+          </div>
         </div>
       </div>
     </Link>
