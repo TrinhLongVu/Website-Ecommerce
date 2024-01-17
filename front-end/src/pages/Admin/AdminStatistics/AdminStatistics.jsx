@@ -88,7 +88,8 @@ const AdminStatistics = () => {
           0
         );
         setTotalProductSold(totalProductSold);
-      } else if (selectedView === "byMonth") {
+      } 
+      else if (selectedView === "byMonth") {
         const monthData = await fetchData(false, selectedYear);
         setStatistics((prevData) => ({
           ...prevData,
@@ -96,10 +97,9 @@ const AdminStatistics = () => {
         }));
 
         const labels = Object.keys(monthData?.data || {});
-        const formattedLabels = labels.map((date) => formatDate(date));
-
+        
         const revenueData = {
-          labels: formattedLabels,
+          labels: labels,
           datasets: [
             {
               label: "Revenue Gain (by month)",
@@ -120,7 +120,7 @@ const AdminStatistics = () => {
         setTotalRevenue(totalRevenue);
 
         const productSoldData = {
-          labels: formattedLabels,
+          labels: labels,
           datasets: [
             {
               label: "Product Sold Quantity (by month)",
