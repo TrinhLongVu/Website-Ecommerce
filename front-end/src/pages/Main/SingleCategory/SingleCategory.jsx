@@ -2,7 +2,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 // Assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTag } from "@fortawesome/free-solid-svg-icons";
+import { faFilterCircleDollar, faTag } from "@fortawesome/free-solid-svg-icons";
 import categoryImg from "../../../assets/category_bg.jpeg";
 // Components
 import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
@@ -97,10 +97,16 @@ const SingleCategory = () => {
           <div className="single-loader-container">
             <Loader />
           </div>
+        ) : productList.length === 0 ? (
+          <div className="no-res-msg-box">
+            <FontAwesomeIcon icon={faFilterCircleDollar} className="msg-icon" />
+            <div>
+              Looks like there are no products fit with your filter criteria!
+            </div>
+            <div>Try using another filter for another range of price.</div>
+          </div>
         ) : (
-          <>
-            <ProductShelf products={productList} />
-          </>
+          <ProductShelf products={productList} />
         )}
         <Pagination
           totalPages={totalPages}

@@ -8,6 +8,7 @@
     align-items: center;
     background-color: #ccd1d9;
     border-radius: 12px;
+    color: black;
 }
 
 .admin-navigate-back:hover {

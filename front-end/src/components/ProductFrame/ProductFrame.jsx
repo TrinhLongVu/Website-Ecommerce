@@ -10,11 +10,11 @@ import "./product-frame.css";
 const ProductFrame = ({ product }) => {
   const { userInfo, userChange, changeUser } = useOutletContext();
   const addToCart = () => {
-    if (!userInfo) {
-      Toastify("error", "top-right", "Please login to add product to cart");
+    if (product.isPreview === true) {
       return;
     }
-    if (product.isPreview === true) {
+    if (!userInfo) {
+      Toastify("error", "top-right", "Please login to add product to cart");
       return;
     }
     fetch("http://localhost:8000/api/v1/cart/add/" + userInfo._id, {
@@ -57,7 +57,9 @@ const ProductFrame = ({ product }) => {
         ></div>
         <div className="product-frame-info">
           <div className="product-frame-name">{product.title}</div>
-          <div className="product-frame-price">${product.price}</div>
+          <div className="product-frame-price">
+            ${product.price?.toLocaleString()}
+          </div>
           <div className="product-frame-desc">
             {Array.isArray(product.detail) ? (
               product.detail.map((para, index) => <div key={index}>{para}</div>)

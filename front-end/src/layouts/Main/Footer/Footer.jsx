@@ -46,7 +46,7 @@ const Footer = ({ categoryList }) => {
       </div>
       <div className="foot-banner">
         <div>
-          <a href="/policy">Privacy Policy | Terms & Conditions</a>
+          <a>Privacy Policy | Terms & Conditions</a>
         </div>
         <div>Copyright © The Mega Mall @ {today.getFullYear()}</div>
       </div>

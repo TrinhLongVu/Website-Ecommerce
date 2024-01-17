@@ -136,7 +136,6 @@ const AdminProducts = () => {
         })
           .then((res) => res.json())
           .then((json) => {
-            console.log(json);
             if (json.status === "success") {
               setCategoryUpdate(!categoryUpdate);
               Swal.fire({
@@ -343,7 +342,7 @@ const AdminProducts = () => {
                     {product.title}
                   </div>
                   <div className="admin-products-card-price">
-                    ${product.price}
+                    ${product.price.toLocaleString()}
                   </div>
                   <div className="admin-products-card-btn-container">
                     <Link

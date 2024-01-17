@@ -71,7 +71,6 @@ const Search = () => {
     fetch(domain + fetchDomain + priceFetchDomain + categoryFetchDomain)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         if (json.status === "fail") {
           setEmpty(true);
         } else {

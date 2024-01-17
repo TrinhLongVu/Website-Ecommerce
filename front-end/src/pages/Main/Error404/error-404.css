@@ -4,7 +4,7 @@
     padding: 100px 0;
     width: 1260px;
     height: 800px;
-    background-image: url('../../assets/bg_404.jpeg');
+    background-image: url('../../../assets/bg_404.jpeg');
     border-radius: 20px;
     display: flex;
     justify-content: center;
