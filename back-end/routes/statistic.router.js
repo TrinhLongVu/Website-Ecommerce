@@ -5,9 +5,9 @@ const middleware = require('../middeware/auth')
 
 router
     .route('/revenue')
-    .get(statisticC.getTotalRevenue)
+    .get(middleware.isLoggedAdmin,statisticC.getTotalRevenue)
     
 router
     .route('/transaction')
-    .get(statisticC.transaction)
+    .get(middleware.isLoggedAdmin,statisticC.transaction)
 module.exports = router;

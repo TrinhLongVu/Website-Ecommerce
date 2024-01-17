@@ -20,7 +20,12 @@ const AdminStatistics = () => {
       : `http://localhost:8000/api/v1/statistic/transaction?month=true&year=${year}`;
 
     try {
-      const response = await fetch(endpoint, { credentials: "include" });
+      const response = await fetch(endpoint, {
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
       const data = await response.json();
 
       return data;
@@ -145,7 +150,7 @@ const AdminStatistics = () => {
   };
 
   const formatNumber = (number) => {
-    return number.toLocaleString('en-US');
+    return number.toLocaleString("en-US");
   };
 
   const chartOptionsRevenue = {
@@ -153,8 +158,8 @@ const AdminStatistics = () => {
       tooltip: {
         callbacks: {
           label: (context) => {
-            const label = context.dataset.label || '';
-            const value = context.formattedValue.replaceAll('.', ',');;
+            const label = context.dataset.label || "";
+            const value = context.formattedValue.replaceAll(".", ",");
             return `${label}: $${value}`;
           },
         },
@@ -174,8 +179,8 @@ const AdminStatistics = () => {
       tooltip: {
         callbacks: {
           label: (context) => {
-            const label = context.dataset.label || '';
-            const value = context.formattedValue.replaceAll('.', ',');;
+            const label = context.dataset.label || "";
+            const value = context.formattedValue.replaceAll(".", ",");
             return `${label}: ${value}`;
           },
         },
@@ -252,7 +257,10 @@ const AdminStatistics = () => {
           <div className="admin-statistics-col">
             <div className="line-chart-container">
               {productSoldChartData && productSoldChartData.labels ? (
-                <Line data={productSoldChartData} options={chartOptionsTotalProductSold}/>
+                <Line
+                  data={productSoldChartData}
+                  options={chartOptionsTotalProductSold}
+                />
               ) : (
                 <p>Loading chart...</p>
               )}
