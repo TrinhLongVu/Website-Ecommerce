@@ -102,7 +102,8 @@ exports.returnPayment = async (req, res, next) => {
                         select: 'balance'
                     })
         const AccountAdmin = await Payment.findById(admin.AccountPayment._id)
-        AccountAdmin.balance += vnp_Params['vnp_Amount'];
+        const  numericValue = parseFloat(vnp_Params['vnp_Amount'].replace(/[^\d.-]/g, ''));
+        AccountAdmin.balance += numericValue;
         if (!user.Transaction) {
             user.Transaction = [];
         }
@@ -119,7 +120,7 @@ exports.returnPayment = async (req, res, next) => {
                         }
                     }),
                     time: new Date(),
-                    moneyTransaction: vnp_Params['vnp_Amount'] / 100,
+                    moneyTransaction: numericValue / 10000,
                 }
         const idTransaction = await Transaction.create(transaction);
         user.Transaction.push(idTransaction)
