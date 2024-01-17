@@ -119,7 +119,7 @@ exports.returnPayment = async (req, res, next) => {
                         }
                     }),
                     time: new Date(),
-                    moneyTransaction: vnp_Params['vnp_Amount'] / 100,
+                    moneyTransaction: vnp_Params['vnp_Amount'],
                 }
         const idTransaction = await Transaction.create(transaction);
         user.Transaction.push(idTransaction)

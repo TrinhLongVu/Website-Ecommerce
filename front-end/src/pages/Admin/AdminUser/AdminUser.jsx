@@ -92,7 +92,8 @@ const AdminUser = () => {
       setSelectedRole("");
       setListChange(!listChange);
     } else if (json.status === "fail") {
-      Toastify("error", "top-right", json.message);
+      console.log(json);
+      Toastify("error", "top-right", json.msg);
     } else {
       Toastify(
         "error",

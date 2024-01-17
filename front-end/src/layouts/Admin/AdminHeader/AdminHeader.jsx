@@ -27,7 +27,7 @@ const Header = () => {
         Manage Products
       </NavLink>
       <NavLink to="/admin/orders" className={classNameFunc}>
-        Manage Orders
+        Orders
       </NavLink>
       <div className="admin-head-logout-btn" onClick={logOut}>
         LOGOUT
