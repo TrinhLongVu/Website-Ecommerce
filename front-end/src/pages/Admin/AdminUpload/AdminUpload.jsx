@@ -53,16 +53,39 @@ const AdminUpload = () => {
   };
 
   const handlePreview = () => {
-    const previewProduct = {
-      title: document
-        .querySelector(".admin-upload-input-name")
-        .value.replace("\n", " "),
-      detail: document.querySelector(".admin-upload-textarea").value,
-      price: document.querySelector(".admin-upload-input-price").value,
-      image: previewImage,
-      isPreview: true,
-    };
-    setPreviewProduct(previewProduct);
+    const productName = document.querySelector(
+      ".admin-upload-input-name"
+    ).value;
+    const productPrice = document.querySelector(
+      ".admin-upload-input-price"
+    ).value;
+    const productDetail = document.querySelector(
+      ".admin-upload-textarea"
+    ).value;
+    if (
+      !productName ||
+      !productPrice ||
+      !productDetail ||
+      !selectedCategory ||
+      !image
+    ) {
+      Toastify(
+        "error",
+        "top-right",
+        "Please input all the information of the new product to preview it"
+      );
+    } else if (isNaN(productPrice)) {
+      Toastify("error", "top-right", "Price of a product should be a number");
+    } else {
+      const previewProduct = {
+        title: productName,
+        detail: productDetail.split("\n"),
+        price: productPrice,
+        image: previewImage,
+        isPreview: true,
+      };
+      setPreviewProduct(previewProduct);
+    }
   };
 
   const uploadProduct = async () => {
