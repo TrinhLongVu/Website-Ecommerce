@@ -144,13 +144,17 @@ const AdminStatistics = () => {
     setSelectedYear(event.target.value);
   };
 
-  const chartOptions = {
+  const formatNumber = (number) => {
+    return number.toLocaleString('en-US');
+  };
+
+  const chartOptionsRevenue = {
     plugins: {
       tooltip: {
         callbacks: {
           label: (context) => {
-            const label = context.dataset.label || "";
-            const value = context.formattedValue;
+            const label = context.dataset.label || '';
+            const value = context.formattedValue.replaceAll('.', ',');;
             return `${label}: $${value}`;
           },
         },
@@ -159,7 +163,28 @@ const AdminStatistics = () => {
     scales: {
       y: {
         ticks: {
-          callback: (value) => `$${value}`,
+          callback: (value) => `$${formatNumber(value)}`,
+        },
+      },
+    },
+  };
+
+  const chartOptionsTotalProductSold = {
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const label = context.dataset.label || '';
+            const value = context.formattedValue.replaceAll('.', ',');;
+            return `${label}: ${value}`;
+          },
+        },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: (value) => `${formatNumber(value)}`,
         },
       },
     },
@@ -176,7 +201,7 @@ const AdminStatistics = () => {
                   Total Revenue
                 </div>
                 <div className="admin-statistics-h5 admin-statistics-font-weight-bold">
-                  $ {totalRevenue}
+                  $ {formatNumber(totalRevenue)}
                 </div>
               </div>
             </div>
@@ -189,7 +214,7 @@ const AdminStatistics = () => {
                   Total Product Sold Quantity
                 </div>
                 <div className="admin-statistics-h5 admin-statistics-font-weight-bold">
-                  {totalProductSold}
+                  {formatNumber(totalProductSold)}
                 </div>
               </div>
             </div>
@@ -217,7 +242,7 @@ const AdminStatistics = () => {
           <div className="admin-statistics-col">
             <div className="line-chart-container">
               {revenueChartData && revenueChartData.labels ? (
-                <Line data={revenueChartData} options={chartOptions} />
+                <Line data={revenueChartData} options={chartOptionsRevenue} />
               ) : (
                 <p>Loading chart...</p>
               )}
@@ -227,7 +252,7 @@ const AdminStatistics = () => {
           <div className="admin-statistics-col">
             <div className="line-chart-container">
               {productSoldChartData && productSoldChartData.labels ? (
-                <Line data={productSoldChartData} />
+                <Line data={productSoldChartData} options={chartOptionsTotalProductSold}/>
               ) : (
                 <p>Loading chart...</p>
               )}
