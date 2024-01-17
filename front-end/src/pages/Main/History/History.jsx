@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStoreSlash } from "@fortawesome/free-solid-svg-icons";
+
 import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
 import Pagination from "../../../components/Pagination/Pagination";
 
@@ -25,6 +28,7 @@ const History = () => {
     )
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         setHistoryList(json.data);
         setTotalPages(json.totalPage);
       });
@@ -52,70 +56,87 @@ const History = () => {
       <Breadcrumbs
         crumbList={[{ name: "Your Purchased History", link: "/history" }]}
       />
-      <div className="history-list">
-        {historyList?.map((order, index) => (
-          <>
-            <p className="history-order-time">
-              <span>{formatTime(order.time)}</span>
-            </p>
-            <div className="history-order" key={index}>
-              <div className="history-order-banner">
-                <div
-                  className="history-order-banner-avt"
-                  style={{ backgroundImage: `url(${userInfo?.Image_Avatar})` }}
-                ></div>
-                <div className="history-order-banner-info" id="order-name">
-                  {userInfo?.FullName}
-                </div>
-                <div className="history-order-banner-info" id="order-tel">
-                  <div>{order.phone}</div>
-                </div>
-                <div className="history-order-banner-info" id="order-address">
-                  {order.address}
-                </div>
-                <div className="history-order-banner-info" id="order-price">
-                  <div>Total</div>
-                  <div>${order.moneyTransaction}</div>
-                </div>
-              </div>
-              <div className="history-order-content">
-                {order.cart_id.map((product, index) => (
-                  <Link
-                    className="history-order-item"
-                    key={index}
-                    to={`/product/${product.product_id._id}`}
-                  >
+      {historyList?.length === 0 ? (
+        <div className="no-res-msg-box">
+          <FontAwesomeIcon icon={faStoreSlash} className="msg-icon" />
+          <div>Looks like you haven't purchased anything ever since!</div>
+          <div>
+            Please look out for your desired items and consider purchasing them.
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="history-list">
+            {historyList?.map((order, index) => (
+              <>
+                <p className="history-order-time">
+                  <span>{formatTime(order.time)}</span>
+                </p>
+                <div className="history-order" key={index}>
+                  <div className="history-order-banner">
                     <div
-                      className="history-order-item-img"
+                      className="history-order-banner-avt"
                       style={{
-                        backgroundImage: `url(${product.product_id.image})`,
+                        backgroundImage: `url(${userInfo?.Image_Avatar})`,
                       }}
                     ></div>
-                    <div className="history-order-item-info">
-                      <div className="history-order-item-title">
-                        {product.product_id.title}
-                      </div>
+                    <div className="history-order-banner-info" id="order-name">
+                      {userInfo?.FullName}
                     </div>
-                    <div className="history-order-item-num">
-                      <div>Price</div>
-                      <div>${product.product_id.price}</div>
+                    <div className="history-order-banner-info" id="order-tel">
+                      <div>{order.phone}</div>
                     </div>
-                    <div className="history-order-item-num">
-                      <div>Quantity</div>
-                      <div>{product.quantity}</div>
+                    <div
+                      className="history-order-banner-info"
+                      id="order-address"
+                    >
+                      {order.address}
                     </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </>
-        ))}
-      </div>
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+                    <div className="history-order-banner-info" id="order-price">
+                      <div>Total</div>
+                      <div>${order.moneyTransaction}</div>
+                    </div>
+                  </div>
+                  <div className="history-order-content">
+                    {order.cart_id.map((product, index) => (
+                      <Link
+                        className="history-order-item"
+                        key={index}
+                        to={`/product/${product.product_id._id}`}
+                      >
+                        <div
+                          className="history-order-item-img"
+                          style={{
+                            backgroundImage: `url(${product.product_id.image})`,
+                          }}
+                        ></div>
+                        <div className="history-order-item-info">
+                          <div className="history-order-item-title">
+                            {product.product_id.title}
+                          </div>
+                        </div>
+                        <div className="history-order-item-num">
+                          <div>Price</div>
+                          <div>${product.product_id.price}</div>
+                        </div>
+                        <div className="history-order-item-num">
+                          <div>Quantity</div>
+                          <div>{product.quantity}</div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </>
+      )}
     </>
   );
 };

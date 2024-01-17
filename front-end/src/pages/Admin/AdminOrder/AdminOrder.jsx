@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBasketShopping,
+  faStoreSlash,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Pagination from "../../../components/Pagination/Pagination";
 
@@ -53,72 +56,84 @@ const AdminOrder = () => {
           <FontAwesomeIcon icon={faBasketShopping} /> Orders
         </h2>
       </div>
-      <div className="history-list">
-        {orderList?.map((order, index) => (
-          <>
-            <p className="history-order-time">
-              <span>{formatTime(order.time)}</span>
-            </p>
-            <div className="history-order" key={index}>
-              <div className="history-order-banner">
-                <div
-                  className="history-order-banner-avt"
-                  style={{
-                    backgroundImage: `url(${order.idUser.Image_Avatar})`,
-                  }}
-                ></div>
-                <div className="history-order-banner-info" id="order-name">
-                  {order.idUser.FullName}
-                </div>
-                <div className="history-order-banner-info" id="order-tel">
-                  <div>{order.phone}</div>
-                </div>
-                <div className="history-order-banner-info" id="order-address">
-                  {order.address}
-                </div>
-                <div className="history-order-banner-info" id="order-price">
-                  <div>Total</div>
-                  <div>${order.moneyTransaction}</div>
-                </div>
-              </div>
-              <div className="history-order-content">
-                {order.cart_id.map((product, index) => (
-                  <div
-                    className="history-order-item"
-                    key={index}
-                    to={`/product/${product.product_id._id}`}
-                  >
+      {orderList.length === 0 ? (
+        <div className="no-res-msg-box">
+          <FontAwesomeIcon icon={faStoreSlash} className="msg-icon" />
+          <div>Looks like there is no order made!</div>
+        </div>
+      ) : (
+        <>
+          <div className="history-list">
+            {orderList?.map((order, index) => (
+              <>
+                <p className="history-order-time">
+                  <span>{formatTime(order.time)}</span>
+                </p>
+                <div className="history-order" key={index}>
+                  <div className="history-order-banner">
                     <div
-                      className="history-order-item-img"
+                      className="history-order-banner-avt"
                       style={{
-                        backgroundImage: `url(${product.product_id.image})`,
+                        backgroundImage: `url(${order.idUser.Image_Avatar})`,
                       }}
                     ></div>
-                    <div className="history-order-item-info">
-                      <div className="history-order-item-title">
-                        {product.product_id.title}
-                      </div>
+                    <div className="history-order-banner-info" id="order-name">
+                      {order.idUser.FullName}
                     </div>
-                    <div className="history-order-item-num">
-                      <div>Price</div>
-                      <div>${product.product_id.price}</div>
+                    <div className="history-order-banner-info" id="order-tel">
+                      <div>{order.phone}</div>
                     </div>
-                    <div className="history-order-item-num">
-                      <div>Quantity</div>
-                      <div>{product.quantity}</div>
+                    <div
+                      className="history-order-banner-info"
+                      id="order-address"
+                    >
+                      {order.address}
+                    </div>
+                    <div className="history-order-banner-info" id="order-price">
+                      <div>Total</div>
+                      <div>${order.moneyTransaction}</div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </>
-        ))}
-      </div>
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+                  <div className="history-order-content">
+                    {order.cart_id.map((product, index) => (
+                      <div
+                        className="history-order-item"
+                        key={index}
+                        to={`/product/${product.product_id._id}`}
+                      >
+                        <div
+                          className="history-order-item-img"
+                          style={{
+                            backgroundImage: `url(${product.product_id.image})`,
+                          }}
+                        ></div>
+                        <div className="history-order-item-info">
+                          <div className="history-order-item-title">
+                            {product.product_id.title}
+                          </div>
+                        </div>
+                        <div className="history-order-item-num">
+                          <div>Price</div>
+                          <div>${product.product_id.price}</div>
+                        </div>
+                        <div className="history-order-item-num">
+                          <div>Quantity</div>
+                          <div>{product.quantity}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </>
+      )}
     </>
   );
 };
