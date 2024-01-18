@@ -6,7 +6,7 @@ dotenv.config({
     path: './config.env'
 });
 
-const PORT = process.env.PORTPAYMENT || 3000;
+const PORT = process.env.PORTPAYMENT || 3001;
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD).replace('<DATABASE_NAME>', process.env.DATABASE_NAME);
 
 mongoose.connect(DB, { 
